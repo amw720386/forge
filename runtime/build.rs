@@ -166,7 +166,7 @@ fn link_real_cuda(kernels_dir: &Path, target_os: &str) {
              For compile-only checks WITHOUT nvcc/GPU (stub FFI):\n\
                cargo build --features cuda-stub\n\
              \n\
-             See docs/CUDA_TOOLCHAIN.md and scripts/verify_cuda_compile.sh\n"
+             See docs/build.md and scripts/verify_cuda_compile.sh\n"
         );
     };
 

@@ -1,0 +1,93 @@
+   Compiling forge-runtime v0.1.0 (/teamspace/studios/this_studio/forge-deploys/20261008T190158Z-52a024ff5a29/runtime)
+    Finished `release` profile [optimized] target(s) in 12.77s
+     Running tests/cuda_phase14.rs (runtime/target/release/deps/cuda_phase14-34abe4a21a8aeda3)
+
+running 1 test
+test packed_logits_match_individual_chunks ... PHASE14_PREFILL_PARITY dtype=Fp32 B=1 max_abs_error=0
+PHASE14_PREFILL_PARITY dtype=Fp32 B=2 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Fp32 B=4 max_abs_error=0.000000059604645
+PHASE14_PREFILL_PARITY dtype=Fp32 B=8 max_abs_error=0.000000059604645
+PHASE14_PREFILL_PARITY dtype=Bf16 B=1 max_abs_error=0
+PHASE14_PREFILL_PARITY dtype=Bf16 B=2 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Bf16 B=4 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Bf16 B=8 max_abs_error=0.000000029802322
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.45s
+
+   Compiling forge-runtime v0.1.0 (/teamspace/studios/this_studio/forge-deploys/20261008T190158Z-52a024ff5a29/runtime)
+    Finished `release` profile [optimized] target(s) in 1.17s
+     Running tests/cuda_batch_parity.rs (runtime/target/release/deps/cuda_batch_parity-7e579376d402583c)
+
+running 7 tests
+test batch_size_one_matches_sequential ... CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.537 device_memory_delta_bytes=Some(0)
+ok
+test batched_greedy_matches_sequential ... CUDA_GRAPH_CAPTURE_OK batch=3 ms=0.133 device_memory_delta_bytes=Some(0)
+ok
+test cancel_before_step_and_invalid_id ... ok
+test cancel_does_not_corrupt_sibling ... CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.132 device_memory_delta_bytes=Some(0)
+ok
+test cpu_batch_regression_still_passes ... ok
+test cuda_batch_types_link ... ok
+test slot_reuse_after_completion ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.30s
+
+     Running tests/cuda_paged_kv.rs (runtime/target/release/deps/cuda_paged_kv-bbb7a5df84ff3be1)
+
+running 3 tests
+test block_allocator_reuse_and_exhaustion ... ok
+test paged_vs_contiguous_attention_cpu ... ok
+test session_grow_clear_returns_blocks ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cuda_phase13.rs (runtime/target/release/deps/cuda_phase13-30c31f5a02d635cb)
+
+running 1 test
+test logits_eager_optimized_graph_and_replacement ... CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.516 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Fp32 batch=1 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.176 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Fp32 batch=2 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=0.174 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Fp32 batch=4 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=0.145 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Fp32 batch=8 max_abs_error=0
+PHASE13_LOGIT_PARITY dtype=Fp32 batch=9 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.302 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Bf16 batch=1 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.171 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Bf16 batch=2 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=0.191 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Bf16 batch=4 max_abs_error=0
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=0.170 device_memory_delta_bytes=Some(0)
+PHASE13_LOGIT_PARITY dtype=Bf16 batch=8 max_abs_error=0
+PHASE13_LOGIT_PARITY dtype=Bf16 batch=9 max_abs_error=0
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.51s
+
+     Running tests/cuda_transformer_parity.rs (runtime/target/release/deps/cuda_transformer_parity-24822242708d6b91)
+
+running 2 tests
+test synthetic_decode_parity ... ok
+test synthetic_prefill_parity ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
+
+{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 185.086770435985}
+{"concurrency": 2, "workload": "short", "aggregate_tok_s_median": 286.7731093885831}
+{"concurrency": 4, "workload": "short", "aggregate_tok_s_median": 534.113323945782}
+{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 1024.154871880455}
+{"concurrency": 1, "workload": "medium", "aggregate_tok_s_median": 131.20587274861626}
+{"concurrency": 2, "workload": "medium", "aggregate_tok_s_median": 198.87705438521004}
+{"concurrency": 4, "workload": "medium", "aggregate_tok_s_median": 381.5312899608419}
+{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 692.737510954707}
+{"concurrency": 1, "workload": "long", "aggregate_tok_s_median": 56.83391326776982}
+{"concurrency": 2, "workload": "long", "aggregate_tok_s_median": 70.6315810254842}
+{"concurrency": 4, "workload": "long", "aggregate_tok_s_median": 120.6726245330837}
+{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 186.65090897476122}
+{"concurrency": 1, "workload": "mixed", "aggregate_tok_s_median": 184.92854545944294}
+{"concurrency": 2, "workload": "mixed", "aggregate_tok_s_median": 144.75847330421846}
+{"concurrency": 4, "workload": "mixed", "aggregate_tok_s_median": 88.23406825676737}
+{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 179.39968249003502}

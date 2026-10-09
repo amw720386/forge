@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Run audited Forge Phase 12 benches. Expects CUDA build env already set
-# (see scripts/remote_cuda_phase12.sh).
+# (see docs/build.md).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL_DIR="${FORGE_MODEL_DIR:-$ROOT/models/Qwen2.5-0.5B-Instruct}"

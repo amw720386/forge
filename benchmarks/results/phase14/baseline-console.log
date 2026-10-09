@@ -1,0 +1,11 @@
+{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 163.24669466672606}
+{"concurrency": 2, "workload": "short", "aggregate_tok_s_median": 255.4239434021587}
+{"concurrency": 4, "workload": "short", "aggregate_tok_s_median": 359.86745541805436}
+{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 493.7510862524003}
+{"concurrency": 1, "workload": "medium", "aggregate_tok_s_median": 120.88461274346999}
+{"concurrency": 2, "workload": "medium", "aggregate_tok_s_median": 131.2045746443004}
+{"concurrency": 4, "workload": "medium", "aggregate_tok_s_median": 161.42193617447953}
+{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 182.22509673612456}
+{"concurrency": 1, "workload": "long", "aggregate_tok_s_median": 55.51160380955569}
+{"concurrency": 2, "workload": "long", "aggregate_tok_s_median": 42.8511720867347}
+{"concurrency": 4, "workload": "long", "aggregate_tok_s_median": 45.8265166456953}

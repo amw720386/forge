@@ -1,0 +1,24 @@
+2026/10/08 19:15:19 forge-runtime forge-runtime/0.1.0
+2026/10/08 19:15:19 loading model from models/Qwen2.5-0.5B-Instruct (device=cuda dtype=bf16) ...
+2026/10/08 19:15:21 model loaded (batch_capacity=8 free_slots=8)
+2026/10/08 19:15:21 forge-server listening on :8080
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=4.702 device_memory_delta_bytes=Some(6291456)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=14.526 device_memory_delta_bytes=Some(4194304)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=3.258 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=2.799 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=4.203 device_memory_delta_bytes=Some(6291456)
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=3.199 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=2.519 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=2.667 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=5.561 device_memory_delta_bytes=Some(4194304)
+CUDA_GRAPH_CAPTURE_OK batch=7 ms=6.390 device_memory_delta_bytes=Some(6291456)
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=3.544 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=3.388 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=4.318 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=2.419 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=3.343 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=3 ms=4.074 device_memory_delta_bytes=Some(6291456)
+CUDA_GRAPH_CAPTURE_OK batch=6 ms=3.856 device_memory_delta_bytes=Some(6291456)
+CUDA_GRAPH_CAPTURE_OK batch=5 ms=3.162 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=7 ms=4.667 device_memory_delta_bytes=Some(4194304)
+2026/10/08 19:16:18 shutting down...

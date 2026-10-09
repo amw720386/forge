@@ -1,118 +1,50 @@
-# Forge top-level build. Works with GNU Make / mingw32-make.
-# Phase 1: kernels + Rust runtime + Go FFI smoke test.
+# Convenience targets; Cargo builds the CPU kernels used by the runtime.
+.DEFAULT_GOAL := build
+MODEL ?= models/Qwen2.5-0.5B-Instruct
 
-ROOT := $(CURDIR)
-KERNELS_BUILD := $(ROOT)/kernels/build
-RUNTIME_DIR := $(ROOT)/runtime
-RUNTIME_TARGET := $(RUNTIME_DIR)/target/release
-BINDINGS_GO := $(ROOT)/bindings/go
-API_DIR := $(ROOT)/api
-
-ifeq ($(OS),Windows_NT)
-  EXE := .exe
-  DLL := forge_runtime.dll
-  PATHSEP := ;
-  export CGO_ENABLED := 1
-  # Ensure MinGW/LLVM tools win over MSVC for cgo.
-  export CC ?= clang
-  export CXX ?= clang++
-else
-  EXE :=
-  DLL := libforge_runtime.so
-  UNAME_S := $(shell uname -s)
-  ifeq ($(UNAME_S),Darwin)
-    DLL := libforge_runtime.dylib
-  endif
-  PATHSEP := :
-  export CGO_ENABLED := 1
-endif
-
-.PHONY: all build test bench clean kernels kernels-test runtime runtime-test \
-        go-smoke bench-kernels help run fmt cuda-stub-check
-
-all: build test
+.PHONY: all build test bench run help kernels runtime go-smoke cuda-stub-check fmt
+all: build
 
 help:
-	@echo "Forge targets:"
-	@echo "  make build         - build C++ kernels + Rust runtime"
-	@echo "  make test          - run kernel, Rust, and Go FFI tests"
-	@echo "  make bench         - synthetic matmul micro-benchmark"
-	@echo "  make run           - Phase 1 placeholder server"
-	@echo "  make clean         - remove build artifacts"
-	@echo "  make cuda-stub-check - compile CUDA Rust path with stub (no GPU)"
+	@echo "make build / test / bench / run MODEL=path/to/model"
+	@echo "make cuda-stub-check checks CUDA linkage without a GPU"
 
-build: kernels runtime
+ifeq ($(OS),Windows_NT)
+build:
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1
+test:
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test.ps1
+bench:
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bench.ps1
+run: build
+	powershell -NoProfile -Command "$$env:FORGE_RUNTIME_DIR='$(CURDIR)/runtime/target/release'; & './bin/forge-server.exe' -model '$(MODEL)' -addr '127.0.0.1:8080'"
+else
+build: runtime
+	mkdir -p bin
+	go -C api build -o ../bin/forge-server ./cmd/forge-server
+test: build kernels
+	ctest --test-dir kernels/build --output-on-failure -C Release
+	cargo test --release --manifest-path runtime/Cargo.toml
+	go -C bindings/go test -count=1 ./...
+	go -C api test -count=1 ./...
+bench: kernels
+	mkdir -p benchmarks/build
+	$(CXX) -std=c++17 -O3 -mavx2 -mfma -pthread -Ikernels/include benchmarks/bench_matmul.cpp kernels/build/libforge_kernels.a -o benchmarks/build/bench_matmul
+	./benchmarks/build/bench_matmul
+run: build
+	./bin/forge-server -model "$(MODEL)" -addr 127.0.0.1:8080
+endif
 
 kernels:
-	cmake -S $(ROOT)/kernels -B $(KERNELS_BUILD) -DCMAKE_BUILD_TYPE=Release
-	cmake --build $(KERNELS_BUILD) --config Release
-
-kernels-test: kernels
-	cd $(KERNELS_BUILD) && ctest --output-on-failure -C Release
-	@# Also run the binary directly if ctest generator differs
-	@if [ -f "$(KERNELS_BUILD)/forge_kernels_tests$(EXE)" ]; then \
-		"$(KERNELS_BUILD)/forge_kernels_tests$(EXE)"; \
-	elif [ -f "$(KERNELS_BUILD)/Release/forge_kernels_tests$(EXE)" ]; then \
-		"$(KERNELS_BUILD)/Release/forge_kernels_tests$(EXE)"; \
-	fi
-
+	cmake -S kernels -B kernels/build -DCMAKE_BUILD_TYPE=Release
+	cmake --build kernels/build --config Release
 runtime:
-	cd $(RUNTIME_DIR) && cargo build --release
-
-runtime-test: runtime
-	cd $(RUNTIME_DIR) && cargo test --release
-
+	cargo build --release --manifest-path runtime/Cargo.toml
 go-smoke: runtime
-ifeq ($(OS),Windows_NT)
-	@powershell -NoProfile -Command \
-	  "$$env:FORGE_RUNTIME_DIR='$(RUNTIME_TARGET)'; \
-	   Set-Location '$(BINDINGS_GO)'; \
-	   go test -count=1 ./..."
-else
-	PATH="$(RUNTIME_TARGET)$(PATHSEP)$$PATH" \
-	LD_LIBRARY_PATH="$(RUNTIME_TARGET)$(PATHSEP)$$LD_LIBRARY_PATH" \
-	DYLD_LIBRARY_PATH="$(RUNTIME_TARGET)$(PATHSEP)$$DYLD_LIBRARY_PATH" \
-	  go test -count=1 -C $(BINDINGS_GO) ./...
-endif
-
-test: kernels-test runtime-test go-smoke
-
-bench: bench-kernels
-
-bench-kernels: kernels
-ifeq ($(OS),Windows_NT)
-	@powershell -NoProfile -ExecutionPolicy Bypass -File $(ROOT)/scripts/bench.ps1
-else
-	@mkdir -p $(ROOT)/benchmarks/build
-	$(CXX) -std=c++17 -O3 -mavx2 -mfma -I$(ROOT)/kernels/include \
-	  $(ROOT)/benchmarks/bench_matmul.cpp \
-	  $(KERNELS_BUILD)/libforge_kernels.a \
-	  -lstdc++ -o $(ROOT)/benchmarks/build/bench_matmul$(EXE)
-	$(ROOT)/benchmarks/build/bench_matmul$(EXE)
-endif
-
-run: runtime
-ifeq ($(OS),Windows_NT)
-	@powershell -NoProfile -Command \
-	  "$$env:FORGE_RUNTIME_DIR='$(RUNTIME_TARGET)'; \
-	   Set-Location '$(API_DIR)'; \
-	   go run ./cmd/forge-server -model ../models/Qwen2.5-0.5B-Instruct -addr :8080"
-else
-	FORGE_RUNTIME_DIR=$(RUNTIME_TARGET) \
-	  go run -C $(API_DIR) ./cmd/forge-server -model ../models/Qwen2.5-0.5B-Instruct -addr :8080
-endif
-
-# Compile/link CUDA Rust modules against forge_cuda_stub (no nvcc/GPU).
+	go -C bindings/go test -count=1 ./...
 cuda-stub-check:
-	cd $(RUNTIME_DIR) && cargo build --release --features cuda-stub
-	cd $(RUNTIME_DIR) && cargo test --release --features cuda-stub --test cuda_compile_check -- --nocapture
-	cd $(RUNTIME_DIR) && cargo test --release --features cuda-stub --test cuda_transformer_parity -- --nocapture
-
+	cargo test --release --manifest-path runtime/Cargo.toml --features cuda-stub
 fmt:
-	cd $(RUNTIME_DIR) && cargo fmt
-	gofmt -w $(BINDINGS_GO) $(API_DIR)/cmd
-
-clean:
-	rm -rf $(KERNELS_BUILD) $(RUNTIME_DIR)/target $(ROOT)/benchmarks/build
-	cd $(API_DIR) && go clean ./... || true
-	cd $(BINDINGS_GO) && go clean ./... || true
+	cargo fmt --manifest-path runtime/Cargo.toml
+	go -C api fmt ./...
+	go -C bindings/go fmt ./...

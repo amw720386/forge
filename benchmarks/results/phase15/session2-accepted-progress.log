@@ -1,0 +1,51 @@
+{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 181.79555653414266}
+{"concurrency": 2, "workload": "short", "aggregate_tok_s_median": 290.6030299115891}
+{"concurrency": 4, "workload": "short", "aggregate_tok_s_median": 567.2497720149462}
+{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 1016.9962317115521}
+{"concurrency": 1, "workload": "medium", "aggregate_tok_s_median": 131.40718785374006}
+{"concurrency": 2, "workload": "medium", "aggregate_tok_s_median": 202.23259412118074}
+{"concurrency": 4, "workload": "medium", "aggregate_tok_s_median": 391.70250104465936}
+{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 734.9955721399892}
+{"concurrency": 1, "workload": "long", "aggregate_tok_s_median": 59.277578500921905}
+{"concurrency": 2, "workload": "long", "aggregate_tok_s_median": 74.75223570037984}
+{"concurrency": 4, "workload": "long", "aggregate_tok_s_median": 133.64542142537127}
+{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 219.7841616680419}
+{"concurrency": 1, "workload": "mixed", "aggregate_tok_s_median": 181.51705492535572}
+{"concurrency": 2, "workload": "mixed", "aggregate_tok_s_median": 145.212304500233}
+{"concurrency": 4, "workload": "mixed", "aggregate_tok_s_median": 90.37495720340983}
+{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 192.03850476047194}
+{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 180.00066276296195}
+{"concurrency": 2, "workload": "short", "aggregate_tok_s_median": 288.73739094547824}
+{"concurrency": 4, "workload": "short", "aggregate_tok_s_median": 561.6496413809033}
+{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 997.0823873670973}
+{"concurrency": 1, "workload": "medium", "aggregate_tok_s_median": 163.392412915118}
+{"concurrency": 2, "workload": "medium", "aggregate_tok_s_median": 291.27458159215547}
+{"concurrency": 4, "workload": "medium", "aggregate_tok_s_median": 558.5213487638758}
+{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 1014.2224111584144}
+{"concurrency": 1, "workload": "long", "aggregate_tok_s_median": 103.79497406024808}
+{"concurrency": 2, "workload": "long", "aggregate_tok_s_median": 148.8577371304334}
+{"concurrency": 4, "workload": "long", "aggregate_tok_s_median": 125.63334246247996}
+{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 209.0279617602574}
+{"concurrency": 1, "workload": "mixed", "aggregate_tok_s_median": 178.84069239554105}
+{"concurrency": 2, "workload": "mixed", "aggregate_tok_s_median": 182.39116253502712}
+{"concurrency": 4, "workload": "mixed", "aggregate_tok_s_median": 177.02826943024803}
+{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 191.76491572730447}
+CONTEXT 128 1
+CONTEXT 128 8
+CONTEXT 512 1
+CONTEXT 512 8
+CONTEXT 1024 1
+CONTEXT 1024 8
+CONTEXT 2048 1
+CONTEXT 2048 8
+CONTEXT 4096 1
+CONTEXT 4096 8
+CONTEXT 128 1
+CONTEXT 128 8
+CONTEXT 512 1
+CONTEXT 512 8
+CONTEXT 1024 1
+CONTEXT 1024 8
+CONTEXT 2048 1
+CONTEXT 2048 8
+CONTEXT 4096 1

@@ -13,10 +13,10 @@ crate-type = ["cdylib", "rlib", "staticlib"]
 [features]
 default = []
 # Real NVIDIA CUDA backend. Requires prebuilt libforge_cuda + CUDA toolkit.
-# Fails the build if libforge_cuda is missing (see docs/CUDA_TOOLCHAIN.md).
+# Fails the build if libforge_cuda is missing (see docs/build.md).
 cuda = []
 # Compile/link check of CUDA Rust paths against forge_cuda_stub.c (no nvcc/GPU).
-# Does NOT enable real GPU inference. Mutually intended vs `cuda` for CI/Windows.
+# Does NOT enable real GPU inference. Mutually intended vs `cuda` for local compile checks.
 cuda-stub = []
 
 [dependencies]

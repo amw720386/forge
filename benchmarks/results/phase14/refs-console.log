@@ -1,0 +1,16 @@
+{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 168.5784161467275}
+{"concurrency": 2, "workload": "short", "aggregate_tok_s_median": 266.98525483174836}
+{"concurrency": 4, "workload": "short", "aggregate_tok_s_median": 371.2327440350296}
+{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 540.2769693410819}
+{"concurrency": 1, "workload": "medium", "aggregate_tok_s_median": 173.52413486859444}
+{"concurrency": 2, "workload": "medium", "aggregate_tok_s_median": 269.56330691632206}
+{"concurrency": 4, "workload": "medium", "aggregate_tok_s_median": 415.85065991888035}
+{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 584.4310575184791}
+{"concurrency": 1, "workload": "long", "aggregate_tok_s_median": 161.52995642320306}
+{"concurrency": 2, "workload": "long", "aggregate_tok_s_median": 241.19010009012052}
+{"concurrency": 4, "workload": "long", "aggregate_tok_s_median": 349.2924117552873}
+{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 446.8954951582654}
+{"concurrency": 1, "workload": "mixed", "aggregate_tok_s_median": 163.37985340468722}
+{"concurrency": 2, "workload": "mixed", "aggregate_tok_s_median": 188.3322371336506}
+{"concurrency": 4, "workload": "mixed", "aggregate_tok_s_median": 177.51848755792034}
+{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 245.94389175607483}

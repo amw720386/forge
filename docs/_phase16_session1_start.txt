@@ -1,7 +1,0 @@
-forge-cloud start
-  GPU=l4 duration=28m0s rate≈$1.68/h estimate≈$0.78 spend_limit=$1.00; provider auto-sleep is the idle safety net if the local process dies
-  studio=forge-gpu status=running machine=l4 dry_run=false
-  auto_sleep=15 min (provider-side idle timeout)
-  Next: forge-cloud exec --command 'nvidia-smi'
-  Then: forge-cloud stop   # always verify status after stop
-  If this process dies: Studio should auto-sleep; still run forge-cloud stop when you can.

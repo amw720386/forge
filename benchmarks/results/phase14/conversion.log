@@ -1,0 +1,543 @@
+Looking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cpu
+Collecting numpy~=2.2.6 (from -r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 1))
+  Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+Requirement already satisfied: sentencepiece<0.3.0,>=0.1.98 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from -r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 2)) (0.2.2)
+Collecting transformers==4.57.6 (from -r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4))
+  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)
+Collecting gguf>=0.1.0 (from -r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 6))
+  Downloading gguf-0.19.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting protobuf<5.0.0,>=4.21.0 (from -r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 7))
+  Downloading protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl.metadata (541 bytes)
+Collecting torch==2.11.0 (from -r requirements/requirements-convert_hf_to_gguf.txt (line 5))
+  Downloading torch-2.11.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (29 kB)
+Requirement already satisfied: filelock in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (3.32.6)
+Collecting huggingface-hub<1.0,>=0.34.0 (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4))
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: packaging>=20.0 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (26.3)
+Requirement already satisfied: pyyaml>=5.1 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (6.0.3)
+Collecting regex!=2019.12.17 (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4))
+  Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Requirement already satisfied: requests in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (2.34.2)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4))
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting safetensors>=0.4.3 (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Requirement already satisfied: tqdm>=4.27 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (4.70.0)
+Requirement already satisfied: typing-extensions>=4.10.0 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (4.16.0)
+Collecting setuptools<82 (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5))
+  Downloading setuptools-81.0.0-py3-none-any.whl.metadata (6.6 kB)
+Requirement already satisfied: sympy>=1.13.3 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (3.6.1)
+Requirement already satisfied: jinja2 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (2026.7.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from huggingface-hub<1.0,>=0.34.0->transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (1.7.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from requests->transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (3.5.1)
+Requirement already satisfied: idna<4,>=2.5 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from requests->transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (3.19)
+Requirement already satisfied: urllib3<3,>=1.26 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from requests->transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (2.5.0)
+Requirement already satisfied: certifi>=2023.5.7 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from requests->transformers==4.57.6->-r /teamspace/studios/this_studio/forge-cache/llama.cpp/requirements/requirements-convert_legacy_llama.txt (line 4)) (2026.7.22)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from sympy>=1.13.3->torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages (from jinja2->torch==2.11.0->-r requirements/requirements-convert_hf_to_gguf.txt (line 5)) (3.0.3)
+Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 163.8 MB/s  0:00:00
+Downloading torch-2.11.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl (190.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 190.3/190.3 MB 195.3 MB/s  0:00:00
+Downloading numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.5/16.5 MB 232.4 MB/s  0:00:00
+Downloading protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl (295 kB)
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 86.8 MB/s  0:00:00
+Downloading setuptools-81.0.0-py3-none-any.whl (1.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 146.3 MB/s  0:00:00
+Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 174.8 MB/s  0:00:00
+Downloading gguf-0.19.0-py3-none-any.whl (118 kB)
+Downloading regex-2026.9.29-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.8/807.8 kB 125.2 MB/s  0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Installing collected packages: setuptools, safetensors, regex, protobuf, numpy, torch, huggingface-hub, gguf, tokenizers, transformers
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 83.0.0
+    Uninstalling setuptools-83.0.0:
+      Successfully uninstalled setuptools-83.0.0
+  Attempting uninstall: protobuf
+    Found existing installation: protobuf 7.36.1
+    Uninstalling protobuf-7.36.1:
+      Successfully uninstalled protobuf-7.36.1
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.26.4
+    Uninstalling numpy-1.26.4:
+      Successfully uninstalled numpy-1.26.4
+  Attempting uninstall: torch
+    Found existing installation: torch 2.8.0+cu128
+    Uninstalling torch-2.8.0+cu128:
+      Successfully uninstalled torch-2.8.0+cu128
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 2.2.0
+    Uninstalling huggingface_hub-2.2.0:
+      Successfully uninstalled huggingface_hub-2.2.0
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+scikit-learn 1.3.2 requires numpy<2.0,>=1.17.3, but you have numpy 2.2.6 which is incompatible.
+matplotlib 3.8.2 requires numpy<2,>=1.21, but you have numpy 2.2.6 which is incompatible.
+pandas 2.1.4 requires numpy<2,>=1.26.0; python_version >= "3.12", but you have numpy 2.2.6 which is incompatible.
+torchvision 0.23.0+cu128 requires torch==2.8.0, but you have torch 2.11.0+cpu which is incompatible.
+scipy 1.11.4 requires numpy<1.28.0,>=1.21.6, but you have numpy 2.2.6 which is incompatible.
+Successfully installed gguf-0.19.0 huggingface-hub-0.36.2 numpy-2.2.6 protobuf-4.25.9 regex-2026.9.29 safetensors-0.8.0 setuptools-81.0.0 tokenizers-0.22.2 torch-2.11.0+cpu transformers-4.57.6
+INFO:hf-to-gguf:Loading model: Qwen2.5-0.5B-Instruct
+INFO:hf-to-gguf:Model architecture: Qwen2ForCausalLM
+INFO:hf-to-gguf:gguf: indexing model part 'model.safetensors'
+INFO:gguf.gguf_writer:gguf: This GGUF file is for Little Endian only
+INFO:hf-to-gguf:Exporting model...
+INFO:hf-to-gguf:token_embd.weight,         torch.bfloat16 --> F16, shape = {896, 151936}
+INFO:hf-to-gguf:blk.0.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.0.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.0.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.0.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.0.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.0.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.0.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.0.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.0.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.0.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.0.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.0.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.1.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.1.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.1.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.1.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.1.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.1.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.1.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.1.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.1.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.1.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.1.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.1.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.10.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.10.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.10.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.10.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.10.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.10.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.10.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.10.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.10.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.10.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.10.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.10.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.11.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.11.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.11.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.11.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.11.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.11.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.11.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.11.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.11.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.11.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.11.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.11.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.12.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.12.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.12.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.12.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.12.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.12.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.12.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.12.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.12.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.12.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.12.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.12.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.13.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.13.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.13.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.13.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.13.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.13.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.13.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.13.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.13.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.13.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.13.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.13.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.14.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.14.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.14.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.14.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.14.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.14.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.14.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.14.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.14.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.14.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.14.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.14.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.15.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.15.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.15.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.15.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.15.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.15.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.15.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.15.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.15.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.15.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.15.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.15.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.16.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.16.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.16.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.16.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.16.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.16.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.16.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.16.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.16.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.16.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.16.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.16.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.17.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.17.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.17.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.17.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.17.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.17.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.17.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.17.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.17.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.17.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.17.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.17.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.18.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.18.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.18.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.18.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.18.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.18.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.18.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.18.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.18.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.18.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.18.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.18.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.19.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.19.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.19.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.19.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.19.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.19.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.19.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.19.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.19.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.19.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.19.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.19.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.2.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.2.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.2.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.2.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.2.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.2.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.2.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.2.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.2.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.2.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.2.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.2.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.20.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.20.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.20.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.20.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.20.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.20.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.20.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.20.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.20.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.20.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.20.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.20.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.21.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.21.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.21.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.21.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.21.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.21.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.21.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.21.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.21.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.21.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.21.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.21.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.22.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.22.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.22.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.22.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.22.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.22.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.22.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.22.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.22.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.22.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.22.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.22.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.23.attn_norm.weight,   torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.23.ffn_down.weight,    torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.23.ffn_gate.weight,    torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.23.ffn_up.weight,      torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.23.ffn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.23.attn_k.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.23.attn_k.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.23.attn_output.weight, torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.23.attn_q.bias,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.23.attn_q.weight,      torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.23.attn_v.bias,        torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.23.attn_v.weight,      torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.3.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.3.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.3.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.3.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.3.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.3.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.3.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.3.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.3.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.3.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.3.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.3.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.4.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.4.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.4.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.4.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.4.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.4.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.4.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.4.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.4.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.4.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.4.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.4.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.5.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.5.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.5.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.5.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.5.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.5.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.5.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.5.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.5.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.5.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.5.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.5.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.6.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.6.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.6.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.6.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.6.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.6.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.6.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.6.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.6.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.6.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.6.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.6.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.7.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.7.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.7.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.7.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.7.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.7.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.7.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.7.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.7.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.7.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.7.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.7.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.8.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.8.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.8.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.8.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.8.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.8.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.8.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.8.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.8.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.8.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.8.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.8.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.9.attn_norm.weight,    torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.9.ffn_down.weight,     torch.bfloat16 --> F16, shape = {4864, 896}
+INFO:hf-to-gguf:blk.9.ffn_gate.weight,     torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.9.ffn_up.weight,       torch.bfloat16 --> F16, shape = {896, 4864}
+INFO:hf-to-gguf:blk.9.ffn_norm.weight,     torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.9.attn_k.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.9.attn_k.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:blk.9.attn_output.weight,  torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.9.attn_q.bias,         torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:blk.9.attn_q.weight,       torch.bfloat16 --> F16, shape = {896, 896}
+INFO:hf-to-gguf:blk.9.attn_v.bias,         torch.bfloat16 --> F32, shape = {128}
+INFO:hf-to-gguf:blk.9.attn_v.weight,       torch.bfloat16 --> F16, shape = {896, 128}
+INFO:hf-to-gguf:output_norm.weight,        torch.bfloat16 --> F32, shape = {896}
+INFO:hf-to-gguf:Set meta model
+INFO:hf-to-gguf:Set model parameters
+INFO:hf-to-gguf:gguf: context length = 32768
+INFO:hf-to-gguf:gguf: embedding length = 896
+INFO:hf-to-gguf:gguf: feed forward length = 4864
+INFO:hf-to-gguf:gguf: head count = 14
+INFO:hf-to-gguf:gguf: key-value head count = 2
+INFO:hf-to-gguf:gguf: rope theta = 1000000.0
+INFO:hf-to-gguf:gguf: rms norm epsilon = 1e-06
+INFO:hf-to-gguf:gguf: file type = 1
+INFO:hf-to-gguf:Set model quantization version
+INFO:hf-to-gguf:Set model tokenizer
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/scipy/__init__.py:132: UserWarning: A NumPy version >=1.21.6 and <1.28.0 is required for this version of SciPy (detected version 2.2.6)
+  warnings.warn(f"A NumPy version >={np_minversion} and <{np_maxversion}"
+
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/convert_hf_to_gguf.py", line 312, in <module>
+    main()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/convert_hf_to_gguf.py", line 306, in main
+    model_instance.write()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1235, in write
+    self.prepare_metadata(vocab_only=False)
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1434, in prepare_metadata
+    self.set_vocab()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/qwen.py", line 65, in set_vocab
+    self._set_vocab_gpt2()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1976, in _set_vocab_gpt2
+    tokens, toktypes, tokpre = self.get_vocab_base()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1587, in get_vocab_base
+    from transformers import AutoTokenizer
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 40, in <module>
+    from .auto_factory import _LazyAutoMapping
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 43, in <module>
+    from ...generation import GenerationMixin
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/generation/utils.py", line 55, in <module>
+    from .candidate_generator import (
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/generation/candidate_generator.py", line 29, in <module>
+    from sklearn.metrics import roc_curve
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/__init__.py", line 83, in <module>
+    from .base import clone
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/base.py", line 19, in <module>
+    from .utils import _IS_32BIT
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/utils/__init__.py", line 15, in <module>
+    from scipy.sparse import issparse
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/scipy/sparse/__init__.py", line 274, in <module>
+    from ._csr import *
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/scipy/sparse/_csr.py", line 11, in <module>
+    from ._sparsetools import (csr_tocsc, csr_tobsr, csr_count_blocks,
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/qwen.py", line 63, in set_vocab
+    self._set_vocab_sentencepiece()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 2093, in _set_vocab_sentencepiece
+    tokens, scores, toktypes = self._create_vocab_sentencepiece()
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 2110, in _create_vocab_sentencepiece
+    raise FileNotFoundError(f"File not found: {tokenizer_path}")
+FileNotFoundError: File not found: /teamspace/studios/this_studio/forge-cache/models/Qwen2.5-0.5B-Instruct/tokenizer.model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/numpy/core/_multiarray_umath.py", line 44, in __getattr__
+    raise ImportError(msg)
+ImportError: 
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.2.6 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/qwen.py", line 63, in set_vocab
+    self._set_vocab_sentencepiece()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 2093, in _set_vocab_sentencepiece
+    tokens, scores, toktypes = self._create_vocab_sentencepiece()
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 2110, in _create_vocab_sentencepiece
+    raise FileNotFoundError(f"File not found: {tokenizer_path}")
+FileNotFoundError: File not found: /teamspace/studios/this_studio/forge-cache/models/Qwen2.5-0.5B-Instruct/tokenizer.model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/convert_hf_to_gguf.py", line 312, in <module>
+    main()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/convert_hf_to_gguf.py", line 306, in main
+    model_instance.write()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1235, in write
+    self.prepare_metadata(vocab_only=False)
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1434, in prepare_metadata
+    self.set_vocab()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/qwen.py", line 65, in set_vocab
+    self._set_vocab_gpt2()
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1976, in _set_vocab_gpt2
+    tokens, toktypes, tokpre = self.get_vocab_base()
+                               ^^^^^^^^^^^^^^^^^^^^^
+  File "/teamspace/studios/this_studio/forge-cache/llama.cpp/conversion/base.py", line 1587, in get_vocab_base
+    from transformers import AutoTokenizer
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2347, in _get_module
+    raise e
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 40, in <module>
+    from .auto_factory import _LazyAutoMapping
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 43, in <module>
+    from ...generation import GenerationMixin
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2347, in _get_module
+    raise e
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/generation/utils.py", line 55, in <module>
+    from .candidate_generator import (
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/transformers/generation/candidate_generator.py", line 29, in <module>
+    from sklearn.metrics import roc_curve
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/__init__.py", line 83, in <module>
+    from .base import clone
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/base.py", line 19, in <module>
+    from .utils import _IS_32BIT
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/sklearn/utils/__init__.py", line 15, in <module>
+    from scipy.sparse import issparse
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/scipy/sparse/__init__.py", line 274, in <module>
+    from ._csr import *
+  File "/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/scipy/sparse/_csr.py", line 11, in <module>
+    from ._sparsetools import (csr_tocsc, csr_tobsr, csr_count_blocks,
+ImportError: numpy.core.multiarray failed to import

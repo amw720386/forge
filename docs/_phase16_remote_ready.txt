@@ -1,3 +1,0 @@
-error: NVIDIA L4, 23034 MiB
-/teamspace/studios/this_studio/forge-deploys/20261008T204116Z-7baa1f1daea5
-Error: We are still setting things up for you, please try again after the progress bar at the top of the Studio disappears.
