@@ -21,6 +21,7 @@ requires `stable-x86_64-pc-windows-msvc`; it does not change your global default
 ```powershell
 .\scripts\build.ps1
 .\scripts\test.ps1
+python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instruct
 .\bin\forge-cli.exe -m models/Qwen2.5-0.5B-Instruct -c 1024 -n 128
 $env:FORGE_RUNTIME_DIR = "$PWD\runtime\target\release"
 .\bin\forge-server.exe -model models/SmolLM2-135M-Instruct -addr 127.0.0.1:8080
@@ -54,6 +55,12 @@ go -C api test -count=1 ./...
 ```
 
 Unix bindings link the runtime in `runtime/target/release` using cgo and an rpath.
+The two Go modules use `github.com/amw720386/forge`; `go.work` resolves both
+locally. From the root run `go test ./api/... ./bindings/go/...` (root `./...`
+is not a module). The API's local replace also supports `GOWORK=off`.
+Windows builds default to serial compilation; `scripts/build.ps1 -Jobs 1`
+is the low-memory option. On Unix pass `-j 1` to Cargo and `--parallel 1`
+to CMake when memory is limited.
 Windows bindings load `forge_runtime.dll`; set `FORGE_RUNTIME_DIR` when running
 outside the root with `go run`. Built server binaries also search relative to
 their executable. Model paths are relative to the current directory; use an
@@ -136,6 +143,12 @@ Repeat with Qwen and `tests/fixtures/pretrained/qwen2`. Generated activation bin
 are ignored; the reference generator, case metadata and tensor manifests are kept.
 The checkpoint example drops the original model before reloading and checks exact
 logit preservation. Omit the final `8` for FP32, or use `4` for INT4.
+
+The Python smoke entry point exercises the actual CLI and server, including
+greedy formatted-input parity, HTTP/SSE, concurrent clients and clean restart.
+It needs only Python's standard library; absent weights are explicitly skipped.
+On Windows its interrupt check uses Ctrl+Break, which reaches the console
+interrupt handler. Rebuild the server and runtime together after ABI changes.
 
 Current cleanup validation is on Windows x86-64 CPU. Linux builds and CUDA
 execution were not retested. Historical details are in [history/](history/).

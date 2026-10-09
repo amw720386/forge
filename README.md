@@ -64,6 +64,8 @@ The CLI applies `tokenizer_config.json`'s chat template to the entire conversati
 and preserves previous turns. A full context asks you to clear history; output
 is capped by the remaining context and stops at EOS. `FORGE_MAX_SEQ` also caps
 the requested context. Models must include `tokenizer_config.json` for chat.
+Run `python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instruct` after
+building to check local CLI conversations and HTTP/SSE behavior.
 
 The server retains its text completions API: plain prompts receive the existing
 Qwen-style wrapper; already formatted prompts pass through. For checkpoints,
