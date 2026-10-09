@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"strings"
 	"sync"
@@ -69,12 +70,16 @@ func New(cfg Config, q *queue.Queue, sched *scheduler.Scheduler, m *metrics.Coll
 }
 
 func (s *Server) Start() error {
+	listener, err := net.Listen("tcp", s.cfg.Addr)
+	if err != nil {
+		return fmt.Errorf("listen on %s: %w", s.cfg.Addr, err)
+	}
 	s.sched.Start()
 	s.wg.Add(1)
 	go func() {
 		defer s.wg.Done()
 		log.Printf("forge-server listening on %s", s.cfg.Addr)
-		if err := s.httpServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		if err := s.httpServer.Serve(listener); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			log.Printf("server error: %v", err)
 		}
 	}()
