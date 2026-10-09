@@ -22,6 +22,7 @@ else
 build: runtime
 	mkdir -p bin
 	go -C api build -o ../bin/forge-server ./cmd/forge-server
+	cp runtime/target/release/forge-cli bin/forge-cli
 test: build kernels
 	ctest --test-dir kernels/build --output-on-failure -C Release
 	cargo test --release --manifest-path runtime/Cargo.toml

@@ -20,6 +20,7 @@ param(
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
+$Model = [System.IO.Path]::GetFullPath((Join-Path $root $Model))
 
 $env:FORGE_BENCH_MEM_CAP_MIB = if ($env:FORGE_BENCH_MEM_CAP_MIB) { $env:FORGE_BENCH_MEM_CAP_MIB } else { "6144" }
 $env:FORGE_BENCH_RAM_FRACTION = if ($env:FORGE_BENCH_RAM_FRACTION) { $env:FORGE_BENCH_RAM_FRACTION } else { "0.45" }

@@ -4,6 +4,7 @@ Run commands from the repository root unless stated otherwise. Weights stay loca
 provide `config.json`, one `model.safetensors`, and `tokenizer.json` in
 `models/Qwen2.5-0.5B-Instruct` or `models/SmolLM2-135M-Instruct`. Preserve upstream
 model licenses and attribution. Forge does not download models automatically.
+For interactive chat also include the upstream `tokenizer_config.json`.
 
 ## CPU
 
@@ -20,6 +21,7 @@ requires `stable-x86_64-pc-windows-msvc`; it does not change your global default
 ```powershell
 .\scripts\build.ps1
 .\scripts\test.ps1
+.\bin\forge-cli.exe -m models/Qwen2.5-0.5B-Instruct -c 1024 -n 128
 $env:FORGE_RUNTIME_DIR = "$PWD\runtime\target\release"
 .\bin\forge-server.exe -model models/SmolLM2-135M-Instruct -addr 127.0.0.1:8080
 ```
@@ -53,7 +55,16 @@ go -C api test -count=1 ./...
 
 Unix bindings link the runtime in `runtime/target/release` using cgo and an rpath.
 Windows bindings load `forge_runtime.dll`; set `FORGE_RUNTIME_DIR` when running
-outside the root. For an unbuilt server, use the module-aware command:
+outside the root with `go run`. Built server binaries also search relative to
+their executable. Model paths are relative to the current directory; use an
+absolute `-model`/`-m` path from other directories. The CLI links the runtime
+directly and needs no DLL search setting. Build it alone with:
+
+```sh
+cargo build --release --manifest-path runtime/Cargo.toml --bin forge-cli
+```
+
+For an unbuilt server, use the module-aware command:
 
 ```sh
 go -C api run ./cmd/forge-server -model ../models/Qwen2.5-0.5B-Instruct -addr 127.0.0.1:8080
@@ -114,12 +125,14 @@ suite. Existing HF reference exports can be regenerated sequentially with Python
 PyTorch, Transformers and Safetensors:
 
 ```sh
-python tests/reference/phase16_reference.py models/SmolLM2-135M-Instruct tests/fixtures/phase16/smollm2
-cargo run --release --manifest-path runtime/Cargo.toml --example phase16_parity -- models/SmolLM2-135M-Instruct tests/fixtures/phase16/smollm2
-cargo run --release --manifest-path runtime/Cargo.toml --example phase16_checkpoint -- models/SmolLM2-135M-Instruct models/smollm2-int8.forge models/SmolLM2-135M-Instruct 8
+python tests/reference/pretrained_reference.py models/SmolLM2-135M-Instruct tests/fixtures/pretrained/smollm2
+cargo run --release --manifest-path runtime/Cargo.toml --example pretrained_parity -- models/SmolLM2-135M-Instruct tests/fixtures/pretrained/smollm2
+cargo run --release --manifest-path runtime/Cargo.toml --example checkpoint_parity -- models/SmolLM2-135M-Instruct models/smollm2-int8.forge models/SmolLM2-135M-Instruct 8
+python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instruct
+cargo test --release -j 1 --manifest-path runtime/Cargo.toml --test chat_templates -- --include-ignored --test-threads=1
 ```
 
-Repeat with Qwen and `tests/fixtures/phase16/qwen2`. Generated activation binaries
+Repeat with Qwen and `tests/fixtures/pretrained/qwen2`. Generated activation binaries
 are ignored; the reference generator, case metadata and tensor manifests are kept.
 The checkpoint example drops the original model before reloading and checks exact
 logit preservation. Omit the final `8` for FP32, or use `4` for INT4.

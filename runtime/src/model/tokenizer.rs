@@ -1,6 +1,7 @@
 //! Hugging Face `tokenizer.json` wrapper.
 
 use std::path::Path;
+use std::sync::Arc;
 use tokenizers::Tokenizer;
 
 /// Reuse the legacy sibling layout while permitting an explicit tokenizer directory.
@@ -16,9 +17,9 @@ pub fn tokenizer_dir(path: impl AsRef<Path>, cfg: &super::ModelConfig) -> Result
     Err(TokError::Load("tokenizer.json not found; set FORGE_TOKENIZER_DIR to the checkpoint's tokenizer directory".into()))
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct ForgeTokenizer {
-    inner: Tokenizer,
+    inner: Arc<Tokenizer>,
     pub eos_token_id: u32,
     pub bos_token_id: u32,
 }
@@ -57,7 +58,7 @@ impl ForgeTokenizer {
         let path = dir.as_ref().join("tokenizer.json");
         let inner = Tokenizer::from_file(&path).map_err(|e| TokError::Load(e.to_string()))?;
         Ok(Self {
-            inner,
+            inner: Arc::new(inner),
             eos_token_id: eos,
             bos_token_id: bos,
         })

@@ -13,7 +13,7 @@ use std::sync::OnceLock;
 
 static VERSION: OnceLock<CString> = OnceLock::new();
 
-enum RuntimeHandleInner {
+pub(crate) enum RuntimeHandleInner {
     Cpu(ContinuousBatcher),
     #[cfg(feature = "cuda")]
     Cuda(crate::cuda_model::CudaBatcher),
@@ -76,7 +76,7 @@ impl RuntimeHandleInner {
         }
     }
 
-    fn admit(
+    pub(crate) fn admit(
         &mut self,
         prompt: &str,
         params: GenerateParams,
@@ -88,7 +88,7 @@ impl RuntimeHandleInner {
         }
     }
 
-    fn cancel(&mut self, id: u64) -> Result<(), crate::model::BatchError> {
+    pub(crate) fn cancel(&mut self, id: u64) -> Result<(), crate::model::BatchError> {
         match self {
             Self::Cpu(b) => b.cancel(id),
             #[cfg(feature = "cuda")]
@@ -96,7 +96,7 @@ impl RuntimeHandleInner {
         }
     }
 
-    fn step(&mut self) -> Result<Vec<BatchEvent>, crate::model::BatchError> {
+    pub(crate) fn step(&mut self) -> Result<Vec<BatchEvent>, crate::model::BatchError> {
         match self {
             Self::Cpu(b) => b.step(),
             #[cfg(feature = "cuda")]
@@ -106,9 +106,12 @@ impl RuntimeHandleInner {
 }
 
 pub struct RuntimeHandle {
-    inner: RuntimeHandleInner,
+    pub(crate) inner: RuntimeHandleInner,
+    pub(crate) tokenizer: ForgeTokenizer,
+    pub(crate) tokenizer_dir: std::path::PathBuf,
+    pub(crate) max_seq: usize,
     /// Compatibility path for single-flight generate_* API.
-    eos_token_id: u32,
+    pub(crate) eos_token_id: u32,
     single_id: Option<u64>,
     single_events: VecDeque<BatchEvent>,
 }
@@ -252,6 +255,7 @@ pub unsafe extern "C" fn forge_runtime_load_ex(
         }
     };
     let eos_token_id = model.cfg.eos_token_id;
+    let tokenizer = tok.clone();
     let handle = if device == 1 || device == 2 {
         #[cfg(all(feature = "cuda-stub", not(feature = "cuda")))]
         {
@@ -310,6 +314,9 @@ pub unsafe extern "C" fn forge_runtime_load_ex(
     };
     Box::into_raw(Box::new(RuntimeHandle {
         inner: handle,
+        tokenizer,
+        tokenizer_dir: tok_dir,
+        max_seq,
         eos_token_id,
         single_id: None,
         single_events: VecDeque::new(),

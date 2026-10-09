@@ -1,4 +1,4 @@
-# Build CPU kernels, Rust runtime and Go server on Windows.
+# Build CPU kernels, Rust runtime, CLI and Go server on Windows.
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
@@ -15,6 +15,7 @@ function Import-VcVars {
           [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
         }
       }
+      if ($LASTEXITCODE -ne 0) { throw "MSVC environment setup failed ($LASTEXITCODE)" }
       return
     }
   }
@@ -31,8 +32,10 @@ cmake --build "$Root\kernels\build" --config Release
 if ($LASTEXITCODE -ne 0) { throw "Kernel build failed ($LASTEXITCODE)" }
 
 Write-Host "==> Rust runtime"
-cargo build --release --manifest-path "$Root\runtime\Cargo.toml"
+cargo build --release -j 1 --manifest-path "$Root\runtime\Cargo.toml"
 if ($LASTEXITCODE -ne 0) { throw "Rust build failed ($LASTEXITCODE)" }
+New-Item -ItemType Directory -Force -Path "$Root\bin" | Out-Null
+Copy-Item -LiteralPath "$Root\runtime\target\release\forge-cli.exe" -Destination "$Root\bin\forge-cli.exe"
 
 Write-Host "==> Go server"
 New-Item -ItemType Directory -Force -Path "$Root\bin" | Out-Null

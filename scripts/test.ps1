@@ -11,7 +11,7 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "==> Rust tests"
 Push-Location "$Root\runtime"
-cargo test --release
+cargo test --release -j 1
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 Pop-Location
 

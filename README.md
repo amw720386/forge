@@ -4,7 +4,8 @@ Forge is an LLM inference runtime written in Go, Rust, C++ and CUDA.
 
 It loads local Hugging Face Safetensors or native `.forge` checkpoints and runs
 its own transformer forward pass on CPU or NVIDIA CUDA. A Go HTTP server exposes
-text completions with streaming and continuous batching.
+text completions with streaming and continuous batching. `forge-cli` provides
+interactive local chat through the same runtime.
 
 ## Features
 
@@ -41,8 +42,8 @@ Supply a local model directory containing `config.json`, `model.safetensors` and
 `tokenizer.json`. Model weights are not included.
 
 ```sh
-# Generate with the existing CPU example
-cargo run --release --manifest-path runtime/Cargo.toml --example generate_qwen -- models/Qwen2.5-0.5B-Instruct --max-tokens 32
+# Interactive chat; Windows: .\bin\forge-cli.exe with the same flags
+./bin/forge-cli -m models/Qwen2.5-0.5B-Instruct
 
 # Start the server on Linux; Windows: .\bin\forge-server.exe with the same flags
 ./bin/forge-server -model models/Qwen2.5-0.5B-Instruct -addr 127.0.0.1:8080
@@ -54,9 +55,20 @@ curl http://127.0.0.1:8080/v1/completions \
   -d '{"prompt":"The capital of France is","max_tokens":16,"temperature":0,"stream":false}'
 ```
 
-Prompts are passed through as supplied; format chat prompts yourself. To use a
-checkpoint, pass `-model models/qwen2.5-int8.forge` and keep its matching tokenizer
-available (see [build.md](docs/build.md)).
+CLI options: `-m/--model`, `-c/--ctx-size` (1024), `-n/--predict` (128),
+`--device` (cpu or cuda), and `--dtype` (fp32; CUDA also supports bf16).
+Generation is greedy. `/clear` resets history; `/help` lists commands; `/exit`
+exits. Ctrl+C stops generation, or exits while waiting for input. Cancellation
+takes effect after the current runtime operation completes, including prefill.
+The CLI applies `tokenizer_config.json`'s chat template to the entire conversation
+and preserves previous turns. A full context asks you to clear history; output
+is capped by the remaining context and stops at EOS. `FORGE_MAX_SEQ` also caps
+the requested context. Models must include `tokenizer_config.json` for chat.
+
+The server retains its text completions API: plain prompts receive the existing
+Qwen-style wrapper; already formatted prompts pass through. For checkpoints,
+use `-m models/qwen2.5-int8.forge` in the CLI or `-model` in the server and keep
+the matching tokenizer directory available (see [build.md](docs/build.md)).
 
 ## Supported models
 
@@ -91,19 +103,22 @@ over other engines. [Methodology and raw evidence](docs/benchmarks.md).
 ## Architecture
 
 ```text
-Go HTTP server / scheduler -> Go bindings -> Rust C ABI / model runtime -> C++ / CUDA kernels
+forge-cli --------------------------------> Rust model runtime -> C++ / CUDA kernels
+forge-server / scheduler -> Go bindings -> Rust C ABI ---------^
 ```
 
 `api/` handles admission, scheduling and streaming. `bindings/go/` bridges the
 Rust C ABI using cgo on Unix and DLL loading on Windows. `runtime/` owns model
 loading, transformer execution, checkpoints and KV state. `kernels/` contains
 CPU kernels and the optional `cuda/` backend. Separate Go modules keep this
-platform-specific binding and optional cloud tooling independent of the server.
+platform-specific binding independent of the server. `tools/cli/` is the thin
+Rust chat interface; the server stays in `api/cmd/forge-server/` for simple Go builds.
 
 ## Limitations
 
 Only the two model targets above are qualified. Sharded Safetensors, scaled RoPE,
-sliding-window attention and automatic chat templates are unsupported. Full
+sliding-window attention are unsupported. CLI chat is qualified for the two
+models above; arbitrary tokenizer templates are unvalidated. Full
 model context limits have not been audited. The HTTP API implements text
 completions, not the full OpenAI API. There is no authentication or TLS; bind to
 loopback for local use.

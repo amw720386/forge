@@ -2,6 +2,7 @@
 
 pub mod attention;
 pub mod cache;
+pub mod chat;
 pub mod checkpoint;
 pub mod compute;
 pub mod ffi;
