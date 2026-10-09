@@ -70,6 +70,7 @@ struct Slot {
     caches: LayerKvCaches,
     tokens: Vec<u32>,
     prompt_len: usize,
+    emitted: String,
     params: GenerateParams,
     generated: usize,
     cancelled: bool,
@@ -180,6 +181,7 @@ impl ContinuousBatcher {
                 caches: LayerKvCaches::new(&model.cfg, max_seq)?,
                 tokens: Vec::new(),
                 prompt_len: 0,
+                emitted: String::new(),
                 params: GenerateParams::default(),
                 generated: 0,
                 cancelled: false,
@@ -258,6 +260,7 @@ impl ContinuousBatcher {
         slot.prompt_len = slot.tokens.len();
         slot.params = params;
         slot.generated = 0;
+        slot.emitted.clear();
         slot.cancelled = false;
         slot.rng_state = 0xDEADBEEF ^ id;
         slot.pending_decode = None;
@@ -317,11 +320,6 @@ impl ContinuousBatcher {
                 let slot = &mut self.slots[si];
                 Self::sample_slot(slot)
             };
-            let piece = self
-                .tok
-                .as_ref()
-                .and_then(|t| t.decode(&[next], true).ok())
-                .unwrap_or_default();
             let slot = &mut self.slots[si];
             slot.tokens.push(next);
             slot.generated += 1;
@@ -329,6 +327,10 @@ impl ContinuousBatcher {
             let done = slot.params.eos_token_id == Some(next)
                 || slot.generated >= slot.params.max_tokens
                 || slot.tokens.len() >= self.max_seq;
+            let piece = match &self.tok {
+                Some(tok) => tok.stream_piece(&slot.tokens[slot.prompt_len..], &mut slot.emitted, done)?,
+                None => String::new(),
+            };
 
             events.push(BatchEvent {
                 request_id: slot.id,

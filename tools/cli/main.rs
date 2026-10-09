@@ -159,7 +159,6 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 continue;
             }
         };
-        let mut tokens = Vec::new();
         let mut text = String::new();
         let mut stopped = false;
         let result = (|| -> Result<(), Box<dyn std::error::Error>> {
@@ -171,20 +170,9 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 let events = runtime.chat_step()?;
                 let mut done = false;
                 for event in events {
-                    tokens.push(event.token_id);
-                    let decoded = runtime.decode_tokens(&tokens)?;
-                    // Byte fallback may leave an incomplete UTF-8 character between tokens.
-                    let stable = if event.done {
-                        decoded.as_str()
-                    } else {
-                        decoded.trim_end_matches('\u{fffd}')
-                    };
-                    let piece = stable
-                        .strip_prefix(&text)
-                        .ok_or("tokenizer changed previously streamed text")?;
-                    write!(output, "{piece}")?;
+                    write!(output, "{}", event.piece)?;
                     output.flush()?;
-                    text = stable.to_owned();
+                    text.push_str(&event.piece);
                     done |= event.done;
                 }
                 if done {

@@ -167,7 +167,7 @@ func nativeBatchCancel(ptr uintptr, requestID uint64) error {
 }
 
 func nativeBatchStep(ptr uintptr) ([]BatchEvent, error) {
-	buf := make([]C.forge_batch_event, 64)
+	buf := make([]C.forge_batch_event, nativeBatchCapacity(ptr))
 	n := C.forge_batch_step(
 		(*C.forge_runtime)(unsafe.Pointer(ptr)),
 		&buf[0],
@@ -179,7 +179,13 @@ func nativeBatchStep(ptr uintptr) ([]BatchEvent, error) {
 	out := make([]BatchEvent, 0, int(n))
 	for i := C.int32_t(0); i < n; i++ {
 		ev := buf[i]
-		piece := C.GoString(&ev.piece[0])
+		size := C.forge_batch_piece((*C.forge_runtime)(unsafe.Pointer(ptr)), ev.request_id, nil, 0)
+		if size == 0 {
+			return nil, StatusInternal
+		}
+		data := make([]byte, int(size))
+		C.forge_batch_piece((*C.forge_runtime)(unsafe.Pointer(ptr)), ev.request_id, (*C.char)(unsafe.Pointer(&data[0])), size)
+		piece := string(data[:len(data)-1])
 		out = append(out, BatchEvent{
 			RequestID: uint64(ev.request_id),
 			TokenID:   uint32(ev.token_id),

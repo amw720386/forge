@@ -13,6 +13,7 @@ pub struct StreamSession {
     scratch: ForwardScratch,
     tokens: Vec<u32>,
     prompt_len: usize,
+    emitted: String,
     params: GenerateParams,
     started: bool,
     finished: bool,
@@ -32,6 +33,7 @@ impl StreamSession {
             scratch,
             tokens: Vec::new(),
             prompt_len: 0,
+            emitted: String::new(),
             params: GenerateParams::default(),
             started: false,
             finished: true,
@@ -47,6 +49,7 @@ impl StreamSession {
             return Err(GenError::PromptTooLong);
         }
         self.prompt_len = self.tokens.len();
+        self.emitted.clear();
         self.params = params;
         self.model
             .forward_tokens(&self.tokens, 0, &mut self.caches, &mut self.scratch)?;
@@ -71,9 +74,12 @@ impl StreamSession {
         let logits = self.last_logits.clone();
         let next = self.sample(&logits);
         self.tokens.push(next);
-        let piece = self.tok.decode(&[next], true).unwrap_or_default();
+        let done = self.params.eos_token_id == Some(next)
+            || self.tokens.len() >= self.max_seq
+            || self.tokens.len() - self.prompt_len >= self.params.max_tokens;
+        let piece = self.tok.stream_piece(&self.tokens[self.prompt_len..], &mut self.emitted, done)?;
 
-        if self.params.eos_token_id == Some(next) || self.tokens.len() >= self.max_seq {
+        if done {
             self.finished = true;
             return Ok(Some((next, piece)));
         }

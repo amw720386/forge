@@ -31,6 +31,7 @@ var (
 	procBatchAdmit       *syscall.Proc
 	procBatchCancel      *syscall.Proc
 	procBatchStep        *syscall.Proc
+	procBatchPiece      *syscall.Proc
 	procBatchSchedStats  *syscall.Proc
 )
 
@@ -78,6 +79,7 @@ func ensureLoaded() error {
 			{"forge_batch_admit", &procBatchAdmit},
 			{"forge_batch_cancel", &procBatchCancel},
 			{"forge_batch_step", &procBatchStep},
+			{"forge_batch_piece", &procBatchPiece},
 			{"forge_batch_sched_stats", &procBatchSchedStats},
 		}
 		for _, p := range procs {
@@ -261,7 +263,7 @@ func nativeBatchCancel(ptr uintptr, requestID uint64) error {
 }
 
 func nativeBatchStep(ptr uintptr) ([]BatchEvent, error) {
-	buf := make([]cBatchEvent, 64)
+	buf := make([]cBatchEvent, nativeBatchCapacity(ptr))
 	r, _, _ := procBatchStep.Call(ptr, uintptr(unsafe.Pointer(&buf[0])), uintptr(len(buf)))
 	n := int32(r)
 	if n < 0 {
@@ -270,10 +272,16 @@ func nativeBatchStep(ptr uintptr) ([]BatchEvent, error) {
 	out := make([]BatchEvent, 0, n)
 	for i := int32(0); i < n; i++ {
 		ev := buf[i]
+		size, _, _ := procBatchPiece.Call(ptr, uintptr(ev.RequestID), 0, 0)
+		if size == 0 {
+			return nil, StatusInternal
+		}
+		piece := make([]byte, int(size))
+		procBatchPiece.Call(ptr, uintptr(ev.RequestID), uintptr(unsafe.Pointer(&piece[0])), size)
 		out = append(out, BatchEvent{
 			RequestID: ev.RequestID,
 			TokenID:   ev.TokenID,
-			Text:      cStringFromBytes(ev.Piece[:]),
+			Text:      string(piece[:len(piece)-1]),
 			Done:      ev.Done != 0,
 		})
 	}

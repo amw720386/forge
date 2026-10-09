@@ -117,6 +117,9 @@ typedef struct forge_batch_event {
 
 /**
  * One shared continuous-batching step. Writes up to `cap` events into `out`.
+ * `cap` must be at least forge_batch_capacity(rt); smaller buffers are rejected
+ * before generation advances. The inline piece is a UTF-8 preview; use
+ * forge_batch_piece before the next step to retrieve the complete text.
  * Returns the number of events written (>=0), or a negative forge_status.
  */
 FORGE_RUNTIME_API int32_t forge_batch_step(
@@ -148,6 +151,10 @@ FORGE_RUNTIME_API forge_status forge_generate_next(
     size_t piece_len);
 
 FORGE_RUNTIME_API void forge_generate_cancel(forge_runtime* rt);
+
+/* Full last-step piece; returns required bytes including NUL. Short buffers are untouched.
+ * Retrieve before the next batch step. Zero means invalid runtime/request. */
+FORGE_RUNTIME_API size_t forge_batch_piece(forge_runtime* rt, uint64_t request_id, char* buf, size_t len);
 
 #ifdef __cplusplus
 }

@@ -72,9 +72,41 @@ impl ForgeTokenizer {
         Ok(enc.get_ids().to_vec())
     }
 
+    /// Decode accumulated generated IDs, holding incomplete byte fallback at the tail.
+    pub fn stream_piece(&self, ids: &[u32], emitted: &mut String, done: bool) -> Result<String, TokError> {
+        let decoded = self.decode(ids, true)?;
+        let stable = if done { decoded.as_str() } else { decoded.trim_end_matches('\u{fffd}') };
+        let piece = stable.strip_prefix(emitted.as_str())
+            .ok_or_else(|| TokError::Decode("tokenizer changed previously streamed text".into()))?.to_owned();
+        *emitted = stable.to_owned();
+        Ok(piece)
+    }
+
     pub fn decode(&self, ids: &[u32], skip_special_tokens: bool) -> Result<String, TokError> {
         self.inner
             .decode(ids, skip_special_tokens)
             .map_err(|e| TokError::Decode(e.to_string()))
+    }
+}
+
+#[cfg(test)]
+mod streaming_tests {
+    use super::*;
+    #[test]
+    #[ignore = "requires local qualified tokenizer directories"]
+    fn qualified_unicode_whitespace_and_special_tokens() {
+        for family in ["Qwen2.5-0.5B-Instruct", "SmolLM2-135M-Instruct"] {
+            let dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../models").join(family);
+            let tok = ForgeTokenizer::from_dir(dir, 0, 0).unwrap();
+            for text in [" café 日本語 😀 punctuation!?\n\t", "replacement: �", "<|im_start|>assistant\nHello<|im_end|>", &" ".repeat(256)] {
+                let ids = tok.encode(text, false).unwrap();
+                let mut emitted = String::new();
+                let mut streamed = String::new();
+                for end in 1..=ids.len() {
+                    streamed.push_str(&tok.stream_piece(&ids[..end], &mut emitted, end == ids.len()).unwrap());
+                }
+                assert_eq!(streamed, tok.decode(&ids, true).unwrap(), "{family}: {text}");
+            }
+        }
     }
 }

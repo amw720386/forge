@@ -114,6 +114,7 @@ pub struct RuntimeHandle {
     pub(crate) eos_token_id: u32,
     single_id: Option<u64>,
     single_events: VecDeque<BatchEvent>,
+    batch_events: Vec<BatchEvent>,
 }
 
 #[repr(C)]
@@ -143,8 +144,7 @@ pub struct ForgeBatchSchedStats {
 pub unsafe extern "C" fn forge_version() -> *const c_char {
     VERSION
         .get_or_init(|| {
-            CString::new(format!("forge-runtime/{}", env!("CARGO_PKG_VERSION")))
-                .expect("version")
+            CString::new(format!("forge-runtime/{}", env!("CARGO_PKG_VERSION"))).expect("version")
         })
         .as_ptr()
 }
@@ -196,7 +196,10 @@ fn write_err(buf: *mut c_char, len: usize, msg: &str) {
 
 fn write_piece(dst: &mut [c_char], piece: &str) {
     let bytes = piece.as_bytes();
-    let n = bytes.len().min(dst.len().saturating_sub(1));
+    let mut n = bytes.len().min(dst.len().saturating_sub(1));
+    while !piece.is_char_boundary(n) {
+        n -= 1;
+    }
     for i in 0..n {
         dst[i] = bytes[i] as c_char;
     }
@@ -240,12 +243,19 @@ pub unsafe extern "C" fn forge_runtime_load_ex(
         return ptr::null_mut();
     }
     if max_seq > model.cfg.max_position_embeddings {
-        write_err(err_buf, err_len, "requested max-seq exceeds model context limit");
+        write_err(
+            err_buf,
+            err_len,
+            "requested max-seq exceeds model context limit",
+        );
         return ptr::null_mut();
     }
     let tok_dir = match crate::model::tokenizer_dir(dir, &model.cfg) {
         Ok(p) => p,
-        Err(e) => { write_err(err_buf, err_len, &e.to_string()); return ptr::null_mut(); }
+        Err(e) => {
+            write_err(err_buf, err_len, &e.to_string());
+            return ptr::null_mut();
+        }
     };
     let tok = match ForgeTokenizer::for_model(&tok_dir, &model.cfg) {
         Ok(t) => t,
@@ -320,6 +330,7 @@ pub unsafe extern "C" fn forge_runtime_load_ex(
         eos_token_id,
         single_id: None,
         single_events: VecDeque::new(),
+        batch_events: Vec::new(),
     }))
 }
 
@@ -444,13 +455,17 @@ pub unsafe extern "C" fn forge_batch_step(
         return -1;
     }
     let handle = &mut *rt;
+    if cap < handle.inner.max_batch() {
+        return -1;
+    }
+    handle.batch_events.clear();
     if handle.inner.active_count() == 0 {
         return 0;
     }
     match handle.inner.step() {
         Ok(events) => {
             let n = events.len().min(cap);
-            for (i, ev) in events.into_iter().take(n).enumerate() {
+            for (i, ev) in events.iter().take(n).enumerate() {
                 let slot = &mut *out.add(i);
                 slot.request_id = ev.request_id;
                 slot.token_id = ev.token_id;
@@ -458,10 +473,77 @@ pub unsafe extern "C" fn forge_batch_step(
                 slot._pad = [0; 3];
                 write_piece(&mut slot.piece, &ev.piece);
             }
+            handle.batch_events = events;
             n as c_int
         }
         Err(crate::model::BatchError::Empty) => 0,
         Err(_) => -4,
+    }
+}
+
+/// Full UTF-8 piece from the last batch step. Return required bytes including NUL.
+/// A short buffer is untouched; retry with the returned size before the next step.
+#[no_mangle]
+pub unsafe extern "C" fn forge_batch_piece(
+    rt: *mut RuntimeHandle,
+    id: u64,
+    buf: *mut c_char,
+    len: usize,
+) -> usize {
+    if rt.is_null() {
+        return 0;
+    }
+    let Some(event) = (*rt).batch_events.iter().find(|e| e.request_id == id) else {
+        return 0;
+    };
+    let needed = event.piece.len() + 1;
+    if !buf.is_null() && len >= needed {
+        write_err(buf, len, &event.piece);
+    }
+    needed
+}
+
+#[cfg(test)]
+mod piece_tests {
+    use super::*;
+
+    #[test]
+    fn inline_piece_keeps_utf8_boundaries() {
+        let mut buf = [0i8; 64];
+        write_piece(&mut buf, &("a".repeat(62) + "é"));
+        let text = unsafe { CStr::from_ptr(buf.as_ptr()) }.to_str().unwrap();
+        assert_eq!(text, "a".repeat(62));
+    }
+
+    #[test]
+    #[ignore = "requires local qualified model"]
+    fn full_piece_is_not_truncated_and_short_event_buffer_does_not_step() {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../models/SmolLM2-135M-Instruct");
+        let mut runtime = RuntimeHandle::load(path.to_str().unwrap(), 64, 0).unwrap();
+        runtime.batch_events.push(BatchEvent {
+            request_id: 42,
+            token_id: 0,
+            piece: "é".repeat(128),
+            done: true,
+        });
+        let ptr = &mut *runtime as *mut RuntimeHandle;
+        let mut short = [7u8; 64];
+        unsafe {
+            assert_eq!(
+                forge_batch_piece(ptr, 42, short.as_mut_ptr().cast(), short.len()),
+                257
+            );
+            assert_eq!(short, [7u8; 64]);
+            let mut full = vec![0u8; 257];
+            assert_eq!(
+                forge_batch_piece(ptr, 42, full.as_mut_ptr().cast(), full.len()),
+                257
+            );
+            assert_eq!(std::str::from_utf8(&full[..256]).unwrap(), "é".repeat(128));
+            let mut event: ForgeBatchEvent = std::mem::zeroed();
+            assert_eq!(forge_batch_step(ptr, &mut event, 1), -1);
+        }
     }
 }
 
@@ -539,6 +621,11 @@ pub unsafe extern "C" fn forge_generate_next(
         }
     }
 
+    if let Some(ev) = handle.single_events.front() {
+        if piece_buf.is_null() || piece_len <= ev.piece.len() {
+            return 1;
+        }
+    }
     match handle.single_events.pop_front() {
         Some(ev) => {
             *token_id = ev.token_id;

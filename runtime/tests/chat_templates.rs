@@ -61,14 +61,64 @@ fn pretrained_chat_tokens_limits_eos_and_cancellation() {
         runtime.chat_cancel(id).unwrap();
         runtime.chat_begin(&prompt, 128).unwrap();
         let mut output = Vec::new();
+        let mut streamed = String::new();
         loop {
             let events = runtime.chat_step().unwrap();
             output.extend(events.iter().map(|e| e.token_id));
+            for event in &events {
+                streamed.push_str(&event.piece);
+            }
             if events.iter().any(|e| e.done) {
                 break;
             }
         }
         assert!(output.len() <= 128);
+        assert_eq!(streamed, runtime.decode_tokens(&output).unwrap());
+        // The CLI's Rust interface and the server's ABI must sample identical IDs.
+        use forge_runtime::ffi::abi::{
+            forge_batch_admit, forge_batch_piece, forge_batch_step, ForgeBatchEvent,
+        };
+        let c_prompt = std::ffi::CString::new(prompt.as_str()).unwrap();
+        let mut id = 0;
+        let mut error = [0i8; 1024];
+        let ptr = &mut *runtime as *mut RuntimeHandle;
+        let mut abi_ids = Vec::new();
+        let mut abi_text = String::new();
+        unsafe {
+            assert_eq!(
+                forge_batch_admit(
+                    ptr,
+                    c_prompt.as_ptr(),
+                    128,
+                    0,
+                    &mut id,
+                    error.as_mut_ptr(),
+                    error.len()
+                ),
+                0
+            );
+            loop {
+                let mut events: [ForgeBatchEvent; 64] = std::array::from_fn(|_| std::mem::zeroed());
+                let n = forge_batch_step(ptr, events.as_mut_ptr(), events.len());
+                assert!(n > 0);
+                for event in &events[..n as usize] {
+                    abi_ids.push(event.token_id);
+                    let size = forge_batch_piece(ptr, event.request_id, std::ptr::null_mut(), 0);
+                    assert!(size > 0);
+                    let mut piece = vec![0u8; size];
+                    assert_eq!(
+                        forge_batch_piece(ptr, event.request_id, piece.as_mut_ptr().cast(), size),
+                        size
+                    );
+                    abi_text.push_str(std::str::from_utf8(&piece[..size - 1]).unwrap());
+                }
+                if events[..n as usize].iter().any(|e| e.done != 0) {
+                    break;
+                }
+            }
+        }
+        assert_eq!(abi_ids, output);
+        assert_eq!(abi_text, streamed);
         let config: serde_json::Value =
             serde_json::from_str(&std::fs::read_to_string(path.join("config.json")).unwrap())
                 .unwrap();
