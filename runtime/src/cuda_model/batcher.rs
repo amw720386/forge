@@ -1,4 +1,4 @@
-//! GPU continuous batching with paged KV + chunked prefill (Phase 10).
+//! GPU continuous batching with paged KV + chunked prefill.
 //!
 //! Contiguous `forward_tokens` / `generate_cuda` remain the reference path.
 //! This batcher allocates KV from a shared block pool and interleaves decode
@@ -221,7 +221,7 @@ impl CudaBatcher {
         let tokens = tok.encode(prompt, true)?;
         if env::var_os("FORGE_SERVING_PROFILE").is_some() {
             eprintln!(
-                "[phase14 tokenize] tokens={} host_ns={}",
+                "[runtime tokenize] tokens={} host_ns={}",
                 tokens.len(),
                 started.elapsed().as_nanos()
             );
@@ -290,7 +290,7 @@ impl CudaBatcher {
         let mut events = Vec::new();
         let vocab = self.model.cfg.vocab_size;
 
-        // --- Phase A: sample & emit for Ready slots ---
+        // --- Sample: sample & emit for Ready slots ---
         for si in 0..self.slots.len() {
             if self.slots[si].cancelled {
                 self.free_slot(si)?;
@@ -338,7 +338,7 @@ impl CudaBatcher {
             self.stats.last_scheduled_prefill = 0;
             return Ok(events);
         }
-        // --- Phase B: schedule under token budget ---
+        // --- Schedule: schedule under token budget ---
         let decode_idxs: Vec<usize> = self
             .slots
             .iter()
@@ -372,7 +372,7 @@ impl CudaBatcher {
         self.stats.last_scheduled_decode = if run_decode { decode_cost } else { 0 };
         self.stats.last_scheduled_prefill = prefill_plan.iter().map(|(_, n)| *n).sum();
 
-        // --- Phase C: execute decode then prefill ---
+        // --- Execute: execute decode then prefill ---
         let decode_start = std::time::Instant::now();
         if run_decode {
             let timer = if profile {
@@ -393,7 +393,7 @@ impl CudaBatcher {
             let transfer_start = std::time::Instant::now();
             self.store_decode_results(&decode_idxs, vocab)?;
             if profile {
-                eprintln!("[phase14 decode] rows={} synchronized_compute_host_ns={} sample_transfer_host_ns={} stream_region_ms={}", decode_idxs.len(), compute_ns, transfer_start.elapsed().as_nanos(),device_ms);
+                eprintln!("[runtime decode] rows={} synchronized_compute_host_ns={} sample_transfer_host_ns={} stream_region_ms={}", decode_idxs.len(), compute_ns, transfer_start.elapsed().as_nanos(),device_ms);
             }
         }
 
@@ -441,7 +441,7 @@ impl CudaBatcher {
         };
         if profile {
             self.synchronize().map_err(compute_err)?;
-            eprintln!("[phase14 step] scheduling_host_ns={} prefill_synchronized_host_ns={} prefill_rows={} prefill_requests={} decode_rows={} total_host_ns={} prefill_stream_region_ms={}", scheduling_ns, prefill_start.elapsed().as_nanos(), self.stats.last_scheduled_prefill, prefill_plan.len(), decode_idxs.len(), step_start.elapsed().as_nanos(),prefill_device_ms);
+            eprintln!("[runtime step] scheduling_host_ns={} prefill_synchronized_host_ns={} prefill_rows={} prefill_requests={} decode_rows={} total_host_ns={} prefill_stream_region_ms={}", scheduling_ns, prefill_start.elapsed().as_nanos(), self.stats.last_scheduled_prefill, prefill_plan.len(), decode_idxs.len(), step_start.elapsed().as_nanos(),prefill_device_ms);
         }
         if env::var_os("FORGE_CUDA_BATCH_TRACE").is_some() {
             let s = &self.stats;

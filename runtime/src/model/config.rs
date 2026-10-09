@@ -22,7 +22,7 @@ pub struct ModelConfig {
 }
 
 impl ModelConfig {
-    /// Tiny synthetic config for Phase 2 unit tests.
+    /// Tiny synthetic config for unit tests.
     pub fn tiny() -> Self {
         Self {
             architecture: super::Architecture::Qwen2,

@@ -1,7 +1,7 @@
 """Summarize the retained unchanged Phase 15 HTTP harness evidence."""
 import json, statistics
 from pathlib import Path
-root=Path(__file__).resolve().parents[2]/'benchmarks/results/phase16'
+root=Path(__file__).resolve().parent
 def cells(name):
     return {(r['workload'],r['concurrency']):r for r in json.loads((root/name).read_text())['results']}
 before={**cells('phase16-before-short-c1-http.json'),**cells('phase16-before-c8-http.json')}

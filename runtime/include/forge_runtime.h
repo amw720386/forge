@@ -71,7 +71,7 @@ FORGE_RUNTIME_API size_t forge_batch_capacity(forge_runtime* rt);
 FORGE_RUNTIME_API size_t forge_batch_active(forge_runtime* rt);
 FORGE_RUNTIME_API size_t forge_batch_free_slots(forge_runtime* rt);
 
-/** Phase 10 scheduler / KV observability (zeros when unsupported). No pointers. */
+/** scheduler / KV observability (zeros when unsupported). No pointers. */
 typedef struct forge_batch_sched_stats {
   uint64_t active_decode;
   uint64_t active_prefill;

@@ -160,7 +160,7 @@ impl CudaBatchScratch {
     }
 }
 
-/// Last shared-decode instrumentation (Phase 9 verification).
+/// Last shared-decode instrumentation (verification).
 #[derive(Debug, Clone, Default)]
 pub struct CudaBatchStats {
     pub last_batch_size: usize,
@@ -171,9 +171,9 @@ pub struct CudaBatchStats {
     pub last_lm_head_n: usize,
     pub last_lm_head_k: usize,
     pub decode_steps: u64,
-    /// Tokens scheduled as decode in the last step (Phase 10).
+    /// Tokens scheduled as decode in the last step.
     pub last_scheduled_decode: usize,
-    /// Tokens scheduled as prefill chunks in the last step (Phase 10).
+    /// Tokens scheduled as prefill chunks in the last step.
     pub last_scheduled_prefill: usize,
     pub prefill_chunks: u64,
 }
@@ -690,7 +690,7 @@ impl CudaTransformer {
         Ok(())
     }
 
-    /// Prefill or resume a prompt chunk into a paged KV session (Phase 10).
+    /// Prefill or resume a prompt chunk into a paged KV session.
     ///
     /// Writes K/V for `tokens` at absolute positions starting at `position_offset`,
     /// attending to the full prefix already stored in `session` plus the new chunk.
@@ -849,7 +849,7 @@ impl CudaTransformer {
         }
         if profile_kv {
             eprintln!(
-                "[phase15 kv] allocation_host_ns={} new_blocks={} requests={}",
+                "[runtime kv] allocation_host_ns={} new_blocks={} requests={}",
                 allocation_start.elapsed().as_nanos(),
                 needed,
                 b
@@ -863,7 +863,7 @@ impl CudaTransformer {
         }
         if profile_kv {
             eprintln!(
-                "[phase15 kv] table_upload_host_ns={} requests={}",
+                "[runtime kv] table_upload_host_ns={} requests={}",
                 table_start.elapsed().as_nanos(),
                 b
             );

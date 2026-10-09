@@ -107,7 +107,7 @@ __device__ inline const float* paged_kv_row(const float* pool, size_t layer,
   return pool + base + kv_h * head_dim;
 }
 
-/** Phase 10 reference: 1 thread, three-pass, per-key block lookup. */
+/** reference: 1 thread, three-pass, per-key block lookup. */
 __global__ void paged_gqa_attn_naive_kernel(
     size_t t_q, size_t t_k, size_t n_heads, size_t n_kv_heads, size_t head_dim,
     float scale, const float* q, size_t q_w, const float* k_pool,
@@ -194,7 +194,7 @@ __device__ inline float warp_reduce_sum(float v) {
 }
 
 /**
- * Phase 11 optimized paged GQA:
+ * optimized paged GQA:
  * - one CUDA block (1 warp) per (head, query)
  * - online softmax (single K/V pass)
  * - physical block id loaded once per logical block
@@ -648,7 +648,7 @@ extern "C" forge_cuda_status forge_cuda_paged_gqa_attn_f32(
   }
   dim3 grid(static_cast<unsigned>(n_heads), static_cast<unsigned>(t_q));
   // Default: optimized warp + online softmax. Env FORGE_PAGED_ATTN_NAIVE=1
-  // selects the Phase 10 reference (checked on host in Rust; here always opt
+  // selects the reference (checked on host in Rust; here always opt
   // unless compile-time â€” Rust switches symbol). Keep naive entry separate.
   const char* prefill_flag = std::getenv("FORGE_PREFILL_ATTN_BLOCK");
   if(t_q>1 && t_k>=128 && head_dim<=128 && prefill_flag && !std::strcmp(prefill_flag,"1")) {

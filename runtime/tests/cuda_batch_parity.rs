@@ -1,4 +1,4 @@
-//! Phase 9/10: CUDA continuous-batching correctness (paged KV + chunked prefill).
+//! CUDA continuous-batching correctness (paged KV + chunked prefill).
 //!
 //! **Status: GPU execution unverified** until these tests pass on a real NVIDIA GPU
 //! with `--features cuda` (not `cuda-stub`).

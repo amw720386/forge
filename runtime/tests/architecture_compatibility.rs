@@ -86,7 +86,7 @@ fn llama_cached_and_quantized_checkpoint_roundtrips() {
             assert!((a - b).abs() < 1e-5);
         }
         let path = std::env::temp_dir().join(format!(
-            "forge-phase16-{}-{bits:?}.forge",
+            "forge-architecture-{}-{bits:?}.forge",
             std::process::id()
         ));
         save_forge(&model, &path, SaveOptions::default()).unwrap();
@@ -171,7 +171,7 @@ fn mixed_safetensors_and_precise_loading_errors() {
         tensor::{serialize_to_file, TensorView},
         Dtype,
     };
-    let dir = std::env::temp_dir().join(format!("forge-phase16-hf-{}", std::process::id()));
+    let dir = std::env::temp_dir().join(format!("forge-architecture-hf-{}", std::process::id()));
     std::fs::create_dir_all(&dir).unwrap();
     std::fs::write(dir.join("config.json"), config().to_string()).unwrap();
     let cfg = parse_hf_config(&config().to_string()).unwrap();

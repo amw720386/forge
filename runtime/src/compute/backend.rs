@@ -129,7 +129,7 @@ impl Buffer {
     }
 }
 
-/// Minimal compute backend for Phase 8A primitives.
+/// Minimal compute backend for primitives.
 pub trait ComputeBackend: Send + Sync {
     fn kind(&self) -> BackendKind;
     fn info(&self) -> DeviceInfo;

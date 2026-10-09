@@ -176,7 +176,7 @@ FORGE_CUDA_API forge_cuda_status forge_cuda_kv_append_f32(
     const float* v_src, float* k_dst, float* v_dst);
 
 /**
- * Paged GQA attention (Phase 11 default = optimized warp/online-softmax).
+ * Paged GQA attention (default = optimized warp/online-softmax).
  * Reads K/V through a logicalâ†’physical block table (no contiguous rebuild).
  *
  * Pool layout: k_pool/v_pool[n_layers][num_blocks][block_size][kv_width]
@@ -188,7 +188,7 @@ FORGE_CUDA_API forge_cuda_status forge_cuda_paged_gqa_attn_f32(
     size_t block_size, size_t num_blocks, size_t n_layers, size_t layer,
     size_t kv_w, float* ctx, int causal, size_t causal_q_offset);
 
-/** Phase 10 naive paged GQA (correctness / A-B reference). */
+/** naive paged GQA (correctness / A-B reference). */
 FORGE_CUDA_API forge_cuda_status forge_cuda_paged_gqa_attn_naive_f32(
     size_t t_q, size_t t_k, size_t n_heads, size_t n_kv_heads, size_t head_dim,
     float scale, const float* q, size_t q_w, const float* k_pool,

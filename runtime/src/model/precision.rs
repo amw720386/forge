@@ -53,7 +53,7 @@ impl ExecutionPrecision {
             exact_greedy_required: !matches!(self, Self::CpuInt8 | Self::CpuInt4),
         }
     }
-    /// Phase 15's conservative BF16 dispatch boundary; no split BF16 reductions.
+    /// Conservative BF16 dispatch boundary; no split BF16 reductions.
     pub fn partitioned_attention(self, batch: usize, lengths: &[usize]) -> bool {
         self.partitioned_attention_lengths(batch, lengths.iter().copied())
     }

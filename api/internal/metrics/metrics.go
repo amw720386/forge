@@ -25,7 +25,7 @@ type Snapshot struct {
 	Busy              bool                   `json:"inference_busy"`
 	AvgQueueWaitMs    float64                `json:"avg_queue_wait_ms"`
 	AvgGenMs          float64                `json:"avg_generation_ms"`
-	// Phase 10 scheduler / KV (optional; zero when not reported).
+	// scheduler / KV (optional; zero when not reported).
 	ActiveDecode           uint64 `json:"active_decode"`
 	ActivePrefill          uint64 `json:"active_prefill"`
 	ScheduledDecodeTokens  uint64 `json:"scheduled_decode_tokens"`
@@ -117,7 +117,7 @@ func (c *Collector) SetBusy(b bool) {
 	c.mu.Unlock()
 }
 
-// SetSchedStats records Phase 10 batcher/KV counters (safe to call every step).
+// SetSchedStats records batcher/KV counters (safe to call every step).
 func (c *Collector) SetSchedStats(
 	activeDecode, activePrefill, schedDecode, schedPrefill uint64,
 	kvNum, kvBlock, kvFree, kvAlloc, stallNs uint64,

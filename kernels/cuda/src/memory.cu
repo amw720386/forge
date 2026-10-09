@@ -15,7 +15,7 @@ extern "C" forge_cuda_status forge_cuda_malloc(forge_cuda_buffer* buf,
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }
   // Soft cap: refuse absurd allocations that are almost certainly bugs
-  // (untrusted size paths). 16 GiB is enough for Phase 8A kernel benches.
+  // (untrusted size paths). 16 GiB is enough for kernel benches.
   constexpr size_t kMaxBytes = 16ull * 1024ull * 1024ull * 1024ull;
   if (bytes > kMaxBytes) {
     forge::cuda_detail::set_error("forge_cuda_malloc",

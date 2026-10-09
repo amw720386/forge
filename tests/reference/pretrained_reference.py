@@ -1,12 +1,12 @@
 """Sequential HF reference export; never runs a Forge model alongside PyTorch.
-Usage: python tests/reference/phase16_reference.py MODEL_DIR OUTPUT_DIR
+Usage: python tests/reference/pretrained_reference.py MODEL_DIR OUTPUT_DIR
 """
 import json, sys, os
 from pathlib import Path
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 if os.environ.get('FORGE_REFERENCE_TEXT_ONLY') == '1':
-    # Studio's optional torchvision installation is incompatible with CPU torch.
+    # Optional incompatible torchvision installs can prevent text-only exports.
     # This text-only utility does not use vision; do not alter model operations.
     import transformers.utils.import_utils as hf_imports
     hf_imports._torchvision_available = False

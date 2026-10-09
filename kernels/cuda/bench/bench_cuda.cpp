@@ -1,4 +1,4 @@
-//! CUDA microbenchmarks — run on a Lightning GPU host only.
+//! CUDA microbenchmarks — run on a CUDA GPU host only.
 //! Uses CUDA events for GPU timing; also reports host wall time.
 
 #include "forge_cuda.h"

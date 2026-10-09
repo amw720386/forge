@@ -96,7 +96,7 @@ pub enum BatchError {
     Full,
     UnknownId(u64),
     Empty,
-    /// GPU KV block pool cannot admit or grow this request (Phase 10).
+    /// GPU KV block pool cannot admit or grow this request.
     KvExhausted(String),
 }
 
@@ -303,7 +303,7 @@ impl ContinuousBatcher {
         let mut events = Vec::new();
         let vocab = self.model.cfg.vocab_size;
 
-        // --- Phase A: sample & emit for slots that have fresh logits ---
+        // --- Sample: sample & emit for slots that have fresh logits ---
         for si in 0..self.slots.len() {
             if self.slots[si].cancelled {
                 self.free_slot(si);
@@ -345,7 +345,7 @@ impl ContinuousBatcher {
             }
         }
 
-        // --- Phase B: shared batched decode for all Decoding slots ---
+        // --- Decode: shared batched decode for all Decoding slots ---
         let decode_idxs: Vec<usize> = self
             .slots
             .iter()

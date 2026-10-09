@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Run audited Forge Phase 12 benches. Expects CUDA build env already set
+# Run audited Forge benches. Expects CUDA build env already set
 # (see docs/build.md).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL_DIR="${FORGE_MODEL_DIR:-$ROOT/models/Qwen2.5-0.5B-Instruct}"
-OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmarks/results}"
+OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmarks/results/local}"
 mkdir -p "$OUT_DIR"
 cd "$ROOT/runtime"
 
@@ -14,7 +14,7 @@ export FORGE_STEP_TOKEN_BUDGET="${FORGE_STEP_TOKEN_BUDGET:-256}"
 run_one() {
   local label="$1"; shift
   echo "LABEL=$label"
-  cargo run --release --features cuda --example bench_phase12 -- "$@"
+  cargo run --release --features cuda --example bench_cuda_inference -- "$@"
 }
 
 # P0 short remasure (fixed_len) — FP32 + BF16
@@ -52,7 +52,7 @@ run_one forge_medium_bf16 \
 # Controlled experiments (B=8 short BF16)
 echo "LABEL=forge_ctrl_naive_attn"
 FORGE_PAGED_ATTN_NAIVE=1 FORGE_CPU_GREEDY=1 \
-  cargo run --release --features cuda --example bench_phase12 -- \
+  cargo run --release --features cuda --example bench_cuda_inference -- \
   --model "$MODEL_DIR" --dtype fp32 --batch 8 --max-new 16 \
   --trials 2 --warmup 1 --token-policy fixed_len \
   --label forge_ctrl_naive_cpu_greedy \
@@ -60,7 +60,7 @@ FORGE_PAGED_ATTN_NAIVE=1 FORGE_CPU_GREEDY=1 \
 
 echo "LABEL=forge_ctrl_opt_cpu_greedy"
 FORGE_CPU_GREEDY=1 \
-  cargo run --release --features cuda --example bench_phase12 -- \
+  cargo run --release --features cuda --example bench_cuda_inference -- \
   --model "$MODEL_DIR" --dtype fp32 --batch 8 --max-new 16 \
   --trials 2 --warmup 1 --token-policy fixed_len \
   --label forge_ctrl_opt_cpu_greedy \

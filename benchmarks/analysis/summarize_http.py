@@ -1,4 +1,4 @@
-"""Summarize repeated Phase 15 HTTP evidence without combining timing domains."""
+"""Summarize repeated HTTP evidence without combining timing domains."""
 import argparse,json,statistics
 from pathlib import Path
 
@@ -27,7 +27,7 @@ def summarize(path):
     return rows
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path('benchmarks/results/phase15'));args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);args=p.parse_args()
     result={}
     for path in sorted(args.root.glob('*-http.json')):
         try:result[path.stem]=summarize(path)

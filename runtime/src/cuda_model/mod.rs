@@ -1,4 +1,4 @@
-//! Full-model CUDA inference (Phase 8B–10). Compiled with `--features cuda`.
+//! Full-model CUDA inference. Compiled with `--features cuda`.
 
 mod batcher;
 pub mod kv;

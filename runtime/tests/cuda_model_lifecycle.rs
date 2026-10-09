@@ -93,12 +93,12 @@ fn graph_reuse_across_architecture_and_weight_change() {
                 assert!((a - b).abs() <= 1e-3 + 1e-2 * a.abs().max(b.abs()));
             }
         }
-        println!("PHASE16_GRAPH_MODEL_REPLACEMENT family={family:?} pass");
+        println!("MODEL_GRAPH_MODEL_REPLACEMENT family={family:?} pass");
     }
 }
 
 #[test]
-#[ignore = "requires real CUDA and downloaded SmolLM2; run in bounded Phase 16 session"]
+#[ignore = "requires real CUDA and downloaded SmolLM2; run in bounded session"]
 fn smollm2_paged_batch_graph_cancel_and_reuse() {
     let dir = std::env::var("FORGE_SMOLLM_MODEL").expect("FORGE_SMOLLM_MODEL");
     let refs = std::env::var("FORGE_SMOLLM_REFS").expect("FORGE_SMOLLM_REFS");
@@ -179,7 +179,7 @@ fn smollm2_paged_batch_graph_cancel_and_reuse() {
                 .collect();
             assert_eq!(output, first);
             println!(
-                "PHASE16_SMOLLM_BATCH dtype={dtype:?} graphs={graphs} cases=4 cancel_reuse=pass"
+                "MODEL_SMOLLM_BATCH dtype={dtype:?} graphs={graphs} cases=4 cancel_reuse=pass"
             );
         }
     }

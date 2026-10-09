@@ -6,7 +6,7 @@
 #include <cstring>
 
 extern "C" const char* forge_cuda_version(void) {
-  return "forge-cuda/0.1.0-phase8a";
+  return "forge-cuda/0.1.0";
 }
 
 extern "C" int forge_cuda_is_available(void) {

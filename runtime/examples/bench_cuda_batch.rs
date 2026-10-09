@@ -1,6 +1,6 @@
-//! Phase 9/10: CUDA continuous-batching throughput benches (B=1,2,4,8).
+//! CUDA continuous-batching throughput benches (B=1,2,4,8).
 //!
-//! Phase 10 uses paged KV + chunked prefill. TTFT is time from admit until the
+//! Uses paged KV + chunked prefill. TTFT is time from admit until the
 //! first emitted token (includes prefill chunks).
 //!
 //! ```bash

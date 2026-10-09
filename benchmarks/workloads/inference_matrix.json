@@ -72,7 +72,7 @@
     {
       "id": "full_combinatorial",
       "priority": "P2",
-      "reason": "Exceeds Phase 12 cloud budget; representative P0/P1 cover short/medium/long/mixed"
+      "reason": "Exceeds cloud budget; representative P0/P1 cover short/medium/long/mixed"
     }
   ],
   "correctness_prompts": [

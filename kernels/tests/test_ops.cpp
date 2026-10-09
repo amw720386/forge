@@ -4,7 +4,7 @@
 #include <cmath>
 #include <vector>
 
-void test_phase2() {
+void test_ops() {
   using namespace forge_test;
 
   // RMSNorm: single row

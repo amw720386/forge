@@ -1,4 +1,4 @@
-//! Phase 12 BF16 greedy correctness survey vs CUDA FP32 reference.
+//! BF16 greedy correctness survey vs CUDA FP32 reference.
 //!
 //! Measures token agreement, first divergence, and logit errors on the shared
 //! prefix at divergence (CPU-greedy path for full logits D2H).

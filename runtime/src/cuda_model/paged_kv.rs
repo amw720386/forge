@@ -1,4 +1,4 @@
-//! Paged GPU KV-cache pool and per-request block tables (Phase 10).
+//! Paged GPU KV-cache pool and per-request block tables.
 //!
 //! Physical blocks are fixed-size token slabs shared across requests. Each
 //! request owns a logical→physical block table. Contiguous `GpuKvCache` remains

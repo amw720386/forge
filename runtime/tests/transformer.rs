@@ -1,4 +1,4 @@
-//! Phase 2 integration: prefill vs KV-cached decode, shapes, GQA.
+//! prefill vs KV-cached decode, shapes, GQA.
 
 use forge_runtime::model::{ForwardScratch, LayerKvCaches, ModelConfig, Transformer};
 

@@ -35,7 +35,7 @@ FORGE_KERNELS_API const char* forge_kernels_version(void);
 /** Effective worker count for parallel kernels (FORGE_NUM_THREADS or HW). */
 FORGE_KERNELS_API unsigned forge_kernels_num_threads(void);
 
-/* ---- Phase 1: GEMM ------------------------------------------------------- */
+/* ---- GEMM ------------------------------------------------------- */
 
 /** C = A (M x K) * B (K x N), row-major FP32. */
 FORGE_KERNELS_API forge_status forge_kernels_matmul_f32(
@@ -50,7 +50,7 @@ FORGE_KERNELS_API forge_status forge_kernels_matvec_f32(
     const float* a, size_t lda,
     const float* x, float* y);
 
-/* ---- Phase 2: transformer primitives ------------------------------------- */
+/* ---- transformer primitives ------------------------------------- */
 
 /**
  * Linear: Y = X @ W^T + optional bias.

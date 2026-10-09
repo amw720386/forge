@@ -1,5 +1,5 @@
 //! Logit parity across block boundaries and request replacement. Run serialized:
-//! cargo test --release --features cuda --test cuda_phase13 -- --test-threads=1
+//! cargo test --release --features cuda --test cuda_graph_replay -- --test-threads=1
 #![cfg(feature = "cuda")]
 use forge_runtime::cuda_model::{CudaTransformer,CudaScratch,CudaBatchScratch,CudaBatchStats,GpuWeightDType};
 use forge_runtime::cuda_model::paged_kv::{GpuKvBlockPool,PagedKvSession};
@@ -51,7 +51,7 @@ fn logits_eager_optimized_graph_and_replacement() {
                     assert!((x-y).abs() <= 1e-4 + 1e-3*x.abs().max(y.abs()),"dtype={dtype:?} B={b} step={step}: {x} vs {y}");
                 }
             }
-            println!("PHASE13_LOGIT_PARITY dtype={dtype:?} batch={b} max_abs_error={max_error}");
+            println!("GRAPH_LOGIT_PARITY dtype={dtype:?} batch={b} max_abs_error={max_error}");
         }
     }
     for key in ["FORGE_BATCHED_PAGED","FORGE_REUSE_BF16","FORGE_CUDA_GRAPHS"] {std::env::remove_var(key);}

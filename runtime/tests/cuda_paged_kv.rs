@@ -1,7 +1,7 @@
-//! Phase 10: paged KV allocator + paged vs contiguous attention (CPU path).
+//! paged KV allocator + paged vs contiguous attention (CPU path).
 //!
 //! Runs under `--features cuda-stub` without a GPU. Full-model GPU parity lives in
-//! `cuda_batch_parity` / Lightning validate-phase10.
+//! `cuda_batch_parity`.
 
 #![cfg(any(feature = "cuda", feature = "cuda-stub"))]
 

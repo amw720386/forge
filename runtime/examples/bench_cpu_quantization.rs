@@ -1,7 +1,7 @@
-//! Reproducible Phase 6 benchmark: FP32 / INT8 / INT4 + batch throughput.
+//! Reproducible benchmark: FP32 / INT8 / INT4 + batch throughput.
 //!
 //! ```bash
-//! cargo run --release --example bench_phase6 -- ../models/Qwen2.5-0.5B-Instruct
+//! cargo run --release --example bench_cpu_quantization -- ../models/Qwen2.5-0.5B-Instruct
 //! ```
 //!
 //! Env: FORGE_NUM_THREADS, optional FORGE_BENCH_PREFILL (default 64), FORGE_BENCH_DECODE (default 32).
@@ -178,7 +178,7 @@ fn main() {
         .and_then(|s| s.parse().ok())
         .unwrap_or(32);
 
-    println!("=== Forge Phase 6 reproducible bench ===");
+    println!("=== Forge CPU quantization benchmark ===");
     println!("kernels: {}", kernels::version());
     println!(
         "threads: {} (FORGE_NUM_THREADS)",

@@ -103,7 +103,7 @@ fn packed_logits_match_individual_chunks() {
                 )
                 .unwrap()
                 .is_empty());
-            println!("PHASE14_PREFILL_PARITY dtype={dtype:?} B={b} max_abs_error={max_error}");
+            println!("PREFILL_PREFILL_PARITY dtype={dtype:?} B={b} max_abs_error={max_error}");
         }
     }
     std::env::remove_var("FORGE_KV_BLOCK_SIZE");
@@ -197,7 +197,7 @@ fn real_model_packed_logits() {
                     );
                 }
             }
-            println!("PHASE14_REAL_PARITY dtype={dtype:?} B={b} max_abs_error={maximum} greedy_disagreements={disagreement}");
+            println!("PREFILL_REAL_PARITY dtype={dtype:?} B={b} max_abs_error={maximum} greedy_disagreements={disagreement}");
             // Report full pretrained-model errors before asserting greedy stability.
             assert_eq!(
                 disagreement, 0,

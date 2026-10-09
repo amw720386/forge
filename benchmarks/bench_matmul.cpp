@@ -1,6 +1,6 @@
 /**
- * Synthetic matmul micro-benchmark (Phase 1).
- * Build via `make bench-kernels` after kernels are configured.
+ * Synthetic matmul micro-benchmark.
+ * Build and run via `make bench` or scripts/bench.ps1.
  */
 
 #include "forge_kernels.h"

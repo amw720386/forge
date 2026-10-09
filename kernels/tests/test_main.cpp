@@ -2,12 +2,12 @@
 
 void test_matmul();
 void test_matvec();
-void test_phase2();
+void test_ops();
 
 int main() {
   test_matmul();
   test_matvec();
-  test_phase2();
+  test_ops();
 
   if (forge_test::failures() != 0) {
     std::cerr << forge_test::failures() << " test failure(s)\n";

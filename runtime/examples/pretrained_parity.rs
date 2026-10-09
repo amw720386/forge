@@ -225,7 +225,7 @@ fn gpu(
                 .sqrt();
             assert!(
                 max.is_finite() && max <= 0.25,
-                "BF16 logit error outside Phase 16 qualified envelope: max={max} rms={rms}"
+                "BF16 logit error outside qualified envelope: max={max} rms={rms}"
             );
             println!("cuda/bf16 max_abs={max} rms={rms} (qualified BF16 envelope; FP32 tolerances unchanged)");
             bf16_projection_attribution(model, &gpu, tokens, reference);

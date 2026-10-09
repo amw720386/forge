@@ -221,7 +221,7 @@ func (r *Runtime) BatchStep() ([]BatchEvent, error) {
 	return nativeBatchStep(r.ptr)
 }
 
-// BatchSchedStats is Phase 10 scheduler / KV observability (no pointers).
+// BatchSchedStats is scheduler / KV observability (no pointers).
 type BatchSchedStats struct {
 	ActiveDecode           uint64
 	ActivePrefill          uint64

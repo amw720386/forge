@@ -40,7 +40,7 @@ dtype, context/slot limits and environment settings alongside new results.
 The README uses the first after-run cells in
 [`phase16/summary.json`](../benchmarks/results/phase16/summary.json), derived from
 `phase16-after-short-c1-http.json` and `phase16-after-c8-http.json`. The raw files
-include every trial, token count and completion. `python benchmarks/analysis/summarize_phase16.py` regenerates the summary and audits
+include every trial, token count and completion. `python benchmarks/results/phase16/summarize.py` regenerates the summary and audits
 candidate/repeat text against the baseline (180/180 exact matches historically).
 
 These are NVIDIA L4 Qwen2.5-0.5B-Instruct CUDA BF16 HTTP results with context 2048,
@@ -53,14 +53,15 @@ Raw results, failed/rejected experiments, server traces, source hashes and audit
 remain under [`benchmarks/results/`](../benchmarks/results/). Earlier phase evidence
 is preserved in [`docs/history/`](history/), including
 [the methodology](history/BENCHMARK_METHODOLOGY.md),
-[Phase 15 qualifications](history/PHASE15_RESULTS.md) and
-[Phase 16 qualifications](history/PHASE16_RESULTS.md). Historical reports describe
+[context qualifications](history/PHASE15_RESULTS.md) and
+[model qualifications](history/PHASE16_RESULTS.md). Historical reports describe
 older source states and commands; use build.md for the current checkout.
 
 Original Nsight `.nsys-rep` captures remain local in `benchmarks/results/phase13`
 and are ignored by Git; their exported statistics CSVs are versioned. They are
 profiling supplements, not the source of the README HTTP throughput numbers.
-Remote scripts and the optional Lightning module are preserved under
-[`tools/forge-cloud/`](../tools/forge-cloud/). Test/benchmark names containing phase
-numbers remain stable because scripts and source-identity records reference them.
-No GPU execution or cloud spending was performed for this cleanup.
+Historical result names and source hashes retain their original provenance.
+Active harnesses use feature names: `bench_cpu_quantization`,
+`bench_cuda_inference`, `context_workloads.py`, `summarize_http.py`, and
+`audit_outputs.py`. The last two require `--root` to select saved results.
+CUDA kernel microbenchmarks remain in `kernels/cuda/bench/`.

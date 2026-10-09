@@ -120,7 +120,7 @@ impl Transformer {
         })
     }
 
-    /// Deterministic synthetic weights for Phase 2 tests.
+    /// Deterministic synthetic weights for tests.
     pub fn synthetic(cfg: ModelConfig, seed: u32) -> Result<Self, TensorError> {
         cfg.validate()?;
         let mut rng = SimpleRng::new(seed);

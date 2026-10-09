@@ -35,7 +35,7 @@ struct ProfileRegion {
         cudaEventSynchronize(end) == cudaSuccess) {
       float ms = 0;
       if (cudaEventElapsedTime(&ms, begin, end) == cudaSuccess)
-        std::fprintf(stderr, "[phase15 device] stage=%s ms=%.6f\n", label, ms);
+        std::fprintf(stderr, "[runtime device] stage=%s ms=%.6f\n", label, ms);
     }
     cudaEventDestroy(begin); cudaEventDestroy(end);
   }

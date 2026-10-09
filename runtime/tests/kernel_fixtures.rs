@@ -15,7 +15,7 @@ fn fixture_dir() -> PathBuf {
 fn read_f32(name: &str) -> Vec<f32> {
     let bytes = fs::read(fixture_dir().join(name)).unwrap_or_else(|e| {
         panic!(
-            "missing fixture {name}: {e}. Run: python tests/reference/phase2_reference.py"
+            "missing fixture {name}: {e}. Run: python tests/reference/kernel_reference.py"
         )
     });
     assert_eq!(bytes.len() % 4, 0);
@@ -99,16 +99,6 @@ fn attention_matches_pytorch() {
 }
 
 #[test]
-fn kernel_version_phase2() {
-    let v = kernels::version();
-    assert!(
-        v.contains("phase2")
-            || v.contains("phase5")
-            || v.contains("phase6")
-            || v.contains("0.2")
-            || v.contains("0.5")
-            || v.contains("0.6")
-            || v.contains("0.7"),
-        "{v}"
-    );
+fn kernel_version() {
+    assert!(kernels::version().starts_with("forge-kernels/"));
 }

@@ -17,7 +17,7 @@
 # Go
 **/vendor/
 api/bin/
-bin/
+/bin/
 bindings/go/*.exe
 
 # IDE / OS
@@ -29,7 +29,6 @@ Thumbs.db
 
 # Models & generated data (never commit weights)
 models/**
-!models/.gitkeep
 !models/README.md
 *.safetensors
 *.bin
@@ -44,10 +43,9 @@ models/**
 .env.*
 !**/.env.example
 
-# Local Lightning session metadata (no secrets, but machine-local)
-configs/cloud/.forge-cloud-state.json
-.forge/
-.forge-deploy-out/
+# Retired machine-local deployment cache.
+/.forge-deploy-out/
+/.forge/
 
 # Local benchmark runs; reviewed historical evidence remains versioned.
 benchmarks/results/local/
@@ -62,5 +60,5 @@ benchmarks/results/local/
 __pycache__/
 *.pyc
 
-# Retired cloud session metadata
-**/.forge-cloud-state.json
+# Small numerical regression fixtures (not model weights).
+!runtime/tests/fixtures/*.bin

@@ -1,9 +1,9 @@
-//! Phase 12 audited CUDA continuous-batching benchmark harness.
+//! audited CUDA continuous-batching benchmark harness.
 //!
 //! Methodology: docs/BENCHMARK_METHODOLOGY.md
 //!
 //! ```bash
-//! cargo run --release --features cuda --example bench_phase12 -- \
+//! cargo run --release --features cuda --example bench_cuda_inference -- \
 //!   --model ../models/Qwen2.5-0.5B-Instruct --dtype bf16 --batch 1,2,4,8 \
 //!   --max-new 16 --trials 3 --warmup 1 --token-policy fixed_len \
 //!   --json-out ../benchmarks/results/forge_short.json
@@ -13,7 +13,7 @@
 
 #[cfg(not(feature = "cuda"))]
 fn main() {
-    eprintln!("bench_phase12 requires --features cuda");
+    eprintln!("bench_cuda_inference requires --features cuda");
     std::process::exit(1);
 }
 
@@ -42,7 +42,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let cfg = Cli::parse(&args);
 
-    eprintln!("=== bench_phase12 (audited) ===");
+    eprintln!("=== bench_cuda_inference (audited) ===");
     eprintln!(
         "model={} dtype={:?} batches={:?} max_new={} max_seq={} trials={} warmup={} policy={}",
         cfg.model.display(),
@@ -127,7 +127,7 @@ fn main() {
 
         let summary = summarize_trials(&trials, b, max_b, &cfg, weight_mib, load_s, upload_s);
         eprintln!(
-            "  MEDIAN agg={:.2} tok/s  decode≈{:.2}  prefill≈{:.2}  ttft_p50={:.4}s  (n={})",
+            "  MEDIAN agg={:.2} tok/s  decodeâ‰ˆ{:.2}  prefillâ‰ˆ{:.2}  ttft_p50={:.4}s  (n={})",
             summary["aggregate_tok_s_median"].as_f64().unwrap_or(0.0),
             summary["steady_decode_tok_s_median"].as_f64().unwrap_or(0.0),
             summary["prefill_tok_s_median"].as_f64().unwrap_or(0.0),
@@ -138,7 +138,7 @@ fn main() {
     }
 
     let out = json!({
-        "harness": "bench_phase12",
+        "harness": "bench_cuda_inference",
         "methodology": "docs/BENCHMARK_METHODOLOGY.md",
         "model_dir": cfg.model.display().to_string(),
         "dtype": format!("{:?}", cfg.dtype),
@@ -311,7 +311,7 @@ impl Cli {
             }
         }
 
-        // Env dtype override (matches Phase 11 scripts)
+        // Dtype can also be selected through the environment.
         if let Ok(d) = env::var("FORGE_CUDA_DTYPE") {
             let s = d.to_ascii_lowercase();
             if s == "bf16" || s == "bfloat16" {
@@ -431,7 +431,7 @@ fn run_trial(
     let mut sched_decode = 0usize;
     let mut kv_util_peak = 0.0f64;
 
-    // Clock for e2e includes admit→done (methodology: TTFT from admit).
+    // Clock for e2e includes admitâ†’done (methodology: TTFT from admit).
     let t0 = t_admit;
     while batcher.active_count() > 0 {
         let evs = batcher.step().map_err(|e| e.to_string())?;

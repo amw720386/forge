@@ -53,7 +53,7 @@ if(FORGE_KERNELS_BUILD_TESTS)
   add_executable(forge_kernels_tests
     tests/test_matmul.cpp
     tests/test_matvec.cpp
-    tests/test_phase2.cpp
+    tests/test_ops.cpp
     tests/test_main.cpp
   )
   target_link_libraries(forge_kernels_tests PRIVATE forge_kernels)

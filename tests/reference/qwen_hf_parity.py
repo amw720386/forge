@@ -53,7 +53,7 @@ def main() -> None:
         "text": text,
     }
     print(json.dumps(result, indent=2))
-    out_path = ROOT / "tests" / "reference" / "phase3_hf_out.json"
+    out_path = ROOT / "tests" / "reference" / "qwen_hf_out.json"
     out_path.write_text(json.dumps(result, indent=2))
     print(f"wrote {out_path}", file=sys.stderr)
 

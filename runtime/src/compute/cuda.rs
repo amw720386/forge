@@ -507,7 +507,7 @@ impl ComputeBackend for CudaBackend {
         let result = map(unsafe { forge_cuda_memcpy_d2h(dst.as_mut_ptr(), &b, dst.len()) });
         if profile {
             eprintln!(
-                "[phase14 d2h] bytes={} host_ns={}",
+                "[runtime d2h] bytes={} host_ns={}",
                 dst.len(),
                 started.elapsed().as_nanos()
             );

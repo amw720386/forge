@@ -50,7 +50,7 @@ fn main() {
         .and_then(|s| s.parse().ok())
         .unwrap_or(32);
 
-    println!("=== Forge Phase 5 profiler ===");
+    println!("=== Forge model profiler ===");
     println!("kernels: {}", kernels::version());
     println!(
         "threads: {}",

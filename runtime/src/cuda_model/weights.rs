@@ -35,7 +35,7 @@ impl GpuLinear {
             WeightStorage::Fp32(w) => (w.shape()[0], w.shape()[1]),
             WeightStorage::Quant(_) => {
                 return Err(ComputeError::InvalidArgument(
-                    "CUDA backend requires FP32 weights (no GPU quant in Phase 8B)".into(),
+                    "CUDA backend requires FP32 weights (GPU quantization unsupported)".into(),
                 ));
             }
         };

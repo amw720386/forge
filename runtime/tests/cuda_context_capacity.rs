@@ -101,7 +101,7 @@ fn exercise(cpu: &Transformer, real: bool) {
                             assert!(x.is_finite() && y.is_finite());
                             maximum = maximum.max((x - y).abs());
                             // BF16 rounds intermediate activations; full-path checks follow the
-                            // Phase 14 measured-logit/greedy contract. FP32 and standalone
+                            // Measured logit/greedy contract. FP32 and standalone
                             // attention retain the original strict numerical bound.
                             if !real && dtype == GpuWeightDType::Fp32 {
                                 assert!(
@@ -172,7 +172,7 @@ fn exercise(cpu: &Transformer, real: bool) {
                         greedy(&z[r * cfg.vocab_size..(r + 1) * cfg.vocab_size])
                     );
                 }
-                println!("PHASE15_LONG_PARITY real={real} dtype={dtype:?} B={b} tile={tile} max_abs_error={maximum} greedy_decisions={decisions}");
+                println!("CONTEXT_LONG_PARITY real={real} dtype={dtype:?} B={b} tile={tile} max_abs_error={maximum} greedy_decisions={decisions}");
             }
         }
     }
@@ -351,7 +351,7 @@ fn scheduling_progress_cancellation_and_reuse() {
             assert!(cancelled_decode);
             assert!(seen.contains(&long));
             assert_eq!(batch.kv_stats().allocated_blocks, 0);
-            println!("PHASE15_SCHED_LIFECYCLE policy={policy} budget={budget} passed");
+            println!("CONTEXT_SCHED_LIFECYCLE policy={policy} budget={budget} passed");
         }
     }
     for key in [

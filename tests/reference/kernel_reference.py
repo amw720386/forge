@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PyTorch reference for Phase 2 primitives + tiny GQA decoder attention.
+"""PyTorch reference for primitives + tiny GQA decoder attention.
 
 Writes binary fixtures consumed by Rust tests under runtime/tests/fixtures/.
 """
