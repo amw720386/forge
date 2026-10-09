@@ -18,6 +18,14 @@ import (
 // Runs twice to catch nondeterminism in content_hash.
 func TestPhase9DeployPipelineE2E(t *testing.T) {
 	repo := findTestRepoRoot(t)
+	python, err := exec.LookPath("python")
+	if err != nil {
+		python, err = exec.LookPath("python3")
+	}
+	if err != nil {
+		t.Fatal("Python is required for deployment verification:", err)
+	}
+	pythonShellPath := strings.ReplaceAll(toGitBashPath(python), "'", "'\"'\"'")
 	var hashes []string
 	for pass := 1; pass <= 2; pass++ {
 		t.Run(fmt.Sprintf("pass_%d", pass), func(t *testing.T) {
@@ -59,8 +67,8 @@ func TestPhase9DeployPipelineE2E(t *testing.T) {
 			bash := findBash(t)
 			extractUnix := toGitBashPath(extractDir)
 			verifyCmd := fmt.Sprintf(
-				`cd '%s' && python3() { '/c/Program Files/Python310/python.exe' "$@"; } && export -f python3 && command -v python3 && python3 -c 'print(1)' && bash scripts/verify_forge_deploy.sh`,
-				extractUnix,
+				`cd '%s' && python3() { '%s' "$@"; } && export -f python3 && command -v python3 && python3 -c 'print(1)' && bash scripts/verify_forge_deploy.sh`,
+				extractUnix, pythonShellPath,
 			)
 			cmd := exec.Command(bash, "-lc", verifyCmd)
 			out, err := cmd.CombinedOutput()
@@ -289,18 +297,21 @@ func findBash(t *testing.T) string {
 		`C:\Program Files\Git\bin\bash.exe`,
 		`C:\Program Files\Git\usr\bin\bash.exe`,
 	}
+	if bash, err := exec.LookPath("bash"); err == nil {
+		candidates = append(candidates, bash)
+	}
 	for _, c := range candidates {
 		if _, err := os.Stat(c); err != nil {
 			continue
 		}
-		cmd := exec.Command(c, "-lc", "command -v sha256sum && command -v python3")
+		cmd := exec.Command(c, "-lc", "command -v sha256sum")
 		out, err := cmd.CombinedOutput()
 		if err == nil && bytes.Contains(out, []byte("sha256sum")) {
 			return c
 		}
 		t.Logf("candidate %s missing tools: %s", c, out)
 	}
-	t.Fatal("Git Bash with sha256sum+python3 required for exact verify_forge_deploy.sh")
+	t.Fatal("bash with sha256sum required for exact verify_forge_deploy.sh (use Git Bash on Windows)")
 	return ""
 }
 
