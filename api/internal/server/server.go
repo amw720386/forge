@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"net/http"
@@ -87,8 +88,8 @@ func (s *Server) Start() error {
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {
-	s.sched.Stop()
 	s.q.Close()
+	s.sched.Stop()
 	err := s.httpServer.Shutdown(ctx)
 	s.wg.Wait()
 	return err
@@ -116,15 +117,24 @@ func (s *Server) handleCompletions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var body completionRequest
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+	decoder := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20))
+	if err := decoder.Decode(&body); err != nil {
 		s.writeError(w, http.StatusBadRequest, "", "invalid_request", "invalid JSON body")
 		return
 	}
-	if body.Prompt == "" {
+	if decoder.Decode(new(any)) != io.EOF {
+		s.writeError(w, http.StatusBadRequest, "", "invalid_request", "body must contain one JSON object")
+		return
+	}
+	if strings.TrimSpace(body.Prompt) == "" || strings.ContainsRune(body.Prompt, 0) {
 		s.writeError(w, http.StatusBadRequest, "", "invalid_request", "prompt is required")
 		return
 	}
-	if body.MaxTokens <= 0 {
+	if body.MaxTokens < 0 || body.Temperature < 0 {
+		s.writeError(w, http.StatusBadRequest, "", "invalid_request", "max_tokens and temperature must be nonnegative")
+		return
+	}
+	if body.MaxTokens == 0 {
 		body.MaxTokens = s.cfg.DefaultMaxTok
 	}
 	if body.MaxTokens > 2048 {
@@ -135,6 +145,7 @@ func (s *Server) handleCompletions(w http.ResponseWriter, r *http.Request) {
 	defer func() { s.metrics.ObserveStage("http_completion", time.Since(received)) }()
 	id := newRequestID()
 	ctx, cancel := context.WithCancel(r.Context())
+	defer cancel()
 	req := &queue.Request{
 		ReceivedAt:  received,
 		ID:          id,
@@ -220,14 +231,25 @@ func (s *Server) handleStream(w http.ResponseWriter, req *queue.Request) {
 
 func (s *Server) handleNonStream(w http.ResponseWriter, req *queue.Request) {
 	var text string
-	for ev := range req.Tokens {
-		text += ev.Text
-		if ev.Done {
-			break
+reading:
+	for {
+		select {
+		case <-req.Ctx.Done():
+			return
+		case ev, ok := <-req.Tokens:
+			if !ok {
+				break reading
+			}
+			text += ev.Text
+			// Wait for channel closure: scheduler owns completion/error state.
 		}
 	}
 	if req.Err != nil {
-		s.writeError(w, http.StatusInternalServerError, req.ID, "generation_failed", req.Err.Error())
+		code := http.StatusInternalServerError
+		if strings.Contains(req.Err.Error(), "formatted prompt exceeds context limit") {
+			code = http.StatusBadRequest
+		}
+		s.writeError(w, code, req.ID, "generation_failed", req.Err.Error())
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")

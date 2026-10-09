@@ -10,6 +10,7 @@ import (
 	"errors"
 	"log"
 	"runtime"
+	"strings"
 	"sync"
 	"time"
 
@@ -27,10 +28,12 @@ type liveReq struct {
 }
 
 type Scheduler struct {
-	rt      *forge.Runtime
-	q       *queue.Queue
-	metrics *metrics.Collector
-	stop    chan struct{}
+	rt       *forge.Runtime
+	q        *queue.Queue
+	metrics  *metrics.Collector
+	stop     chan struct{}
+	done     chan struct{}
+	stopOnce sync.Once
 
 	mu   sync.Mutex
 	live map[uint64]*liveReq // runtime request id → HTTP request
@@ -42,6 +45,7 @@ func New(rt *forge.Runtime, q *queue.Queue, m *metrics.Collector) *Scheduler {
 		q:       q,
 		metrics: m,
 		stop:    make(chan struct{}),
+		done:    make(chan struct{}),
 		live:    make(map[uint64]*liveReq),
 	}
 }
@@ -51,10 +55,12 @@ func (s *Scheduler) Start() {
 }
 
 func (s *Scheduler) Stop() {
-	close(s.stop)
+	s.stopOnce.Do(func() { close(s.stop) })
+	<-s.done
 }
 
 func (s *Scheduler) loop() {
+	defer close(s.done)
 	// CUDA kernels and graph capture use the per-thread default stream. Keep
 	// admissions, steps, and cancellation on the same OS thread so a Go
 	// goroutine migration cannot reorder work across independent CUDA streams.
@@ -108,7 +114,7 @@ func (s *Scheduler) loop() {
 		s.metrics.SetBusy(false)
 		if err != nil {
 			log.Printf("batch step: %v", err)
-			time.Sleep(10 * time.Millisecond)
+			s.failAll(errors.New("generation failed; check server logs"))
 			continue
 		}
 		dispatchStart := time.Now()
@@ -157,7 +163,12 @@ func (s *Scheduler) tryAdmit(req *queue.Request) bool {
 	s.metrics.ObserveStage("runtime_admit_tokenize", time.Since(admitStart))
 	if err != nil {
 		req.State = queue.StateFailed
-		req.Err = err
+		log.Printf("admit request %s: %v", req.ID, err)
+		if strings.Contains(err.Error(), "prompt exceeds max_seq") {
+			req.Err = errors.New("formatted prompt exceeds context limit; shorten prompt or increase -max-seq")
+		} else {
+			req.Err = errors.New("model could not admit request; check server logs")
+		}
 		s.metrics.IncFailed()
 		close(req.Tokens)
 		// Busy means backpressure raced; stop draining the queue this round.
@@ -204,6 +215,8 @@ func (s *Scheduler) dispatch(events []forge.BatchEvent) {
 		tokEv := queue.TokenEvent{TokenID: ev.TokenID, Text: ev.Text, Done: ev.Done}
 		select {
 		case lr.req.Tokens <- tokEv:
+		case <-s.stop:
+			return
 		case <-lr.req.Ctx.Done():
 			_ = s.rt.BatchCancel(ev.RequestID)
 			s.mu.Lock()
@@ -235,11 +248,38 @@ func (s *Scheduler) dispatch(events []forge.BatchEvent) {
 	}
 }
 
-func (s *Scheduler) cancelAll() {
+func (s *Scheduler) failAll(err error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	for id, lr := range s.live {
 		_ = s.rt.BatchCancel(id)
+		lr.req.Err = err
+		lr.req.State = queue.StateFailed
+		s.metrics.IncFailed()
+		close(lr.req.Tokens)
+		delete(s.live, id)
+	}
+}
+
+func (s *Scheduler) cancelAll() {
+	for {
+		select {
+		case req, ok := <-s.q.Chan():
+			if !ok {
+				goto drained
+			}
+			req.Err = errors.New("server shutting down")
+			close(req.Tokens)
+		default:
+			goto drained
+		}
+	}
+drained:
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for id, lr := range s.live {
+		_ = s.rt.BatchCancel(id)
+		lr.req.Err = errors.New("server shutting down")
 		lr.req.State = queue.StateCancelled
 		close(lr.req.Tokens)
 		delete(s.live, id)

@@ -24,10 +24,13 @@ func main() {
 	maxSeq := flag.Int("max-seq", 1024, "max sequence length (also capped by FORGE_MAX_SEQ)")
 	queueCap := flag.Int("queue", 16, "admission queue capacity")
 	device := flag.String("device", "cpu", "execution device: cpu or cuda (cuda requires CUDA runtime build)")
-	dtype := flag.String("dtype", "fp32", "CUDA weight dtype: fp32 or bf16 (ignored for cpu)")
+	dtype := flag.String("dtype", "fp32", "weight dtype: fp32 (cpu), fp32 or bf16 (cuda)")
 	flag.Parse()
 	if flag.NArg() != 0 || *maxSeq <= 0 || *queueCap <= 0 {
 		log.Fatal("use named flags with positive -max-seq and -queue values")
+	}
+	if *device == "cpu" && *dtype != "fp32" {
+		log.Fatal("CPU requires -dtype fp32; quantization is selected by checkpoint")
 	}
 	if *dtype != "fp32" && *dtype != "bf16" {
 		log.Fatalf("unknown --dtype %q (use fp32 or bf16)", *dtype)
