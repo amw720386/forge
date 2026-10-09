@@ -4,7 +4,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL_DIR="${FORGE_MODEL_DIR:-$ROOT/models/Qwen2.5-0.5B-Instruct}"
-OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmarks/results/local}"
+OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmark-output}"
 mkdir -p "$OUT_DIR"
 cd "$ROOT/runtime"
 
@@ -17,7 +17,7 @@ run_one() {
   cargo run --release --features cuda --example bench_cuda_inference -- "$@"
 }
 
-# P0 short remasure (fixed_len) — FP32 + BF16
+# Short fixed-length workload — FP32 + BF16
 run_one forge_short_fp32 \
   --model "$MODEL_DIR" --dtype fp32 --batch 1,2,4,8 --max-new 16 \
   --trials 3 --warmup 1 --token-policy fixed_len --workload short_hello \
@@ -36,7 +36,7 @@ run_one forge_short64_bf16 \
   --label forge_short64_bf16 \
   --json-out "$OUT_DIR/forge_short64_bf16.json"
 
-# P0 medium
+# Medium fixed-length workload
 run_one forge_medium_fp32 \
   --model "$MODEL_DIR" --dtype fp32 --batch 1,4 --max-new 64 --medium \
   --trials 2 --warmup 1 --token-policy fixed_len \
@@ -49,7 +49,7 @@ run_one forge_medium_bf16 \
   --label forge_medium_bf16 \
   --json-out "$OUT_DIR/forge_medium_bf16.json"
 
-# Controlled experiments (B=8 short BF16)
+# Controlled attention and sampling comparisons (B=8 short FP32)
 echo "LABEL=forge_ctrl_naive_attn"
 FORGE_PAGED_ATTN_NAIVE=1 FORGE_CPU_GREEDY=1 \
   cargo run --release --features cuda --example bench_cuda_inference -- \

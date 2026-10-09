@@ -1,8 +1,0 @@
-=== FORGE DEPLOY VERIFY ===
-cwd=/teamspace/studios/this_studio/forge-deploys/20261009T050938Z-ea35dc7e27fc
-deploy_id=20261009T050938Z-ea35dc7e27fc
-content_hash=ea35dc7e27fcaa7f694783efb2632fdd592bb86f27627418e16577e1893cfcc9
-OK: build root is isolated deploy: /teamspace/studios/this_studio/forge-deploys/20261009T050938Z-ea35dc7e27fc
-OK: required source files present
-OK: no known obsolete cuda_model import markers
-FAIL: hash:runtime/tests/fixtures/attn.json, hash:runtime/tests/fixtures/rmsnorm.json, hash:runtime/tests/fixtures/rope.json, hash:runtime/tests/fixtures/softmax.json, unexpected:forge-server, unexpected:runtime/tests/fixtures/softmax_causal_in.bin, unexpected:runtime/tests/fixtures/rmsnorm_x.bin, unexpected:runtime/tests/fixtures/attn_v.bin, unexpected:runtime/tests/fixtures/softmax_in.bin, unexpected:runtime/tests/fixtures/rope_y.bin, unexpected:runtime/tests/fixtures/softmax_causal_out.bin, unexpected:runtime/tests/fixtures/attn_k.bin, unexpected:runtime/tests/fixtures/softmax_out.bin, unexpected:runtime/tests/fixtures/rmsnorm_w.bin, unexpected:runtime/tests/fixtures/rope_x.bin, unexpected:runtime/tests/fixtures/silu_x.bin, unexpected:runtime/tests/fixtures/attn_ctx.bin, unexpected:runtime/tests/fixtures/rmsnorm_y.bin, unexpected:runtime/tests/fixtures/attn_q.bin, unexpected:runtime/tests/fixtures/silu_y.bin, unexpected:tests/reference/phase2_reference.py, count:250!=233, content_hash:6ce98988ce07baa1b9e7feb76d7b409d283ae6c3a44810c22cda16fb799d3369!=ea35dc7e27fcaa7f694783efb2632fdd592bb86f27627418e16577e1893cfcc9

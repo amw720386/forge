@@ -1,5 +1,0 @@
-/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/lightning_sdk/helpers.py:78: UserWarning: A newer version of lightning-sdk is available (2026.10.1). Please consider upgrading with `pip install -U lightning-sdk`. Not all platform functionality can be guaranteed to work with the current version.
-  warnings.warn(
-PHASE15_WATCHDOG_READY deadline=2026-10-09T05:34:15.865579+00:00
-4430 /bin/bash /commands/python3 /teamspace/studios/this_studio/forge-deploys/20261008T204116Z-7baa1f1daea5/scripts/phase15_remote_watchdog.py --deadline 2026-10-09T05:34:15.8655795+00:00
-4439 /home/zeus/miniconda3/envs/cloudspace/bin/python /teamspace/studios/this_studio/forge-deploys/20261008T204116Z-7baa1f1daea5/scripts/phase15_remote_watchdog.py --deadline 2026-10-09T05:34:15.8655795+00:00

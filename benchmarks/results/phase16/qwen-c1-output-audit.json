@@ -1,9 +1,0 @@
-[
-  {
-    "workload": "short",
-    "concurrency": 1,
-    "requests": 3,
-    "exact_text_matches": 3,
-    "differences": []
-  }
-]

@@ -2,7 +2,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MODEL_DIR="${FORGE_MODEL_DIR:-$ROOT/models/Qwen2.5-0.5B-Instruct}"
-OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmarks/results/local}"
+OUT_DIR="${FORGE_BENCH_OUT:-$ROOT/benchmark-output}"
 mkdir -p "$OUT_DIR"
 cd "$ROOT/runtime"
 

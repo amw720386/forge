@@ -1,9 +1,0 @@
-2026/10/09 02:57:56 forge-runtime forge-runtime/0.1.0
-2026/10/09 02:57:56 loading model from models/Qwen2.5-0.5B-Instruct (device=cuda dtype=bf16) ...
-2026/10/09 02:57:59 model loaded (batch_capacity=4 free_slots=4)
-2026/10/09 02:57:59 forge-server listening on :8080
-CUDA_GRAPH_CAPTURE_OK batch=3 ms=5.247 device_memory_delta_bytes=Some(6291456)
-CUDA_GRAPH_CAPTURE_OK batch=2 ms=3.968 device_memory_delta_bytes=Some(6291456)
-CUDA_GRAPH_CAPTURE_OK batch=4 ms=6.170 device_memory_delta_bytes=Some(6291456)
-CUDA_GRAPH_CAPTURE_OK batch=1 ms=3.940 device_memory_delta_bytes=Some(4194304)
-2026/10/09 02:58:05 shutting down...

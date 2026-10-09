@@ -5,9 +5,9 @@ from pathlib import Path
 
 p = argparse.ArgumentParser()
 p.add_argument('--root', type=Path, required=True)
-p.add_argument('--baseline', default='accepted-baseline-http.json')
-p.add_argument('--candidate', default='accepted-final-http.json')
-p.add_argument('--out', default='accepted-output-audit.json')
+p.add_argument('--baseline', required=True)
+p.add_argument('--candidate', required=True)
+p.add_argument('--out', default='output-audit.json')
 args = p.parse_args()
 a = json.loads((args.root/args.baseline).read_text())
 z = json.loads((args.root/args.candidate).read_text())

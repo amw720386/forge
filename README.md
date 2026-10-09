@@ -84,21 +84,18 @@ hardware configurations are unvalidated.
 
 ## Performance
 
-Historical NVIDIA L4 measurements of Qwen2.5-0.5B-Instruct, CUDA BF16, eight
-available slots, context limit 2048, at most 64 output tokens and natural EOS.
-These are median aggregate output tokens/s over three warmed loopback HTTP/SSE
-trials, including request processing and excluding model load.
+Local CPU measurements on an Intel Core i5-1235U, Windows, October 9, 2026.
+Median decode tokens/s across three separate runs per backend, using group size
+64, a short prompt and 16 fixed decode steps. Model loading is excluded; these
+are internal runtime timings. HTTP serving includes additional work.
 
-| Hardware | Model | Dtype | Workload | Concurrency | HTTP output tok/s |
-|---|---|---|---|---:|---:|
-| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Short | 1 | 183.54 |
-| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Short | 8 | 937.13 |
-| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Medium | 8 | 1035.48 |
-| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Long | 8 | 223.39 |
+| Model | FP32 tok/s | INT8 tok/s | INT4 tok/s |
+|---|---:|---:|---:|
+| Qwen2.5-0.5B-Instruct | 12.60 | 30.51 | 21.65 |
+| SmolLM2-135M-Instruct | 37.30 | 67.55 | 39.99 |
 
-Short C=8 varied between runs; a nine-trial repeat measured 1062.39 tok/s.
-These are retained results, not a new GPU benchmark or a claim of superiority
-over other engines. [Methodology and raw evidence](docs/benchmarks.md).
+See [benchmarks.md](docs/benchmarks.md) for commands and timing definitions.
+Generated output stays in the ignored `benchmark-output/` directory.
 
 ## Architecture
 

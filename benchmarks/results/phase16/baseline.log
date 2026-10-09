@@ -1,6 +1,0 @@
-{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 181.95618731553185}
-{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 992.6856440035857}
-{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 1032.2296761189475}
-{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 223.3128322761365}
-{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 202.78655271081553}
-PHASE16_BASELINE_DONE

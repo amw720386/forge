@@ -47,11 +47,10 @@ models/**
 /.forge-deploy-out/
 /.forge/
 
-# Local benchmark runs; reviewed historical evidence remains versioned.
-benchmarks/results/local/
+# Local benchmark output stays outside the harness source tree.
+/benchmark-output/
 *.prof
 *.log
-!benchmarks/results/phase*/*.log
 *.nsys-rep
 *.nsys-rep.zip
 

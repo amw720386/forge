@@ -1,89 +1,0 @@
-WARNING: CPU context switch tracing not supported, disabling.
-Try the 'nsys status --environment' command to learn more.
-
-=== bench_phase12 (audited) ===
-model=/teamspace/studios/this_studio/forge-cache/models/Qwen2.5-0.5B-Instruct dtype=Bf16 batches=[8] max_new=16 max_seq=512 trials=1 warmup=1 policy=fixed_len
-  prompt[0] tokens=10
-  prompt[1] tokens=10
-  prompt[2] tokens=10
-  prompt[3] tokens=10
-  prompt[4] tokens=10
-  prompt[5] tokens=10
-  prompt[6] tokens=10
-  prompt[7] tokens=10
-load=1.80s upload=0.67s weights=942.4 MiB VRAM free/total=Some(21281.125)/Some(22563.125)
-
-=== configured_admit_B=8 (max_batch=8) ===
-CUDA_GRAPH_CAPTURE_OK batch=8 ms=23.175
-  warmup 0 done
-  trial 0: tokens=128 wall=0.148s agg=865.56 tok/s ttft_p50=0.0571s e2e_p50=0.1479s occ=8.00
-  MEDIAN agg=865.56 tok/s  decode≈1322.08  prefill≈1400.70  ttft_p50=0.0571s  (n=1)
-{
-  "dtype": "Bf16",
-  "harness": "bench_phase12",
-  "label": "",
-  "max_new": 16,
-  "max_seq": 512,
-  "methodology": "docs/BENCHMARK_METHODOLOGY.md",
-  "model_dir": "/teamspace/studios/this_studio/forge-cache/models/Qwen2.5-0.5B-Instruct",
-  "results": [
-    {
-      "admit_batch": 8,
-      "aggregate_tok_s_max": 865.5633276830984,
-      "aggregate_tok_s_median": 865.5633276830984,
-      "aggregate_tok_s_min": 865.5633276830984,
-      "avg_occupancy_median": 8.0,
-      "dtype": "Bf16",
-      "e2e_p50_median_s": 0.147869902,
-      "e2e_p95_median_s": 0.147869902,
-      "e2e_wall_s_max": 0.147880572,
-      "e2e_wall_s_median": 0.147880572,
-      "e2e_wall_s_min": 0.147880572,
-      "kv_util_peak_median": 0.0625,
-      "label": "",
-      "load_s": 1.796593057,
-      "max_batch": 8,
-      "max_new": 16,
-      "max_seq": 512,
-      "mean_per_req_tok_s_median": 108.20322312785467,
-      "n_trials": 1,
-      "prefill_tok_s_median": 1400.696419256172,
-      "request_throughput_median": 54.09770798019365,
-      "steady_decode_tok_s_median": 1322.0791201334296,
-      "token_policy": "fixed_len",
-      "total_tokens_median": 128.0,
-      "trials": [
-        {
-          "aggregate_tok_s": 865.5633276830984,
-          "avg_occupancy": 8.0,
-          "e2e_p50_s": 0.147869902,
-          "e2e_p95_s": 0.147869902,
-          "e2e_wall_s": 0.147880572,
-          "kv_util_peak": 0.0625,
-          "mean_per_req_tok_s": 108.20322312785467,
-          "prefill_tok_s": 1400.696419256172,
-          "sched_decode": 120,
-          "sched_prefill": 80,
-          "steady_decode_tok_s": 1322.0791201334296,
-          "total_tokens": 128,
-          "ttft_p50_s": 0.057114446,
-          "ttft_p95_s": 0.057114446
-        }
-      ],
-      "ttft_p50_median_s": 0.057114446,
-      "ttft_p95_median_s": 0.057114446,
-      "upload_s": 0.665551732,
-      "weight_mib": 942.42919921875,
-      "workload": "short_hello"
-    }
-  ],
-  "token_policy": "fixed_len",
-  "trials": 1,
-  "warmup": 1,
-  "workload": "short_hello"
-}
-Collecting data...
-Generating '/tmp/nsys-report-b956.qdstrm'
-[1/1] [0%                          ] graphs_nodes_nsys_b8.nsys-rep[1/1] [0%                          ] graphs_nodes_nsys_b8.nsys-rep[1/1] [0%                          ] graphs_nodes_nsys_b8.nsys-rep[1/1] [=====29%                    ] graphs_nodes_nsys_b8.nsys-rep[1/1] [===23%                      ] graphs_nodes_nsys_b8.nsys-rep[1/1] [========42%                 ] graphs_nodes_nsys_b8.nsys-rep[1/1] [==============63%           ] graphs_nodes_nsys_b8.nsys-rep[1/1] [==================75%       ] graphs_nodes_nsys_b8.nsys-rep[1/1] [========================100%] graphs_nodes_nsys_b8.nsys-rep[1/1] [========================100%] graphs_nodes_nsys_b8.nsys-rep
-Generated:
-	/teamspace/studios/this_studio/forge-cache/phase13-results/graphs_nodes_nsys_b8.nsys-rep

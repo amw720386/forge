@@ -33,6 +33,6 @@ if __name__=='__main__':
         try:result[path.stem]=summarize(path)
         except (ValueError,KeyError,statistics.StatisticsError):continue
     (args.root/'summary.json').write_text(json.dumps(result,indent=2))
-    for name in ['accepted-baseline-http','accepted-final-http']:
-        for r in result.get(name,[]):
+    for name, rows in result.items():
+        for r in rows:
             print(name,r['workload'],r['concurrency'],round(r['output_tok_s'],2),round(r['ttft_ms'],1),round(r['p95_ms'],1))

@@ -1,3 +1,0 @@
-/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/lightning_sdk/helpers.py:78: UserWarning: A newer version of lightning-sdk is available (2026.10.1). Please consider upgrading with `pip install -U lightning-sdk`. Not all platform functionality can be guaranteed to work with the current version.
-  warnings.warn(
-PHASE15_WATCHDOG_READY deadline=2026-10-09T03:52:45.456427+00:00

@@ -1,9 +1,0 @@
-{
-  "date": "2026-10-08",
-  "platform": "Windows CPU",
-  "cargo_test_release": "passed: 41 tests, GPU suites feature gated",
-  "cargo_check_cuda_stub_tests": "passed, existing unreachable-code warning",
-  "go_test_all_api": "passed",
-  "python_py_compile": "passed",
-  "notes": "GPU numerical evidence is in phase13-logit-parity-final.log, not inferred from CPU builds."
-}

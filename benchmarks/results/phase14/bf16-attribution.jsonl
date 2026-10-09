@@ -1,2 +1,0 @@
-{"batch":1,"modes":["packed","packed_attention","packed_lt","combined"],"max_abs_errors":[0.0, 0.08531761, 0.09936023, 0.09936023],"greedy_disagreements":[0, 0, 0, 0]}
-{"batch":8,"modes":["packed","packed_attention","packed_lt","combined"],"max_abs_errors":[0.13403845, 0.13403845, 0.18113428, 0.18113428],"greedy_disagreements":[0, 0, 0, 0]}

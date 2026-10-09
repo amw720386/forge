@@ -1,6 +1,0 @@
-{"concurrency": 1, "workload": "short", "aggregate_tok_s_median": 183.54069791977253}
-{"concurrency": 8, "workload": "short", "aggregate_tok_s_median": 937.1314035231541}
-{"concurrency": 8, "workload": "medium", "aggregate_tok_s_median": 1035.4754432924108}
-{"concurrency": 8, "workload": "long", "aggregate_tok_s_median": 223.3869739268363}
-{"concurrency": 8, "workload": "mixed", "aggregate_tok_s_median": 203.96499048631088}
-PHASE16_SECOND_MODEL_DONE
