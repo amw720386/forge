@@ -10,12 +10,12 @@ import (
 	"syscall"
 	"time"
 
-	forge "github.com/forge-ml/forge/bindings/go"
+	forge "github.com/amw720386/forge/bindings/go"
 
-	"github.com/forge-ml/forge/api/internal/metrics"
-	"github.com/forge-ml/forge/api/internal/queue"
-	"github.com/forge-ml/forge/api/internal/scheduler"
-	"github.com/forge-ml/forge/api/internal/server"
+	"github.com/amw720386/forge/api/internal/metrics"
+	"github.com/amw720386/forge/api/internal/queue"
+	"github.com/amw720386/forge/api/internal/scheduler"
+	"github.com/amw720386/forge/api/internal/server"
 )
 
 func main() {

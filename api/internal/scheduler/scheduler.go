@@ -13,10 +13,10 @@ import (
 	"sync"
 	"time"
 
-	forge "github.com/forge-ml/forge/bindings/go"
+	forge "github.com/amw720386/forge/bindings/go"
 
-	"github.com/forge-ml/forge/api/internal/metrics"
-	"github.com/forge-ml/forge/api/internal/queue"
+	"github.com/amw720386/forge/api/internal/metrics"
+	"github.com/amw720386/forge/api/internal/queue"
 )
 
 type liveReq struct {
