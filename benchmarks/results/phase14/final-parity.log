@@ -1,0 +1,226 @@
+=== FORGE DEPLOY VERIFY ===
+cwd=/teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23
+deploy_id=20261008T192014Z-e4331fde9a23
+content_hash=e4331fde9a239d9e064ec786fc867fc0573b757c314acfc03cd71c8e649dd87a
+OK: build root is isolated deploy: /teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23
+OK: required source files present
+OK: no known obsolete cuda_model import markers
+OK: per-file hashes match manifest (196 files)
+OK: content_hash matches
+DEPLOY_VERIFY_OK id=20261008T192014Z-e4331fde9a23 content_hash=e4331fde9a239d9e064ec786fc867fc0573b757c314acfc03cd71c8e649dd87a
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test FORGE_HAS_MAVX2
+-- Performing Test FORGE_HAS_MAVX2 - Success
+-- Performing Test FORGE_HAS_MFMA
+-- Performing Test FORGE_HAS_MFMA - Success
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done (2.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23/kernels/build-cuda
+[  6%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/memory.cu.o
+[  6%] Building CXX object CMakeFiles/forge_kernels.dir/src/matmul.cpp.o
+[ 12%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/device.cu.o
+[ 12%] Building CXX object CMakeFiles/forge_kernels.dir/src/linear_quant.cpp.o
+[ 18%] Building CXX object CMakeFiles/forge_kernels.dir/src/matvec.cpp.o
+[ 21%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/matmul.cu.o
+[ 21%] Building CXX object CMakeFiles/forge_kernels.dir/src/linear.cpp.o
+[ 24%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/matvec.cu.o
+[ 27%] Building CXX object CMakeFiles/forge_kernels.dir/src/rmsnorm.cpp.o
+[ 30%] Building CXX object CMakeFiles/forge_kernels.dir/src/softmax.cpp.o
+[ 33%] Building CXX object CMakeFiles/forge_kernels.dir/src/rope.cpp.o
+[ 36%] Building CXX object CMakeFiles/forge_kernels.dir/src/activation.cpp.o
+[ 39%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/rmsnorm.cu.o
+[ 42%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/softmax.cu.o
+[ 45%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/activation.cu.o
+[ 48%] Linking CXX static library libforge_kernels.a
+[ 48%] Built target forge_kernels
+[ 51%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/linear.cu.o
+[ 54%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/rope.cu.o
+[ 57%] Building CXX object CMakeFiles/forge_kernels_tests.dir/tests/test_matmul.cpp.o
+[ 60%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/embedding.cu.o
+[ 63%] Building CXX object CMakeFiles/forge_kernels_tests.dir/tests/test_matvec.cpp.o
+[ 66%] Building CXX object CMakeFiles/forge_kernels_tests.dir/tests/test_phase2.cpp.o
+[ 69%] Building CXX object CMakeFiles/forge_kernels_tests.dir/tests/test_main.cpp.o
+[ 72%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/attention.cu.o
+[ 75%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/elem.cu.o
+[ 78%] Building CUDA object cuda/CMakeFiles/forge_cuda.dir/src/argmax.cu.o
+[ 81%] Linking CXX executable forge_kernels_tests
+[ 81%] Built target forge_kernels_tests
+[ 84%] Linking CUDA static library libforge_cuda.a
+[ 84%] Built target forge_cuda
+[ 93%] Building CXX object cuda/CMakeFiles/forge_cuda_tests.dir/tests/test_main.cpp.o
+[ 93%] Building CXX object cuda/CMakeFiles/forge_cuda_tests.dir/tests/test_cuda_ops.cpp.o
+[ 93%] Building CXX object cuda/CMakeFiles/forge_cuda_bench.dir/bench/bench_cuda.cpp.o
+[ 96%] Linking CXX executable forge_cuda_bench
+[ 96%] Built target forge_cuda_bench
+[100%] Linking CXX executable forge_cuda_tests
+[100%] Built target forge_cuda_tests
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.190
+   Compiling crossbeam-utils v0.8.23
+   Compiling shlex v2.0.1
+   Compiling memchr v2.8.3
+   Compiling find-msvc-tools v0.1.14
+   Compiling fnv v1.0.7
+   Compiling crossbeam-epoch v0.9.21
+   Compiling ident_case v1.0.1
+   Compiling version_check v0.9.5
+   Compiling strsim v0.11.1
+   Compiling crossbeam-deque v0.8.8
+   Compiling cfg-if v1.0.5
+   Compiling zerocopy v0.8.61
+   Compiling typenum v1.20.1
+   Compiling rayon-core v1.13.0
+   Compiling pkg-config v0.3.34
+   Compiling cc v1.6.0
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling either v1.19.0
+   Compiling serde_json v1.0.151
+   Compiling minimal-lexical v0.2.1
+   Compiling generic-array v0.14.7
+   Compiling paste v1.0.15
+   Compiling esaxx-rs v0.1.10
+   Compiling thiserror v1.0.69
+   Compiling regex-syntax v0.8.11
+   Compiling itoa v1.0.18
+   Compiling aho-corasick v1.1.5
+   Compiling nom v7.1.3
+   Compiling itertools v0.11.0
+   Compiling bitflags v2.13.2
+   Compiling base64 v0.13.1
+   Compiling pastey v0.2.3
+   Compiling macro_rules_attribute-proc_macro v0.2.3
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling once_cell v1.21.4
+   Compiling unicode-segmentation v1.13.3
+   Compiling smallvec v1.16.2
+   Compiling macro_rules_attribute v0.2.3
+   Compiling unicode-normalization-alignments v0.1.12
+   Compiling getrandom v0.2.17
+   Compiling rand_core v0.6.4
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling itertools v0.12.1
+   Compiling digest v0.10.7
+   Compiling rayon v1.12.0
+   Compiling unicode_categories v0.1.1
+   Compiling log v0.4.34
+   Compiling onig_sys v69.9.3
+   Compiling forge-runtime v0.1.0 (/teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23/runtime)
+   Compiling lazy_static v1.5.1
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+   Compiling memmap2 v0.9.11
+   Compiling regex-automata v0.4.18
+   Compiling serde_derive v1.0.229
+   Compiling darling_core v0.20.11
+   Compiling rayon-cond v0.3.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling thiserror-impl v1.0.69
+   Compiling monostate-impl v0.1.18
+   Compiling monostate v0.1.18
+   Compiling rand_chacha v0.3.1
+   Compiling regex v1.13.1
+   Compiling rand v0.8.8
+   Compiling darling_macro v0.20.11
+   Compiling spm_precompiled v0.1.4
+   Compiling safetensors v0.4.5
+   Compiling darling v0.20.11
+   Compiling derive_builder_core v0.20.2
+   Compiling derive_builder_macro v0.20.2
+   Compiling derive_builder v0.20.2
+   Compiling onig v6.5.3
+   Compiling tokenizers v0.20.4
+warning: unused import: `GpuWeightDType`
+  --> examples/bench_phase12.rs:21:63
+   |
+21 | use forge_runtime::cuda_model::{CudaBatcher, CudaTransformer, GpuWeightDType};
+   |                                                               ^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: fields `n_req` and `prompt_tokens` are never read
+   --> examples/bench_phase12.rs:369:5
+    |
+368 | struct TrialMetrics {
+    |        ------------ fields in this struct
+369 |     n_req: usize,
+    |     ^^^^^
+370 |     total_tokens: usize,
+371 |     prompt_tokens: usize,
+    |     ^^^^^^^^^^^^^
+    |
+    = note: `TrialMetrics` has derived impls for the traits `Debug` and `Clone`, but these are intentionally ignored during dead code analysis
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `forge-runtime` (example "bench_phase12") generated 2 warnings (run `cargo fix --example "bench_phase12" -p forge-runtime` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 34.99s
+   Compiling forge-runtime v0.1.0 (/teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23/runtime)
+    Finished `release` profile [optimized] target(s) in 4.43s
+PHASE14_BUILD_OK
+   Compiling forge-runtime v0.1.0 (/teamspace/studios/this_studio/forge-deploys/20261008T192014Z-e4331fde9a23/runtime)
+    Finished `release` profile [optimized] target(s) in 13.19s
+     Running tests/cuda_phase14.rs (runtime/target/release/deps/cuda_phase14-34abe4a21a8aeda3)
+
+running 3 tests
+test mixed_lifecycle_and_exhaustion ... CUDA_GRAPH_CAPTURE_OK batch=3 ms=0.446 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.315 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.306 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=3 ms=0.311 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.211 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.212 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=3 ms=0.341 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.247 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.321 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=3 ms=0.153 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=0.153 device_memory_delta_bytes=Some(0)
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=0.170 device_memory_delta_bytes=Some(0)
+ok
+test packed_logits_match_individual_chunks ... PHASE14_PREFILL_PARITY dtype=Fp32 B=1 max_abs_error=0
+PHASE14_PREFILL_PARITY dtype=Fp32 B=2 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Fp32 B=4 max_abs_error=0.000000059604645
+PHASE14_PREFILL_PARITY dtype=Fp32 B=8 max_abs_error=0.000000059604645
+PHASE14_PREFILL_PARITY dtype=Bf16 B=1 max_abs_error=0
+PHASE14_PREFILL_PARITY dtype=Bf16 B=2 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Bf16 B=4 max_abs_error=0.000000029802322
+PHASE14_PREFILL_PARITY dtype=Bf16 B=8 max_abs_error=0.000000029802322
+ok
+test real_model_packed_logits ... ignored, requires the full Qwen checkpoint; explicit bounded GPU validation
+
+test result: ok. 2 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.49s
+
+    Finished `release` profile [optimized] target(s) in 0.05s
+     Running tests/cuda_phase14.rs (runtime/target/release/deps/cuda_phase14-34abe4a21a8aeda3)
+
+running 1 test
+test real_model_packed_logits ... PHASE14_REAL_PARITY dtype=Fp32 B=1 max_abs_error=0.000010848045 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Fp32 B=2 max_abs_error=0.00001692772 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Fp32 B=4 max_abs_error=0.00003194809 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Fp32 B=8 max_abs_error=0.000037312508 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Bf16 B=1 max_abs_error=0.09936023 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Bf16 B=2 max_abs_error=0.11010146 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Bf16 B=4 max_abs_error=0.109956026 greedy_disagreements=0
+PHASE14_REAL_PARITY dtype=Bf16 B=8 max_abs_error=0.18113428 greedy_disagreements=0
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 6.65s
+

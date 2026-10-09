@@ -1,0 +1,33 @@
+{
+  "executed_source": "retained-source-hashes.json",
+  "final_local_source": "local-source-hashes.json",
+  "matched_paths": [
+    "runtime/src/compute/cuda.rs",
+    "kernels/cuda/include/forge_cuda.h",
+    "kernels/cuda/src/forge_cuda_stub.c",
+    "runtime/build.rs",
+    "runtime/src/lib.rs",
+    "runtime/src/scheduling.rs",
+    "runtime/src/cuda_model/batcher.rs",
+    "runtime/src/cuda_model/transformer.rs",
+    "runtime/tests/cuda_phase15.rs",
+    "api/internal/scheduler/scheduler.go",
+    "kernels/cuda/src/attention.cu",
+    "kernels/cuda/src/error.hpp",
+    "kernels/cuda/src/linear.cu",
+    "kernels/cuda/src/elem.cu",
+    "kernels/cuda/bench/bench_phase15_attention.cu",
+    "benchmarks/forge/bench_http.py",
+    "scripts/phase15_http.sh",
+    "scripts/phase15_context.sh",
+    "scripts/phase15_correctness.sh",
+    "scripts/phase15_accepted.sh",
+    "scripts/phase15_scheduling.sh",
+    "scripts/phase15_refs.sh"
+  ],
+  "post_gpu_reporting_corrections": [
+    "benchmarks/forge/phase15_context.py"
+  ],
+  "correction": "Context reporter counts the server chat wrapper; wire prompts and timing samples unchanged.",
+  "context_audit": "context-token-count-audit.json"
+}

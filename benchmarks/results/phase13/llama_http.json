@@ -1,0 +1,2068 @@
+{
+  "runtime": "llama",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 1,
+      "workload": "short",
+      "aggregate_tok_s_median": 183.62646850687176,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.05465743500002418,
+          "aggregate_tok_s": 182.9577256963408,
+          "per_request_tok_s": [
+            182.9577256963408
+          ],
+          "latency_p50_s": 0.05465743500002418,
+          "latency_p95_s": 0.05465743500002418,
+          "ttft_p50_s": 0.0074280110000017885,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.05465743500002418,
+              "ttft_s": 0.0074280110000017885,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.751,
+                "prompt_per_token_ms": 0.6751,
+                "prompt_per_second": 1481.2620352540364,
+                "predicted_n": 10,
+                "predicted_ms": 46.998,
+                "predicted_per_token_ms": 5.2219999999999995,
+                "predicted_per_second": 191.49751053236307
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.054328725999994276,
+          "aggregate_tok_s": 184.06468798846956,
+          "per_request_tok_s": [
+            184.06468798846956
+          ],
+          "latency_p50_s": 0.054328725999994276,
+          "latency_p95_s": 0.054328725999994276,
+          "ttft_p50_s": 0.007273975999964932,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.054328725999994276,
+              "ttft_s": 0.007273975999964932,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.699,
+                "prompt_per_token_ms": 0.6698999999999999,
+                "prompt_per_second": 1492.7601134497686,
+                "predicted_n": 10,
+                "predicted_ms": 46.906,
+                "predicted_per_token_ms": 5.211777777777778,
+                "predicted_per_second": 191.87310791796358
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.054458379999971385,
+          "aggregate_tok_s": 183.62646850687176,
+          "per_request_tok_s": [
+            183.62646850687176
+          ],
+          "latency_p50_s": 0.054458379999971385,
+          "latency_p95_s": 0.054458379999971385,
+          "ttft_p50_s": 0.007315317999996296,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.054458379999971385,
+              "ttft_s": 0.007315317999996296,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.691,
+                "prompt_per_token_ms": 0.6691,
+                "prompt_per_second": 1494.5449110745778,
+                "predicted_n": 10,
+                "predicted_ms": 46.89,
+                "predicted_per_token_ms": 5.21,
+                "predicted_per_second": 191.93857965451056
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "short",
+      "aggregate_tok_s_median": 298.3913839845776,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.06893173200001002,
+          "aggregate_tok_s": 290.1421365706739,
+          "per_request_tok_s": [
+            145.81148560861823,
+            145.07106828533696
+          ],
+          "latency_p50_s": 0.06858170300000666,
+          "latency_p95_s": 0.06893173200001002,
+          "ttft_p50_s": 0.009635507999973925,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.06858170300000666,
+              "ttft_s": 0.009635507999973925,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.315,
+                "prompt_per_token_ms": 0.8314999999999999,
+                "prompt_per_second": 1202.645820805773,
+                "predicted_n": 10,
+                "predicted_ms": 58.62,
+                "predicted_per_token_ms": 6.513333333333333,
+                "predicted_per_second": 153.53121801432957
+              }
+            },
+            {
+              "latency_s": 0.06893173200001002,
+              "ttft_s": 0.011229189000005135,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.788,
+                "prompt_per_token_ms": 0.9788,
+                "prompt_per_second": 1021.6591744993871,
+                "predicted_n": 10,
+                "predicted_ms": 57.485,
+                "predicted_per_token_ms": 6.387222222222222,
+                "predicted_per_second": 156.56258154301122
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.06557324499999595,
+          "aggregate_tok_s": 305.00244421335617,
+          "per_request_tok_s": [
+            153.61819861951275,
+            152.50122210667809
+          ],
+          "latency_p50_s": 0.06509645400001318,
+          "latency_p95_s": 0.06557324499999595,
+          "ttft_p50_s": 0.00860391100002289,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.06509645400001318,
+              "ttft_s": 0.00860391100002289,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 7.988,
+                "prompt_per_token_ms": 0.7988000000000001,
+                "prompt_per_second": 1251.8778167250875,
+                "predicted_n": 10,
+                "predicted_ms": 56.03,
+                "predicted_per_token_ms": 6.225555555555555,
+                "predicted_per_second": 160.62823487417455
+              }
+            },
+            {
+              "latency_s": 0.06557324499999595,
+              "ttft_s": 0.009008170999948106,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.281,
+                "prompt_per_token_ms": 0.8281000000000001,
+                "prompt_per_second": 1207.5836251660426,
+                "predicted_n": 10,
+                "predicted_ms": 56.093,
+                "predicted_per_token_ms": 6.232555555555556,
+                "predicted_per_second": 160.4478277146881
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.06702606400000377,
+          "aggregate_tok_s": 298.3913839845776,
+          "per_request_tok_s": [
+            149.41991974626583,
+            150.03777050831516
+          ],
+          "latency_p50_s": 0.06664988400001448,
+          "latency_p95_s": 0.0669254809999984,
+          "ttft_p50_s": 0.00900598200001923,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.0669254809999984,
+              "ttft_s": 0.009287549000021045,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.66,
+                "prompt_per_token_ms": 0.866,
+                "prompt_per_second": 1154.7344110854503,
+                "predicted_n": 10,
+                "predicted_ms": 57.293,
+                "predicted_per_token_ms": 6.365888888888889,
+                "predicted_per_second": 157.08725324210636
+              }
+            },
+            {
+              "latency_s": 0.06664988400001448,
+              "ttft_s": 0.00900598200001923,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.273,
+                "prompt_per_token_ms": 0.8272999999999999,
+                "prompt_per_second": 1208.75135984528,
+                "predicted_n": 10,
+                "predicted_ms": 57.349,
+                "predicted_per_token_ms": 6.372111111111111,
+                "predicted_per_second": 156.93386109609585
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "short",
+      "aggregate_tok_s_median": 517.7180190824539,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.07714634300003809,
+          "aggregate_tok_s": 518.4950892614605,
+          "per_request_tok_s": [
+            130.2039525128369,
+            130.9124085627614,
+            130.1958308040299,
+            130.93417751653513
+          ],
+          "latency_p50_s": 0.07638695299999654,
+          "latency_p95_s": 0.07680737499998713,
+          "ttft_p50_s": 0.010547131000009813,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.07680258400000639,
+              "ttft_s": 0.012028328999974747,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.429,
+                "prompt_per_token_ms": 1.0429,
+                "prompt_per_second": 958.8647041902389,
+                "predicted_n": 10,
+                "predicted_ms": 64.561,
+                "predicted_per_token_ms": 7.173444444444446,
+                "predicted_per_second": 139.40304518207586
+              }
+            },
+            {
+              "latency_s": 0.07638695299999654,
+              "ttft_s": 0.010547131000009813,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.883,
+                "prompt_per_token_ms": 0.8882999999999999,
+                "prompt_per_second": 1125.7458065968706,
+                "predicted_n": 10,
+                "predicted_ms": 65.479,
+                "predicted_per_token_ms": 7.275444444444444,
+                "predicted_per_second": 137.44864765802777
+              }
+            },
+            {
+              "latency_s": 0.07680737499998713,
+              "ttft_s": 0.010975542999972276,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.196,
+                "prompt_per_token_ms": 0.9196,
+                "prompt_per_second": 1087.4293170943888,
+                "predicted_n": 10,
+                "predicted_ms": 65.531,
+                "predicted_per_token_ms": 7.2812222222222225,
+                "predicted_per_second": 137.33957974088597
+              }
+            },
+            {
+              "latency_s": 0.07637425300003997,
+              "ttft_s": 0.010459199000024455,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.453,
+                "prompt_per_token_ms": 0.8452999999999999,
+                "prompt_per_second": 1183.0119484206791,
+                "predicted_n": 10,
+                "predicted_ms": 65.627,
+                "predicted_per_token_ms": 7.291888888888888,
+                "predicted_per_second": 137.13867767839457
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.07726213600000165,
+          "aggregate_tok_s": 517.7180190824539,
+          "per_request_tok_s": [
+            130.3786047353769,
+            130.68539116496822,
+            130.01008826285096,
+            129.42950477061348
+          ],
+          "latency_p50_s": 0.07669970099999546,
+          "latency_p95_s": 0.07726213600000165,
+          "ttft_p50_s": 0.009876902999963022,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.07669970099999546,
+              "ttft_s": 0.009876902999963022,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.883,
+                "prompt_per_token_ms": 0.8882999999999999,
+                "prompt_per_second": 1125.7458065968706,
+                "predicted_n": 10,
+                "predicted_ms": 66.341,
+                "predicted_per_token_ms": 7.3712222222222215,
+                "predicted_per_second": 135.66271234982892
+              }
+            },
+            {
+              "latency_s": 0.0765196469999978,
+              "ttft_s": 0.009634488000017427,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.444,
+                "prompt_per_token_ms": 0.8444,
+                "prompt_per_second": 1184.2728564661297,
+                "predicted_n": 10,
+                "predicted_ms": 66.584,
+                "predicted_per_token_ms": 7.3982222222222225,
+                "predicted_per_second": 135.1676078337138
+              }
+            },
+            {
+              "latency_s": 0.07691710799997509,
+              "ttft_s": 0.010375486999976147,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.268,
+                "prompt_per_token_ms": 0.9268000000000001,
+                "prompt_per_second": 1078.9814415192059,
+                "predicted_n": 10,
+                "predicted_ms": 66.163,
+                "predicted_per_token_ms": 7.351444444444444,
+                "predicted_per_second": 136.0276891918444
+              }
+            },
+            {
+              "latency_s": 0.07726213600000165,
+              "ttft_s": 0.01097324199997729,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.645,
+                "prompt_per_token_ms": 0.9644999999999999,
+                "prompt_per_second": 1036.8066355624678,
+                "predicted_n": 10,
+                "predicted_ms": 65.988,
+                "predicted_per_token_ms": 7.332,
+                "predicted_per_second": 136.3884342607747
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.07819811999996773,
+          "aggregate_tok_s": 511.5212488486489,
+          "per_request_tok_s": [
+            129.16468937056118,
+            128.5839745098586,
+            129.83322014036057,
+            128.146384588172
+          ],
+          "latency_p50_s": 0.07742053999999143,
+          "latency_p95_s": 0.07803575599996293,
+          "ttft_p50_s": 0.009907094999960009,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.07742053999999143,
+              "ttft_s": 0.009907094999960009,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.674,
+                "prompt_per_token_ms": 0.8674,
+                "prompt_per_second": 1152.8706479133043,
+                "predicted_n": 10,
+                "predicted_ms": 67.344,
+                "predicted_per_token_ms": 7.482666666666666,
+                "predicted_per_second": 133.64219529579475
+              }
+            },
+            {
+              "latency_s": 0.07777018899997756,
+              "ttft_s": 0.010342075999972167,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.426,
+                "prompt_per_token_ms": 0.9426,
+                "prompt_per_second": 1060.8953957139827,
+                "predicted_n": 10,
+                "predicted_ms": 67.207,
+                "predicted_per_token_ms": 7.467444444444443,
+                "predicted_per_second": 133.91462198878094
+              }
+            },
+            {
+              "latency_s": 0.0770218900000259,
+              "ttft_s": 0.00948425399997177,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.337,
+                "prompt_per_token_ms": 0.8337,
+                "prompt_per_second": 1199.4722322178243,
+                "predicted_n": 10,
+                "predicted_ms": 67.385,
+                "predicted_per_token_ms": 7.487222222222223,
+                "predicted_per_second": 133.5608815018179
+              }
+            },
+            {
+              "latency_s": 0.07803575599996293,
+              "ttft_s": 0.010335194999981923,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.045,
+                "prompt_per_token_ms": 0.9045,
+                "prompt_per_second": 1105.583195135434,
+                "predicted_n": 10,
+                "predicted_ms": 67.27,
+                "predicted_per_token_ms": 7.474444444444444,
+                "predicted_per_second": 133.78920767058125
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "short",
+      "aggregate_tok_s_median": 876.0879013158365,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.09131503800000473,
+          "aggregate_tok_s": 876.0879013158365,
+          "per_request_tok_s": [
+            110.09821366193907,
+            112.00389916929053,
+            111.5798531149177,
+            110.93162620504849,
+            110.16682959603335,
+            110.51930967959845,
+            111.63799032777068,
+            110.45258421330657
+          ],
+          "latency_p50_s": 0.0901456180000082,
+          "latency_p95_s": 0.09082799500004057,
+          "ttft_p50_s": 0.012814650000052552,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.09082799500004057,
+              "ttft_s": 0.013754934000019148,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 11.048,
+                "prompt_per_token_ms": 1.1048,
+                "prompt_per_second": 905.1412020275163,
+                "predicted_n": 10,
+                "predicted_ms": 76.731,
+                "predicted_per_token_ms": 8.525666666666666,
+                "predicted_per_second": 117.29288032216445
+              }
+            },
+            {
+              "latency_s": 0.08928260600004023,
+              "ttft_s": 0.011989748000019063,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.511,
+                "prompt_per_token_ms": 0.9511,
+                "prompt_per_second": 1051.4141520344865,
+                "predicted_n": 10,
+                "predicted_ms": 76.981,
+                "predicted_per_token_ms": 8.553444444444445,
+                "predicted_per_second": 116.91196529013654
+              }
+            },
+            {
+              "latency_s": 0.08962191400001984,
+              "ttft_s": 0.012433199999975386,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.149,
+                "prompt_per_token_ms": 1.0149,
+                "prompt_per_second": 985.3187506158242,
+                "predicted_n": 10,
+                "predicted_ms": 76.877,
+                "predicted_per_token_ms": 8.541888888888888,
+                "predicted_per_second": 117.07012500487794
+              }
+            },
+            {
+              "latency_s": 0.0901456180000082,
+              "ttft_s": 0.012814650000052552,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.45,
+                "prompt_per_token_ms": 1.045,
+                "prompt_per_second": 956.9377990430622,
+                "predicted_n": 10,
+                "predicted_ms": 76.864,
+                "predicted_per_token_ms": 8.540444444444445,
+                "predicted_per_second": 117.08992506244795
+              }
+            },
+            {
+              "latency_s": 0.09077142400002458,
+              "ttft_s": 0.014748488999998699,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 12.461,
+                "prompt_per_token_ms": 1.2461,
+                "prompt_per_second": 802.5038118931064,
+                "predicted_n": 10,
+                "predicted_ms": 75.872,
+                "predicted_per_token_ms": 8.430222222222222,
+                "predicted_per_second": 118.62083509067904
+              }
+            },
+            {
+              "latency_s": 0.09048192599999538,
+              "ttft_s": 0.013549277999970855,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 11.355,
+                "prompt_per_token_ms": 1.1355,
+                "prompt_per_second": 880.6693086745927,
+                "predicted_n": 10,
+                "predicted_ms": 76.717,
+                "predicted_per_token_ms": 8.524111111111111,
+                "predicted_per_second": 117.31428496943312
+              }
+            },
+            {
+              "latency_s": 0.08957524199996669,
+              "ttft_s": 0.01224546499997814,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.822,
+                "prompt_per_token_ms": 0.9822,
+                "prompt_per_second": 1018.122581958868,
+                "predicted_n": 10,
+                "predicted_ms": 76.92,
+                "predicted_per_token_ms": 8.546666666666667,
+                "predicted_per_second": 117.00468018720748
+              }
+            },
+            {
+              "latency_s": 0.09053658699997413,
+              "ttft_s": 0.013496696999993674,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.743,
+                "prompt_per_token_ms": 1.0743,
+                "prompt_per_second": 930.8386856557759,
+                "predicted_n": 10,
+                "predicted_ms": 76.805,
+                "predicted_per_token_ms": 8.533888888888889,
+                "predicted_per_second": 117.17987110214179
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.0912807560000033,
+          "aggregate_tok_s": 876.4169306397628,
+          "per_request_tok_s": [
+            110.31647701243006,
+            112.33170870603945,
+            112.26048257796323,
+            110.87265114075896,
+            111.71198380590064,
+            110.21125822990378,
+            110.68718901607308,
+            110.87480241279403
+          ],
+          "latency_p50_s": 0.09019181799999387,
+          "latency_p95_s": 0.09073483200000965,
+          "ttft_p50_s": 0.012768238000035126,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.09064828999999008,
+              "ttft_s": 0.013390533999995569,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 11.192,
+                "prompt_per_token_ms": 1.1192,
+                "prompt_per_second": 893.49535382416,
+                "predicted_n": 10,
+                "predicted_ms": 77.084,
+                "predicted_per_token_ms": 8.56488888888889,
+                "predicted_per_second": 116.75574697732343
+              }
+            },
+            {
+              "latency_s": 0.08902205900000126,
+              "ttft_s": 0.011516126999993048,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.533,
+                "prompt_per_token_ms": 0.9532999999999999,
+                "prompt_per_second": 1048.987726843596,
+                "predicted_n": 10,
+                "predicted_ms": 77.158,
+                "predicted_per_token_ms": 8.57311111111111,
+                "predicted_per_second": 116.64376992664404
+              }
+            },
+            {
+              "latency_s": 0.08907854099999213,
+              "ttft_s": 0.011601678999966225,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 9.859,
+                "prompt_per_token_ms": 0.9859,
+                "prompt_per_second": 1014.301653311695,
+                "predicted_n": 10,
+                "predicted_ms": 77.116,
+                "predicted_per_token_ms": 8.568444444444445,
+                "predicted_per_second": 116.70729809637429
+              }
+            },
+            {
+              "latency_s": 0.09019356799996103,
+              "ttft_s": 0.01285505999999259,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.828,
+                "prompt_per_token_ms": 1.0828,
+                "prompt_per_second": 923.5315847801995,
+                "predicted_n": 10,
+                "predicted_ms": 77.145,
+                "predicted_per_token_ms": 8.571666666666665,
+                "predicted_per_second": 116.66342601594401
+              }
+            },
+            {
+              "latency_s": 0.08951591099997813,
+              "ttft_s": 0.012046309000027122,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.193,
+                "prompt_per_token_ms": 1.0192999999999999,
+                "prompt_per_second": 981.0654370646523,
+                "predicted_n": 10,
+                "predicted_ms": 77.142,
+                "predicted_per_token_ms": 8.571333333333333,
+                "predicted_per_second": 116.66796297736641
+              }
+            },
+            {
+              "latency_s": 0.09073483200000965,
+              "ttft_s": 0.0136160890000383,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 11.862,
+                "prompt_per_token_ms": 1.1862,
+                "prompt_per_second": 843.0281571404486,
+                "predicted_n": 10,
+                "predicted_ms": 76.928,
+                "predicted_per_token_ms": 8.547555555555554,
+                "predicted_per_second": 116.99251247920134
+              }
+            },
+            {
+              "latency_s": 0.09034469199997375,
+              "ttft_s": 0.013182627999981378,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 11.526,
+                "prompt_per_token_ms": 1.1526,
+                "prompt_per_second": 867.6036786395974,
+                "predicted_n": 10,
+                "predicted_ms": 77.013,
+                "predicted_per_token_ms": 8.557,
+                "predicted_per_second": 116.86338670094659
+              }
+            },
+            {
+              "latency_s": 0.09019181799999387,
+              "ttft_s": 0.012768238000035126,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 10.524,
+                "prompt_per_token_ms": 1.0524,
+                "prompt_per_second": 950.2090459901178,
+                "predicted_n": 10,
+                "predicted_ms": 77.123,
+                "predicted_per_token_ms": 8.569222222222223,
+                "predicted_per_second": 116.6967052630214
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.1061287390000416,
+          "aggregate_tok_s": 753.8014750177013,
+          "per_request_tok_s": [
+            95.82967279954444,
+            95.64386478990178,
+            95.01845329624032,
+            94.8145882712037,
+            105.19926982450254,
+            95.4163566191719,
+            94.70170926636881,
+            95.44054371942002
+          ],
+          "latency_p50_s": 0.10477727400001413,
+          "latency_p95_s": 0.10559471500005202,
+          "ttft_p50_s": 0.02521187799999325,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.10435181200000443,
+              "ttft_s": 0.023964126000009855,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 15.186,
+                "prompt_per_token_ms": 1.5186,
+                "prompt_per_second": 658.5012511523771,
+                "predicted_n": 10,
+                "predicted_ms": 80.063,
+                "predicted_per_token_ms": 8.895888888888889,
+                "predicted_per_second": 112.41147596267939
+              }
+            },
+            {
+              "latency_s": 0.10455453700001271,
+              "ttft_s": 0.0256842300000244,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 17.633,
+                "prompt_per_token_ms": 1.7632999999999999,
+                "prompt_per_second": 567.118471048602,
+                "predicted_n": 10,
+                "predicted_ms": 78.576,
+                "predicted_per_token_ms": 8.730666666666666,
+                "predicted_per_second": 114.53879047037265
+              }
+            },
+            {
+              "latency_s": 0.10524271500003124,
+              "ttft_s": 0.028049661000011383,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 19.739,
+                "prompt_per_token_ms": 1.9739,
+                "prompt_per_second": 506.6112771670297,
+                "predicted_n": 10,
+                "predicted_ms": 77.019,
+                "predicted_per_token_ms": 8.557666666666668,
+                "predicted_per_second": 116.8542827094613
+              }
+            },
+            {
+              "latency_s": 0.1054690019999498,
+              "ttft_s": 0.027446655999995073,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 18.693,
+                "prompt_per_token_ms": 1.8693000000000002,
+                "prompt_per_second": 534.9596105494035,
+                "predicted_n": 10,
+                "predicted_ms": 77.831,
+                "predicted_per_token_ms": 8.64788888888889,
+                "predicted_per_second": 115.6351582274415
+              }
+            },
+            {
+              "latency_s": 0.09505769399999053,
+              "ttft_s": 0.007970254999975168,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.864,
+                "prompt_per_token_ms": 0.6864,
+                "prompt_per_second": 1456.876456876457,
+                "predicted_n": 10,
+                "predicted_ms": 86.815,
+                "predicted_per_token_ms": 9.64611111111111,
+                "predicted_per_second": 103.66872084317227
+              }
+            },
+            {
+              "latency_s": 0.10480383399999482,
+              "ttft_s": 0.02521187799999325,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 16.563,
+                "prompt_per_token_ms": 1.6562999999999999,
+                "prompt_per_second": 603.7553583288052,
+                "predicted_n": 10,
+                "predicted_ms": 79.335,
+                "predicted_per_token_ms": 8.815,
+                "predicted_per_second": 113.44299489506524
+              }
+            },
+            {
+              "latency_s": 0.10559471500005202,
+              "ttft_s": 0.02925607200000968,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 20.794,
+                "prompt_per_token_ms": 2.0794,
+                "prompt_per_second": 480.90795421756275,
+                "predicted_n": 10,
+                "predicted_ms": 76.195,
+                "predicted_per_token_ms": 8.466111111111111,
+                "predicted_per_second": 118.11798674453705
+              }
+            },
+            {
+              "latency_s": 0.10477727400001413,
+              "ttft_s": 0.024400198000023465,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 15.486,
+                "prompt_per_token_ms": 1.5486,
+                "prompt_per_second": 645.7445434586077,
+                "predicted_n": 10,
+                "predicted_ms": 80.098,
+                "predicted_per_token_ms": 8.899777777777778,
+                "predicted_per_second": 112.36235611376065
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 1,
+      "workload": "medium",
+      "aggregate_tok_s_median": 191.31234499402902,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.3323331439999606,
+          "aggregate_tok_s": 192.57784291297645,
+          "per_request_tok_s": [
+            192.57784291297645
+          ],
+          "latency_p50_s": 0.3323331439999606,
+          "latency_p95_s": 0.3323331439999606,
+          "ttft_p50_s": 0.010722235999992336,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.3323331439999606,
+              "ttft_s": 0.010722235999992336,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 9.506,
+                "prompt_per_token_ms": 0.05003157894736842,
+                "prompt_per_second": 19987.37639385651,
+                "predicted_n": 64,
+                "predicted_ms": 319.929,
+                "predicted_per_token_ms": 5.0782380952380946,
+                "predicted_per_second": 196.9186913346399
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.342463873999975,
+          "aggregate_tok_s": 186.88102558813156,
+          "per_request_tok_s": [
+            186.88102558813156
+          ],
+          "latency_p50_s": 0.342463873999975,
+          "latency_p95_s": 0.342463873999975,
+          "ttft_p50_s": 0.013441075999992336,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.342463873999975,
+              "ttft_s": 0.013441075999992336,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 10.722,
+                "prompt_per_token_ms": 0.056431578947368416,
+                "prompt_per_second": 17720.574519679165,
+                "predicted_n": 64,
+                "predicted_ms": 329.035,
+                "predicted_per_token_ms": 5.222777777777778,
+                "predicted_per_second": 191.46899266035527
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.3345314700000017,
+          "aggregate_tok_s": 191.31234499402902,
+          "per_request_tok_s": [
+            191.31234499402902
+          ],
+          "latency_p50_s": 0.3345314700000017,
+          "latency_p95_s": 0.3345314700000017,
+          "ttft_p50_s": 0.010917290000008961,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.3345314700000017,
+              "ttft_s": 0.010917290000008961,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 9.735,
+                "prompt_per_token_ms": 0.05123684210526316,
+                "prompt_per_second": 19517.205957883925,
+                "predicted_n": 64,
+                "predicted_ms": 323.411,
+                "predicted_per_token_ms": 5.133507936507937,
+                "predicted_per_second": 194.79856900352803
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "medium",
+      "aggregate_tok_s_median": 329.54279734334324,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.38841692500000136,
+          "aggregate_tok_s": 329.54279734334324,
+          "per_request_tok_s": [
+            164.81796196040366,
+            164.84173939960993
+          ],
+          "latency_p50_s": 0.38825118100004374,
+          "latency_p95_s": 0.38830719199995656,
+          "ttft_p50_s": 0.01973160700003973,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.38830719199995656,
+              "ttft_s": 0.020038244999966537,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 13.189,
+                "prompt_per_token_ms": 0.06941578947368421,
+                "prompt_per_second": 14405.944347562363,
+                "predicted_n": 64,
+                "predicted_ms": 367.984,
+                "predicted_per_token_ms": 5.8410158730158726,
+                "predicted_per_second": 171.20309578677336
+              }
+            },
+            {
+              "latency_s": 0.38825118100004374,
+              "ttft_s": 0.01973160700003973,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 12.851,
+                "prompt_per_token_ms": 0.06763684210526316,
+                "prompt_per_second": 14784.84164656447,
+                "predicted_n": 64,
+                "predicted_ms": 368.19,
+                "predicted_per_token_ms": 5.844285714285714,
+                "predicted_per_second": 171.10730872647275
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.3992688750000184,
+          "aggregate_tok_s": 320.5859710451863,
+          "per_request_tok_s": [
+            160.33513570735587,
+            162.86474070814322
+          ],
+          "latency_p50_s": 0.39296412300001293,
+          "latency_p95_s": 0.3991639120000059,
+          "ttft_p50_s": 0.010802998000031039,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.3991639120000059,
+              "ttft_s": 0.02593409700000393,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 15.083,
+                "prompt_per_token_ms": 0.0793842105263158,
+                "prompt_per_second": 12596.96346880594,
+                "predicted_n": 64,
+                "predicted_ms": 372.981,
+                "predicted_per_token_ms": 5.920333333333334,
+                "predicted_per_second": 168.90940825403973
+              }
+            },
+            {
+              "latency_s": 0.39296412300001293,
+              "ttft_s": 0.010802998000031039,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 9.478,
+                "prompt_per_token_ms": 0.04988421052631579,
+                "prompt_per_second": 20046.42329605402,
+                "predicted_n": 64,
+                "predicted_ms": 381.812,
+                "predicted_per_token_ms": 6.060507936507936,
+                "predicted_per_second": 165.00267147182385
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.3838052870000297,
+          "aggregate_tok_s": 333.5024407831831,
+          "per_request_tok_s": [
+            166.8169004902127,
+            166.8493445392407
+          ],
+          "latency_p50_s": 0.38357957100004114,
+          "latency_p95_s": 0.3836541730000249,
+          "ttft_p50_s": 0.013983760000030543,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.3836541730000249,
+              "ttft_s": 0.01415401400004157,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 12.475,
+                "prompt_per_token_ms": 0.06565789473684211,
+                "prompt_per_second": 15230.460921843687,
+                "predicted_n": 64,
+                "predicted_ms": 369.189,
+                "predicted_per_token_ms": 5.860142857142858,
+                "predicted_per_second": 170.64430413690548
+              }
+            },
+            {
+              "latency_s": 0.38357957100004114,
+              "ttft_s": 0.013983760000030543,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 12.132,
+                "prompt_per_token_ms": 0.06385263157894737,
+                "prompt_per_second": 15661.061655126938,
+                "predicted_n": 64,
+                "predicted_ms": 369.333,
+                "predicted_per_token_ms": 5.8624285714285715,
+                "predicted_per_second": 170.57777127957695
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "medium",
+      "aggregate_tok_s_median": 542.3864145864704,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 0.47198822299998255,
+          "aggregate_tok_s": 542.3864145864704,
+          "per_request_tok_s": [
+            135.68453574406198,
+            135.83361648629528,
+            135.78262645891863,
+            135.5966036466176
+          ],
+          "latency_p50_s": 0.47134159699999145,
+          "latency_p95_s": 0.47198822299998255,
+          "ttft_p50_s": 0.034805284000015035,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.47168234500003337,
+              "ttft_s": 0.034805284000015035,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 28.182,
+                "prompt_per_token_ms": 0.14832631578947367,
+                "prompt_per_second": 6741.891987793628,
+                "predicted_n": 64,
+                "predicted_ms": 436.155,
+                "predicted_per_token_ms": 6.923095238095238,
+                "predicted_per_second": 144.44406231729548
+              }
+            },
+            {
+              "latency_s": 0.4711646619999783,
+              "ttft_s": 0.0335686829999986,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 27.16,
+                "prompt_per_token_ms": 0.14294736842105263,
+                "prompt_per_second": 6995.581737849779,
+                "predicted_n": 64,
+                "predicted_ms": 436.987,
+                "predicted_per_token_ms": 6.936301587301588,
+                "predicted_per_second": 144.16904850716384
+              }
+            },
+            {
+              "latency_s": 0.47134159699999145,
+              "ttft_s": 0.0354595620000282,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 29.2,
+                "prompt_per_token_ms": 0.15368421052631578,
+                "prompt_per_second": 6506.8493150684935,
+                "predicted_n": 64,
+                "predicted_ms": 435.394,
+                "predicted_per_token_ms": 6.911015873015873,
+                "predicted_per_second": 144.69652774268823
+              }
+            },
+            {
+              "latency_s": 0.47198822299998255,
+              "ttft_s": 0.03706554199999346,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 30.241,
+                "prompt_per_token_ms": 0.15916315789473684,
+                "prompt_per_second": 6282.861016500777,
+                "predicted_n": 64,
+                "predicted_ms": 434.568,
+                "predicted_per_token_ms": 6.897904761904762,
+                "predicted_per_second": 144.97155796100955
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 0.4833968670000104,
+          "aggregate_tok_s": 529.5855589399062,
+          "per_request_tok_s": [
+            134.15257122456177,
+            134.1314976202807,
+            134.32351366604175,
+            132.39638973497654
+          ],
+          "latency_p50_s": 0.47706875400001536,
+          "latency_p95_s": 0.4833968670000104,
+          "ttft_p50_s": 0.025556536999999935,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.47706875400001536,
+              "ttft_s": 0.025556536999999935,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 23.609,
+                "prompt_per_token_ms": 0.12425789473684211,
+                "prompt_per_second": 8047.778389597187,
+                "predicted_n": 64,
+                "predicted_ms": 450.972,
+                "predicted_per_token_ms": 7.158285714285714,
+                "predicted_per_second": 139.6982517761635
+              }
+            },
+            {
+              "latency_s": 0.477143706999982,
+              "ttft_s": 0.026620905000015682,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 24.75,
+                "prompt_per_token_ms": 0.13026315789473683,
+                "prompt_per_second": 7676.767676767677,
+                "predicted_n": 64,
+                "predicted_ms": 450.061,
+                "predicted_per_token_ms": 7.143825396825396,
+                "predicted_per_second": 139.98102479441678
+              }
+            },
+            {
+              "latency_s": 0.4764616279999814,
+              "ttft_s": 0.024231952999969053,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 22.619,
+                "prompt_per_token_ms": 0.11904736842105262,
+                "prompt_per_second": 8400.017684247756,
+                "predicted_n": 64,
+                "predicted_ms": 451.77,
+                "predicted_per_token_ms": 7.1709523809523805,
+                "predicted_per_second": 139.45149080284216
+              }
+            },
+            {
+              "latency_s": 0.4833968670000104,
+              "ttft_s": 0.04339102500000536,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 16.221,
+                "prompt_per_token_ms": 0.08537368421052631,
+                "prompt_per_second": 11713.211269342211,
+                "predicted_n": 64,
+                "predicted_ms": 439.758,
+                "predicted_per_token_ms": 6.980285714285714,
+                "predicted_per_second": 143.26061151815318
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 0.4690839300000107,
+          "aggregate_tok_s": 545.7445536452169,
+          "per_request_tok_s": [
+            136.62150790730013,
+            136.4879904942187,
+            136.79008781747228,
+            136.43613841130423
+          ],
+          "latency_p50_s": 0.4684474719999798,
+          "latency_p95_s": 0.4690839300000107,
+          "ttft_p50_s": 0.030554955000013706,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.4684474719999798,
+              "ttft_s": 0.030554955000013706,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 23.855,
+                "prompt_per_token_ms": 0.12555263157894736,
+                "prompt_per_second": 7964.78725634039,
+                "predicted_n": 64,
+                "predicted_ms": 437.43,
+                "predicted_per_token_ms": 6.943333333333333,
+                "predicted_per_second": 144.02304368698992
+              }
+            },
+            {
+              "latency_s": 0.46890572400002384,
+              "ttft_s": 0.031002847000024758,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 24.122,
+                "prompt_per_token_ms": 0.1269578947368421,
+                "prompt_per_second": 7876.627145344499,
+                "predicted_n": 64,
+                "predicted_ms": 437.392,
+                "predicted_per_token_ms": 6.942730158730159,
+                "predicted_per_second": 144.03555620587483
+              }
+            },
+            {
+              "latency_s": 0.4678701580000393,
+              "ttft_s": 0.030074853000030544,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 23.577,
+                "prompt_per_token_ms": 0.12408947368421054,
+                "prompt_per_second": 8058.701276667938,
+                "predicted_n": 64,
+                "predicted_ms": 437.462,
+                "predicted_per_token_ms": 6.943841269841269,
+                "predicted_per_second": 144.0125085150253
+              }
+            },
+            {
+              "latency_s": 0.4690839300000107,
+              "ttft_s": 0.031457309000018085,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 24.433,
+                "prompt_per_token_ms": 0.12859473684210526,
+                "prompt_per_second": 7776.368026848933,
+                "predicted_n": 64,
+                "predicted_ms": 437.349,
+                "predicted_per_token_ms": 6.942047619047619,
+                "predicted_per_second": 144.04971773114835
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "medium",
+      "aggregate_tok_s_median": 888.7168990251857,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 0.5938599269999827,
+          "aggregate_tok_s": 862.1561696989447,
+          "per_request_tok_s": [
+            108.22189593658253,
+            108.15219254946176,
+            107.93762263875476,
+            108.23287190576559,
+            107.87264090140219,
+            108.080169019285,
+            108.03068733208684,
+            107.79335097700155
+          ],
+          "latency_p50_s": 0.5921530339999777,
+          "latency_p95_s": 0.5937286430000199,
+          "ttft_p50_s": 0.05081402700000126,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.5913775530000294,
+              "ttft_s": 0.04984112099998583,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.475,
+                "prompt_per_token_ms": 0.21828947368421053,
+                "prompt_per_second": 4581.0729355033145,
+                "predicted_n": 64,
+                "predicted_ms": 541.306,
+                "predicted_per_token_ms": 8.592158730158731,
+                "predicted_per_second": 116.38518693677882
+              }
+            },
+            {
+              "latency_s": 0.5917586919999849,
+              "ttft_s": 0.05023126100002173,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.102,
+                "prompt_per_token_ms": 0.2215894736842105,
+                "prompt_per_second": 4512.849745855304,
+                "predicted_n": 64,
+                "predicted_ms": 541.184,
+                "predicted_per_token_ms": 8.590222222222222,
+                "predicted_per_second": 116.41142384105962
+              }
+            },
+            {
+              "latency_s": 0.5929350529999624,
+              "ttft_s": 0.05162801699998454,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.966,
+                "prompt_per_token_ms": 0.22613684210526316,
+                "prompt_per_second": 4422.101196294744,
+                "predicted_n": 64,
+                "predicted_ms": 541.109,
+                "predicted_per_token_ms": 8.589031746031747,
+                "predicted_per_second": 116.4275589576222
+              }
+            },
+            {
+              "latency_s": 0.5913175809999984,
+              "ttft_s": 0.049717267999994874,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.758,
+                "prompt_per_token_ms": 0.21977894736842107,
+                "prompt_per_second": 4550.026342257771,
+                "predicted_n": 64,
+                "predicted_ms": 541.3,
+                "predicted_per_token_ms": 8.592063492063492,
+                "predicted_per_second": 116.38647699981526
+              }
+            },
+            {
+              "latency_s": 0.5932922329999997,
+              "ttft_s": 0.052044978000026276,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 43.43,
+                "prompt_per_token_ms": 0.22857894736842105,
+                "prompt_per_second": 4374.8560902601885,
+                "predicted_n": 64,
+                "predicted_ms": 541.094,
+                "predicted_per_token_ms": 8.58879365079365,
+                "predicted_per_second": 116.43078651768452
+              }
+            },
+            {
+              "latency_s": 0.5921530339999777,
+              "ttft_s": 0.05081402700000126,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.718,
+                "prompt_per_token_ms": 0.22483157894736844,
+                "prompt_per_second": 4447.773772180345,
+                "predicted_n": 64,
+                "predicted_ms": 541.125,
+                "predicted_per_token_ms": 8.589285714285714,
+                "predicted_per_second": 116.42411642411643
+              }
+            },
+            {
+              "latency_s": 0.592424259999973,
+              "ttft_s": 0.050841236999985995,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.417,
+                "prompt_per_token_ms": 0.22324736842105264,
+                "prompt_per_second": 4479.336115236815,
+                "predicted_n": 64,
+                "predicted_ms": 541.129,
+                "predicted_per_token_ms": 8.589349206349207,
+                "predicted_per_second": 116.42325582254877
+              }
+            },
+            {
+              "latency_s": 0.5937286430000199,
+              "ttft_s": 0.05228267400002551,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 43.199,
+                "prompt_per_token_ms": 0.22736315789473682,
+                "prompt_per_second": 4398.249959489804,
+                "predicted_n": 64,
+                "predicted_ms": 541.139,
+                "predicted_per_token_ms": 8.589507936507937,
+                "predicted_per_second": 116.421104374292
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 0.576111471000047,
+          "aggregate_tok_s": 888.7168990251857,
+          "per_request_tok_s": [
+            111.32313336283853,
+            111.31923362760901,
+            111.19649766614602,
+            111.46227707877819,
+            111.33940386033757,
+            111.42862562566395,
+            111.34272582409754,
+            111.47687331267258
+          ],
+          "latency_p50_s": 0.5748018070000285,
+          "latency_p95_s": 0.5755576960000326,
+          "ttft_p50_s": 0.04532929600003399,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.5749029699999824,
+              "ttft_s": 0.04544947899995577,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.217,
+                "prompt_per_token_ms": 0.22219473684210525,
+                "prompt_per_second": 4500.556647795912,
+                "predicted_n": 64,
+                "predicted_ms": 529.148,
+                "predicted_per_token_ms": 8.399174603174604,
+                "predicted_per_second": 119.05931799798921
+              }
+            },
+            {
+              "latency_s": 0.5749231099999861,
+              "ttft_s": 0.045685394999964046,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.949,
+                "prompt_per_token_ms": 0.2260473684210526,
+                "prompt_per_second": 4423.851544855526,
+                "predicted_n": 64,
+                "predicted_ms": 528.997,
+                "predicted_per_token_ms": 8.396777777777777,
+                "predicted_per_second": 119.09330298659539
+              }
+            },
+            {
+              "latency_s": 0.5755576960000326,
+              "ttft_s": 0.046475254000029054,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 43.177,
+                "prompt_per_token_ms": 0.22724736842105264,
+                "prompt_per_second": 4400.4910021539245,
+                "predicted_n": 64,
+                "predicted_ms": 528.922,
+                "predicted_per_token_ms": 8.395587301587302,
+                "predicted_per_second": 119.11019016036391
+              }
+            },
+            {
+              "latency_s": 0.574185290999992,
+              "ttft_s": 0.04463101800001823,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.641,
+                "prompt_per_token_ms": 0.21916315789473684,
+                "prompt_per_second": 4562.810691385894,
+                "predicted_n": 64,
+                "predicted_ms": 529.233,
+                "predicted_per_token_ms": 8.40052380952381,
+                "predicted_per_second": 119.04019590615098
+              }
+            },
+            {
+              "latency_s": 0.5748189569999909,
+              "ttft_s": 0.04550324899997804,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.687,
+                "prompt_per_token_ms": 0.22466842105263157,
+                "prompt_per_second": 4451.00381849275,
+                "predicted_n": 64,
+                "predicted_ms": 529.075,
+                "predicted_per_token_ms": 8.398015873015874,
+                "predicted_per_second": 119.07574540471578
+              }
+            },
+            {
+              "latency_s": 0.5743586950000008,
+              "ttft_s": 0.04490329399999382,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.916,
+                "prompt_per_token_ms": 0.22061052631578945,
+                "prompt_per_second": 4532.875274358241,
+                "predicted_n": 64,
+                "predicted_ms": 529.169,
+                "predicted_per_token_ms": 8.399507936507936,
+                "predicted_per_second": 119.0545931451011
+              }
+            },
+            {
+              "latency_s": 0.5748018070000285,
+              "ttft_s": 0.04532929600003399,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.483,
+                "prompt_per_token_ms": 0.22359473684210524,
+                "prompt_per_second": 4472.3771861685855,
+                "predicted_n": 64,
+                "predicted_ms": 529.127,
+                "predicted_per_token_ms": 8.398841269841268,
+                "predicted_per_second": 119.06404322591742
+              }
+            },
+            {
+              "latency_s": 0.5741101100000492,
+              "ttft_s": 0.04460470700001906,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.345,
+                "prompt_per_token_ms": 0.21760526315789472,
+                "prompt_per_second": 4595.477083081389,
+                "predicted_n": 64,
+                "predicted_ms": 529.303,
+                "predicted_per_token_ms": 8.40163492063492,
+                "predicted_per_second": 119.02445291260393
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 0.5693832680000241,
+          "aggregate_tok_s": 899.2185558919134,
+          "per_request_tok_s": [
+            112.80912642048759,
+            112.54132178833268,
+            112.6079443919416,
+            112.65285837749948,
+            112.45146976724638,
+            112.68533303903513,
+            112.81186275398554,
+            112.67512954540754
+          ],
+          "latency_p50_s": 0.5680046720000291,
+          "latency_p95_s": 0.5691344019999747,
+          "ttft_p50_s": 0.04497775599998022,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.5673299850000149,
+              "ttft_s": 0.04411252400001331,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.344,
+                "prompt_per_token_ms": 0.21760000000000002,
+                "prompt_per_second": 4595.588235294117,
+                "predicted_n": 64,
+                "predicted_ms": 522.75,
+                "predicted_per_token_ms": 8.297619047619047,
+                "predicted_per_second": 120.51649928263988
+              }
+            },
+            {
+              "latency_s": 0.56868000999998,
+              "ttft_s": 0.045801638000000366,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.893,
+                "prompt_per_token_ms": 0.22575263157894737,
+                "prompt_per_second": 4429.6272118993775,
+                "predicted_n": 64,
+                "predicted_ms": 522.641,
+                "predicted_per_token_ms": 8.295888888888888,
+                "predicted_per_second": 120.54163374094264
+              }
+            },
+            {
+              "latency_s": 0.5683435600000166,
+              "ttft_s": 0.045421746999977586,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.651,
+                "prompt_per_token_ms": 0.22447894736842108,
+                "prompt_per_second": 4454.760732456449,
+                "predicted_n": 64,
+                "predicted_ms": 522.678,
+                "predicted_per_token_ms": 8.29647619047619,
+                "predicted_per_second": 120.53310068531677
+              }
+            },
+            {
+              "latency_s": 0.5681169650000015,
+              "ttft_s": 0.04509724899997991,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.128,
+                "prompt_per_token_ms": 0.2217263157894737,
+                "prompt_per_second": 4510.064565134827,
+                "predicted_n": 64,
+                "predicted_ms": 522.718,
+                "predicted_per_token_ms": 8.29711111111111,
+                "predicted_per_second": 120.52387711921152
+              }
+            },
+            {
+              "latency_s": 0.5691344019999747,
+              "ttft_s": 0.04627665999998953,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 43.118,
+                "prompt_per_token_ms": 0.22693684210526316,
+                "prompt_per_second": 4406.512361426782,
+                "predicted_n": 64,
+                "predicted_ms": 522.609,
+                "predicted_per_token_ms": 8.295380952380953,
+                "predicted_per_second": 120.54901465531591
+              }
+            },
+            {
+              "latency_s": 0.5679532400000085,
+              "ttft_s": 0.04497775599998022,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 42.392,
+                "prompt_per_token_ms": 0.22311578947368424,
+                "prompt_per_second": 4481.97773164748,
+                "predicted_n": 64,
+                "predicted_ms": 522.741,
+                "predicted_per_token_ms": 8.297476190476191,
+                "predicted_per_second": 120.51857420787734
+              }
+            },
+            {
+              "latency_s": 0.5673162240000238,
+              "ttft_s": 0.044185016000028554,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.605,
+                "prompt_per_token_ms": 0.2189736842105263,
+                "prompt_per_second": 4566.758803028482,
+                "predicted_n": 64,
+                "predicted_ms": 522.786,
+                "predicted_per_token_ms": 8.298190476190475,
+                "predicted_per_second": 120.50820029610588
+              }
+            },
+            {
+              "latency_s": 0.5680046720000291,
+              "ttft_s": 0.04490273400000433,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 41.853,
+                "prompt_per_token_ms": 0.22027894736842107,
+                "prompt_per_second": 4539.698468449095,
+                "predicted_n": 64,
+                "predicted_ms": 522.786,
+                "predicted_per_token_ms": 8.298190476190475,
+                "predicted_per_second": 120.50820029610588
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

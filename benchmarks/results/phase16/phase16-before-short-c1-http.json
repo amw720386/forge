@@ -1,0 +1,276 @@
+{
+  "runtime": "forge",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 1,
+      "workload": "short",
+      "aggregate_tok_s_median": 181.95618731553185,
+      "trials": [
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 1,
+              "total_ns": 54361510,
+              "mean_ms": 54.36151
+            },
+            "http_parse": {
+              "count": 1,
+              "total_ns": 38572,
+              "mean_ms": 0.038572
+            },
+            "queue_admission": {
+              "count": 1,
+              "total_ns": 1410,
+              "mean_ms": 0.00141
+            },
+            "queue_wait": {
+              "count": 1,
+              "total_ns": 57962,
+              "mean_ms": 0.057962
+            },
+            "runtime_admit_tokenize": {
+              "count": 1,
+              "total_ns": 124845,
+              "mean_ms": 0.124845
+            },
+            "runtime_step": {
+              "count": 20,
+              "total_ns": 53867693,
+              "mean_ms": 2.69338465
+            },
+            "scheduler_host": {
+              "count": 20,
+              "total_ns": 169684,
+              "mean_ms": 0.0084842
+            },
+            "scheduler_iteration": {
+              "count": 20,
+              "total_ns": 54033955,
+              "mean_ms": 2.70169775
+            },
+            "server_ttft": {
+              "count": 1,
+              "total_ns": 6449288,
+              "mean_ms": 6.449288
+            },
+            "sse_write_flush": {
+              "count": 10,
+              "total_ns": 455718,
+              "mean_ms": 0.0455718
+            },
+            "token_dispatch": {
+              "count": 20,
+              "total_ns": 98273,
+              "mean_ms": 0.0049136499999999994
+            }
+          },
+          "observed_active_mean": 0.8,
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.054901462000003676,
+          "aggregate_tok_s": 182.1445119257358,
+          "observed_kv_blocks_peak": 2,
+          "observed_kv_utilization_peak": 0.00390625,
+          "observed_scheduled_tokens_peak": 0,
+          "per_request_tok_s": [
+            182.1445119257358
+          ],
+          "latency_p50_s": 0.054901462000003676,
+          "latency_p95_s": 0.054901462000003676,
+          "ttft_p50_s": 0.006962848999990001,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.054901462000003676,
+              "ttft_s": 0.006962848999990001,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1610.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 1,
+              "total_ns": 54522827,
+              "mean_ms": 54.522827
+            },
+            "http_parse": {
+              "count": 1,
+              "total_ns": 185798,
+              "mean_ms": 0.185798
+            },
+            "queue_admission": {
+              "count": 1,
+              "total_ns": 1020,
+              "mean_ms": 0.00102
+            },
+            "queue_wait": {
+              "count": 1,
+              "total_ns": 93915,
+              "mean_ms": 0.093915
+            },
+            "runtime_admit_tokenize": {
+              "count": 1,
+              "total_ns": 102915,
+              "mean_ms": 0.102915
+            },
+            "runtime_step": {
+              "count": 20,
+              "total_ns": 53873157,
+              "mean_ms": 2.69365785
+            },
+            "scheduler_host": {
+              "count": 20,
+              "total_ns": 156269,
+              "mean_ms": 0.00781345
+            },
+            "scheduler_iteration": {
+              "count": 20,
+              "total_ns": 54026527,
+              "mean_ms": 2.70132635
+            },
+            "server_ttft": {
+              "count": 1,
+              "total_ns": 6584674,
+              "mean_ms": 6.584674
+            },
+            "sse_write_flush": {
+              "count": 10,
+              "total_ns": 484211,
+              "mean_ms": 0.0484211
+            },
+            "token_dispatch": {
+              "count": 20,
+              "total_ns": 78084,
+              "mean_ms": 0.0039042
+            }
+          },
+          "observed_active_mean": 0.8,
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.054958284999997886,
+          "aggregate_tok_s": 181.95618731553185,
+          "observed_kv_blocks_peak": 2,
+          "observed_kv_utilization_peak": 0.00390625,
+          "observed_scheduled_tokens_peak": 0,
+          "per_request_tok_s": [
+            181.95618731553185
+          ],
+          "latency_p50_s": 0.054958284999997886,
+          "latency_p95_s": 0.054958284999997886,
+          "ttft_p50_s": 0.007013852000000043,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.054958284999997886,
+              "ttft_s": 0.007013852000000043,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1610.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 1,
+              "total_ns": 54539868,
+              "mean_ms": 54.539868
+            },
+            "http_parse": {
+              "count": 1,
+              "total_ns": 98244,
+              "mean_ms": 0.098244
+            },
+            "queue_admission": {
+              "count": 1,
+              "total_ns": 1340,
+              "mean_ms": 0.00134
+            },
+            "queue_wait": {
+              "count": 1,
+              "total_ns": 57382,
+              "mean_ms": 0.057382
+            },
+            "runtime_admit_tokenize": {
+              "count": 1,
+              "total_ns": 132766,
+              "mean_ms": 0.132766
+            },
+            "runtime_step": {
+              "count": 20,
+              "total_ns": 53861561,
+              "mean_ms": 2.69307805
+            },
+            "scheduler_host": {
+              "count": 20,
+              "total_ns": 280569,
+              "mean_ms": 0.014028450000000001
+            },
+            "scheduler_iteration": {
+              "count": 20,
+              "total_ns": 54139341,
+              "mean_ms": 2.70696705
+            },
+            "server_ttft": {
+              "count": 1,
+              "total_ns": 6509331,
+              "mean_ms": 6.509331
+            },
+            "sse_write_flush": {
+              "count": 10,
+              "total_ns": 468861,
+              "mean_ms": 0.0468861
+            },
+            "token_dispatch": {
+              "count": 20,
+              "total_ns": 84832,
+              "mean_ms": 0.004241600000000001
+            }
+          },
+          "observed_active_mean": 0.8,
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.05504664800000114,
+          "aggregate_tok_s": 181.66410423391798,
+          "observed_kv_blocks_peak": 2,
+          "observed_kv_utilization_peak": 0.00390625,
+          "observed_scheduled_tokens_peak": 1,
+          "per_request_tok_s": [
+            181.66410423391798
+          ],
+          "latency_p50_s": 0.05504664800000114,
+          "latency_p95_s": 0.05504664800000114,
+          "ttft_p50_s": 0.006969718999982888,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.05504664800000114,
+              "ttft_s": 0.006969718999982888,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1610.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

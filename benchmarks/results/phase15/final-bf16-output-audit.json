@@ -1,0 +1,30 @@
+[
+  {
+    "workload": "short",
+    "concurrency": 8,
+    "requests": 8,
+    "exact_text_matches": 8,
+    "differences": []
+  },
+  {
+    "workload": "medium",
+    "concurrency": 8,
+    "requests": 8,
+    "exact_text_matches": 8,
+    "differences": []
+  },
+  {
+    "workload": "long",
+    "concurrency": 8,
+    "requests": 8,
+    "exact_text_matches": 8,
+    "differences": []
+  },
+  {
+    "workload": "mixed",
+    "concurrency": 8,
+    "requests": 8,
+    "exact_text_matches": 8,
+    "differences": []
+  }
+]

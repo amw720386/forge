@@ -1,0 +1,20 @@
+warning: struct `BufferView` is never constructed
+  --> src\compute\backend.rs:87:19
+   |
+87 | pub(crate) struct BufferView<'a> {
+   |                   ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `view_mut` is never used
+   --> src\compute\backend.rs:103:19
+    |
+102 | impl Buffer {
+    | ----------- method in this implementation
+103 |     pub(crate) fn view_mut(
+    |                   ^^^^^^^^
+
+warning: `forge-runtime` (lib) generated 2 warnings
+    Finished `release` profile [optimized] target(s) in 0.18s
+     Running `runtime\target\release\examples\phase16_checkpoint.exe models/SmolLM2-135M-Instruct models/smollm2-fp32.forge models/SmolLM2-135M-Instruct`
+CHECKPOINT_EXACT_ROUNDTRIP architecture=llama weights_mib=513.13 ids=[504, 3575, 282, 4649, 314, 7042, 30, 7042, 314, 253, 2240, 3807] text=The capital of France is Paris. Paris is a city located

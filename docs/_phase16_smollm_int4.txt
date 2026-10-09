@@ -1,0 +1,21 @@
+   Compiling forge-runtime v0.1.0 (C:\Users\ahame\Documents\Projects\llm-inference-runtime\runtime)
+warning: struct `BufferView` is never constructed
+  --> src\compute\backend.rs:87:19
+   |
+87 | pub(crate) struct BufferView<'a> {
+   |                   ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `view_mut` is never used
+   --> src\compute\backend.rs:103:19
+    |
+102 | impl Buffer {
+    | ----------- method in this implementation
+103 |     pub(crate) fn view_mut(
+    |                   ^^^^^^^^
+
+warning: `forge-runtime` (lib) generated 2 warnings
+    Finished `release` profile [optimized] target(s) in 16.26s
+     Running `runtime\target\release\examples\phase16_checkpoint.exe models/SmolLM2-135M-Instruct models/smollm2-int4.forge models/SmolLM2-135M-Instruct 4`
+CHECKPOINT_EXACT_ROUNDTRIP architecture=llama weights_mib=180.27 ids=[38634, 28, 4649, 30, 657, 506, 260, 2240, 339, 5248, 768, 7141] text=Paris, France. It's the city I'm most drawn

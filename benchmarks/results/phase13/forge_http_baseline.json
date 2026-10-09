@@ -1,0 +1,1168 @@
+{
+  "runtime": "forge",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 1,
+      "workload": "short",
+      "aggregate_tok_s_median": 165.3023519697172,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.06049520700003086,
+          "aggregate_tok_s": 165.3023519697172,
+          "per_request_tok_s": [
+            165.3023519697172
+          ],
+          "latency_p50_s": 0.06049520700003086,
+          "latency_p95_s": 0.06049520700003086,
+          "ttft_p50_s": 0.012714317000018127,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.06049520700003086,
+              "ttft_s": 0.012714317000018127,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.06057051900006627,
+          "aggregate_tok_s": 165.09681880039793,
+          "per_request_tok_s": [
+            165.09681880039793
+          ],
+          "latency_p50_s": 0.06057051900006627,
+          "latency_p95_s": 0.06057051900006627,
+          "ttft_p50_s": 0.012679705999971702,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.06057051900006627,
+              "ttft_s": 0.012679705999971702,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "short",
+          "wall_s": 0.06033302300011201,
+          "aggregate_tok_s": 165.74670889574745,
+          "per_request_tok_s": [
+            165.74670889574745
+          ],
+          "latency_p50_s": 0.06033302300011201,
+          "latency_p95_s": 0.06033302300011201,
+          "ttft_p50_s": 0.012509141999998974,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.06033302300011201,
+              "ttft_s": 0.012509141999998974,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "short",
+      "aggregate_tok_s_median": 259.2873957830732,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.07694575100003931,
+          "aggregate_tok_s": 259.92338420336927,
+          "per_request_tok_s": [
+            130.1313423446776,
+            130.0289678535251
+          ],
+          "latency_p50_s": 0.0768454379999639,
+          "latency_p95_s": 0.07690593999996054,
+          "ttft_p50_s": 0.01982705000000351,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.0768454379999639,
+              "ttft_s": 0.01982705000000351,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.07690593999996054,
+              "ttft_s": 0.019983684999942852,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.07713448599997719,
+          "aggregate_tok_s": 259.2873957830732,
+          "per_request_tok_s": [
+            129.84533615608294,
+            129.73982727525296
+          ],
+          "latency_p50_s": 0.07701470300003166,
+          "latency_p95_s": 0.07707733400002326,
+          "ttft_p50_s": 0.019814409999980853,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.07701470300003166,
+              "ttft_s": 0.019814409999980853,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.07707733400002326,
+              "ttft_s": 0.019874132000040845,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "short",
+          "wall_s": 0.07727564900005746,
+          "aggregate_tok_s": 258.8137435116867,
+          "per_request_tok_s": [
+            129.6514819066025,
+            129.4781004493911
+          ],
+          "latency_p50_s": 0.07712985500006653,
+          "latency_p95_s": 0.07723313800011056,
+          "ttft_p50_s": 0.01988327100002607,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.07712985500006653,
+              "ttft_s": 0.01988327100002607,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.07723313800011056,
+              "ttft_s": 0.02008713700001863,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "short",
+      "aggregate_tok_s_median": 373.3511018585013,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.10713775800013536,
+          "aggregate_tok_s": 373.3511018585013,
+          "per_request_tok_s": [
+            93.49080201029035,
+            93.88675897403101,
+            93.6007235185434,
+            93.33777546462532
+          ],
+          "latency_p50_s": 0.10683678100008365,
+          "latency_p95_s": 0.10713775800013536,
+          "ttft_p50_s": 0.03247060500007137,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.10696239399999286,
+              "ttft_s": 0.040581884999937756,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10651129199982279,
+              "ttft_s": 0.04024783599993498,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10683678100008365,
+              "ttft_s": 0.03221075000010387,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10713775800013536,
+              "ttft_s": 0.03247060500007137,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.10670221700002003,
+          "aggregate_tok_s": 374.8750599998545,
+          "per_request_tok_s": [
+            94.19213730393592,
+            93.9083423776834,
+            93.87004042102167,
+            93.79416092883841
+          ],
+          "latency_p50_s": 0.10648681199995735,
+          "latency_p95_s": 0.1066164450000997,
+          "ttft_p50_s": 0.03218037800002094,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.1061659739998504,
+              "ttft_s": 0.03999002999989898,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10648681199995735,
+              "ttft_s": 0.032020565000038914,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10653026199997839,
+              "ttft_s": 0.04023790599990207,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1066164450000997,
+              "ttft_s": 0.03218037800002094,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "short",
+          "wall_s": 0.10725517100013349,
+          "aggregate_tok_s": 372.9423917467832,
+          "per_request_tok_s": [
+            93.36831209076027,
+            93.52699481806837,
+            93.70148195833555,
+            93.2355979366958
+          ],
+          "latency_p50_s": 0.10692100200003551,
+          "latency_p95_s": 0.10725517100013349,
+          "ttft_p50_s": 0.032149968000112494,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.10710271800007831,
+              "ttft_s": 0.03214988800004903,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10692100200003551,
+              "ttft_s": 0.040149313000029,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10672189799993248,
+              "ttft_s": 0.04010727199988651,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.10725517100013349,
+              "ttft_s": 0.032149968000112494,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "short",
+      "aggregate_tok_s_median": 519.1472269604092,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.15409886800011918,
+          "aggregate_tok_s": 519.1472269604092,
+          "per_request_tok_s": [
+            65.07172570010336,
+            65.35846086424807,
+            64.99847601325466,
+            65.50100639019377,
+            65.3252134093481,
+            65.18452696633972,
+            65.06948962750718,
+            64.89340337005115
+          ],
+          "latency_p50_s": 0.1534106399999473,
+          "latency_p95_s": 0.15409886800011918,
+          "ttft_p50_s": 0.06630038699995566,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.15367657599995255,
+              "ttft_s": 0.05651430500006427,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15300237899987223,
+              "ttft_s": 0.06630038699995566,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15384976099994674,
+              "ttft_s": 0.06698462500003188,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15266941000004408,
+              "ttft_s": 0.06587492599987854,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15308024999990266,
+              "ttft_s": 0.06641691000004357,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1534106399999473,
+              "ttft_s": 0.06654454399995302,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15368185700003778,
+              "ttft_s": 0.05639961199995014,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15409886800011918,
+              "ttft_s": 0.06710732800002006,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.153979063999941,
+          "aggregate_tok_s": 519.5511514476452,
+          "per_request_tok_s": [
+            65.11441116451103,
+            65.18453546439268,
+            65.0915403487033,
+            65.2712440537752,
+            65.05299333936833,
+            65.42138157203308,
+            65.11726049289103,
+            65.01103497306458
+          ],
+          "latency_p50_s": 0.15356911399999262,
+          "latency_p95_s": 0.1538200400000278,
+          "ttft_p50_s": 0.06590031699988685,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.15357583399986652,
+              "ttft_s": 0.055958670999871174,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15341061999993144,
+              "ttft_s": 0.06590031699988685,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15362979499991525,
+              "ttft_s": 0.06647056099996007,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15320682399988073,
+              "ttft_s": 0.06561007899995275,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15372082799990494,
+              "ttft_s": 0.06626073600000382,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1528552249999393,
+              "ttft_s": 0.06566240000006474,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15356911399999262,
+              "ttft_s": 0.06606551099980607,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1538200400000278,
+              "ttft_s": 0.06658227399998395,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "short",
+          "wall_s": 0.1546991530001378,
+          "aggregate_tok_s": 517.1327602545357,
+          "per_request_tok_s": [
+            64.8392287656361,
+            64.84950569762631,
+            64.86263821814886,
+            64.89860077128688,
+            64.9904541045655,
+            64.95621619758015,
+            64.96533118605015,
+            64.65667512403111
+          ],
+          "latency_p50_s": 0.15408652699989034,
+          "latency_p95_s": 0.15466307200017582,
+          "ttft_p50_s": 0.0664946819999841,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.1542276210000182,
+              "ttft_s": 0.06656587399993441,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1542031799999677,
+              "ttft_s": 0.06654146299979402,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1541719589999957,
+              "ttft_s": 0.056026872000074945,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15408652699989034,
+              "ttft_s": 0.0664946819999841,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1538687510001182,
+              "ttft_s": 0.06610189100001662,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15394985399984762,
+              "ttft_s": 0.06659926499992253,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.1539282539999931,
+              "ttft_s": 0.06617498399987198,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.15466307200017582,
+              "ttft_s": 0.06670798700019986,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 1,
+      "workload": "medium",
+      "aggregate_tok_s_median": 121.44784573027364,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.5269751770001676,
+          "aggregate_tok_s": 121.44784573027364,
+          "per_request_tok_s": [
+            121.44784573027364
+          ],
+          "latency_p50_s": 0.5269751770001676,
+          "latency_p95_s": 0.5269751770001676,
+          "ttft_p50_s": 0.028472453000176756,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.5269751770001676,
+              "ttft_s": 0.028472453000176756,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.5288842659999773,
+          "aggregate_tok_s": 121.0094610755593,
+          "per_request_tok_s": [
+            121.0094610755593
+          ],
+          "latency_p50_s": 0.5288842659999773,
+          "latency_p95_s": 0.5288842659999773,
+          "ttft_p50_s": 0.028525103999982093,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.5288842659999773,
+              "ttft_s": 0.028525103999982093,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "medium",
+          "wall_s": 0.5265682960000504,
+          "aggregate_tok_s": 121.54168886763718,
+          "per_request_tok_s": [
+            121.54168886763718
+          ],
+          "latency_p50_s": 0.5265682960000504,
+          "latency_p95_s": 0.5265682960000504,
+          "ttft_p50_s": 0.028224035999983244,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.5265682960000504,
+              "ttft_s": 0.028224035999983244,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "medium",
+      "aggregate_tok_s_median": 131.4450956438842,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.972712422000086,
+          "aggregate_tok_s": 131.59079405689823,
+          "per_request_tok_s": [
+            65.80598815962476,
+            65.79539702844912
+          ],
+          "latency_p50_s": 0.972555869000189,
+          "latency_p95_s": 0.972712422000086,
+          "ttft_p50_s": 0.05117577800001527,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.972555869000189,
+              "ttft_s": 0.05117577800001527,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.972712422000086,
+              "ttft_s": 0.05122088799998892,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.9738070909997987,
+          "aggregate_tok_s": 131.44287116310028,
+          "per_request_tok_s": [
+            65.72944772554186,
+            65.73173023763678
+          ],
+          "latency_p50_s": 0.9736545769999339,
+          "latency_p95_s": 0.9736883879998004,
+          "ttft_p50_s": 0.05131505099984679,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.9736883879998004,
+              "ttft_s": 0.05131505099984679,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.9736545769999339,
+              "ttft_s": 0.05138604299986582,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "medium",
+          "wall_s": 0.973790610999913,
+          "aggregate_tok_s": 131.4450956438842,
+          "per_request_tok_s": [
+            65.73693306204237,
+            65.7225478219421
+          ],
+          "latency_p50_s": 0.9735775159999775,
+          "latency_p95_s": 0.973790610999913,
+          "ttft_p50_s": 0.05150426599993807,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.9735775159999775,
+              "ttft_s": 0.05150426599993807,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.973790610999913,
+              "ttft_s": 0.051605117999997674,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "medium",
+      "aggregate_tok_s_median": 161.89834870041176,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 1.5793613460000415,
+          "aggregate_tok_s": 162.09083541797233,
+          "per_request_tok_s": [
+            40.53109597360331,
+            40.53113601615788,
+            40.52779958787709,
+            40.52461561588129
+          ],
+          "latency_p50_s": 1.5790345279999656,
+          "latency_p95_s": 1.5792870340001173,
+          "ttft_p50_s": 0.09666363899987118,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 1.5790345279999656,
+              "ttft_s": 0.0963767519999692,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.579032967999865,
+              "ttft_s": 0.09679881299985027,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.579162960999838,
+              "ttft_s": 0.09666363899987118,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.5792870340001173,
+              "ttft_s": 0.09675886200011519,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 1.581239104999895,
+          "aggregate_tok_s": 161.89834870041176,
+          "per_request_tok_s": [
+            40.48085822486029,
+            40.480906387334315,
+            40.47955521874482,
+            40.47674412366402
+          ],
+          "latency_p50_s": 1.5809941489999346,
+          "latency_p95_s": 1.581154842999922,
+          "ttft_p50_s": 0.09660028799999054,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 1.5809941489999346,
+              "ttft_s": 0.09680780399980904,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.580992267999818,
+              "ttft_s": 0.09658325699979287,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.5810450399999354,
+              "ttft_s": 0.09660028799999054,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.581154842999922,
+              "ttft_s": 0.0966480289998799,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "medium",
+          "wall_s": 1.5813596179998513,
+          "aggregate_tok_s": 161.8860106746599,
+          "per_request_tok_s": [
+            40.47618375877299,
+            40.476780730952676,
+            40.485439062970975,
+            40.47885421972447
+          ],
+          "latency_p50_s": 1.5810724199998276,
+          "latency_p95_s": 1.581176732999893,
+          "ttft_p50_s": 0.09777081799984444,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 1.581176732999893,
+              "ttft_s": 0.09785637000004499,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.5811534130000382,
+              "ttft_s": 0.09769813600019006,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.5808152629999768,
+              "ttft_s": 0.09777081799984444,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.5810724199998276,
+              "ttft_s": 0.09801505399991584,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "medium",
+      "aggregate_tok_s_median": 182.3886386207138,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 2.807065846000114,
+          "aggregate_tok_s": 182.3968613809208,
+          "per_request_tok_s": [
+            22.804901640946877,
+            22.805241068718296,
+            22.807832973905825,
+            22.802509372117786,
+            22.802464526137452,
+            22.81034407988275,
+            22.80499362755542,
+            22.80025504821204
+          ],
+          "latency_p50_s": 2.8064028890000827,
+          "latency_p95_s": 2.8069861440001205,
+          "ttft_p50_s": 0.18191850500011242,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.8064142089999677,
+              "ttft_s": 0.18167788899995685,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.806372438999915,
+              "ttft_s": 0.18129875999989054,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8060535199999777,
+              "ttft_s": 0.18154860599997846,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.806708637000156,
+              "ttft_s": 0.21923214599996754,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8067141569999876,
+              "ttft_s": 0.21917446500015103,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.805744612000126,
+              "ttft_s": 0.21831660300017575,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8064028890000827,
+              "ttft_s": 0.2187205029999859,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8069861440001205,
+              "ttft_s": 0.18191850500011242,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 2.8167272749999483,
+          "aggregate_tok_s": 181.77123662070173,
+          "per_request_tok_s": [
+            22.72291930319854,
+            22.72277012483953,
+            22.853832610083412,
+            22.727905533179744,
+            22.73520194381921,
+            22.72385440916435,
+            22.853719247569888,
+            22.723558135629162
+          ],
+          "latency_p50_s": 2.8159215949999634,
+          "latency_p95_s": 2.8165580009999758,
+          "ttft_p50_s": 0.20813322999993034,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.816539509999984,
+              "ttft_s": 0.2460983280000164,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8165580009999758,
+              "ttft_s": 0.20817749200000435,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8004055639999024,
+              "ttft_s": 0.1534921829997984,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8159215949999634,
+              "ttft_s": 0.20805279899991547,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8150178810001307,
+              "ttft_s": 0.2448227150000548,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8164236069999333,
+              "ttft_s": 0.20813322999993034,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.800419454999883,
+              "ttft_s": 0.15368010899987894,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8164603279999483,
+              "ttft_s": 0.20853407100003096,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "medium",
+          "wall_s": 2.8071923989998595,
+          "aggregate_tok_s": 182.3886386207138,
+          "per_request_tok_s": [
+            22.799405747880957,
+            22.80675277859034,
+            22.80155746465821,
+            22.80702000774355,
+            22.800506212421883,
+            22.806214990779022,
+            22.802681372717565,
+            22.80133235353116
+          ],
+          "latency_p50_s": 2.806687466000085,
+          "latency_p95_s": 2.807090707000043,
+          "ttft_p50_s": 0.18115668599989476,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.807090707000043,
+              "ttft_s": 0.21859958000004553,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8061864230000992,
+              "ttft_s": 0.18067842300001757,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.806825809999964,
+              "ttft_s": 0.21840909499996997,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8061535429999367,
+              "ttft_s": 0.1803104439998151,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8069552229999317,
+              "ttft_s": 0.2182660119999582,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8062525949999326,
+              "ttft_s": 0.2182255999998688,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.806687466000085,
+              "ttft_s": 0.18065880199992534,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.8068535209999936,
+              "ttft_s": 0.18115668599989476,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

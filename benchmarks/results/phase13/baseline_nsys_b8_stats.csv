@@ -1,0 +1,50 @@
+Generating SQLite file /teamspace/studios/this_studio/forge-cache/phase13-results/baseline_nsys_b8.sqlite from /teamspace/studios/this_studio/forge-cache/phase13-results/baseline_nsys_b8.nsys-rep
+Processing [/teamspace/studios/this_studio/forge-cache/phase13-results/baseline_nsys_b8.sqlite] with [/opt/nvidia/nsight-compute/2025.3.1/host/target-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+Time (%),Total Time (ns),Instances,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+26.0,98938260,4416,22404.5,22735.5,7616,52383,14571.1,void cutlass::Kernel2<cutlass_80_wmma_tensorop_s161616gemm_bf16_16x16_128x1_tn_align8>(T1::Params)
+25.5,96801586,3342,28965.2,9536.0,9120,1105371,103311.4,void cutlass::Kernel2<cutlass_80_wmma_tensorop_s161616gemm_bf16_16x16_128x2_tn_align8>(T1::Params)
+23.7,90011638,6144,14650.3,14928.0,5791,21088,3989.7,"<unnamed>::paged_gqa_attn_opt_kernel(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, float, const float *, unsigned long, const float *, const float *, const unsigned int *, unsigned long, unsigned long, unsigned long, unsigned long, float *, int, unsigned long)"
+5.1,19357296,12288,1575.3,1568.0,1535,1824,37.4,"<unnamed>::rope_kernel(unsigned long, unsigned long, unsigned long, float *, unsigned long, float)"
+4.8,18165676,7943,2287.0,1120.0,1087,3319795,37939.3,"<unnamed>::f32_to_bf16_kernel(unsigned long, const float *, __nv_bfloat16 *)"
+4.6,17642429,16,1102651.8,1102732.0,1100956,1103516,774.8,"std::enable_if<!T7, void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, float, float, float, (bool)0, (bool)1, (bool)1, (bool)0, (int)6, (bool)0, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<const __nv_bfloat16>, cublasGemvTensorStridedBatched<const float>, cublasGemvTensorStridedBatched<float>, float>>(T13)"
+2.4,9133338,6144,1486.5,1472.0,1439,1824,44.5,"<unnamed>::paged_kv_append_kernel(unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, const unsigned int *, const float *, const float *, float *, float *)"
+2.1,7814978,2254,3467.2,3456.0,3359,3680,54.7,"<unnamed>::rmsnorm_kernel(unsigned long, unsigned long, const float *, unsigned long, const float *, float, float *, unsigned long)"
+2.0,7523490,46,163554.1,197951.5,98208,199392,48139.3,"<unnamed>::argmax_rows_kernel(unsigned long, unsigned long, const float *, int *)"
+1.2,4539436,3312,1370.6,1376.0,1280,1600,45.0,"<unnamed>::add_bias_rows_kernel(unsigned long, unsigned long, const float *, float *, unsigned long)"
+0.7,2538292,2208,1149.6,1152.0,1119,1280,15.9,"<unnamed>::add_rows_kernel(unsigned long, unsigned long, const float *, const float *, float *)"
+0.7,2501592,2208,1133.0,1120.0,1119,1440,17.2,"<unnamed>::copy_rows_kernel(unsigned long, unsigned long, const float *, float *)"
+0.5,1880446,1104,1703.3,1664.0,1632,2112,49.3,"void cublasLt::splitKreduce_kernel<(int)32, (int)16, int, float, float, float, float, (bool)0, float, float, float, (bool)1, (bool)0, (bool)0, (bool)0>(cublasLt::cublasSplitKParams<T6>, const T4 *, const T10 *, T9 *, T5 *, const T6 *, const T6 *, const T11 *, const T4 *, T11 *, void *, long, T6 *, int *, T6 *, T6 *, const T6 *, const T6 *, const T6 *, const T6 *, const T6 *)"
+0.4,1497887,1104,1356.8,1344.0,1312,1440,35.4,"<unnamed>::mul_kernel(unsigned long, const float *, const float *, float *)"
+0.4,1466907,1104,1328.7,1312.0,1280,1440,25.4,"<unnamed>::silu_kernel(unsigned long, const float *, float *)"
+0.0,127744,46,2777.0,2816.0,2080,3328,244.5,"<unnamed>::embed_bf16_kernel(const __nv_bfloat16 *, unsigned long, const int *, unsigned long, float *)"
+
+Processing [/teamspace/studios/this_studio/forge-cache/phase13-results/baseline_nsys_b8.sqlite] with [/opt/nvidia/nsight-compute/2025.3.1/host/target-linux-x64/reports/cuda_api_sum.py]... 
+Time (%),Total Time (ns),Num Calls,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Name
+47.2,348999197,23470,14870.0,4460.0,3530,41883219,289298.3,cudaMemcpy
+26.0,192473014,44817,4294.6,3340.0,2650,1043547,5481.7,cudaLaunchKernel
+8.1,60191700,551,109240.8,34531.0,2060,3754126,246489.4,cudaFree
+7.6,56475473,554,101941.3,14855.0,1260,1037727,149535.8,cudaMalloc
+4.5,33329101,7758,4296.1,3400.0,2571,34021,2148.5,cuLaunchKernel
+3.3,24307483,15,1620498.9,94523.0,22690,8900409,2690306.7,cuLibraryLoadData
+1.4,10088479,1104,9138.1,3950.0,3020,4714531,141759.4,cudaLaunchKernelExC_v11060
+0.7,5228087,44817,116.7,90.0,69,26601,339.0,cuKernelGetName
+0.6,4436596,7758,571.9,330.0,229,1421887,16152.8,cuKernelGetFunction
+0.3,2332843,1104,2113.1,2060.0,820,22721,828.5,cudaEventRecord
+0.1,976350,6624,147.4,120.0,69,22590,286.1,cuStreamGetCaptureInfo_v2
+0.1,723088,5,144617.6,5400.0,1840,695688,308097.7,cudaDeviceSynchronize
+0.0,169401,880,192.5,150.0,70,800,106.7,cuGetProcAddress_v2
+0.0,41432,21,1973.0,561.0,210,9880,2998.5,cuLibraryGetKernel
+0.0,32661,1,32661.0,32661.0,32661,32661,0.0,cudaMemGetInfo
+0.0,20082,18,1115.7,340.0,249,13731,3152.3,cudaEventCreateWithFlags
+0.0,7450,4,1862.5,1730.0,1450,2540,476.3,cuInit
+0.0,4970,1,4970.0,4970.0,4970,4970,0.0,cudaEventQuery
+0.0,2270,3,756.7,580.0,510,1180,368.3,cudaGetDriverEntryPointByVersion_v12050
+0.0,1360,3,453.3,100.0,90,1170,620.7,cuModuleGetLoadingMode
+0.0,760,1,760.0,760.0,760,760,0.0,cudaGetDeviceProperties_v12000
+
+Processing [/teamspace/studios/this_studio/forge-cache/phase13-results/baseline_nsys_b8.sqlite] with [/opt/nvidia/nsight-compute/2025.3.1/host/target-linux-x64/reports/cuda_gpu_mem_time_sum.py]... 
+Time (%),Total Time (ns),Count,Avg (ns),Med (ns),Min (ns),Max (ns),StdDev (ns),Operation
+85.7,152611437,368,414705.0,544.0,352,41847420,2227295.5,[CUDA memcpy Host-to-Device]
+14.3,25416250,23056,1102.4,1088.0,1055,1152,16.8,[CUDA memcpy Device-to-Device]
+0.0,50112,46,1089.4,992.0,672,1824,168.9,[CUDA memcpy Device-to-Host]
+

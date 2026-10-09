@@ -1,0 +1,17 @@
+{
+  "prompt_n_tokens": 26,
+  "first_greedy_id": 9707,
+  "generated_ids": [
+    9707,
+    0,
+    1084,
+    594,
+    6419,
+    311,
+    3367,
+    498,
+    13,
+    151645
+  ],
+  "text": "Hello! It's nice to meet you."
+}

@@ -1,0 +1,24 @@
+    Finished `release` profile [optimized] target(s) in 0.06s
+     Running tests/cuda_phase15.rs (runtime/target/release/deps/cuda_phase15-8c758415e796bb10)
+
+running 1 test
+test real_long_greedy_agreement ... CUDA_GRAPH_CAPTURE_OK batch=1 ms=3.306 device_memory_delta_bytes=Some(4194304)
+PHASE15_LONG_PARITY real=true dtype=Fp32 B=1 tile=1 max_abs_error=0.000012874603 greedy_decisions=8
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=11.593 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Fp32 B=2 tile=1 max_abs_error=0.000014454126 greedy_decisions=16
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=2.380 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Fp32 B=4 tile=1 max_abs_error=0.000018119812 greedy_decisions=32
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=2.432 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Fp32 B=8 tile=1 max_abs_error=0.00002193451 greedy_decisions=64
+CUDA_GRAPH_CAPTURE_OK batch=1 ms=2.168 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Bf16 B=1 tile=1 max_abs_error=0.06612754 greedy_decisions=8
+CUDA_GRAPH_CAPTURE_OK batch=2 ms=2.335 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Bf16 B=2 tile=1 max_abs_error=0.108668804 greedy_decisions=16
+CUDA_GRAPH_CAPTURE_OK batch=4 ms=2.389 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Bf16 B=4 tile=1 max_abs_error=0 greedy_decisions=32
+CUDA_GRAPH_CAPTURE_OK batch=8 ms=2.369 device_memory_delta_bytes=Some(0)
+PHASE15_LONG_PARITY real=true dtype=Bf16 B=8 tile=1 max_abs_error=0 greedy_decisions=64
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 105.36s
+

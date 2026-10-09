@@ -1,0 +1,444 @@
+{
+  "runtime": "forge",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 8,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 190.13901331630777,
+      "trials": [
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9217406986,
+              "mean_ms": 1152.17587325
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 488550,
+              "mean_ms": 0.06106875
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 4552,
+              "mean_ms": 0.000569
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 42840209,
+              "mean_ms": 5.355026125
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 4144253,
+              "mean_ms": 0.518031625
+            },
+            "runtime_step": {
+              "count": 166,
+              "total_ns": 1837424479,
+              "mean_ms": 11.068822162650601
+            },
+            "scheduler_host": {
+              "count": 166,
+              "total_ns": 5175072,
+              "mean_ms": 0.03117513253012048
+            },
+            "scheduler_iteration": {
+              "count": 166,
+              "total_ns": 1842581022,
+              "mean_ms": 11.099885674698795
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 1125192439,
+              "mean_ms": 140.649054875
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 15979354,
+              "mean_ms": 0.04565529714285714
+            },
+            "token_dispatch": {
+              "count": 166,
+              "total_ns": 583521,
+              "mean_ms": 0.0035151867469879515
+            }
+          },
+          "observed_active_mean": 4.951367781155016,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.843536051000001,
+          "aggregate_tok_s": 189.85253898894317,
+          "observed_kv_blocks_peak": 168,
+          "observed_kv_utilization_peak": 0.328125,
+          "observed_scheduled_tokens_peak": 137,
+          "per_request_tok_s": [
+            58.49770750410337,
+            39.4703608450927,
+            35.521708044812954,
+            41.39769514689966,
+            38.4680132246026,
+            35.68765445933862,
+            36.97084129341702,
+            38.57116206191909
+          ],
+          "latency_p50_s": 1.6214698480000607,
+          "latency_p95_s": 1.8017151630000399,
+          "ttft_p50_s": 0.04649949000008746,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.1709468699999661,
+              "ttft_s": 0.006744094999930894,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6214698480000607,
+              "ttft_s": 0.04649949000008746,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.8017151630000399,
+              "ttft_s": 0.3900465519999443,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.24155934199995954,
+              "ttft_s": 0.026721633999954975,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6637199230000306,
+              "ttft_s": 0.0919162589999587,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7933372470000677,
+              "ttft_s": 0.4329673820000153,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.2704834310000024,
+              "ttft_s": 0.0457878959999789,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6592707239999527,
+              "ttft_s": 0.08869183499996325,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1574.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9195634211,
+              "mean_ms": 1149.454276375
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 408879,
+              "mean_ms": 0.051109875
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3490,
+              "mean_ms": 0.00043625
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 48926748,
+              "mean_ms": 6.1158435
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 4749026,
+              "mean_ms": 0.59362825
+            },
+            "runtime_step": {
+              "count": 166,
+              "total_ns": 1833411365,
+              "mean_ms": 11.044646777108435
+            },
+            "scheduler_host": {
+              "count": 166,
+              "total_ns": 5825561,
+              "mean_ms": 0.035093740963855424
+            },
+            "scheduler_iteration": {
+              "count": 166,
+              "total_ns": 1839217603,
+              "mean_ms": 11.07962411445783
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 1119340263,
+              "mean_ms": 139.917532875
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 14861134,
+              "mean_ms": 0.04246038285714286
+            },
+            "token_dispatch": {
+              "count": 166,
+              "total_ns": 590568,
+              "mean_ms": 0.0035576385542168674
+            }
+          },
+          "observed_active_mean": 4.948328267477204,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.8398922469999661,
+          "aggregate_tok_s": 190.22853135594872,
+          "observed_kv_blocks_peak": 168,
+          "observed_kv_utilization_peak": 0.328125,
+          "observed_scheduled_tokens_peak": 65,
+          "per_request_tok_s": [
+            59.20913482323695,
+            39.54994848025949,
+            35.58529141584652,
+            41.571362240160134,
+            38.55177484477217,
+            35.75518553628889,
+            37.32842270466484,
+            38.650948199708374
+          ],
+          "latency_p50_s": 1.618206912000005,
+          "latency_p95_s": 1.7984958800000186,
+          "ttft_p50_s": 0.04781084600006125,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.16889285799993559,
+              "ttft_s": 0.0066157219999922745,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.618206912000005,
+              "ttft_s": 0.04781084600006125,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7984958800000186,
+              "ttft_s": 0.3879657420000058,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.24055021200001647,
+              "ttft_s": 0.027734115000043857,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6601051510000389,
+              "ttft_s": 0.09105049100003271,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7899501580000106,
+              "ttft_s": 0.4301745349999919,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.2678923800000348,
+              "ttft_s": 0.044472670000004655,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6558455349999122,
+              "ttft_s": 0.08707659199990303,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1574.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9196012748,
+              "mean_ms": 1149.5015935
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 329656,
+              "mean_ms": 0.041207
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3530,
+              "mean_ms": 0.00044125
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 38406928,
+              "mean_ms": 4.800866
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 3750186,
+              "mean_ms": 0.46877325
+            },
+            "runtime_step": {
+              "count": 166,
+              "total_ns": 1835036935,
+              "mean_ms": 11.054439367469879
+            },
+            "scheduler_host": {
+              "count": 166,
+              "total_ns": 4782571,
+              "mean_ms": 0.028810668674698794
+            },
+            "scheduler_iteration": {
+              "count": 166,
+              "total_ns": 1839801053,
+              "mean_ms": 11.083138873493976
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 1116018715,
+              "mean_ms": 139.502339375
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 15648935,
+              "mean_ms": 0.044711242857142855
+            },
+            "token_dispatch": {
+              "count": 166,
+              "total_ns": 548618,
+              "mean_ms": 0.0033049277108433734
+            }
+          },
+          "observed_active_mean": 4.954407294832826,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.8407584740000402,
+          "aggregate_tok_s": 190.13901331630777,
+          "observed_kv_blocks_peak": 168,
+          "observed_kv_utilization_peak": 0.328125,
+          "observed_scheduled_tokens_peak": 195,
+          "per_request_tok_s": [
+            59.45513742445942,
+            39.536709749442814,
+            35.57246824843489,
+            41.83842193070101,
+            38.531081320709575,
+            35.74039289457455,
+            37.427224866542026,
+            38.634698320344015
+          ],
+          "latency_p50_s": 1.618748762999985,
+          "latency_p95_s": 1.7991442019999795,
+          "ttft_p50_s": 0.04644473899998047,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.16819404400007443,
+              "ttft_s": 0.0066479930000014065,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.618748762999985,
+              "ttft_s": 0.04644473899998047,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7991442019999795,
+              "ttft_s": 0.3884479509999892,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.23901475100001335,
+              "ttft_s": 0.026607111999965127,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6609967279999864,
+              "ttft_s": 0.09056052199991882,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7906910030000063,
+              "ttft_s": 0.430858120000039,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.26718518499990296,
+              "ttft_s": 0.04422884499990687,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6565419890000612,
+              "ttft_s": 0.08609646200000043,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1574.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

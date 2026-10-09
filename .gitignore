@@ -1,0 +1,106 @@
+# Build artifacts
+**/target/
+**/build/
+**/cmake-build-*/
+**/*.o
+**/*.obj
+**/*.a
+**/*.lib
+**/*.so
+**/*.dylib
+**/*.dll
+**/*.exe
+**/*.pdb
+**/*.ilk
+
+# Go
+**/vendor/
+api/bin/
+bin/
+bindings/go/*.exe
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Models & generated data (never commit weights)
+models/**
+!models/.gitkeep
+!models/README.md
+*.safetensors
+*.bin
+*.gguf
+*.forge
+*.pt
+*.pth
+*.onnx
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local Lightning session metadata (no secrets, but machine-local)
+configs/cloud/.forge-cloud-state.json
+.forge/
+.forge-deploy-out/
+
+# Benchmark/test outputs (keep committed summaries/)
+benchmarks/results/*
+!benchmarks/results/.gitkeep
+!benchmarks/results/summaries/
+!benchmarks/results/summaries/**
+!benchmarks/results/phase13/
+benchmarks/results/phase13/*
+!benchmarks/results/phase13/*.json
+!benchmarks/results/phase13/*.csv
+!benchmarks/results/phase13/*.txt
+*.prof
+*.log
+!benchmarks/results/phase13/phase13-logit-parity-final.log
+!benchmarks/results/phase13/phase13-chunk8-tests.log
+!benchmarks/results/phase13/phase13-forge-v13-server.log
+!docs/PHASE12_COST_LEDGER.md
+
+# Python reference env
+.venv/
+__pycache__/
+*.pyc
+
+# Cargo lock is kept for the runtime crate
+
+# Phase 14 reproducible evidence
+!benchmarks/results/phase14/
+!benchmarks/results/phase14/*.json
+!benchmarks/results/phase14/*.jsonl
+!benchmarks/results/phase14/*.csv
+!benchmarks/results/phase14/*tests.log
+!benchmarks/results/phase14/*parity.log
+# Phase 15 reproducible evidence
+!benchmarks/results/phase15/
+!benchmarks/results/phase15/*.json
+!benchmarks/results/phase15/*.jsonl
+!benchmarks/results/phase15/*.csv
+!benchmarks/results/phase15/*.txt
+!benchmarks/results/phase15/EVIDENCE.md
+!benchmarks/results/phase15/*tests.log
+!benchmarks/results/phase15/*regression.log
+!benchmarks/results/phase15/gpu-regressions.log
+!benchmarks/results/phase15/cuda-kernels.log
+!benchmarks/results/phase15/cpu-kernels.log
+!benchmarks/results/phase15/cuda-stub-check.log
+!benchmarks/results/phase15/bf16-diagnostic-failure.log
+!benchmarks/results/phase15/*profile*server.log
+!benchmarks/results/phase15/rejected-*.log
+!benchmarks/results/phase15/session3-*.log
+!benchmarks/results/phase15/llama-offload-validation.log
+
+# Phase 16 reproducible evidence
+!benchmarks/results/phase16/
+!benchmarks/results/phase16/*.json
+!benchmarks/results/phase16/*.txt
+!benchmarks/results/phase16/*.log
+!benchmarks/results/phase16/EVIDENCE.md

@@ -1,0 +1,8 @@
+=== forge-cloud prepare-deploy (non-billable) ===
+repo: C:\Users\ahame\Documents\Projects\llm-inference-runtime
+deploy_id:     20261009T050559Z-783c6acc1d65
+content_hash:  783c6acc1d65fbacfb2aa1d3d5c4d57ee37408d0b43953fb4de41dbef77a4418
+file_count:    235
+staging:       C:\Users\ahame\AppData\Local\Temp\forge-prepare-deploy-3468146035\staging
+tar:           C:\Users\ahame\AppData\Local\Temp\forge-prepare-deploy-3468146035\20261009T050559Z-783c6acc1d65.tar.gz
+DEPLOY_PREPARE_OK

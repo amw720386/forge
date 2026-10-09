@@ -1,0 +1,45 @@
+[package]
+name = "forge-runtime"
+version = "0.1.0"
+edition = "2021"
+description = "Forge LLM inference runtime (Rust core)"
+license = "MIT"
+publish = false
+
+[lib]
+name = "forge_runtime"
+crate-type = ["cdylib", "rlib", "staticlib"]
+
+[features]
+default = []
+# Real NVIDIA CUDA backend. Requires prebuilt libforge_cuda + CUDA toolkit.
+# Fails the build if libforge_cuda is missing (see docs/CUDA_TOOLCHAIN.md).
+cuda = []
+# Compile/link check of CUDA Rust paths against forge_cuda_stub.c (no nvcc/GPU).
+# Does NOT enable real GPU inference. Mutually intended vs `cuda` for CI/Windows.
+cuda-stub = []
+
+[dependencies]
+safetensors = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokenizers = { version = "0.20", default-features = false, features = ["onig"] }
+memmap2 = "0.9"
+sha2 = "0.10"
+
+[[bin]]
+name = "forge-quantize"
+path = "src/bin/forge_quantize.rs"
+
+[[bin]]
+name = "forge-bench"
+path = "src/bin/forge_bench.rs"
+
+[[bin]]
+name = "forge-int4-diag"
+path = "src/bin/forge_int4_diag.rs"
+
+[build-dependencies]
+cc = "1.2"
+
+[dev-dependencies]

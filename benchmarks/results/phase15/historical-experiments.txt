@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT=$(readlink -f /teamspace/studios/this_studio/forge-current)
+cd "$ROOT"
+FORGE_ATTN_SOFTMAX_TILE=4 FORGE_DECODE_ATTN_BLOCK=0 bash scripts/phase15_http.sh prefill-only --workloads short,long,mixed --concurrency 8 --trials 3
+FORGE_SCHED_POLICY=fixed FORGE_STEP_TOKEN_BUDGET=256 FORGE_ATTN_SOFTMAX_TILE=1 FORGE_DECODE_ATTN_BLOCK=0 bash scripts/phase15_http.sh fixed-only --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10
+FORGE_SCHED_POLICY=adaptive FORGE_ATTN_SOFTMAX_TILE=1 FORGE_DECODE_ATTN_BLOCK=0 bash scripts/phase15_http.sh adaptive-only --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10
+FORGE_SCHED_POLICY=decode-first FORGE_ATTN_SOFTMAX_TILE=4 FORGE_DECODE_ATTN_BLOCK=1 bash scripts/phase15_http.sh combined-decode-first --workloads short,long,mixed --concurrency 8 --trials 3
+FORGE_SCHED_POLICY=adaptive FORGE_ATTN_SOFTMAX_TILE=4 FORGE_DECODE_ATTN_BLOCK=1 bash scripts/phase15_http.sh combined-adaptive --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10
+FORGE_SCHED_POLICY=decode-first FORGE_ATTN_SOFTMAX_TILE=1 FORGE_DECODE_ATTN_BLOCK=0 bash scripts/phase15_http.sh baseline-staggered --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10
+FORGE_SCHED_POLICY=decode-first FORGE_ATTN_SOFTMAX_TILE=4 FORGE_DECODE_ATTN_BLOCK=1 bash scripts/phase15_http.sh combined-staggered --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10
+FORGE_SCHED_POLICY=fixed FORGE_STEP_TOKEN_BUDGET=256 FORGE_ATTN_SOFTMAX_TILE=4 FORGE_DECODE_ATTN_BLOCK=1 bash scripts/phase15_http.sh combined-fixed --workloads short,long,mixed --concurrency 8 --trials 3 --arrival-gap-ms 10

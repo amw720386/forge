@@ -1,0 +1,7 @@
+{
+  "seq": 5,
+  "n_heads": 4,
+  "n_kv": 2,
+  "head_dim": 8,
+  "theta": 10000.0
+}

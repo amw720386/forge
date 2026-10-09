@@ -1,0 +1,35 @@
+{
+  "harness": "bench_phase12",
+  "methodology": "docs/BENCHMARK_METHODOLOGY.md",
+  "gpu": "NVIDIA L4",
+  "token_policy": "fixed_len",
+  "warmup": 1,
+  "trials": 3,
+  "max_new": 16,
+  "workload": "short_hello",
+  "source_session": "validate-phase12 --mode forge (session 1c 2026-10-08)",
+  "results": [
+    {"dtype": "fp32", "admit_batch": 1, "aggregate_tok_s_median": 100.80, "steady_decode_tok_s_median": 108.51, "prefill_tok_s_median": 487.90, "ttft_p50_median_s": 0.0205, "weight_mib": 1884.6},
+    {"dtype": "fp32", "admit_batch": 2, "aggregate_tok_s_median": 169.25, "steady_decode_tok_s_median": 191.47, "prefill_tok_s_median": 617.01, "ttft_p50_median_s": 0.0324, "weight_mib": 1884.6},
+    {"dtype": "fp32", "admit_batch": 4, "aggregate_tok_s_median": 269.79, "steady_decode_tok_s_median": 329.69, "prefill_tok_s_median": 723.55, "ttft_p50_median_s": 0.0553, "weight_mib": 1884.6},
+    {"dtype": "fp32", "admit_batch": 8, "aggregate_tok_s_median": 398.80, "steady_decode_tok_s_median": 543.71, "prefill_tok_s_median": 798.36, "ttft_p50_median_s": 0.1002, "weight_mib": 1884.6},
+    {"dtype": "bf16", "admit_batch": 1, "aggregate_tok_s_median": 166.90, "steady_decode_tok_s_median": 179.04, "prefill_tok_s_median": 825.34, "ttft_p50_median_s": 0.0121, "weight_mib": 942.4},
+    {"dtype": "bf16", "admit_batch": 2, "aggregate_tok_s_median": 266.79, "steady_decode_tok_s_median": 297.73, "prefill_tok_s_median": 1042.23, "ttft_p50_median_s": 0.0192, "weight_mib": 942.4},
+    {"dtype": "bf16", "admit_batch": 4, "aggregate_tok_s_median": 418.85, "steady_decode_tok_s_median": 498.82, "prefill_tok_s_median": 1230.11, "ttft_p50_median_s": 0.0325, "weight_mib": 942.4},
+    {"dtype": "bf16", "admit_batch": 8, "aggregate_tok_s_median": 585.27, "steady_decode_tok_s_median": 752.53, "prefill_tok_s_median": 1351.20, "ttft_p50_median_s": 0.0592, "weight_mib": 942.4}
+  ],
+  "controlled_B8_fp32": [
+    {"label": "naive_attn_cpu_greedy", "aggregate_tok_s_median": 35.32},
+    {"label": "opt_attn_cpu_greedy", "aggregate_tok_s_median": 373.05},
+    {"label": "opt_attn_gpu_argmax", "aggregate_tok_s_median": 398.80}
+  ],
+  "medium_bf16": [
+    {"admit_batch": 1, "max_new": 64, "aggregate_tok_s_median": 112.65, "ttft_p50_median_s": 0.0454},
+    {"admit_batch": 4, "max_new": 64, "aggregate_tok_s_median": 138.24, "ttft_p50_median_s": 0.1654}
+  ],
+  "long_bf16": [
+    {"admit_batch": 1, "max_new": 64, "aggregate_tok_s_median": 52.88, "ttft_p50_median_s": 0.2089},
+    {"admit_batch": 2, "max_new": 64, "aggregate_tok_s_median": 39.92, "ttft_p50_median_s": 0.4136}
+  ],
+  "mixed_stagger_bf16_B8": {"aggregate_tok_s_median": 472.27, "avg_occupancy_median": 6.91}
+}

@@ -1,0 +1,18 @@
+warning: struct `BufferView` is never constructed
+  --> src\compute\backend.rs:87:19
+   |
+87 | pub(crate) struct BufferView<'a> {
+   |                   ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `view_mut` is never used
+   --> src\compute\backend.rs:103:19
+    |
+102 | impl Buffer {
+    | ----------- method in this implementation
+103 |     pub(crate) fn view_mut(
+    |                   ^^^^^^^^
+
+warning: `forge-runtime` (lib) generated 2 warnings
+    Finished `release` profile [optimized] target(s) in 0.22s

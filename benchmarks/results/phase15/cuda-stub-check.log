@@ -1,0 +1,3 @@
+warning: forge-runtime@0.1.0: linking forge_cuda STUB (compile-check only; no GPU)
+    Checking forge-runtime v0.1.0 (C:\Users\ahame\Documents\Projects\llm-inference-runtime\runtime)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.56s

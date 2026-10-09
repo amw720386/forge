@@ -1,0 +1,10 @@
+{
+  "status": "unresolved",
+  "hf_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "gguf_file_type": 1,
+  "gguf_architecture": "qwen2",
+  "embedding_sample_exact_match": true,
+  "q_projection_sample_exact_match": false,
+  "complete_tensor_identity_verified": false,
+  "note": "No successful full identity report was produced on GPU Studio. Comparison is provisional."
+}

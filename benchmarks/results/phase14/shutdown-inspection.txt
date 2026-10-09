@@ -1,0 +1,25 @@
+studio=forge-gpu cloud=lightning-public-prod machine= cloudspace_status=CLOUD_SPACE_STATE_READY auto_sleep=true idle_seconds=900
+visible_studio=forge-gpu status=CLOUD_SPACE_STATE_READY
+  requested=null
+  inUse=null
+visible_studio=crazy-cori-805 status=CLOUD_SPACE_STATE_READY
+  requested=null
+  inUse=null
+visible_studio=accused-jade-e8c4 status=CLOUD_SPACE_STATE_READY
+  requested=null
+  inUse=null
+accelerator_catalog_http=200
+l4_catalog={"acceleratorType":"GPU","allowedResources":[],"availabilityStrategy":"p50","availableInSeconds":"90","availableInSecondsSpot":"161","availableZones":["eu-north-1","us-east-1","us-east-2","us-west-2","ap-northeast-2","ap-south-1","ca-central-1"],"byocOnly":false,"capacityBlockOnly":false,"capacityBlockPrice":0,"capacityBlocksAvailable":[],"clusterId":"lightning-public-prod","cost":1.68,"detailedQuotasInfo":[],"deviceCard":"https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/l4/PB-11316-001_v01.pdf","deviceInfo":"This machine has 1 NVIDIA L4 Tensor Core graphic card (GPU) optimized for AI workloads, 16 vCPUs and 64 GB of RAM. L4 is optimized for inference workloads and smaller training workloads. Use this if you have RTX optimizations to gain additional speed-ups over the V100. For large model training use the A100 GPUs.","displayName":"L4","dwsCost":0,"dwsOnly":false,"dwsSupported":false,"enabled":true,"family":"L4","full":false,"instanceId":"g6.4xlarge","isCustom":false,"isTierRestricted":false,"lightningInterruptible":false,"localDiskIncluded":false,"localDiskSize":"600","localDiskSupported":true,"localDisksCount":"0","maxAvailableQuota":"59400","multiNodeIbCostPerGpuHour":0,"nonOndemand":false,"nonSpot":false,"outOfCapacity":false,"partitionOnly":false,"partitionableParents":["g6.48xlarge","g6.12xlarge"],"persistentDiskSupported":false,"promo":null,"provider":"AWS","quotaCheckedAt":"2026-10-08T19:30:35.445693Z","quotaCode":"L-DB2E81BA","quotaName":"Running On-Demand G and VT instances","quotaPageUrl":"https://us-east-1.console.aws.amazon.com/servicequotas/home/services/ec2/quotas/L-DB2E81BA","quotaServiceCode":"ec2","quotaUtilization":"844","quotaValue":"68500","reservable":false,"reservationAvailableZones":[],"reservationQuotaCode":"","reservationQuotaName":"","reservationQuotaPageUrl":"","resources":{"cpu":16,"cpus":"","extra":{},"gpu":1,"gpuType":"nvidia-tesla-l4","iops":"0","memoryMb":"64000","storageGb":"500","throughput":"0"},"secondaryInstanceId":"","slug":"g6.4xlarge","slugMultiCloud":"lit-l4-1","spotPrice":1.01904,"spotQuotaCode":"L-3819A6DF","spotQuotaName":"Running G and VT spot instances","spotQuotaPageUrl":"https://us-east-1.console.aws.amazon.com/servicequotas/home/services/ec2/quotas/L-3819A6DF"}
+codestatus http=200
+  requested=null
+  inUse=null
+  collabStatus=null
+  field=requested
+  field=inUse
+  field=collabStatus
+  field=collabSession
+required-balance-status http=200
+  hasRequiredBalance=true
+  reason="REQUIRED_BALANCE_REASON_SUFFICIENT_CREDITS"
+  field=hasRequiredBalance
+  field=reason

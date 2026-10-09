@@ -1,0 +1,880 @@
+{
+  "runtime": "forge",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 8,
+      "workload": "long",
+      "aggregate_tok_s_median": 218.0091930525286,
+      "trials": [
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 18755700643,
+              "mean_ms": 2344.462580375
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2318916,
+              "mean_ms": 0.2898645
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 4139,
+              "mean_ms": 0.000517375
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 36418870,
+              "mean_ms": 4.55235875
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 10722965,
+              "mean_ms": 1.340370625
+            },
+            "runtime_step": {
+              "count": 135,
+              "total_ns": 2332705710,
+              "mean_ms": 17.279301555555556
+            },
+            "scheduler_host": {
+              "count": 135,
+              "total_ns": 9471195,
+              "mean_ms": 0.070157
+            },
+            "scheduler_iteration": {
+              "count": 135,
+              "total_ns": 2342160074,
+              "mean_ms": 17.34933388148148
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 6326286606,
+              "mean_ms": 790.78582575
+            },
+            "sse_write_flush": {
+              "count": 512,
+              "total_ns": 22998150,
+              "mean_ms": 0.04491826171875
+            },
+            "token_dispatch": {
+              "count": 135,
+              "total_ns": 610994,
+              "mean_ms": 0.004525881481481481
+            }
+          },
+          "observed_active_mean": 7.90453460620525,
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 2.347191481999971,
+          "aggregate_tok_s": 218.13303427794492,
+          "observed_kv_blocks_peak": 488,
+          "observed_kv_utilization_peak": 0.953125,
+          "observed_scheduled_tokens_peak": 1024,
+          "per_request_tok_s": [
+            27.269779820125976,
+            27.280344402141388,
+            27.27382800026017,
+            27.28240166661297,
+            27.273883673771696,
+            27.271318116460645,
+            27.2820592677382,
+            27.266629284743114
+          ],
+          "latency_p50_s": 2.3465671690000818,
+          "latency_p95_s": 2.347191481999971,
+          "ttft_p50_s": 0.7924975309999809,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.3469203059999018,
+              "ttft_s": 0.7926480639999909,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3460114379998913,
+              "ttft_s": 0.7923425679999809,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3465719590000162,
+              "ttft_s": 0.7925118709999879,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.345834534000005,
+              "ttft_s": 0.7921388039999329,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3465671690000818,
+              "ttft_s": 0.7927183960000548,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3467879229999653,
+              "ttft_s": 0.7924975309999809,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3458639749999293,
+              "ttft_s": 0.7918526889999384,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.347191481999971,
+              "ttft_s": 0.7929220600000235,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 18768666106,
+              "mean_ms": 2346.08326325
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2818586,
+              "mean_ms": 0.35232325
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 4151,
+              "mean_ms": 0.000518875
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 31072431,
+              "mean_ms": 3.884053875
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 9634231,
+              "mean_ms": 1.204278875
+            },
+            "runtime_step": {
+              "count": 135,
+              "total_ns": 2335099918,
+              "mean_ms": 17.29703642962963
+            },
+            "scheduler_host": {
+              "count": 135,
+              "total_ns": 9490601,
+              "mean_ms": 0.07030074814814816
+            },
+            "scheduler_iteration": {
+              "count": 135,
+              "total_ns": 2344573690,
+              "mean_ms": 17.367212518518517
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 6329627353,
+              "mean_ms": 791.203419125
+            },
+            "sse_write_flush": {
+              "count": 512,
+              "total_ns": 25043094,
+              "mean_ms": 0.04891229296875
+            },
+            "token_dispatch": {
+              "count": 135,
+              "total_ns": 578006,
+              "mean_ms": 0.004281525925925926
+            }
+          },
+          "observed_active_mean": 7.904761904761905,
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 2.3485248160000083,
+          "aggregate_tok_s": 218.0091930525286,
+          "observed_kv_blocks_peak": 488,
+          "observed_kv_utilization_peak": 0.953125,
+          "observed_scheduled_tokens_peak": 1024,
+          "per_request_tok_s": [
+            27.2540667422917,
+            27.264993518586568,
+            27.260803741802906,
+            27.26070619191559,
+            27.2629532909809,
+            27.253315843017425,
+            27.259248635219144,
+            27.254812924220705
+          ],
+          "latency_p50_s": 2.347701470000061,
+          "latency_p95_s": 2.3483381020000706,
+          "ttft_p50_s": 0.7924776779999547,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.348273400999915,
+              "ttft_s": 0.7926328909999256,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3473323020000407,
+              "ttft_s": 0.7928448259999641,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3476930690000017,
+              "ttft_s": 0.7924468879999722,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.347701470000061,
+              "ttft_s": 0.7924057170000651,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.347507964999977,
+              "ttft_s": 0.7924776779999547,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3483381020000706,
+              "ttft_s": 0.7927778340000486,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.347827002000031,
+              "ttft_s": 0.792393876999995,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3482091099999707,
+              "ttft_s": 0.7931153909999011,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 18768211314,
+              "mean_ms": 2346.02641425
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2099672,
+              "mean_ms": 0.262459
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3930,
+              "mean_ms": 0.00049125
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 31706395,
+              "mean_ms": 3.963299375
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 9932250,
+              "mean_ms": 1.24153125
+            },
+            "runtime_step": {
+              "count": 135,
+              "total_ns": 2334882154,
+              "mean_ms": 17.29542336296296
+            },
+            "scheduler_host": {
+              "count": 135,
+              "total_ns": 9630429,
+              "mean_ms": 0.07133651111111111
+            },
+            "scheduler_iteration": {
+              "count": 135,
+              "total_ns": 2344496257,
+              "mean_ms": 17.366638940740742
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 6336118463,
+              "mean_ms": 792.014807875
+            },
+            "sse_write_flush": {
+              "count": 512,
+              "total_ns": 23314344,
+              "mean_ms": 0.045535828125
+            },
+            "token_dispatch": {
+              "count": 135,
+              "total_ns": 566967,
+              "mean_ms": 0.004199755555555556
+            }
+          },
+          "observed_active_mean": 7.904306220095694,
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 2.348735069999975,
+          "aggregate_tok_s": 217.98967731171376,
+          "observed_kv_blocks_peak": 488,
+          "observed_kv_utilization_peak": 0.953125,
+          "observed_scheduled_tokens_peak": 1024,
+          "per_request_tok_s": [
+            27.252461575823915,
+            27.2563954999445,
+            27.263147239016103,
+            27.251684539992404,
+            27.267018844868776,
+            27.25591714324151,
+            27.26016370605803,
+            27.250710514056014
+          ],
+          "latency_p50_s": 2.3480727669999624,
+          "latency_p95_s": 2.3485626169999705,
+          "ttft_p50_s": 0.7935147289999804,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 2.348411714000008,
+              "ttft_s": 0.7940649299999905,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3480727669999624,
+              "ttft_s": 0.7933265960000426,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3474912650000306,
+              "ttft_s": 0.7935147289999804,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.348478675000024,
+              "ttft_s": 0.794197693000001,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3471579480000173,
+              "ttft_s": 0.7934825280000268,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3481139770000254,
+              "ttft_s": 0.7935602699999436,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3477481899999475,
+              "ttft_s": 0.7933301450000272,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 2.3485626169999705,
+              "ttft_s": 0.7942324629999575,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 197.30872422256988,
+      "trials": [
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9747481777,
+              "mean_ms": 1218.435222125
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2112822,
+              "mean_ms": 0.26410275
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3600,
+              "mean_ms": 0.00045
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 51822680,
+              "mean_ms": 6.477835
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 3774226,
+              "mean_ms": 0.47177825
+            },
+            "runtime_step": {
+              "count": 144,
+              "total_ns": 1771697318,
+              "mean_ms": 12.303453597222221
+            },
+            "scheduler_host": {
+              "count": 144,
+              "total_ns": 4943264,
+              "mean_ms": 0.03432822222222222
+            },
+            "scheduler_iteration": {
+              "count": 144,
+              "total_ns": 1776623340,
+              "mean_ms": 12.337662083333335
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 944633777,
+              "mean_ms": 118.079222125
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 16228273,
+              "mean_ms": 0.04636649428571429
+            },
+            "token_dispatch": {
+              "count": 144,
+              "total_ns": 602078,
+              "mean_ms": 0.004181097222222222
+            }
+          },
+          "observed_active_mean": 5.4113924050632916,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.778141880000021,
+          "aggregate_tok_s": 196.834686779885,
+          "observed_kv_blocks_peak": 170,
+          "observed_kv_utilization_peak": 0.33203125,
+          "observed_scheduled_tokens_peak": 10,
+          "per_request_tok_s": [
+            29.424675820916907,
+            37.3707621384938,
+            36.006603557082684,
+            27.469392792200996,
+            37.37166146641832,
+            36.0054160854583,
+            27.520759493698705,
+            37.36187532151271
+          ],
+          "latency_p50_s": 1.712527553999962,
+          "latency_p95_s": 1.7775103570000965,
+          "ttft_p50_s": 0.07734630999993897,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.3398508129999982,
+              "ttft_s": 0.010893838000015421,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.712568766000004,
+              "ttft_s": 0.07768306800005575,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.777451735999989,
+              "ttft_s": 0.31355318600003557,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.3640415380000377,
+              "ttft_s": 0.04294514100001834,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.712527553999962,
+              "ttft_s": 0.07734630999993897,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7775103570000965,
+              "ttft_s": 0.31377339100004065,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.36336206500004664,
+              "ttft_s": 0.04221198599998388,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.712976114000071,
+              "ttft_s": 0.07765680700003941,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9698722390,
+              "mean_ms": 1212.34029875
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2628644,
+              "mean_ms": 0.3285805
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3379,
+              "mean_ms": 0.000422375
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 61761309,
+              "mean_ms": 7.720163625
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 5696195,
+              "mean_ms": 0.712024375
+            },
+            "runtime_step": {
+              "count": 144,
+              "total_ns": 1765807442,
+              "mean_ms": 12.262551680555555
+            },
+            "scheduler_host": {
+              "count": 144,
+              "total_ns": 6154174,
+              "mean_ms": 0.04273731944444444
+            },
+            "scheduler_iteration": {
+              "count": 144,
+              "total_ns": 1771944686,
+              "mean_ms": 12.305171430555555
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 928010514,
+              "mean_ms": 116.00131425
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 15147311,
+              "mean_ms": 0.04327803142857143
+            },
+            "token_dispatch": {
+              "count": 144,
+              "total_ns": 546137,
+              "mean_ms": 0.0037926180555555556
+            }
+          },
+          "observed_active_mean": 5.400630914826499,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.7738698649999378,
+          "aggregate_tok_s": 197.30872422256988,
+          "observed_kv_blocks_peak": 170,
+          "observed_kv_utilization_peak": 0.33203125,
+          "observed_scheduled_tokens_peak": 0,
+          "per_request_tok_s": [
+            27.53577571202989,
+            37.48247255892111,
+            36.09049726701082,
+            29.55013984100974,
+            37.475154338643264,
+            36.084674174187484,
+            27.562446622912834,
+            38.00408432625943
+          ],
+          "latency_p50_s": 1.6840295229999356,
+          "latency_p95_s": 1.7736061489999884,
+          "ttft_p50_s": 0.046655074999989665,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.3631639110000151,
+              "ttft_s": 0.04646014100001139,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7074647330000516,
+              "ttft_s": 0.07888333200003217,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7733199830000785,
+              "ttft_s": 0.31308477699997184,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.33840787400004047,
+              "ttft_s": 0.01540161800005535,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7077981699999327,
+              "ttft_s": 0.07924886900002548,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7736061489999884,
+              "ttft_s": 0.3130171050000854,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.36281249399996796,
+              "ttft_s": 0.046055532999957904,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.6840295229999356,
+              "ttft_s": 0.046655074999989665,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "server_stage_deltas": {
+            "http_completion": {
+              "count": 8,
+              "total_ns": 9710247361,
+              "mean_ms": 1213.780920125
+            },
+            "http_parse": {
+              "count": 8,
+              "total_ns": 2860396,
+              "mean_ms": 0.3575495
+            },
+            "queue_admission": {
+              "count": 8,
+              "total_ns": 3759,
+              "mean_ms": 0.000469875
+            },
+            "queue_wait": {
+              "count": 8,
+              "total_ns": 47396512,
+              "mean_ms": 5.924564
+            },
+            "runtime_admit_tokenize": {
+              "count": 8,
+              "total_ns": 3405128,
+              "mean_ms": 0.425641
+            },
+            "runtime_step": {
+              "count": 144,
+              "total_ns": 1766078356,
+              "mean_ms": 12.264433027777779
+            },
+            "scheduler_host": {
+              "count": 144,
+              "total_ns": 4234065,
+              "mean_ms": 0.02940322916666667
+            },
+            "scheduler_iteration": {
+              "count": 144,
+              "total_ns": 1770296090,
+              "mean_ms": 12.293722847222222
+            },
+            "server_ttft": {
+              "count": 8,
+              "total_ns": 937959325,
+              "mean_ms": 117.244915625
+            },
+            "sse_write_flush": {
+              "count": 350,
+              "total_ns": 15268631,
+              "mean_ms": 0.04362466
+            },
+            "token_dispatch": {
+              "count": 144,
+              "total_ns": 506120,
+              "mean_ms": 0.003514722222222222
+            }
+          },
+          "observed_active_mean": 5.408805031446541,
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 1.77204183799995,
+          "aggregate_tok_s": 197.51226663758368,
+          "observed_kv_blocks_peak": 170,
+          "observed_kv_utilization_peak": 0.33203125,
+          "observed_scheduled_tokens_peak": 10,
+          "per_request_tok_s": [
+            29.673102086952603,
+            37.498598607062014,
+            36.12000314571487,
+            27.651178317219237,
+            37.50934639138496,
+            36.13818080756855,
+            27.65188328501954,
+            37.500028557150046
+          ],
+          "latency_p50_s": 1.7062414080000963,
+          "latency_p95_s": 1.7718713849999403,
+          "ttft_p50_s": 0.07651756400002796,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.33700554699998975,
+              "ttft_s": 0.010360848000004808,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7067304479999166,
+              "ttft_s": 0.07680837999998857,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7718713849999403,
+              "ttft_s": 0.3122614709999425,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.3616482410000117,
+              "ttft_s": 0.04269338599999628,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7062414080000963,
+              "ttft_s": 0.07651756400002796,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7709801260000404,
+              "ttft_s": 0.3113375420000466,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how this works:\n\n1. **Storage**: This is the initial step where information is stored in a computer's memory. The computer uses a type of memory called RAM (Random Access Memory) to",
+              "server_timings": null
+            },
+            {
+              "latency_s": 0.3616390209999736,
+              "ttft_s": 0.04261435499995514,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": null
+            },
+            {
+              "latency_s": 1.7066653670000278,
+              "ttft_s": 0.07736607100002857,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called data processing. Here's a step-by-step explanation of how a computer stores and retrieves information:\n\n1. Input: The computer receives input from the user, such as typing a query or selecting an option from a menu.\n\n2. Data Collection: The computer collects data from",
+              "server_timings": null
+            }
+          ],
+          "peak_vram_mib_sampled": 1614.0,
+          "vram_sampling_note": "nvidia-smi at ~100 ms; may miss shorter allocation peaks",
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

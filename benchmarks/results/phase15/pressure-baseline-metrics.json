@@ -1,0 +1,77 @@
+{
+  "stages": {
+    "http_completion": {
+      "count": 64,
+      "total_ns": 114312389677,
+      "max_ns": 2480244853
+    },
+    "http_parse": {
+      "count": 64,
+      "total_ns": 4769497,
+      "max_ns": 282034
+    },
+    "queue_admission": {
+      "count": 64,
+      "total_ns": 41909,
+      "max_ns": 1630
+    },
+    "queue_wait": {
+      "count": 64,
+      "total_ns": 1428247311,
+      "max_ns": 163518236
+    },
+    "runtime_admit_tokenize": {
+      "count": 64,
+      "total_ns": 70509306,
+      "max_ns": 2327548
+    },
+    "runtime_step": {
+      "count": 1186,
+      "total_ns": 17223530656,
+      "max_ns": 262355434
+    },
+    "scheduler_host": {
+      "count": 1186,
+      "total_ns": 74969767,
+      "max_ns": 10945097
+    },
+    "scheduler_iteration": {
+      "count": 1186,
+      "total_ns": 17298272431,
+      "max_ns": 262364814
+    },
+    "server_ttft": {
+      "count": 64,
+      "total_ns": 27844558333,
+      "max_ns": 951639894
+    },
+    "sse_write_flush": {
+      "count": 3448,
+      "total_ns": 136891049,
+      "max_ns": 2072343
+    },
+    "token_dispatch": {
+      "count": 1186,
+      "total_ns": 5861224,
+      "max_ns": 40421
+    }
+  },
+  "requests_total": 64,
+  "requests_completed": 64,
+  "requests_failed": 0,
+  "requests_cancelled": 0,
+  "tokens_generated": 3448,
+  "queue_len": 0,
+  "inference_busy": false,
+  "avg_queue_wait_ms": 22.316364234375,
+  "avg_generation_ms": 1762.53073059375,
+  "active_decode": 0,
+  "active_prefill": 0,
+  "scheduled_decode_tokens": 0,
+  "scheduled_prefill_tokens": 0,
+  "kv_num_blocks": 512,
+  "kv_block_size": 16,
+  "kv_free_blocks": 512,
+  "kv_allocated_blocks": 0,
+  "prefill_stall_ns": 1517701138
+}

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "chat_template_note": "Prompts are already rendered chat strings; tokenizer add_special_tokens=true",
+  "token_policy_default": "fixed_len",
+  "workloads": [
+    {
+      "id": "short_hello",
+      "priority": "P0",
+      "prompt_id": "hello",
+      "prompt": "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n",
+      "target_prompt_tokens": [16, 32],
+      "max_new": 16,
+      "batches": [1, 2, 4, 8],
+      "dtypes": ["fp32", "bf16"],
+      "max_seq": 512
+    },
+    {
+      "id": "short_64",
+      "priority": "P0",
+      "prompt_id": "hello",
+      "prompt": "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n",
+      "target_prompt_tokens": [16, 32],
+      "max_new": 64,
+      "batches": [1, 4, 8],
+      "dtypes": ["bf16"],
+      "max_seq": 512
+    },
+    {
+      "id": "medium_256",
+      "priority": "P0",
+      "prompt_id": "medium_pad",
+      "prompt_template": "<|im_start|>user\nSummarize the following:\n{pad}\n<|im_end|>\n<|im_start|>assistant\n",
+      "pad_token_word": "alpha ",
+      "pad_repeats": 220,
+      "target_prompt_tokens": [200, 320],
+      "max_new": 64,
+      "batches": [1, 4],
+      "dtypes": ["fp32", "bf16"],
+      "max_seq": 1024
+    },
+    {
+      "id": "long_1024",
+      "priority": "P1",
+      "prompt_id": "long_pad",
+      "prompt_template": "<|im_start|>user\nRead carefully then reply with one word: OK.\n{pad}\n<|im_end|>\n<|im_start|>assistant\n",
+      "pad_token_word": "beta ",
+      "pad_repeats": 980,
+      "target_prompt_tokens": [900, 1200],
+      "max_new": 64,
+      "batches": [1, 2],
+      "dtypes": ["bf16"],
+      "max_seq": 2048
+    },
+    {
+      "id": "mixed_stagger",
+      "priority": "P1",
+      "mode": "mixed_stagger",
+      "max_new": 32,
+      "batches": [8],
+      "dtypes": ["bf16"],
+      "max_seq": 1024,
+      "prompts": [
+        "<|im_start|>user\nHi<|im_end|>\n<|im_start|>assistant\n",
+        "<|im_start|>user\nExplain continuous batching in one sentence.<|im_end|>\n<|im_start|>assistant\n",
+        "<|im_start|>user\nList three primes.<|im_end|>\n<|im_start|>assistant\n",
+        "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n"
+      ]
+    }
+  ],
+  "omitted": [
+    {
+      "id": "full_combinatorial",
+      "priority": "P2",
+      "reason": "Exceeds Phase 12 cloud budget; representative P0/P1 cover short/medium/long/mixed"
+    }
+  ],
+  "correctness_prompts": [
+    {"id": "hello", "text": "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n"},
+    {"id": "short", "text": "<|im_start|>user\nShort.<|im_end|>\n<|im_start|>assistant\n"},
+    {"id": "primes", "text": "<|im_start|>user\nList three primes.<|im_end|>\n<|im_start|>assistant\n"},
+    {"id": "reason", "text": "<|im_start|>user\nIf 2+2=4, what is 3+5? Reply with only the number.<|im_end|>\n<|im_start|>assistant\n"},
+    {"id": "repeat", "text": "<|im_start|>user\na a a a a a a a a a a a a a a a<|im_end|>\n<|im_start|>assistant\n"},
+    {"id": "numeric", "text": "<|im_start|>user\nCompute 17*19. Show only the product.<|im_end|>\n<|im_start|>assistant\n"}
+  ]
+}

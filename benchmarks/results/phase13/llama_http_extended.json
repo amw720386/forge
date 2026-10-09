@@ -1,0 +1,2068 @@
+{
+  "runtime": "llama",
+  "max_new": 64,
+  "eos": true,
+  "timing": "client POST through SSE completion; loopback; load excluded",
+  "results": [
+    {
+      "concurrency": 1,
+      "workload": "long",
+      "aggregate_tok_s_median": 174.16945831061057,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "long",
+          "wall_s": 0.3711833620000107,
+          "aggregate_tok_s": 172.4215214150632,
+          "per_request_tok_s": [
+            172.4215214150632
+          ],
+          "latency_p50_s": 0.3711833620000107,
+          "latency_p95_s": 0.3711833620000107,
+          "ttft_p50_s": 0.0360147210001287,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.3711833620000107,
+              "ttft_s": 0.0360147210001287,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 32.954,
+                "prompt_per_token_ms": 0.03621318681318681,
+                "prompt_per_second": 27614.250166899314,
+                "predicted_n": 64,
+                "predicted_ms": 334.87,
+                "predicted_per_token_ms": 5.315396825396825,
+                "predicted_per_second": 188.13270821512825
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "long",
+          "wall_s": 0.3674582249998366,
+          "aggregate_tok_s": 174.16945831061057,
+          "per_request_tok_s": [
+            174.16945831061057
+          ],
+          "latency_p50_s": 0.3674582249998366,
+          "latency_p95_s": 0.3674582249998366,
+          "ttft_p50_s": 0.03062259099988296,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.3674582249998366,
+              "ttft_s": 0.03062259099988296,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 27.891,
+                "prompt_per_token_ms": 0.030649450549450546,
+                "prompt_per_second": 32627.01229787387,
+                "predicted_n": 64,
+                "predicted_ms": 336.594,
+                "predicted_per_token_ms": 5.342761904761905,
+                "predicted_per_second": 187.16911174887252
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "long",
+          "wall_s": 0.3662626640000326,
+          "aggregate_tok_s": 174.73798530552463,
+          "per_request_tok_s": [
+            174.73798530552463
+          ],
+          "latency_p50_s": 0.3662626640000326,
+          "latency_p95_s": 0.3662626640000326,
+          "ttft_p50_s": 0.029959283999914987,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.3662626640000326,
+              "ttft_s": 0.029959283999914987,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 27.094,
+                "prompt_per_token_ms": 0.029773626373626374,
+                "prompt_per_second": 33586.77197903595,
+                "predicted_n": 64,
+                "predicted_ms": 336.053,
+                "predicted_per_token_ms": 5.334174603174604,
+                "predicted_per_second": 187.47042877165208
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "long",
+      "aggregate_tok_s_median": 281.04551249269446,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "long",
+          "wall_s": 0.4677561670000614,
+          "aggregate_tok_s": 273.64684643480757,
+          "per_request_tok_s": [
+            136.9781234358023,
+            136.82342321740379
+          ],
+          "latency_p50_s": 0.467227892999972,
+          "latency_p95_s": 0.4677561670000614,
+          "ttft_p50_s": 0.07528072600007363,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.467227892999972,
+              "ttft_s": 0.07528072600007363,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.238,
+                "prompt_per_token_ms": 0.0585032967032967,
+                "prompt_per_second": 17093.05383372779,
+                "predicted_n": 64,
+                "predicted_ms": 391.74,
+                "predicted_per_token_ms": 6.218095238095239,
+                "predicted_per_second": 160.82095267269105
+              }
+            },
+            {
+              "latency_s": 0.4677561670000614,
+              "ttft_s": 0.07662933999995403,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 54.144,
+                "prompt_per_token_ms": 0.059498901098901096,
+                "prompt_per_second": 16807.033096926716,
+                "predicted_n": 64,
+                "predicted_ms": 390.84,
+                "predicted_per_token_ms": 6.203809523809523,
+                "predicted_per_second": 161.19128031931228
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "long",
+          "wall_s": 0.45544224800005395,
+          "aggregate_tok_s": 281.04551249269446,
+          "per_request_tok_s": [
+            142.5591528600479,
+            140.52275624634723
+          ],
+          "latency_p50_s": 0.44893645000001925,
+          "latency_p95_s": 0.45544224800005395,
+          "ttft_p50_s": 0.030008245000090028,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.44893645000001925,
+              "ttft_s": 0.030008245000090028,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 27.351,
+                "prompt_per_token_ms": 0.030056043956043953,
+                "prompt_per_second": 33271.17838470257,
+                "predicted_n": 64,
+                "predicted_ms": 418.415,
+                "predicted_per_token_ms": 6.641507936507937,
+                "predicted_per_second": 150.56821576664316
+              }
+            },
+            {
+              "latency_s": 0.45544224800005395,
+              "ttft_s": 0.0648181150002074,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 34.616,
+                "prompt_per_token_ms": 0.03803956043956044,
+                "prompt_per_second": 26288.42153917264,
+                "predicted_n": 64,
+                "predicted_ms": 390.138,
+                "predicted_per_token_ms": 6.192666666666666,
+                "predicted_per_second": 161.48132199375607
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "long",
+          "wall_s": 0.4488560269999198,
+          "aggregate_tok_s": 285.16939129798715,
+          "per_request_tok_s": [
+            142.61569448642004,
+            142.6656969560456
+          ],
+          "latency_p50_s": 0.44860117999996874,
+          "latency_p95_s": 0.44875846399986585,
+          "ttft_p50_s": 0.05596704599997793,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.44875846399986585,
+              "ttft_s": 0.05621982200000275,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.259,
+                "prompt_per_token_ms": 0.058526373626373626,
+                "prompt_per_second": 17086.314050207475,
+                "predicted_n": 64,
+                "predicted_ms": 392.014,
+                "predicted_per_token_ms": 6.222444444444444,
+                "predicted_per_second": 160.70854612335273
+              }
+            },
+            {
+              "latency_s": 0.44860117999996874,
+              "ttft_s": 0.05596704599997793,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.166,
+                "prompt_per_token_ms": 0.05842417582417582,
+                "prompt_per_second": 17116.202084038672,
+                "predicted_n": 64,
+                "predicted_ms": 392.122,
+                "predicted_per_token_ms": 6.22415873015873,
+                "predicted_per_second": 160.6642830547636
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "long",
+      "aggregate_tok_s_median": 430.45226186561433,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "long",
+          "wall_s": 0.6275435109998853,
+          "aggregate_tok_s": 407.9398408440348,
+          "per_request_tok_s": [
+            103.23629742406504,
+            102.06024878015148,
+            102.01392918273201,
+            103.26896305097583
+          ],
+          "latency_p50_s": 0.6199369949999891,
+          "latency_p95_s": 0.6273653069999909,
+          "ttft_p50_s": 0.09283047799999622,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.6199369949999891,
+              "ttft_s": 0.09283047799999622,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 72.743,
+                "prompt_per_token_ms": 0.07993736263736263,
+                "prompt_per_second": 12509.794756883824,
+                "predicted_n": 64,
+                "predicted_ms": 526.671,
+                "predicted_per_token_ms": 8.359857142857143,
+                "predicted_per_second": 119.619268955382
+              }
+            },
+            {
+              "latency_s": 0.6270805799999835,
+              "ttft_s": 0.15518901999985246,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 135.026,
+                "prompt_per_token_ms": 0.14838021978021979,
+                "prompt_per_second": 6739.4427739842695,
+                "predicted_n": 64,
+                "predicted_ms": 471.544,
+                "predicted_per_token_ms": 7.484825396825396,
+                "predicted_per_second": 133.60365098484976
+              }
+            },
+            {
+              "latency_s": 0.6273653069999909,
+              "ttft_s": 0.1564675920001264,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 63.464,
+                "prompt_per_token_ms": 0.06974065934065934,
+                "prompt_per_second": 14338.837766292703,
+                "predicted_n": 64,
+                "predicted_ms": 470.626,
+                "predicted_per_token_ms": 7.470253968253968,
+                "predicted_per_second": 133.8642573933442
+              }
+            },
+            {
+              "latency_s": 0.6197408989999076,
+              "ttft_s": 0.09183244199994078,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 71.956,
+                "prompt_per_token_ms": 0.07907252747252748,
+                "prompt_per_second": 12646.617377286118,
+                "predicted_n": 64,
+                "predicted_ms": 527.485,
+                "predicted_per_token_ms": 8.372777777777777,
+                "predicted_per_second": 119.43467586756022
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "long",
+          "wall_s": 0.5900202619998254,
+          "aggregate_tok_s": 433.88340449920986,
+          "per_request_tok_s": [
+            108.48886370291652,
+            108.56276990540982,
+            109.97342760180496,
+            109.87526107116216
+          ],
+          "latency_p50_s": 0.5824787069998365,
+          "latency_p95_s": 0.5899222999998983,
+          "ttft_p50_s": 0.05736704099990675,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.5899222999998983,
+              "ttft_s": 0.12388832099986757,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 66.249,
+                "prompt_per_token_ms": 0.0728010989010989,
+                "prompt_per_second": 13736.05639330405,
+                "predicted_n": 64,
+                "predicted_ms": 465.755,
+                "predicted_per_token_ms": 7.392936507936508,
+                "predicted_per_second": 135.26424837092463
+              }
+            },
+            {
+              "latency_s": 0.5895206989998769,
+              "ttft_s": 0.1233608769998682,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 66.163,
+                "prompt_per_token_ms": 0.0727065934065934,
+                "prompt_per_second": 13753.910796064267,
+                "predicted_n": 64,
+                "predicted_ms": 465.82,
+                "predicted_per_token_ms": 7.393968253968254,
+                "predicted_per_second": 135.24537374951697
+              }
+            },
+            {
+              "latency_s": 0.5819587640000918,
+              "ttft_s": 0.05609399900004064,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 52.783,
+                "prompt_per_token_ms": 0.0580032967032967,
+                "prompt_per_second": 17240.399371009607,
+                "predicted_n": 64,
+                "predicted_ms": 525.397,
+                "predicted_per_token_ms": 8.339634920634921,
+                "predicted_per_second": 119.90932570989175
+              }
+            },
+            {
+              "latency_s": 0.5824787069998365,
+              "ttft_s": 0.05736704099990675,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.665,
+                "prompt_per_token_ms": 0.05897252747252747,
+                "prompt_per_second": 16957.04835553899,
+                "predicted_n": 64,
+                "predicted_ms": 524.571,
+                "predicted_per_token_ms": 8.32652380952381,
+                "predicted_per_second": 120.09813733507951
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "long",
+          "wall_s": 0.594723323999915,
+          "aggregate_tok_s": 430.45226186561433,
+          "per_request_tok_s": [
+            109.02080283004581,
+            107.74283895428364,
+            107.64417281497867,
+            109.08894933275022
+          ],
+          "latency_p50_s": 0.587043924999989,
+          "latency_p95_s": 0.5945514590000585,
+          "ttft_p50_s": 0.05738909199999398,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.587043924999989,
+              "ttft_s": 0.05738909199999398,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.766,
+                "prompt_per_token_ms": 0.05908351648351648,
+                "prompt_per_second": 16925.194360748428,
+                "predicted_n": 64,
+                "predicted_ms": 528.885,
+                "predicted_per_token_ms": 8.395,
+                "predicted_per_second": 119.11852293031568
+              }
+            },
+            {
+              "latency_s": 0.5940069949999724,
+              "ttft_s": 0.12386768999999731,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 66.591,
+                "prompt_per_token_ms": 0.07317692307692307,
+                "prompt_per_second": 13665.510354252077,
+                "predicted_n": 64,
+                "predicted_ms": 469.823,
+                "predicted_per_token_ms": 7.457507936507936,
+                "predicted_per_second": 134.09305206428806
+              }
+            },
+            {
+              "latency_s": 0.5945514590000585,
+              "ttft_s": 0.12441611400004149,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 66.551,
+                "prompt_per_token_ms": 0.07313296703296704,
+                "prompt_per_second": 13673.723910985558,
+                "predicted_n": 64,
+                "predicted_ms": 469.766,
+                "predicted_per_token_ms": 7.456603174603175,
+                "predicted_per_second": 134.10932251376215
+              }
+            },
+            {
+              "latency_s": 0.5866772059998766,
+              "ttft_s": 0.05705776399986462,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 53.562,
+                "prompt_per_token_ms": 0.058859340659340655,
+                "prompt_per_second": 16989.65684627161,
+                "predicted_n": 64,
+                "predicted_ms": 529.031,
+                "predicted_per_token_ms": 8.39731746031746,
+                "predicted_per_second": 119.08564904514103
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "long",
+      "aggregate_tok_s_median": 579.5546770230434,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 0.8976236890000564,
+          "aggregate_tok_s": 570.3949286035029,
+          "per_request_tok_s": [
+            73.4601279935224,
+            72.63841110484621,
+            71.31234623241575,
+            71.34575588691627,
+            72.68712754413258,
+            71.9407638132029,
+            73.45164542583478,
+            71.89909757935703
+          ],
+          "latency_p50_s": 0.881076541000084,
+          "latency_p95_s": 0.8974603049998677,
+          "ttft_p50_s": 0.15791783000008763,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.8712209160000839,
+              "ttft_s": 0.08195474700005434,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 61.068,
+                "prompt_per_token_ms": 0.0671076923076923,
+                "prompt_per_second": 14901.421366345712,
+                "predicted_n": 64,
+                "predicted_ms": 788.721,
+                "predicted_per_token_ms": 12.519380952380953,
+                "predicted_per_second": 79.87615392515224
+              }
+            },
+            {
+              "latency_s": 0.881076541000084,
+              "ttft_s": 0.15791783000008763,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 75.653,
+                "prompt_per_token_ms": 0.08313516483516484,
+                "prompt_per_second": 12028.604285355505,
+                "predicted_n": 64,
+                "predicted_ms": 722.877,
+                "predicted_per_token_ms": 11.474238095238094,
+                "predicted_per_second": 87.15175610788559
+              }
+            },
+            {
+              "latency_s": 0.8974603049998677,
+              "ttft_s": 0.28713345799997114,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 51.648,
+                "prompt_per_token_ms": 0.05675604395604396,
+                "prompt_per_second": 17619.268897149937,
+                "predicted_n": 64,
+                "predicted_ms": 610.052,
+                "predicted_per_token_ms": 9.68336507936508,
+                "predicted_per_second": 103.26988519011493
+              }
+            },
+            {
+              "latency_s": 0.897040043999823,
+              "ttft_s": 0.2857281519998196,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 127.387,
+                "prompt_per_token_ms": 0.1399857142857143,
+                "prompt_per_second": 7143.586080212266,
+                "predicted_n": 64,
+                "predicted_ms": 610.952,
+                "predicted_per_token_ms": 9.697650793650794,
+                "predicted_per_second": 103.11775720514868
+              }
+            },
+            {
+              "latency_s": 0.880486024999982,
+              "ttft_s": 0.15718899000012243,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 136.416,
+                "prompt_per_token_ms": 0.1499076923076923,
+                "prompt_per_second": 6670.771756978654,
+                "predicted_n": 64,
+                "predicted_ms": 722.962,
+                "predicted_per_token_ms": 11.475587301587302,
+                "predicted_per_second": 87.14150951225653
+              }
+            },
+            {
+              "latency_s": 0.8896208020000813,
+              "ttft_s": 0.23486963699997432,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 152.255,
+                "prompt_per_token_ms": 0.1673131868131868,
+                "prompt_per_second": 5976.815211323109,
+                "predicted_n": 64,
+                "predicted_ms": 654.343,
+                "predicted_per_token_ms": 10.386396825396824,
+                "predicted_per_second": 96.2797798708017
+              }
+            },
+            {
+              "latency_s": 0.8713215289999425,
+              "ttft_s": 0.08189829499997359,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 61.208,
+                "prompt_per_token_ms": 0.06726153846153846,
+                "prompt_per_second": 14867.337602927722,
+                "predicted_n": 64,
+                "predicted_ms": 788.721,
+                "predicted_per_token_ms": 12.519380952380953,
+                "predicted_per_second": 79.87615392515224
+              }
+            },
+            {
+              "latency_s": 0.8901363460001903,
+              "ttft_s": 0.2354762230002052,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 77.018,
+                "prompt_per_token_ms": 0.08463516483516484,
+                "prompt_per_second": 11815.41977200135,
+                "predicted_n": 64,
+                "predicted_ms": 654.303,
+                "predicted_per_token_ms": 10.385761904761905,
+                "predicted_per_second": 96.2856658153791
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 0.8719462850001491,
+          "aggregate_tok_s": 587.1921342034417,
+          "per_request_tok_s": [
+            74.10002949620808,
+            74.86565673736976,
+            75.74394686803936,
+            74.89146185215677,
+            73.4529015886087,
+            75.74409926127156,
+            74.11139576667428,
+            73.41478879274172
+          ],
+          "latency_p50_s": 0.8548646040001131,
+          "latency_p95_s": 0.8717589610000687,
+          "ttft_p50_s": 0.143267471000172,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.863697362000039,
+              "ttft_s": 0.220733361999919,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 77.19,
+                "prompt_per_token_ms": 0.08482417582417583,
+                "prompt_per_second": 11789.091851276073,
+                "predicted_n": 64,
+                "predicted_ms": 642.693,
+                "predicted_per_token_ms": 10.20147619047619,
+                "predicted_per_second": 98.02502905741933
+              }
+            },
+            {
+              "latency_s": 0.8548646040001131,
+              "ttft_s": 0.143267471000172,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 135.964,
+                "prompt_per_token_ms": 0.149410989010989,
+                "prompt_per_second": 6692.948133329411,
+                "predicted_n": 64,
+                "predicted_ms": 711.31,
+                "predicted_per_token_ms": 11.29063492063492,
+                "predicted_per_second": 88.56897836386386
+              }
+            },
+            {
+              "latency_s": 0.8449520080000639,
+              "ttft_s": 0.06848805899994659,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 61.856,
+                "prompt_per_token_ms": 0.06797362637362638,
+                "prompt_per_second": 14711.588204862908,
+                "predicted_n": 64,
+                "predicted_ms": 776.039,
+                "predicted_per_token_ms": 12.318079365079365,
+                "predicted_per_second": 81.18148701289496
+              }
+            },
+            {
+              "latency_s": 0.8545700459999352,
+              "ttft_s": 0.14295394199984912,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 74.441,
+                "prompt_per_token_ms": 0.08180329670329671,
+                "prompt_per_second": 12224.446205719965,
+                "predicted_n": 64,
+                "predicted_ms": 711.256,
+                "predicted_per_token_ms": 11.289777777777777,
+                "predicted_per_second": 88.57570270057477
+              }
+            },
+            {
+              "latency_s": 0.871306628000184,
+              "ttft_s": 0.27113118400006897,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 50.499,
+                "prompt_per_token_ms": 0.0554934065934066,
+                "prompt_per_second": 18020.15881502604,
+                "predicted_n": 64,
+                "predicted_ms": 599.802,
+                "predicted_per_token_ms": 9.520666666666667,
+                "predicted_per_second": 105.03466143827463
+              }
+            },
+            {
+              "latency_s": 0.8449503080000795,
+              "ttft_s": 0.06861937200005741,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 61.998,
+                "prompt_per_token_ms": 0.06812967032967032,
+                "prompt_per_second": 14677.892835252751,
+                "predicted_n": 64,
+                "predicted_ms": 775.896,
+                "predicted_per_token_ms": 12.315809523809524,
+                "predicted_per_second": 81.19644900863003
+              }
+            },
+            {
+              "latency_s": 0.8635648990000391,
+              "ttft_s": 0.2204938760000914,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 151.107,
+                "prompt_per_token_ms": 0.16605164835164835,
+                "prompt_per_second": 6022.2226634106955,
+                "predicted_n": 64,
+                "predicted_ms": 642.699,
+                "predicted_per_token_ms": 10.201571428571429,
+                "predicted_per_second": 98.02411393202729
+              }
+            },
+            {
+              "latency_s": 0.8717589610000687,
+              "ttft_s": 0.270721463999962,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 126.529,
+                "prompt_per_token_ms": 0.13904285714285713,
+                "prompt_per_second": 7192.027124216583,
+                "predicted_n": 64,
+                "predicted_ms": 600.524,
+                "predicted_per_token_ms": 9.532126984126984,
+                "predicted_per_second": 104.90838001478708
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "long",
+          "wall_s": 0.8834369220001008,
+          "aggregate_tok_s": 579.5546770230434,
+          "per_request_tok_s": [
+            74.46064946294467,
+            75.4108629783929,
+            74.48847527405479,
+            72.99473206143274,
+            73.75117385076288,
+            72.99313196216305,
+            73.71986564858908,
+            72.44433462788042
+          ],
+          "latency_p50_s": 0.8677827980000075,
+          "latency_p95_s": 0.8834369220001008,
+          "ttft_p50_s": 0.17972033299997747,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.8595143940001435,
+              "ttft_s": 0.10470257500014668,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 72.239,
+                "prompt_per_token_ms": 0.07938351648351649,
+                "prompt_per_second": 12597.073602901479,
+                "predicted_n": 64,
+                "predicted_ms": 754.498,
+                "predicted_per_token_ms": 11.976158730158732,
+                "predicted_per_second": 83.49922730080132
+              }
+            },
+            {
+              "latency_s": 0.8486840950001806,
+              "ttft_s": 0.03044107700020504,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 26.74,
+                "prompt_per_token_ms": 0.029384615384615384,
+                "prompt_per_second": 34031.41361256545,
+                "predicted_n": 64,
+                "predicted_ms": 817.754,
+                "predicted_per_token_ms": 12.980222222222222,
+                "predicted_per_second": 77.0402835082433
+              }
+            },
+            {
+              "latency_s": 0.8591933149998567,
+              "ttft_s": 0.10425984299990887,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 72.171,
+                "prompt_per_token_ms": 0.07930879120879121,
+                "prompt_per_second": 12608.942650094912,
+                "predicted_n": 64,
+                "predicted_ms": 754.523,
+                "predicted_per_token_ms": 11.976555555555557,
+                "predicted_per_second": 83.4964606778057
+              }
+            },
+            {
+              "latency_s": 0.8767755999999736,
+              "ttft_s": 0.25758137399998304,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 77.22,
+                "prompt_per_token_ms": 0.08485714285714285,
+                "prompt_per_second": 11784.511784511786,
+                "predicted_n": 64,
+                "predicted_ms": 618.797,
+                "predicted_per_token_ms": 9.822174603174604,
+                "predicted_per_second": 101.81044833766163
+              }
+            },
+            {
+              "latency_s": 0.8677827980000075,
+              "ttft_s": 0.17972033299997747,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 75.805,
+                "prompt_per_token_ms": 0.08330219780219782,
+                "prompt_per_second": 12004.485192269638,
+                "predicted_n": 64,
+                "predicted_ms": 687.595,
+                "predicted_per_token_ms": 10.91420634920635,
+                "predicted_per_second": 91.62370290650746
+              }
+            },
+            {
+              "latency_s": 0.8767948199999864,
+              "ttft_s": 0.2575495730000057,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 152.571,
+                "prompt_per_token_ms": 0.16766043956043955,
+                "prompt_per_second": 5964.436229689783,
+                "predicted_n": 64,
+                "predicted_ms": 618.835,
+                "predicted_per_token_ms": 9.822777777777778,
+                "predicted_per_second": 101.80419659521519
+              }
+            },
+            {
+              "latency_s": 0.8681513379999615,
+              "ttft_s": 0.1800341110001682,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 147.568,
+                "prompt_per_token_ms": 0.16216263736263736,
+                "prompt_per_second": 6166.64859590155,
+                "predicted_n": 64,
+                "predicted_ms": 687.612,
+                "predicted_per_token_ms": 10.91447619047619,
+                "predicted_per_second": 91.62143767124483
+              }
+            },
+            {
+              "latency_s": 0.8834369220001008,
+              "ttft_s": 0.2802821110001332,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 99.086,
+                "prompt_per_token_ms": 0.10888571428571428,
+                "prompt_per_second": 9183.941222776175,
+                "predicted_n": 64,
+                "predicted_ms": 602.94,
+                "predicted_per_token_ms": 9.57047619047619,
+                "predicted_per_second": 104.48800875709026
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 1,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 181.30651834096864,
+      "trials": [
+        {
+          "concurrency": 1,
+          "workload": "mixed",
+          "wall_s": 0.054887937999865244,
+          "aggregate_tok_s": 182.18939104661848,
+          "per_request_tok_s": [
+            182.18939104661848
+          ],
+          "latency_p50_s": 0.054887937999865244,
+          "latency_p95_s": 0.054887937999865244,
+          "ttft_p50_s": 0.0076366069999949104,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.054887937999865244,
+              "ttft_s": 0.0076366069999949104,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.543,
+                "prompt_per_token_ms": 0.6543,
+                "prompt_per_second": 1528.3509093687912,
+                "predicted_n": 10,
+                "predicted_ms": 46.937,
+                "predicted_per_token_ms": 5.215222222222222,
+                "predicted_per_second": 191.7463834501566
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "mixed",
+          "wall_s": 0.05515521500001341,
+          "aggregate_tok_s": 181.30651834096864,
+          "per_request_tok_s": [
+            181.30651834096864
+          ],
+          "latency_p50_s": 0.05515521500001341,
+          "latency_p95_s": 0.05515521500001341,
+          "ttft_p50_s": 0.007526105000124517,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.05515521500001341,
+              "ttft_s": 0.007526105000124517,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.573,
+                "prompt_per_token_ms": 0.6573,
+                "prompt_per_second": 1521.3753232922563,
+                "predicted_n": 10,
+                "predicted_ms": 47.148,
+                "predicted_per_token_ms": 5.238666666666667,
+                "predicted_per_second": 190.88826673453804
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 1,
+          "workload": "mixed",
+          "wall_s": 0.055862393000097654,
+          "aggregate_tok_s": 179.01130730261625,
+          "per_request_tok_s": [
+            179.01130730261625
+          ],
+          "latency_p50_s": 0.055862393000097654,
+          "latency_p95_s": 0.055862393000097654,
+          "ttft_p50_s": 0.007779670999980226,
+          "observed_active_peak": 1,
+          "requests": [
+            {
+              "latency_s": 0.055862393000097654,
+              "ttft_s": 0.007779670999980226,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.718,
+                "prompt_per_token_ms": 0.6718,
+                "prompt_per_second": 1488.5382554331647,
+                "predicted_n": 10,
+                "predicted_ms": 47.808,
+                "predicted_per_token_ms": 5.312,
+                "predicted_per_second": 188.25301204819277
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 2,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 206.08775141263052,
+      "trials": [
+        {
+          "concurrency": 2,
+          "workload": "mixed",
+          "wall_s": 0.3602244459998474,
+          "aggregate_tok_s": 205.42747951101396,
+          "per_request_tok_s": [
+            123.75144537052839,
+            177.66700930682288
+          ],
+          "latency_p50_s": 0.08080713699996522,
+          "latency_p95_s": 0.3602244459998474,
+          "ttft_p50_s": 0.022009778999972696,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.08080713699996522,
+              "ttft_s": 0.022009778999972696,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 16.568,
+                "prompt_per_token_ms": 1.6568,
+                "prompt_per_second": 603.5731530661516,
+                "predicted_n": 10,
+                "predicted_ms": 58.454,
+                "predicted_per_token_ms": 6.494888888888889,
+                "predicted_per_second": 153.96722208916412
+              }
+            },
+            {
+              "latency_s": 0.3602244459998474,
+              "ttft_s": 0.022520951999922545,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 16.966,
+                "prompt_per_token_ms": 0.08929473684210527,
+                "prompt_per_second": 11198.868324885063,
+                "predicted_n": 64,
+                "predicted_ms": 337.442,
+                "predicted_per_token_ms": 5.356222222222223,
+                "predicted_per_second": 186.69875119279757
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "mixed",
+          "wall_s": 0.3590703449999637,
+          "aggregate_tok_s": 206.08775141263052,
+          "per_request_tok_s": [
+            131.6234014403931,
+            178.23805527578855
+          ],
+          "latency_p50_s": 0.07597433199998704,
+          "latency_p95_s": 0.3590703449999637,
+          "ttft_p50_s": 0.008671884000023056,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.07597433199998704,
+              "ttft_s": 0.008671884000023056,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 7.366,
+                "prompt_per_token_ms": 0.7365999999999999,
+                "prompt_per_second": 1357.5889220743961,
+                "predicted_n": 10,
+                "predicted_ms": 66.949,
+                "predicted_per_token_ms": 7.438777777777777,
+                "predicted_per_second": 134.43068604460112
+              }
+            },
+            {
+              "latency_s": 0.3590703449999637,
+              "ttft_s": 0.025651121999999305,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 16.23,
+                "prompt_per_token_ms": 0.08542105263157895,
+                "prompt_per_second": 11706.71595810228,
+                "predicted_n": 64,
+                "predicted_ms": 333.197,
+                "predicted_per_token_ms": 5.28884126984127,
+                "predicted_per_second": 189.07733262904526
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 2,
+          "workload": "mixed",
+          "wall_s": 0.3555971859998408,
+          "aggregate_tok_s": 208.1006344072507,
+          "per_request_tok_s": [
+            134.50939379984854,
+            179.97892705491952
+          ],
+          "latency_p50_s": 0.07434424999996736,
+          "latency_p95_s": 0.3555971859998408,
+          "ttft_p50_s": 0.00798131600004126,
+          "observed_active_peak": 2,
+          "requests": [
+            {
+              "latency_s": 0.07434424999996736,
+              "ttft_s": 0.00798131600004126,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 6.834,
+                "prompt_per_token_ms": 0.6834,
+                "prompt_per_second": 1463.271875914545,
+                "predicted_n": 10,
+                "predicted_ms": 66.047,
+                "predicted_per_token_ms": 7.338555555555555,
+                "predicted_per_second": 136.26659802867655
+              }
+            },
+            {
+              "latency_s": 0.3555971859998408,
+              "ttft_s": 0.023983039999848188,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 15.567,
+                "prompt_per_token_ms": 0.08193157894736842,
+                "prompt_per_second": 12205.306096229204,
+                "predicted_n": 64,
+                "predicted_ms": 331.312,
+                "predicted_per_token_ms": 5.258920634920635,
+                "predicted_per_second": 190.15308832761866
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 311.45964521019476,
+      "trials": [
+        {
+          "concurrency": 4,
+          "workload": "mixed",
+          "wall_s": 0.472967079,
+          "aggregate_tok_s": 312.91818515766084,
+          "per_request_tok_s": [
+            81.69678870828255,
+            135.47252809333176,
+            135.3605908320415,
+            81.90615006580339
+          ],
+          "latency_p50_s": 0.12240383200014548,
+          "latency_p95_s": 0.47281117500006076,
+          "ttft_p50_s": 0.048373090000040975,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.12240383200014548,
+              "ttft_s": 0.048373090000040975,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 43.927,
+                "prompt_per_token_ms": 4.3927,
+                "prompt_per_second": 227.65042001502493,
+                "predicted_n": 10,
+                "predicted_ms": 73.697,
+                "predicted_per_token_ms": 8.188555555555556,
+                "predicted_per_second": 122.1216603118173
+              }
+            },
+            {
+              "latency_s": 0.47242050399995605,
+              "ttft_s": 0.04849262299990187,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 44.233,
+                "prompt_per_token_ms": 0.2328052631578947,
+                "prompt_per_second": 4295.435534555649,
+                "predicted_n": 64,
+                "predicted_ms": 423.565,
+                "predicted_per_token_ms": 6.723253968253968,
+                "predicted_per_second": 148.7375019182416
+              }
+            },
+            {
+              "latency_s": 0.47281117500006076,
+              "ttft_s": 0.04979050700012522,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 45.304,
+                "prompt_per_token_ms": 0.049784615384615385,
+                "prompt_per_second": 20086.526576019776,
+                "predicted_n": 64,
+                "predicted_ms": 422.678,
+                "predicted_per_token_ms": 6.709174603174604,
+                "predicted_per_second": 149.04963116130955
+              }
+            },
+            {
+              "latency_s": 0.1220909539999866,
+              "ttft_s": 0.04810798299990893,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 43.599,
+                "prompt_per_token_ms": 4.3599,
+                "prompt_per_second": 229.36305878575197,
+                "predicted_n": 10,
+                "predicted_ms": 73.688,
+                "predicted_per_token_ms": 8.187555555555555,
+                "predicted_per_second": 122.13657583324286
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "mixed",
+          "wall_s": 0.4816265020001538,
+          "aggregate_tok_s": 307.29206010335525,
+          "per_request_tok_s": [
+            83.82712961436503,
+            134.7674362993505,
+            132.9145254785645,
+            83.83550029515025
+          ],
+          "latency_p50_s": 0.1192931220000446,
+          "latency_p95_s": 0.48151245899998685,
+          "ttft_p50_s": 0.020128150000118694,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.1192931220000446,
+              "ttft_s": 0.020128150000118694,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 17.204,
+                "prompt_per_token_ms": 1.7204000000000002,
+                "prompt_per_second": 581.2601720530109,
+                "predicted_n": 10,
+                "predicted_ms": 98.654,
+                "predicted_per_token_ms": 10.961555555555556,
+                "predicted_per_second": 91.22792790966407
+              }
+            },
+            {
+              "latency_s": 0.4748921679999967,
+              "ttft_s": 0.020424136999963594,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 17.55,
+                "prompt_per_token_ms": 0.09236842105263159,
+                "prompt_per_second": 10826.210826210827,
+                "predicted_n": 64,
+                "predicted_ms": 454.212,
+                "predicted_per_token_ms": 7.209714285714286,
+                "predicted_per_second": 138.7017516049774
+              }
+            },
+            {
+              "latency_s": 0.48151245899998685,
+              "ttft_s": 0.054762024999945424,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 33.645,
+                "prompt_per_token_ms": 0.036972527472527474,
+                "prompt_per_second": 27047.109525932527,
+                "predicted_n": 64,
+                "predicted_ms": 426.472,
+                "predicted_per_token_ms": 6.769396825396825,
+                "predicted_per_second": 147.7236489148174
+              }
+            },
+            {
+              "latency_s": 0.11928121100004319,
+              "ttft_s": 0.020118390000106956,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 16.861,
+                "prompt_per_token_ms": 1.6861000000000002,
+                "prompt_per_second": 593.0846331771544,
+                "predicted_n": 10,
+                "predicted_ms": 98.726,
+                "predicted_per_token_ms": 10.969555555555555,
+                "predicted_per_second": 91.16139618742784
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 4,
+          "workload": "mixed",
+          "wall_s": 0.4751819450000312,
+          "aggregate_tok_s": 311.45964521019476,
+          "per_request_tok_s": [
+            87.15319694826948,
+            134.8770523382302,
+            134.73113205804592,
+            87.35322921345515
+          ],
+          "latency_p50_s": 0.11474048400009451,
+          "latency_p95_s": 0.4750201310000648,
+          "ttft_p50_s": 0.009681839999984732,
+          "observed_active_peak": 4,
+          "requests": [
+            {
+              "latency_s": 0.11474048400009451,
+              "ttft_s": 0.009681839999984732,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 8.111,
+                "prompt_per_token_ms": 0.8111,
+                "prompt_per_second": 1232.8936012822091,
+                "predicted_n": 10,
+                "predicted_ms": 104.688,
+                "predicted_per_token_ms": 11.632,
+                "predicted_per_second": 85.9697386519945
+              }
+            },
+            {
+              "latency_s": 0.4745062179999877,
+              "ttft_s": 0.05055462599989369,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 40.746,
+                "prompt_per_token_ms": 0.21445263157894737,
+                "prompt_per_second": 4663.034408285476,
+                "predicted_n": 64,
+                "predicted_ms": 423.652,
+                "predicted_per_token_ms": 6.72463492063492,
+                "predicted_per_second": 148.70695759727326
+              }
+            },
+            {
+              "latency_s": 0.4750201310000648,
+              "ttft_s": 0.05112165099990307,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 41.001,
+                "prompt_per_token_ms": 0.045056043956043956,
+                "prompt_per_second": 22194.580619984878,
+                "predicted_n": 64,
+                "predicted_ms": 423.647,
+                "predicted_per_token_ms": 6.724555555555556,
+                "predicted_per_second": 148.7087126782439
+              }
+            },
+            {
+              "latency_s": 0.11447773700001562,
+              "ttft_s": 0.009374962000038067,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 7.753,
+                "prompt_per_token_ms": 0.7753,
+                "prompt_per_second": 1289.8232942086934,
+                "predicted_n": 10,
+                "predicted_ms": 104.821,
+                "predicted_per_token_ms": 11.646777777777778,
+                "predicted_per_second": 85.86065769263793
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "workload": "mixed",
+      "aggregate_tok_s_median": 564.0769596370875,
+      "trials": [
+        {
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 0.6296281750001071,
+          "aggregate_tok_s": 555.883637195779,
+          "per_request_tok_s": [
+            53.35601006449613,
+            102.79220835832434,
+            101.73706322749366,
+            53.14915069172597,
+            102.89699942187296,
+            102.7810453495667,
+            53.212741908135044,
+            102.79876991569517
+          ],
+          "latency_p50_s": 0.6219812080000793,
+          "latency_p95_s": 0.6290726110000833,
+          "ttft_p50_s": 0.08022146200005409,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.1874203109998689,
+              "ttft_s": 0.0794730630000231,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 69.671,
+                "prompt_per_token_ms": 6.9671,
+                "prompt_per_second": 143.53174204475317,
+                "predicted_n": 10,
+                "predicted_ms": 107.567,
+                "predicted_per_token_ms": 11.951888888888888,
+                "predicted_per_second": 83.66878317699667
+              }
+            },
+            {
+              "latency_s": 0.6226152839999486,
+              "ttft_s": 0.0810277230000338,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 71.279,
+                "prompt_per_token_ms": 0.37515263157894735,
+                "prompt_per_second": 2665.5817281387226,
+                "predicted_n": 64,
+                "predicted_ms": 541.328,
+                "predicted_per_token_ms": 8.592507936507936,
+                "predicted_per_second": 116.38045695031478
+              }
+            },
+            {
+              "latency_s": 0.6290726110000833,
+              "ttft_s": 0.10572864100004153,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 95.753,
+                "prompt_per_token_ms": 0.10522307692307692,
+                "prompt_per_second": 9503.618685576432,
+                "predicted_n": 64,
+                "predicted_ms": 523.131,
+                "predicted_per_token_ms": 8.303666666666667,
+                "predicted_per_second": 120.4287262655052
+              }
+            },
+            {
+              "latency_s": 0.18814976099997693,
+              "ttft_s": 0.08011471000008896,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 70.351,
+                "prompt_per_token_ms": 7.0351,
+                "prompt_per_second": 142.14439027163795,
+                "predicted_n": 10,
+                "predicted_ms": 107.654,
+                "predicted_per_token_ms": 11.961555555555556,
+                "predicted_per_second": 83.60116670072641
+              }
+            },
+            {
+              "latency_s": 0.6219812080000793,
+              "ttft_s": 0.08022146200005409,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 70.968,
+                "prompt_per_token_ms": 0.37351578947368425,
+                "prompt_per_second": 2677.262991770939,
+                "predicted_n": 64,
+                "predicted_ms": 541.417,
+                "predicted_per_token_ms": 8.593920634920636,
+                "predicted_per_second": 116.36132592807391
+              }
+            },
+            {
+              "latency_s": 0.6226829060001364,
+              "ttft_s": 0.08111400600000707,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 71.479,
+                "prompt_per_token_ms": 0.07854835164835165,
+                "prompt_per_second": 12731.01190559465,
+                "predicted_n": 64,
+                "predicted_ms": 541.305,
+                "predicted_per_token_ms": 8.592142857142857,
+                "predicted_per_second": 116.38540194529887
+              }
+            },
+            {
+              "latency_s": 0.18792491499993957,
+              "ttft_s": 0.07959909599981074,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 70.0,
+                "prompt_per_token_ms": 7.0,
+                "prompt_per_second": 142.85714285714286,
+                "predicted_n": 10,
+                "predicted_ms": 107.638,
+                "predicted_per_token_ms": 11.959777777777779,
+                "predicted_per_second": 83.61359371225775
+              }
+            },
+            {
+              "latency_s": 0.622575543000039,
+              "ttft_s": 0.08069457400006286,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 70.699,
+                "prompt_per_token_ms": 0.3721,
+                "prompt_per_second": 2687.4496103198067,
+                "predicted_n": 64,
+                "predicted_ms": 541.478,
+                "predicted_per_token_ms": 8.594888888888889,
+                "predicted_per_second": 116.34821728675958
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 0.6200773680000111,
+          "aggregate_tok_s": 564.4456934928703,
+          "per_request_tok_s": [
+            53.73785239723494,
+            104.60826627432975,
+            103.24001127806045,
+            53.73912332900585,
+            104.67864234169554,
+            103.30773381677507,
+            53.71182004707309,
+            104.53976763404665
+          ],
+          "latency_p50_s": 0.6113950139999815,
+          "latency_p95_s": 0.6199146940000446,
+          "ttft_p50_s": 0.035916438000185735,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.18608856800005924,
+              "ttft_s": 0.03451921200007746,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 31.219,
+                "prompt_per_token_ms": 3.1219,
+                "prompt_per_second": 320.31775521317144,
+                "predicted_n": 10,
+                "predicted_ms": 151.499,
+                "predicted_per_token_ms": 16.833222222222222,
+                "predicted_per_second": 59.40633271506743
+              }
+            },
+            {
+              "latency_s": 0.6118063349999829,
+              "ttft_s": 0.03652732399996239,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a detailed explanation of how a computer stores and retrieves information:\n\n1. **Storage**:\n   - **Storage Devices**: The computer uses various storage devices to store information. Common storage devices include hard drives, solid-state",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 32.747,
+                "prompt_per_token_ms": 0.17235263157894737,
+                "prompt_per_second": 5802.058203804929,
+                "predicted_n": 64,
+                "predicted_ms": 574.922,
+                "predicted_per_token_ms": 9.125746031746033,
+                "predicted_per_second": 109.58008216766797
+              }
+            },
+            {
+              "latency_s": 0.6199146940000446,
+              "ttft_s": 0.10268965299997035,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 64.918,
+                "prompt_per_token_ms": 0.07133846153846155,
+                "prompt_per_second": 14017.683847315073,
+                "predicted_n": 64,
+                "predicted_ms": 516.935,
+                "predicted_per_token_ms": 8.20531746031746,
+                "predicted_per_second": 121.87218895992727
+              }
+            },
+            {
+              "latency_s": 0.18608416700021735,
+              "ttft_s": 0.03413220100014769,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 30.771,
+                "prompt_per_token_ms": 3.0771,
+                "prompt_per_second": 324.9813135744694,
+                "predicted_n": 10,
+                "predicted_ms": 151.74,
+                "predicted_per_token_ms": 16.86,
+                "predicted_per_second": 59.311981020166066
+              }
+            },
+            {
+              "latency_s": 0.6113950139999815,
+              "ttft_s": 0.035916438000185735,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 32.364,
+                "prompt_per_token_ms": 0.17033684210526315,
+                "prompt_per_second": 5870.720553701644,
+                "predicted_n": 64,
+                "predicted_ms": 575.058,
+                "predicted_per_token_ms": 9.127904761904762,
+                "predicted_per_second": 109.55416671014055
+              }
+            },
+            {
+              "latency_s": 0.6195083140000861,
+              "ttft_s": 0.10222208100003627,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 65.004,
+                "prompt_per_token_ms": 0.07143296703296703,
+                "prompt_per_second": 13999.13851455295,
+                "predicted_n": 64,
+                "predicted_ms": 516.926,
+                "predicted_per_token_ms": 8.205174603174603,
+                "predicted_per_second": 121.87431082978995
+              }
+            },
+            {
+              "latency_s": 0.18617875900008585,
+              "ttft_s": 0.034758828000121866,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 31.899,
+                "prompt_per_token_ms": 3.1899,
+                "prompt_per_second": 313.48945107997116,
+                "predicted_n": 10,
+                "predicted_ms": 151.1,
+                "predicted_per_token_ms": 16.788888888888888,
+                "predicted_per_second": 59.56320317670418
+              }
+            },
+            {
+              "latency_s": 0.6122072150001259,
+              "ttft_s": 0.037086607999981425,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 33.108,
+                "prompt_per_token_ms": 0.17425263157894735,
+                "prompt_per_second": 5738.794249124079,
+                "predicted_n": 64,
+                "predicted_ms": 574.797,
+                "predicted_per_token_ms": 9.123761904761905,
+                "predicted_per_second": 109.60391233774706
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        },
+        {
+          "concurrency": 8,
+          "workload": "mixed",
+          "wall_s": 0.6204827089998162,
+          "aggregate_tok_s": 564.0769596370875,
+          "per_request_tok_s": [
+            54.72659330061212,
+            104.31092456671188,
+            104.26203707294785,
+            54.87030530900976,
+            104.34947117908226,
+            103.19114221683638,
+            54.669964096458706,
+            104.37230746254302
+          ],
+          "latency_p50_s": 0.6131894709999415,
+          "latency_p95_s": 0.6202082719998998,
+          "ttft_p50_s": 0.0794468419999248,
+          "observed_active_peak": 8,
+          "requests": [
+            {
+              "latency_s": 0.18272652099994957,
+              "ttft_s": 0.07829014300000381,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 70.724,
+                "prompt_per_token_ms": 7.0724,
+                "prompt_per_second": 141.39471749335445,
+                "predicted_n": 10,
+                "predicted_ms": 104.036,
+                "predicted_per_token_ms": 11.559555555555555,
+                "predicted_per_second": 86.50851628282518
+              }
+            },
+            {
+              "latency_s": 0.6135503090001748,
+              "ttft_s": 0.07964318700010153,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 72.01,
+                "prompt_per_token_ms": 0.379,
+                "prompt_per_second": 2638.522427440633,
+                "predicted_n": 64,
+                "predicted_ms": 533.31,
+                "predicted_per_token_ms": 8.465238095238094,
+                "predicted_per_second": 118.13016819485854
+              }
+            },
+            {
+              "latency_s": 0.6138379970000187,
+              "ttft_s": 0.08004285799984245,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 72.466,
+                "prompt_per_token_ms": 0.07963296703296703,
+                "prompt_per_second": 12557.613225512656,
+                "predicted_n": 64,
+                "predicted_ms": 533.237,
+                "predicted_per_token_ms": 8.464079365079364,
+                "predicted_per_second": 118.14634018269551
+              }
+            },
+            {
+              "latency_s": 0.1822479380000459,
+              "ttft_s": 0.07799415500016948,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 71.095,
+                "prompt_per_token_ms": 7.1095,
+                "prompt_per_second": 140.6568675715592,
+                "predicted_n": 10,
+                "predicted_ms": 103.997,
+                "predicted_per_token_ms": 11.555222222222222,
+                "predicted_per_second": 86.54095791224746
+              }
+            },
+            {
+              "latency_s": 0.6133236639998358,
+              "ttft_s": 0.0794468419999248,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval.\" Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 72.236,
+                "prompt_per_token_ms": 0.3801894736842105,
+                "prompt_per_second": 2630.2674566698042,
+                "predicted_n": 64,
+                "predicted_ms": 533.271,
+                "predicted_per_token_ms": 8.464619047619047,
+                "predicted_per_second": 118.13880747312342
+              }
+            },
+            {
+              "latency_s": 0.6202082719998998,
+              "ttft_s": 0.10364998799991554,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information by using a combination of hardware and software components. Here's a detailed explanation of how this process works:\n\n1. **Hardware Components**:\n   - **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It is located",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 910,
+                "prompt_ms": 95.716,
+                "prompt_per_token_ms": 0.10518241758241757,
+                "prompt_per_second": 9507.292406703164,
+                "predicted_n": 64,
+                "predicted_ms": 516.177,
+                "predicted_per_token_ms": 8.193285714285715,
+                "predicted_per_second": 122.05115687060832
+              }
+            },
+            {
+              "latency_s": 0.18291579600008845,
+              "ttft_s": 0.0786158210000849,
+              "tokens": 10,
+              "text": "Hello! How can I assist you today?",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 10,
+                "prompt_ms": 71.455,
+                "prompt_per_token_ms": 7.1455,
+                "prompt_per_second": 139.9482191589112,
+                "predicted_n": 10,
+                "predicted_ms": 103.965,
+                "predicted_per_token_ms": 11.551666666666668,
+                "predicted_per_second": 86.56759486365604
+              }
+            },
+            {
+              "latency_s": 0.6131894709999415,
+              "ttft_s": 0.0794898839999405,
+              "tokens": 64,
+              "text": "A computer stores and retrieves information through a process called \"storage\" and \"retrieval\". Here's a simplified explanation of how these processes work:\n\n1. **Storage**: This is the process of storing information in a computer's memory. When you enter information into a computer, it is stored in the computer's memory",
+              "server_timings": {
+                "cache_n": 0,
+                "prompt_n": 190,
+                "prompt_ms": 71.787,
+                "prompt_per_token_ms": 0.37782631578947373,
+                "prompt_per_second": 2646.7187652360453,
+                "predicted_n": 64,
+                "predicted_ms": 533.369,
+                "predicted_per_token_ms": 8.466174603174604,
+                "predicted_per_second": 118.11710091887603
+              }
+            }
+          ],
+          "queue_wait_s": null,
+          "queue_wait_note": "not exposed per request; TTFT includes admission, prefill and transport"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "verified_at_utc": "2026-10-08T19:51:18.236947+00:00",
+  "rust_cpu_release": {
+    "command": "cargo test --release --manifest-path runtime/Cargo.toml",
+    "passed": true,
+    "tests": 41
+  },
+  "go": {
+    "command": "go -C api test ./...",
+    "passed": true
+  },
+  "cuda_stub": {
+    "command": "cargo check --manifest-path runtime/Cargo.toml --features cuda-stub --tests --examples",
+    "passed": true,
+    "gpu_validation": false
+  },
+  "python_bench_http_syntax": true,
+  "required_evidence_json_and_doc_links": true,
+  "warnings": [
+    "CPU-only BufferView dead code",
+    "existing CUDA-stub parity test unreachable branch"
+  ],
+  "post_gpu_cleanup": [
+    "diagnostic real-CUDA feature guard and rustfmt",
+    "exact NVIDIA L4 predicate",
+    "cloud CLI aliases",
+    "documentation"
+  ],
+  "real_gpu_evidence": "compute-tests.log, final-parity.log, kernel-tests.log, final-http.json; collected before verified shutdown"
+}

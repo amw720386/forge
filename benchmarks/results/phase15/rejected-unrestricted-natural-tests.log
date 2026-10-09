@@ -1,0 +1,26 @@
+    Finished `release` profile [optimized] target(s) in 0.08s
+     Running tests/cuda_phase15.rs (runtime/target/release/deps/cuda_phase15-8c758415e796bb10)
+
+running 1 test
+test real_http_long_teacher_forced ... NATURAL_LONG dtype=Fp32 max_abs_error=0.000039339066 disagreements=0/256
+NATURAL_MISMATCH dtype=Bf16 step=14 row=0 baseline=330 candidate=264 baseline_margin=0.0043411255 candidate_margin=-0.0026474
+NATURAL_MISMATCH dtype=Bf16 step=14 row=1 baseline=330 candidate=264 baseline_margin=0.0043411255 candidate_margin=-0.0026474
+NATURAL_MISMATCH dtype=Bf16 step=14 row=2 baseline=330 candidate=264 baseline_margin=0.0043411255 candidate_margin=-0.0026474
+NATURAL_MISMATCH dtype=Bf16 step=14 row=3 baseline=330 candidate=264 baseline_margin=0.0043411255 candidate_margin=-0.0026474
+NATURAL_LONG dtype=Bf16 max_abs_error=0.15000272 disagreements=4/256
+
+thread 'real_http_long_teacher_forced' (29900) panicked at tests/cuda_phase15.rs:246:9:
+assertion `left == right` failed
+  left: 4
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    real_http_long_teacher_forced
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 10.49s
+
+error: test failed, to rerun pass `--test cuda_phase15`
