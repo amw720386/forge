@@ -91,8 +91,8 @@ are internal runtime timings. HTTP serving includes additional work.
 
 | Model | FP32 tok/s | INT8 tok/s | INT4 tok/s |
 |---|---:|---:|---:|
-| Qwen2.5-0.5B-Instruct | 12.60 | 30.51 | 21.65 |
-| SmolLM2-135M-Instruct | 37.30 | 67.55 | 39.99 |
+| Qwen2.5-0.5B-Instruct | 10.38 | 24.17 | 16.99 |
+| SmolLM2-135M-Instruct | 32.30 | 48.94 | 29.02 |
 
 See [benchmarks.md](docs/benchmarks.md) for commands and timing definitions.
 Generated output stays in the ignored `benchmark-output/` directory.
