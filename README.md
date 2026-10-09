@@ -1,101 +1,109 @@
 # Forge
 
-Event-driven LLM inference runtime: **Go** (HTTP + scheduling) â†’ **Rust** (model/runtime) â†’ **C++** (kernels).
+Forge is an LLM inference runtime written in Go, Rust, C++ and CUDA.
 
-Not a wrapper around llama.cpp / candle / ONNX Runtime. The forward pass is our own.
+It loads local Hugging Face Safetensors or native `.forge` checkpoints and runs
+its own transformer forward pass on CPU or NVIDIA CUDA. A Go HTTP server exposes
+text completions with streaming and continuous batching.
 
-## Status
+## Features
 
-**Phases 1-16 implemented, with benchmark and numerical qualifications documented.** Phase 16 adds a validated model-neutral decoder plan, Qwen/Llama adapters and SmolLM2-135M-Instruct CPU and real L4 inference. Qwen regressions pass; 180 audited HTTP completions match controls. SmolLM2 BF16 remains experimentally qualified because logits differ from FP32. Phase 15's conservative attention dispatch, pinned worker, graph invalidation and fair fixed-budget scheduling remain intact.
+- CPU FP32 and groupwise INT8/INT4 weight quantization.
+- CUDA FP32/BF16 inference, paged KV caching, chunked prefill and CUDA Graphs.
+- Shared batched decoding, bounded admission and request cancellation.
+- Checkpoint validation and offline quantization with `forge-quantize`.
+- `/v1/completions`, SSE streaming, `/health` and JSON `/metrics`.
 
-See [Phase 16 results](docs/PHASE16_RESULTS.md), [design](docs/PHASE16_DESIGN.md), [supported architectures](docs/MODEL_ARCHITECTURES.md), [precision contracts](docs/PRECISION_CONTRACTS.md) and [cost ledger](docs/PHASE16_COST_LEDGER.md). New Phase 16 compute cost was estimated at $0.70; the Studio is verified stopped. Previous Phase 15 evidence remains preserved.
+## Build
 
-See [Phase 15 results](docs/PHASE15_RESULTS.md), [design](docs/PHASE15_DESIGN.md), [profile](docs/PHASE15_PROFILE.md), [cost ledger](docs/PHASE15_COST_LEDGER.md), [roadmap](docs/ROADMAP.md) and [benchmark methodology](docs/BENCHMARK_METHODOLOGY.md). [Phase 14 results](docs/PHASE14_RESULTS.md) remain preserved.
+Requires Rust stable, Go 1.22+, CMake and a C++17 compiler. Default x86-64 CPU
+builds require AVX2/FMA. Windows uses MSVC for Rust and LLVM-MinGW for CMake.
 
-## Layout
-
+```powershell
+# Windows, from the repository root
+.\scripts\build.ps1
+.\scripts\test.ps1
 ```
-api/         Go HTTP server, scheduler, forge-cloud (Lightning)
-runtime/     Rust inference core + compute backend + C ABI
-kernels/     C++ CPU kernels + optional kernels/cuda/
-bindings/go  Go cgo bindings to Rust
-docs/        Architecture & roadmap
-models/      Local weights (gitignored)
-```
 
-## Prerequisites
-
-- Go 1.22+
-- Rust stable (Cargo)
-- CMake 3.16+
-- C++17 compiler (clang++/g++/MSVC)
-- On Windows: LLVM-MinGW (or MinGW-w64) for cgo
-
-## Quick start
-
-```bash
+```sh
+# Linux CPU
 make build
 make test
-make run
 ```
 
-### Windows (PowerShell)
+For optional CUDA builds, toolchain details and individual test commands, see
+[build.md](docs/build.md). CUDA requires the toolkit and a separate kernel build;
+`cuda-stub` only checks compilation and linkage without a GPU.
 
-```powershell
-.\scripts\test.ps1
-.\scripts\bench.ps1
+## Usage
 
-# Inference server (download model first â€” see models/README.md)
-cd runtime; cargo build --release; cd ..
-$env:FORGE_RUNTIME_DIR = "$PWD\runtime\target\release"
-go run ./api/cmd/forge-server -model models/Qwen2.5-0.5B-Instruct -addr :8080
+Supply a local model directory containing `config.json`, `model.safetensors` and
+`tokenizer.json`. Model weights are not included.
+
+```sh
+# Generate with the existing CPU example
+cargo run --release --manifest-path runtime/Cargo.toml --example generate_qwen -- models/Qwen2.5-0.5B-Instruct --max-tokens 32
+
+# Start the server on Linux; Windows: .\bin\forge-server.exe with the same flags
+./bin/forge-server -model models/Qwen2.5-0.5B-Instruct -addr 127.0.0.1:8080
 ```
 
-```powershell
-# Non-streaming completion
-Invoke-RestMethod -Method Post http://127.0.0.1:8080/v1/completions `
-  -ContentType application/json `
-  -Body '{"prompt":"Explain what a KV cache is","max_tokens":64,"temperature":0,"stream":false}'
+```sh
+curl http://127.0.0.1:8080/v1/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"prompt":"The capital of France is","max_tokens":16,"temperature":0,"stream":false}'
 ```
 
-## Execution model
+Prompts are passed through as supplied; format chat prompts yourself. To use a
+checkpoint, pass `-model models/qwen2.5-int8.forge` and keep its matching tokenizer
+available (see [build.md](docs/build.md)).
 
-Concurrent HTTP clients share a **continuous batcher**: independent KV per request, shared batched decode steps (`BatchStep`). Queue wait / full batch is intentional backpressure â€” not thread-per-request fake parallelism.
+## Supported models
 
-### Quantized inference (CPU)
+| Model | CPU | CUDA |
+|---|---|---|
+| Qwen2.5-0.5B-Instruct | FP32, INT8, INT4 | FP32, BF16 |
+| SmolLM2-135M-Instruct | FP32, INT8, INT4 | FP32; BF16 experimental |
 
-```powershell
-# Offline INT8 checkpoint (recommended â€” no re-quant on load)
-cargo run --release --bin forge-quantize -- `
-  --model ../models/Qwen2.5-0.5B-Instruct --bits 8 --group-size 64 `
-  --output ../models/qwen2.5-int8.forge
+CUDA correctness was previously tested on NVIDIA L4. Quantized CPU output is
+approximate; CUDA INT8/INT4 is unsupported. SmolLM2 BF16 logits differ from FP32
+even where tested greedy outputs agree. Other Qwen/Llama-family checkpoints and
+hardware configurations are unvalidated.
 
-cargo run --release --bin forge-bench -- --model ../models/qwen2.5-int8.forge --backend forge
+## Performance
 
-# Server can take a .forge file
-go run ./api/cmd/forge-server -model models/qwen2.5-int8.forge -max-seq 1024
+Historical NVIDIA L4 measurements of Qwen2.5-0.5B-Instruct, CUDA BF16, eight
+available slots, context limit 2048, at most 64 output tokens and natural EOS.
+These are median aggregate output tokens/s over three warmed loopback HTTP/SSE
+trials, including request processing and excluding model load.
+
+| Hardware | Model | Dtype | Workload | Concurrency | HTTP output tok/s |
+|---|---|---|---|---:|---:|
+| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Short | 1 | 183.54 |
+| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Short | 8 | 937.13 |
+| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Medium | 8 | 1035.48 |
+| NVIDIA L4 | Qwen2.5-0.5B | BF16 | Long | 8 | 223.39 |
+
+Short C=8 varied between runs; a nine-trial repeat measured 1062.39 tok/s.
+These are retained results, not a new GPU benchmark or a claim of superiority
+over other engines. [Methodology and raw evidence](docs/benchmarks.md).
+
+## Architecture
+
+```text
+Go HTTP server / scheduler -> Go bindings -> Rust C ABI / model runtime -> C++ / CUDA kernels
 ```
 
-Defaults: `FORGE_MAX_SEQ=1024`, `FORGE_MAX_BATCH=4`, `FORGE_MEM_BUDGET_MIB=8192` â€” see [MEMORY_MANAGEMENT.md](docs/MEMORY_MANAGEMENT.md).
+`api/` handles admission, scheduling and streaming. `bindings/go/` bridges the
+Rust C ABI using cgo on Unix and DLL loading on Windows. `runtime/` owns model
+loading, transformer execution, checkpoints and KV state. `kernels/` contains
+CPU kernels and the optional `cuda/` backend. Separate Go modules keep this
+platform-specific binding and optional cloud tooling independent of the server.
 
-### CUDA / Lightning (Phase 8Aâ€“12)
+## Limitations
 
-- Local Windows: CPU-only by default (no CUDA toolkit required).
-- GPU server (Linux + CUDA runtime build): `forge-server --device cuda [--dtype fp32|bf16] --model â€¦`
-- Copy `.env.example` â†’ `.env` with Lightning keys (gitignored). See [LIGHTNING.md](docs/LIGHTNING.md).
-- Phase 12 benchmarking â€” [PHASE12_RESULTS.md](docs/PHASE12_RESULTS.md), [BENCHMARK_METHODOLOGY.md](docs/BENCHMARK_METHODOLOGY.md).
-
-```powershell
-go run ./api/cmd/forge-cloud status
-go run ./api/cmd/forge-cloud auth
-go run ./api/cmd/forge-cloud prepare-deploy
-# Phase 12 billable ($6 total / $2 session; always stops):
-# go run ./api/cmd/forge-cloud validate-phase12 --gpu l4 --duration 40m --mode forge --confirm
-# go run ./api/cmd/forge-cloud validate-phase12 --gpu l4 --duration 30m --mode compare --confirm
-```
-
-Local: `make cuda-stub-check` / `cargo test --features cuda-stub --test cuda_paged_kv`.
-
-## License
-
-MIT (unless noted otherwise in subcomponents).
+Only the two model targets above are qualified. Sharded Safetensors, scaled RoPE,
+sliding-window attention and automatic chat templates are unsupported. Full
+model context limits have not been audited. The HTTP API implements text
+completions, not the full OpenAI API. There is no authentication or TLS; bind to
+loopback for local use.
