@@ -1,4 +1,4 @@
-# Run Phase 1 tests on Windows.
+# Build and run CPU kernels, Rust, Go bindings and API tests on Windows.
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
@@ -22,4 +22,8 @@ go test -count=1 ./...
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 Pop-Location
 
-Write-Host "All Phase 1 tests passed."
+Write-Host "==> Go API tests"
+go -C "$Root\api" test -count=1 ./...
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+Write-Host "All CPU tests passed."

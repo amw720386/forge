@@ -1,10 +1,7 @@
-# Build Phase 1 artifacts on Windows (MSVC Rust + MinGW/LLVM C++ kernels optional).
+# Build CPU kernels, Rust runtime and Go server on Windows.
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
-
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
-            [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 function Import-VcVars {
   $candidates = @(
@@ -25,16 +22,21 @@ function Import-VcVars {
 }
 
 Import-VcVars
-rustup default stable-x86_64-pc-windows-msvc | Out-Null
 
 Write-Host "==> CMake kernels"
 cmake -S "$Root\kernels" -B "$Root\kernels\build" -G "MinGW Makefiles" `
   -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
+if ($LASTEXITCODE -ne 0) { throw "CMake configure failed ($LASTEXITCODE)" }
 cmake --build "$Root\kernels\build" --config Release
+if ($LASTEXITCODE -ne 0) { throw "Kernel build failed ($LASTEXITCODE)" }
 
 Write-Host "==> Rust runtime"
-Push-Location "$Root\runtime"
-cargo build --release
-Pop-Location
+cargo build --release --manifest-path "$Root\runtime\Cargo.toml"
+if ($LASTEXITCODE -ne 0) { throw "Rust build failed ($LASTEXITCODE)" }
+
+Write-Host "==> Go server"
+New-Item -ItemType Directory -Force -Path "$Root\bin" | Out-Null
+go -C "$Root\api" build -o "$Root\bin\forge-server.exe" ./cmd/forge-server
+if ($LASTEXITCODE -ne 0) { throw "Go build failed ($LASTEXITCODE)" }
 
 Write-Host "Build complete."
