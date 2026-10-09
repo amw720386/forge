@@ -1,4 +1,5 @@
 # Build CPU kernels, Rust runtime, CLI and Go server on Windows.
+param([ValidateRange(1, 64)][int]$Jobs = 1)
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
@@ -28,11 +29,11 @@ Write-Host "==> CMake kernels"
 cmake -S "$Root\kernels" -B "$Root\kernels\build" -G "MinGW Makefiles" `
   -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
 if ($LASTEXITCODE -ne 0) { throw "CMake configure failed ($LASTEXITCODE)" }
-cmake --build "$Root\kernels\build" --config Release
+cmake --build "$Root\kernels\build" --config Release --parallel $Jobs
 if ($LASTEXITCODE -ne 0) { throw "Kernel build failed ($LASTEXITCODE)" }
 
 Write-Host "==> Rust runtime"
-cargo build --release -j 1 --manifest-path "$Root\runtime\Cargo.toml"
+cargo build --release -j $Jobs --manifest-path "$Root\runtime\Cargo.toml"
 if ($LASTEXITCODE -ne 0) { throw "Rust build failed ($LASTEXITCODE)" }
 New-Item -ItemType Directory -Force -Path "$Root\bin" | Out-Null
 Copy-Item -LiteralPath "$Root\runtime\target\release\forge-cli.exe" -Destination "$Root\bin\forge-cli.exe"
