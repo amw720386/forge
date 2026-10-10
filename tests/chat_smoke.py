@@ -151,6 +151,23 @@ def main():
                         assert models["object"] == "list" and [m["id"] for m in models["data"]] == [api_model]
                     expected = complete(base)
                     if restart == 0:
+                        alias = {k: v for k, v in base.items() if k != "max_tokens"}
+                        alias.update(max_completion_tokens=8, frequency_penalty=0,
+                                     presence_penalty=0, repetition_penalty=1,
+                                     response_format={"type": "text"})
+                        compatible = complete(alias)
+                        assert compatible["choices"] == expected["choices"] and compatible["usage"] == expected["usage"]
+                        streamed(alias, expected)
+                        assert complete(dict(alias, max_tokens=8))["usage"] == expected["usage"]
+                        for patch in [{"max_tokens":7}, {"max_completion_tokens":256},
+                                      {"max_completion_tokens":None}, {"frequency_penalty":1},
+                                      {"presence_penalty":1}, {"repetition_penalty":1.1},
+                                      {"response_format":{"type":"json_schema"}}]:
+                            try:
+                                request("/v1/chat/completions", dict(alias, **patch)).close()
+                                raise AssertionError(patch)
+                            except urllib.error.HTTPError as e:
+                                assert e.code == 400 and "error" in json.load(e)
                         for messages, count in zip(conversations, counts):
                             body = dict(base, messages=messages)
                             result = complete(body)

@@ -22,14 +22,21 @@ type chatMessage struct {
 	Content *string `json:"content"`
 }
 type chatRequest struct {
-	Model         string        `json:"model"`
-	Messages      []chatMessage `json:"messages"`
-	Stream        bool          `json:"stream"`
-	MaxTokens     *int          `json:"max_tokens"`
-	Temperature   *float64      `json:"temperature"`
-	TopP          *float64      `json:"top_p"`
-	TopK          *int          `json:"top_k"`
-	N             *int          `json:"n"`
+	Model               string        `json:"model"`
+	Messages            []chatMessage `json:"messages"`
+	Stream              bool          `json:"stream"`
+	MaxTokens           *int          `json:"max_tokens"`
+	MaxCompletionTokens *int          `json:"max_completion_tokens"`
+	FrequencyPenalty    *float64      `json:"frequency_penalty"`
+	PresencePenalty     *float64      `json:"presence_penalty"`
+	RepetitionPenalty   *float64      `json:"repetition_penalty"`
+	ResponseFormat      *struct {
+		Type string `json:"type"`
+	} `json:"response_format"`
+	Temperature   *float64 `json:"temperature"`
+	TopP          *float64 `json:"top_p"`
+	TopK          *int     `json:"top_k"`
+	N             *int     `json:"n"`
 	StreamOptions *struct {
 		IncludeUsage bool `json:"include_usage"`
 	} `json:"stream_options"`
@@ -73,11 +80,29 @@ func parseChat(data []byte, model string, defaultLimit int) (chatRequest, []forg
 	if body.Model == "" || body.Model != model {
 		return bad("unknown model; use the ID returned by /v1/models")
 	}
+	if body.MaxTokens != nil && body.MaxCompletionTokens != nil && *body.MaxTokens != *body.MaxCompletionTokens {
+		return bad("max_tokens and max_completion_tokens must match when both are supplied")
+	}
+	if body.MaxTokens == nil {
+		body.MaxTokens = body.MaxCompletionTokens
+	}
 	if body.MaxTokens == nil {
 		body.MaxTokens = &defaultLimit
 	}
 	if *body.MaxTokens < 1 || *body.MaxTokens > 2048 {
-		return bad("max_tokens must be between 1 and 2048")
+		return bad("max_tokens/max_completion_tokens must be between 1 and 2048")
+	}
+	if body.FrequencyPenalty != nil && *body.FrequencyPenalty != 0 {
+		return bad("only frequency_penalty=0 is supported")
+	}
+	if body.PresencePenalty != nil && *body.PresencePenalty != 0 {
+		return bad("only presence_penalty=0 is supported")
+	}
+	if body.RepetitionPenalty != nil && *body.RepetitionPenalty != 1 {
+		return bad("only repetition_penalty=1 is supported")
+	}
+	if body.ResponseFormat != nil && body.ResponseFormat.Type != "text" {
+		return bad("only response_format with type=text is supported")
 	}
 	if body.Temperature != nil && *body.Temperature != 0 {
 		return bad("only greedy generation is supported: temperature must be 0")
