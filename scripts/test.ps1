@@ -6,7 +6,7 @@ Set-Location $Root
 & "$PSScriptRoot\build.ps1"
 
 Write-Host "==> Kernel tests"
-& "$Root\kernels\build\forge_kernels_tests.exe"
+ctest --test-dir "$Root\kernels\cmake-build-msvc" --output-on-failure -C Release
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "==> Rust tests"

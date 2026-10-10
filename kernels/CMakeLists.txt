@@ -64,6 +64,9 @@ if(FORGE_KERNELS_BUILD_TESTS)
   add_test(NAME forge_kernels_tests COMMAND forge_kernels_tests)
 endif()
 
+add_executable(forge_matmul_bench EXCLUDE_FROM_ALL ../benchmarks/bench_matmul.cpp)
+target_link_libraries(forge_matmul_bench PRIVATE forge_kernels)
+
 if(FORGE_BUILD_CUDA)
   enable_language(CUDA)
   add_subdirectory(cuda)

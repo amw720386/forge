@@ -33,7 +33,7 @@ function Invoke-Diag([string]$Backend) {
     Write-Host ""
     Write-Host ">>>>>> PROCESS backend=$Backend <<<<<<"
     $args = @(
-        "run", "--release", "-p", "forge-runtime", "--bin", "forge-int4-diag", "--",
+        "run", "--release", "-j", "1", "-p", "forge-runtime", "--features", "diagnostics", "--bin", "forge-int4-diag", "--",
         "--model", $Model,
         "--backend", $Backend,
         "--group", "$Group",

@@ -1,6 +1,7 @@
 //! Safe single-backend INT4 diagnosis: memory/paging + kernel microbench + decode.
 //!
 //! One process = one backend. Orchestrate with `scripts/bench_int4_compare.ps1`.
+//! Build explicitly with Cargo's `--features diagnostics`.
 //!
 //! ```text
 //! forge-int4-diag --model ../models/Qwen2.5-0.5B-Instruct --backend int4 --group 64 --reps 3

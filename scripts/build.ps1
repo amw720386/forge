@@ -11,6 +11,7 @@ function Import-VcVars {
   )
   foreach ($bat in $candidates) {
     if (Test-Path $bat) {
+      $script:CMakeGenerator = if ($bat -match '\\2022\\') { "Visual Studio 17 2022" } else { "Visual Studio 18 2026" }
       cmd /c "`"$bat`" && set" | ForEach-Object {
         if ($_ -match '^(.*?)=(.*)$') {
           [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2], "Process")
@@ -21,15 +22,16 @@ function Import-VcVars {
     }
   }
   Write-Warning "vcvars64.bat not found; MSVC build may fail"
+  $script:CMakeGenerator = if ($env:VisualStudioVersion -like '18.*') { "Visual Studio 18 2026" } else { "Visual Studio 17 2022" }
 }
 
 Import-VcVars
 
 Write-Host "==> CMake kernels"
-cmake -S "$Root\kernels" -B "$Root\kernels\build" -G "MinGW Makefiles" `
-  -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
+# Keep old generator caches intact; CMake rejects incompatible caches here.
+cmake -S "$Root\kernels" -B "$Root\kernels\cmake-build-msvc" -G $CMakeGenerator -A x64
 if ($LASTEXITCODE -ne 0) { throw "CMake configure failed ($LASTEXITCODE)" }
-cmake --build "$Root\kernels\build" --config Release --parallel $Jobs
+cmake --build "$Root\kernels\cmake-build-msvc" --config Release --parallel $Jobs
 if ($LASTEXITCODE -ne 0) { throw "Kernel build failed ($LASTEXITCODE)" }
 
 Write-Host "==> Rust runtime"

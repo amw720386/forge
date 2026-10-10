@@ -12,6 +12,8 @@ crate-type = ["cdylib", "rlib", "staticlib"]
 
 [features]
 default = []
+# Opt-in development diagnostics; ordinary release builds omit this binary.
+diagnostics = []
 # Real NVIDIA CUDA backend. Requires prebuilt libforge_cuda + CUDA toolkit.
 # Fails the build if libforge_cuda is missing (see docs/build.md).
 cuda = []
@@ -44,6 +46,7 @@ path = "src/bin/forge_bench.rs"
 [[bin]]
 name = "forge-int4-diag"
 path = "src/bin/forge_int4_diag.rs"
+required-features = ["diagnostics"]
 
 [build-dependencies]
 cc = "1.2"

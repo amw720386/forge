@@ -1,19 +1,12 @@
 # Synthetic matmul micro-benchmark.
+param([ValidateRange(1, 64)][int]$Jobs = 1)
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 Set-Location $Root
 
-if (-not (Test-Path "$Root\kernels\build\libforge_kernels.a")) {
-  & "$PSScriptRoot\build.ps1"
-}
-
-New-Item -ItemType Directory -Force -Path "$Root\benchmarks\build" | Out-Null
-clang++ -std=c++17 -O3 -mavx2 -mfma `
-  -I"$Root\kernels\include" `
-  "$Root\benchmarks\bench_matmul.cpp" `
-  "$Root\kernels\build\libforge_kernels.a" `
-  -o "$Root\benchmarks\build\bench_matmul.exe"
+& "$PSScriptRoot\build.ps1" -Jobs $Jobs
+cmake --build "$Root\kernels\cmake-build-msvc" --config Release --target forge_matmul_bench --parallel $Jobs
 if ($LASTEXITCODE -ne 0) { throw "Benchmark build failed ($LASTEXITCODE)" }
 
-& "$Root\benchmarks\build\bench_matmul.exe"
+& "$Root\kernels\cmake-build-msvc\Release\forge_matmul_bench.exe"
 if ($LASTEXITCODE -ne 0) { throw "Benchmark failed ($LASTEXITCODE)" }
