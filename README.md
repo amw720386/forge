@@ -59,3 +59,7 @@ For measured performance and reproducible commands, see [benchmarks](docs/benchm
 ## Build and tests
 
 See [docs/build.md](docs/build.md) for Linux, CUDA, tests and troubleshooting.
+
+## License
+
+Forge is licensed under the [MIT License](LICENSE).
