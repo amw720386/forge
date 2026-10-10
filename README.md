@@ -14,7 +14,7 @@ Forge runs local models on CPU or NVIDIA GPUs, with an interactive CLI and an Op
 
 ## Quickstart
 
-**Windows:** Install Rust (MSVC), Go 1.22+, CMake, Visual Studio C++ Build Tools and LLVM-MinGW. See [build instructions](docs/build.md) for details.
+**Windows:** Install Rust (MSVC), Go 1.22+, CMake and Visual Studio C++ Build Tools. See [build instructions](docs/build.md) for details.
 
 ```powershell
 git clone https://github.com/amw720386/forge.git

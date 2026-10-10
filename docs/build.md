@@ -12,8 +12,11 @@ Use Rust stable, Go 1.22+, CMake 3.16+ and a C++17 compiler. Cargo compiles the 
 kernels itself; CMake separately builds their unit tests. Default x86-64 builds
 use AVX2/FMA. Other CPU architectures are not qualified.
 
-On Windows, install Visual Studio C++ Build Tools and LLVM-MinGW (including
-`clang++` and `mingw32-make`) on PATH. The existing script imports MSVC environment
+On Windows, install Visual Studio 2022 C++ Build Tools (Desktop development with
+C++, including a Windows SDK) and CMake 3.21+ on PATH. Visual Studio 2026 Build
+Tools requires CMake 4.2+. The scripts use the Visual Studio x64 generator and
+MSVC for both Cargo's kernels and standalone tests/benchmarks; LLVM-MinGW is
+not required. The build script imports MSVC environment
 variables from common Build Tools locations. For another installation, use a
 Visual Studio developer PowerShell. It uses your selected Rust toolchain and
 requires `stable-x86_64-pc-windows-msvc`; it does not change your global default.
@@ -33,6 +36,22 @@ In a second PowerShell:
 ```powershell
 Invoke-RestMethod -Method Post http://127.0.0.1:8080/v1/completions -ContentType application/json -Body '{"prompt":"The capital of France is","max_tokens":16,"temperature":0,"stream":false}'
 ```
+
+The legacy `/v1/completions` endpoint wraps plain prompts in a fixed Qwen-style
+ChatML conversation with the system message `You are a helpful assistant.`,
+a user turn and an assistant generation prefix. Prompts containing
+`<|im_start|>` pass through unchanged. This wrapper does not use the loaded
+model's chat template. Use `/v1/chat/completions` for model-specific formatting.
+
+Chat accepts `max_tokens` or `max_completion_tokens` (1–2048, default 64).
+Both may be supplied if equal; conflicting values are rejected. They have
+identical generation and usage-accounting semantics, and the full formatted
+input plus resolved output limit must fit the context. Generation remains
+greedy: only `temperature=0`, `top_p=1`, `top_k=1`, `n=1`,
+`frequency_penalty=0`, `presence_penalty=0` and `repetition_penalty=1` are
+accepted when supplied. Optional `response_format` supports only
+`{"type":"text"}`. Unknown fields, explicit nulls, non-neutral penalties,
+tools and constrained-output formats are rejected.
 
 On Linux with GCC/Clang and GNU Make:
 
@@ -60,7 +79,9 @@ The two Go modules use `github.com/amw720386/forge`; `go.work` resolves both
 locally. From the root run `go test ./api/... ./bindings/go/...` (root `./...`
 is not a module). The API's local replace also supports `GOWORK=off`.
 Windows builds default to serial compilation; `scripts/build.ps1 -Jobs 1`
-is the low-memory option. On Unix pass `-j 1` to Cargo and `--parallel 1`
+is the low-memory option. Increase `-Jobs` for CMake and Cargo parallelism.
+Windows CMake output is in `kernels/cmake-build-msvc/Release`; older MinGW
+caches in `kernels/build` are left untouched. On Unix pass `-j 1` to Cargo and `--parallel 1`
 to CMake when memory is limited.
 Windows bindings load `forge_runtime.dll`; set `FORGE_RUNTIME_DIR` when running
 outside the root with `go run`. Built server binaries also search relative to
@@ -70,6 +91,14 @@ directly and needs no DLL search setting. Build it alone with:
 
 ```sh
 cargo build --release --manifest-path runtime/Cargo.toml --bin forge-cli
+```
+
+Ordinary Cargo builds include the CLI, quantizer and benchmark tool, but omit
+the development-only INT4 diagnostic. `scripts/bench_int4_compare.ps1` enables
+it explicitly; to invoke it directly:
+
+```sh
+cargo run --release -j 1 --manifest-path runtime/Cargo.toml --features diagnostics --bin forge-int4-diag -- --model models/Qwen2.5-0.5B-Instruct --backend int4 --reps 1
 ```
 
 For an unbuilt server, use the module-aware command:
@@ -157,12 +186,13 @@ execution were not retested. Historical details are in [history/](history/).
 
 ## Common setup failures
 
-- Private clone denied: sign into GitHub through your Git credential manager with
-  access to `amw720386/forge`; never put a token in the clone URL.
 - Script execution blocked: use the process-scoped `powershell -NoProfile
   -ExecutionPolicy Bypass -File .\scripts\build.ps1 -Jobs 1` invocation in README.
-- Missing `clang++`/`mingw32-make`: add LLVM-MinGW's bin directory to PATH.
-  Missing MSVC/link.exe: install the C++ workload or use a developer PowerShell.
+- Missing MSVC/link.exe or Visual Studio generator: install the C++ workload
+  and Windows SDK, update CMake, or use a developer PowerShell.
+- Incompatible CMake cache in `kernels/cmake-build-msvc`: use a fresh build
+  directory or rename that generated directory before rebuilding. The script
+  stops on generator conflicts and does not delete caches or user files.
 - Native build failure or low memory: the script stops at the failing command;
   use `-Jobs 1`, close memory-heavy processes, and rebuild.
 - DLL not found or missing `forge_chat_prepare`: rebuild runtime and server
