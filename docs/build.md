@@ -4,7 +4,7 @@ Run commands from the repository root unless stated otherwise. Weights stay loca
 provide `config.json`, one `model.safetensors`, and `tokenizer.json` in
 `models/Qwen2.5-0.5B-Instruct` or `models/SmolLM2-135M-Instruct`. Preserve upstream
 model licenses and attribution. Forge does not download models automatically.
-For interactive chat also include the upstream `tokenizer_config.json`.
+For CLI and HTTP chat also include the upstream `tokenizer_config.json`.
 
 ## CPU
 
@@ -22,6 +22,7 @@ requires `stable-x86_64-pc-windows-msvc`; it does not change your global default
 .\scripts\build.ps1
 .\scripts\test.ps1
 python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instruct
+python tests/chat_smoke.py --model models/Qwen2.5-0.5B-Instruct
 .\bin\forge-cli.exe -m models/Qwen2.5-0.5B-Instruct -c 1024 -n 128
 $env:FORGE_RUNTIME_DIR = "$PWD\runtime\target\release"
 .\bin\forge-server.exe -model models/SmolLM2-135M-Instruct -addr 127.0.0.1:8080
@@ -136,6 +137,7 @@ python tests/reference/pretrained_reference.py models/SmolLM2-135M-Instruct test
 cargo run --release --manifest-path runtime/Cargo.toml --example pretrained_parity -- models/SmolLM2-135M-Instruct tests/fixtures/pretrained/smollm2
 cargo run --release --manifest-path runtime/Cargo.toml --example checkpoint_parity -- models/SmolLM2-135M-Instruct models/smollm2-int8.forge models/SmolLM2-135M-Instruct 8
 python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instruct
+python tests/chat_smoke.py --model models/Qwen2.5-0.5B-Instruct
 cargo test --release -j 1 --manifest-path runtime/Cargo.toml --test chat_templates -- --include-ignored --test-threads=1
 ```
 
@@ -152,3 +154,30 @@ interrupt handler. Rebuild the server and runtime together after ABI changes.
 
 Current cleanup validation is on Windows x86-64 CPU. Linux builds and CUDA
 execution were not retested. Historical details are in [history/](history/).
+
+## Common setup failures
+
+- Private clone denied: sign into GitHub through your Git credential manager with
+  access to `amw720386/forge`; never put a token in the clone URL.
+- Script execution blocked: use the process-scoped `powershell -NoProfile
+  -ExecutionPolicy Bypass -File .\scripts\build.ps1 -Jobs 1` invocation in README.
+- Missing `clang++`/`mingw32-make`: add LLVM-MinGW's bin directory to PATH.
+  Missing MSVC/link.exe: install the C++ workload or use a developer PowerShell.
+- Native build failure or low memory: the script stops at the failing command;
+  use `-Jobs 1`, close memory-heavy processes, and rebuild.
+- DLL not found or missing `forge_chat_prepare`: rebuild runtime and server
+  together; remove a stale `FORGE_RUNTIME_DIR` or point it at this checkout's
+  `runtime/target/release`. Do not copy an older DLL to make a build pass.
+- Model load failed: check the path and the original four files listed in README.
+  `.forge` checkpoints additionally need their matching tokenizer directory.
+  Chat requires a string `chat_template` in `tokenizer_config.json`.
+- Chat context overflow: reduce history/output or increase `-max-seq` and
+  `FORGE_MAX_SEQ` within model and memory limits. The full formatted input counts.
+- Address already in use: stop the previous process with Ctrl+C or select another
+  localhost port using `-addr`. Restart tests verify process cleanup.
+
+A clean source build uses only tracked source plus installed compilers and normal
+Cargo/Go package resolution. Model-dependent tests require separately supplied
+weights. Existing package download caches may be reused; compiled outputs from
+another checkout are not required. Windows CPU is the validated installation
+path; Linux and historical CUDA execution have not been retested in this phase.
