@@ -17,6 +17,7 @@ var (
 
 	dll               *syscall.DLL
 	procVersion       *syscall.Proc
+	procChatPrepare *syscall.Proc
 	procMatmul        *syscall.Proc
 	procMatvec        *syscall.Proc
 	procRuntimeLoad   *syscall.Proc
@@ -64,6 +65,7 @@ func ensureLoaded() error {
 			name string
 			dst  **syscall.Proc
 		}{
+			{"forge_chat_prepare", &procChatPrepare},
 			{"forge_version", &procVersion},
 			{"forge_matmul_f32", &procMatmul},
 			{"forge_matvec_f32", &procMatvec},
@@ -344,4 +346,26 @@ func cStringFromBytes(b []byte) string {
 		}
 	}
 	return string(b)
+}
+
+func nativeChatPrepare(ptr uintptr, input string) (string, error) {
+	p, err := syscall.BytePtrFromString(input)
+	if err != nil {
+		return "", err
+	}
+	errorBuf := make([]byte, 1024)
+	call := func(out, size uintptr) uintptr {
+		n, _, _ := procChatPrepare.Call(ptr, uintptr(unsafe.Pointer(p)), out, size,
+			uintptr(unsafe.Pointer(&errorBuf[0])), uintptr(len(errorBuf)))
+		return n
+	}
+	n := call(0, 0)
+	if n == 0 {
+		return "", fmt.Errorf("prepare chat: %s", cStringFromBytes(errorBuf))
+	}
+	out := make([]byte, int(n))
+	if call(uintptr(unsafe.Pointer(&out[0])), n) != n {
+		return "", fmt.Errorf("prepare chat failed")
+	}
+	return string(out[:len(out)-1]), nil
 }

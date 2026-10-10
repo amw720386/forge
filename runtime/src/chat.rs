@@ -2,10 +2,11 @@
 use crate::ffi::abi::{forge_runtime_load_ex, RuntimeHandle};
 use crate::model::{BatchError, BatchEvent, GenerateParams, TokError};
 use minijinja::{context, Environment};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::ffi::{CStr, CString};
 
-#[derive(Clone, Debug, Serialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Message {
     pub role: String,
     pub content: String,

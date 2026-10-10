@@ -212,6 +212,14 @@ func (s *Scheduler) dispatch(events []forge.BatchEvent) {
 			continue
 		}
 
+		lr.req.CompletionTokens++
+		if ev.Done && lr.req.Chat {
+			if ev.TokenID == lr.req.EOSTokenID {
+				lr.req.FinishReason = "stop"
+			} else {
+				lr.req.FinishReason = "length"
+			}
+		}
 		tokEv := queue.TokenEvent{TokenID: ev.TokenID, Text: ev.Text, Done: ev.Done}
 		select {
 		case lr.req.Tokens <- tokEv:
@@ -288,4 +296,9 @@ drained:
 
 func (s *Scheduler) Logf(format string, args ...any) {
 	log.Printf(format, args...)
+}
+
+// PrepareChat uses the same loaded tokenizer as batch admission.
+func (s *Scheduler) PrepareChat(messages []forge.Message) (forge.PreparedChat, error) {
+	return s.rt.PrepareChat(messages)
 }

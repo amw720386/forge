@@ -2,6 +2,7 @@
 package forge
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"sync"
@@ -242,4 +243,37 @@ func (r *Runtime) BatchSchedStats() (BatchSchedStats, error) {
 		return BatchSchedStats{}, errors.New("runtime closed")
 	}
 	return nativeBatchSchedStats(r.ptr)
+}
+
+// Message is a text-only conversation turn.
+type Message struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}
+
+// PreparedChat describes the exact rendered input and loaded runtime limits.
+type PreparedChat struct {
+	Prompt       string `json:"prompt"`
+	PromptTokens int    `json:"prompt_tokens"`
+	ContextSize  int    `json:"context_size"`
+	EOSTokenID   uint32 `json:"eos_token_id"`
+}
+
+func (r *Runtime) PrepareChat(messages []Message) (PreparedChat, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	var prepared PreparedChat
+	if r.ptr == 0 {
+		return prepared, errors.New("runtime closed")
+	}
+	input, err := json.Marshal(messages)
+	if err != nil {
+		return prepared, err
+	}
+	output, err := nativeChatPrepare(r.ptr, string(input))
+	if err != nil {
+		return prepared, err
+	}
+	err = json.Unmarshal([]byte(output), &prepared)
+	return prepared, err
 }

@@ -21,6 +21,7 @@ import (
 func main() {
 	addr := flag.String("addr", "127.0.0.1:8080", "listen address")
 	modelDir := flag.String("model", "models/Qwen2.5-0.5B-Instruct", "HF model directory or .forge checkpoint")
+	modelID := flag.String("model-id", "", "API model ID (default: model directory/checkpoint name)")
 	maxSeq := flag.Int("max-seq", 1024, "max sequence length (also capped by FORGE_MAX_SEQ)")
 	queueCap := flag.Int("queue", 16, "admission queue capacity")
 	device := flag.String("device", "cpu", "execution device: cpu or cuda (cuda requires CUDA runtime build)")
@@ -79,10 +80,14 @@ func main() {
 		*queueCap = cap
 	}
 
+	if *modelID == "" {
+		*modelID = filepath.Base(filepath.Clean(*modelDir))
+	}
 	m := metrics.New()
 	q := queue.New(*queueCap)
 	sched := scheduler.New(rt, q, m)
 	srv := server.New(server.Config{
+		ModelID:       *modelID,
 		Addr:          *addr,
 		QueueCap:      *queueCap,
 		DefaultMaxTok: 64,

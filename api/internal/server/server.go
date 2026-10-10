@@ -23,18 +23,20 @@ import (
 )
 
 type Config struct {
+	ModelID       string
 	Addr          string
 	QueueCap      int
 	DefaultMaxTok int
 }
 
 type Server struct {
-	cfg        Config
-	q          *queue.Queue
-	sched      *scheduler.Scheduler
-	metrics    *metrics.Collector
-	httpServer *http.Server
-	wg         sync.WaitGroup
+	modelCreated int64
+	cfg          Config
+	q            *queue.Queue
+	sched        *scheduler.Scheduler
+	metrics      *metrics.Collector
+	httpServer   *http.Server
+	wg           sync.WaitGroup
 }
 
 type completionRequest struct {
@@ -57,11 +59,13 @@ func New(cfg Config, q *queue.Queue, sched *scheduler.Scheduler, m *metrics.Coll
 	if cfg.DefaultMaxTok <= 0 {
 		cfg.DefaultMaxTok = 64
 	}
-	s := &Server{cfg: cfg, q: q, sched: sched, metrics: m}
+	s := &Server{modelCreated: time.Now().Unix(), cfg: cfg, q: q, sched: sched, metrics: m}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", s.handleHealth)
 	mux.HandleFunc("/metrics", s.handleMetrics)
 	mux.HandleFunc("/v1/completions", s.handleCompletions)
+	mux.HandleFunc("/v1/chat/completions", s.handleChat)
+	mux.HandleFunc("/v1/models", s.handleModels)
 	s.httpServer = &http.Server{
 		Addr:              cfg.Addr,
 		Handler:           mux,

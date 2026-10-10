@@ -156,6 +156,11 @@ FORGE_RUNTIME_API void forge_generate_cancel(forge_runtime* rt);
  * Retrieve before the next batch step. Zero means invalid runtime/request. */
 FORGE_RUNTIME_API size_t forge_batch_piece(forge_runtime* rt, uint64_t request_id, char* buf, size_t len);
 
+/* Render and count with the loaded tokenizer. Required bytes including NUL;
+ * short output buffers untouched, zero on error. Caller serializes runtime access. */
+FORGE_RUNTIME_API size_t forge_chat_prepare(forge_runtime* rt, const char* messages_json,
+    char* out, size_t len, char* err_buf, size_t err_len);
+
 #ifdef __cplusplus
 }
 #endif

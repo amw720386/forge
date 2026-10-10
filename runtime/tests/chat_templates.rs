@@ -50,6 +50,55 @@ fn pretrained_chat_tokens_limits_eos_and_cancellation() {
             runtime.count_tokens(&prompt).unwrap(),
             case["tokens"].as_array().unwrap().len()
         );
+        // The Go-facing preparation ABI uses the same complete HF template.
+        // Its sizing call and short-buffer contract must not truncate UTF-8.
+        use forge_runtime::ffi::abi::forge_chat_prepare;
+        let input = std::ffi::CString::new(serde_json::to_string(&messages).unwrap()).unwrap();
+        let ptr = &mut *runtime as *mut RuntimeHandle;
+        let mut error = [0i8; 1024];
+        unsafe {
+            let size = forge_chat_prepare(
+                ptr,
+                input.as_ptr(),
+                std::ptr::null_mut(),
+                0,
+                error.as_mut_ptr(),
+                error.len(),
+            );
+            assert!(size > 1);
+            let mut short = [42u8; 1];
+            assert_eq!(
+                forge_chat_prepare(
+                    ptr,
+                    input.as_ptr(),
+                    short.as_mut_ptr().cast(),
+                    1,
+                    error.as_mut_ptr(),
+                    error.len()
+                ),
+                size
+            );
+            assert_eq!(short, [42]);
+            let mut output = vec![0u8; size];
+            assert_eq!(
+                forge_chat_prepare(
+                    ptr,
+                    input.as_ptr(),
+                    output.as_mut_ptr().cast(),
+                    size,
+                    error.as_mut_ptr(),
+                    error.len()
+                ),
+                size
+            );
+            let prepared: serde_json::Value = serde_json::from_slice(&output[..size - 1]).unwrap();
+            assert_eq!(prepared["prompt"], prompt);
+            assert_eq!(
+                prepared["prompt_tokens"].as_u64().unwrap() as usize,
+                case["tokens"].as_array().unwrap().len()
+            );
+            assert_eq!(prepared["context_size"], 256);
+        }
         // A one-token completion must free its slot and include the final token.
         runtime.chat_begin(&prompt, 1).unwrap();
         let events = runtime.chat_step().unwrap();

@@ -27,19 +27,24 @@ const (
 
 // Request is a queued inference job.
 type Request struct {
-	ReceivedAt  time.Time
-	ID          string
-	Prompt      string
-	MaxTokens   int
-	Temperature float32
-	Stream      bool
-	State       State
-	EnqueuedAt  time.Time
-	StartedAt   time.Time
-	Ctx         context.Context
-	Cancel      context.CancelFunc
-	Tokens      chan TokenEvent
-	Err         error
+	PromptTokens     int
+	CompletionTokens int
+	FinishReason     string
+	EOSTokenID       uint32
+	Chat             bool
+	ReceivedAt       time.Time
+	ID               string
+	Prompt           string
+	MaxTokens        int
+	Temperature      float32
+	Stream           bool
+	State            State
+	EnqueuedAt       time.Time
+	StartedAt        time.Time
+	Ctx              context.Context
+	Cancel           context.CancelFunc
+	Tokens           chan TokenEvent
+	Err              error
 }
 
 // TokenEvent is one streamed token.

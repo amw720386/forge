@@ -214,3 +214,19 @@ func nativeBatchSchedStats(ptr uintptr) (BatchSchedStats, error) {
 		PrefillStallNs:       uint64(st.prefill_stall_ns),
 	}, nil
 }
+
+func nativeChatPrepare(ptr uintptr, input string) (string, error) {
+	p := C.CString(input)
+	defer C.free(unsafe.Pointer(p))
+	errorBuf := make([]byte, 1024)
+	rt := (*C.forge_runtime)(unsafe.Pointer(ptr))
+	n := C.forge_chat_prepare(rt, p, nil, 0, (*C.char)(unsafe.Pointer(&errorBuf[0])), C.size_t(len(errorBuf)))
+	if n == 0 {
+		return "", fmt.Errorf("prepare chat: %s", C.GoString((*C.char)(unsafe.Pointer(&errorBuf[0]))))
+	}
+	out := make([]byte, int(n))
+	if C.forge_chat_prepare(rt, p, (*C.char)(unsafe.Pointer(&out[0])), n, (*C.char)(unsafe.Pointer(&errorBuf[0])), C.size_t(len(errorBuf))) != n {
+		return "", fmt.Errorf("prepare chat failed")
+	}
+	return string(out[:len(out)-1]), nil
+}

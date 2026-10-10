@@ -654,3 +654,57 @@ pub unsafe extern "C" fn forge_generate_cancel(rt: *mut RuntimeHandle) {
     }
     handle.single_events.clear();
 }
+
+/// Render with the loaded tokenizer's chat template and return preparation JSON.
+/// Returns required bytes including NUL; short buffers are untouched, zero is error.
+#[no_mangle]
+pub unsafe extern "C" fn forge_chat_prepare(
+    rt: *mut RuntimeHandle,
+    messages_json: *const c_char,
+    out: *mut c_char,
+    len: usize,
+    err_buf: *mut c_char,
+    err_len: usize,
+) -> usize {
+    if rt.is_null() || messages_json.is_null() {
+        write_err(err_buf, err_len, "invalid argument");
+        return 0;
+    }
+    let result = (|| -> Result<String, String> {
+        let input = CStr::from_ptr(messages_json)
+            .to_str()
+            .map_err(|e| e.to_string())?;
+        let messages: Vec<crate::chat::Message> =
+            serde_json::from_str(input).map_err(|e| e.to_string())?;
+        if messages.is_empty() {
+            return Err("messages must not be empty".into());
+        }
+        let handle = &*rt;
+        let prompt = handle
+            .chat_template()?
+            .render(&messages)
+            .map_err(|e| format!("chat template: {e}"))?;
+        if prompt.contains('\0') {
+            return Err("chat template produced NUL".into());
+        }
+        let tokens = handle.count_tokens(&prompt).map_err(|e| e.to_string())?;
+        Ok(
+            serde_json::json!({"prompt": prompt, "prompt_tokens": tokens,
+            "context_size": handle.context_size(), "eos_token_id": handle.eos_token_id})
+            .to_string(),
+        )
+    })();
+    match result {
+        Ok(json) => {
+            let required = json.len() + 1;
+            if !out.is_null() && len >= required {
+                write_err(out, len, &json);
+            }
+            required
+        }
+        Err(error) => {
+            write_err(err_buf, err_len, &error);
+            0
+        }
+    }
+}
