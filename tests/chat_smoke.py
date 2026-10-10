@@ -57,6 +57,31 @@ def main():
         near[0]["content"] = near[0]["content"][:-5]
     conversations.append(near)
     counts = [prepare(m)["prompt_tokens"] for m in conversations]
+    # Count actual sampled IDs independently of the Go scheduler, including EOS.
+    class BatchEvent(ctypes.Structure):
+        _fields_ = [("request_id", ctypes.c_uint64), ("token_id", ctypes.c_uint32),
+                    ("done", ctypes.c_uint8), ("pad", ctypes.c_uint8 * 3),
+                    ("piece", ctypes.c_char * 64)]
+    lib.forge_batch_admit.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_int32,
+                                    ctypes.c_int32, ctypes.c_void_p, ctypes.c_void_p,
+                                    ctypes.c_size_t]
+    lib.forge_batch_step.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_size_t]
+    lib.forge_batch_step.restype = ctypes.c_int32
+    lib.forge_batch_capacity.argtypes = [ctypes.c_void_p]
+    lib.forge_batch_capacity.restype = ctypes.c_size_t
+    request_id = ctypes.c_uint64()
+    assert lib.forge_batch_admit(rt, prepared["prompt"].encode(), 128, 0,
+                                ctypes.byref(request_id), error, len(error)) == 0, error.value
+    events = (BatchEvent * lib.forge_batch_capacity(rt))()
+    sampled = []
+    while True:
+        n = lib.forge_batch_step(rt, events, len(events))
+        assert n > 0
+        sampled.extend(events[i].token_id for i in range(n))
+        if any(events[i].done for i in range(n)):
+            break
+    assert sampled[-1] == prepared["eos_token_id"]
+    eos_count = len(sampled)
     lib.forge_runtime_free(rt)
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
@@ -136,6 +161,7 @@ def main():
                             assert result["usage"]["completion_tokens"] == limit and result["choices"][0]["finish_reason"] == "length"
                         eos = complete(dict(base, messages=fixture["messages"], max_tokens=128))
                         assert eos["choices"][0]["finish_reason"] == "stop", eos
+                        assert eos["usage"]["completion_tokens"] == eos_count
                         streamed(dict(base, messages=fixture["messages"], max_tokens=128), eos)
                         for patch in [{"model": "wrong"}, {"temperature": 0.7}, {"top_p": 0.5}, {"top_k": 8}, {"n": 2}, {"tools": []}, {"logprobs": True}, {"max_tokens": 0}, {"messages": []}, {"messages": [{"role": "developer", "content": "hi"}]}, {"messages": [{"role": "user", "content": []}]}, {"messages": [{"role": "user", "content": " test" * 300}]}, {"max_tokens": 256}]:
                             for stream in [False, True]:
