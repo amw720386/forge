@@ -30,9 +30,9 @@ inline float dot_row(const float* xrow, const float* wrow, size_t k) {
 #endif
 }
 
-void linear_range(size_t m, size_t k, const float* x, size_t ldx, const float* w,
-                  size_t ldw, const float* bias, float* y, size_t ldy,
-                  size_t j0, size_t j1) {
+void linear_range(size_t m, size_t k, const float* x, size_t ldx,
+                  const float* w, size_t ldw, const float* bias, float* y,
+                  size_t ldy, size_t j0, size_t j1) {
   for (size_t i = 0; i < m; ++i) {
     const float* xrow = x + i * ldx;
     for (size_t j = j0; j < j1; ++j) {
@@ -47,9 +47,11 @@ void linear_range(size_t m, size_t k, const float* x, size_t ldx, const float* w
 
 }  // namespace
 
-extern "C" forge_status forge_kernels_linear_f32(
-    size_t m, size_t n, size_t k, const float* x, size_t ldx, const float* w,
-    size_t ldw, const float* bias, float* y, size_t ldy) {
+extern "C" forge_status forge_kernels_linear_f32(size_t m, size_t n, size_t k,
+                                                 const float* x, size_t ldx,
+                                                 const float* w, size_t ldw,
+                                                 const float* bias, float* y,
+                                                 size_t ldy) {
   if (x == nullptr || w == nullptr || y == nullptr) {
     return FORGE_ERR_INVALID_ARGUMENT;
   }
@@ -57,11 +59,12 @@ extern "C" forge_status forge_kernels_linear_f32(
     return FORGE_ERR_INVALID_ARGUMENT;
   }
 
-  const double flops =
-      2.0 * static_cast<double>(m) * static_cast<double>(n) * static_cast<double>(k);
+  const double flops = 2.0 * static_cast<double>(m) * static_cast<double>(n) *
+                       static_cast<double>(k);
 
   // Persistent pool. Decode MLP (gate/up/down ≈ 8.7e6 flops) and lm_head
-  // benefit; tiny projections (q/k/v ≈ 1.6e6) stay serial to avoid pool overhead.
+  // benefit; tiny projections (q/k/v ≈ 1.6e6) stay serial to avoid pool
+  // overhead.
   const bool worth = (flops >= 5e6) || (m >= 16 && n >= 512 && flops >= 2e6);
 
   if (worth && forge::ThreadPool::instance().total_threads() > 1) {

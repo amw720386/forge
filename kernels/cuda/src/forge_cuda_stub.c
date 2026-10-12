@@ -22,7 +22,8 @@ forge_cuda_status forge_cuda_set_device(int device) {
   return FORGE_CUDA_ERR_UNAVAILABLE;
 }
 
-forge_cuda_status forge_cuda_device_name(int device, char* out, size_t out_len) {
+forge_cuda_status forge_cuda_device_name(int device, char* out,
+                                         size_t out_len) {
   (void)device;
   if (out == NULL || out_len == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
@@ -61,7 +62,7 @@ forge_cuda_status forge_cuda_free(forge_cuda_buffer* buf) {
 }
 
 forge_cuda_status forge_cuda_memcpy_h2d(forge_cuda_buffer* dst, const void* src,
-                                       size_t bytes) {
+                                        size_t bytes) {
   (void)dst;
   (void)src;
   (void)bytes;
@@ -69,7 +70,7 @@ forge_cuda_status forge_cuda_memcpy_h2d(forge_cuda_buffer* dst, const void* src,
 }
 
 forge_cuda_status forge_cuda_memcpy_d2h(void* dst, const forge_cuda_buffer* src,
-                                       size_t bytes) {
+                                        size_t bytes) {
   (void)dst;
   (void)src;
   (void)bytes;
@@ -77,8 +78,8 @@ forge_cuda_status forge_cuda_memcpy_d2h(void* dst, const forge_cuda_buffer* src,
 }
 
 forge_cuda_status forge_cuda_memcpy_d2d(forge_cuda_buffer* dst, size_t dst_off,
-                                       const forge_cuda_buffer* src,
-                                       size_t src_off, size_t bytes) {
+                                        const forge_cuda_buffer* src,
+                                        size_t src_off, size_t bytes) {
   (void)dst;
   (void)dst_off;
   (void)src;
@@ -95,9 +96,9 @@ forge_cuda_status forge_cuda_memset_zero(forge_cuda_buffer* buf) {
 forge_cuda_status forge_cuda_synchronize(void) { return FORGE_CUDA_OK; }
 
 forge_cuda_status forge_cuda_matmul_f32(size_t m, size_t n, size_t k,
-                                       const float* a, size_t lda,
-                                       const float* b, size_t ldb, float* c,
-                                       size_t ldc) {
+                                        const float* a, size_t lda,
+                                        const float* b, size_t ldb, float* c,
+                                        size_t ldc) {
   (void)m;
   (void)n;
   (void)k;
@@ -111,7 +112,7 @@ forge_cuda_status forge_cuda_matmul_f32(size_t m, size_t n, size_t k,
 }
 
 forge_cuda_status forge_cuda_matvec_f32(size_t m, size_t n, const float* a,
-                                       size_t lda, const float* x, float* y) {
+                                        size_t lda, const float* x, float* y) {
   (void)m;
   (void)n;
   (void)a;
@@ -121,9 +122,10 @@ forge_cuda_status forge_cuda_matvec_f32(size_t m, size_t n, const float* a,
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
-forge_cuda_status forge_cuda_rmsnorm_f32(size_t rows, size_t dim, const float* x,
-                                        size_t ldx, const float* weight,
-                                        float eps, float* y, size_t ldy) {
+forge_cuda_status forge_cuda_rmsnorm_f32(size_t rows, size_t dim,
+                                         const float* x, size_t ldx,
+                                         const float* weight, float eps,
+                                         float* y, size_t ldy) {
   (void)rows;
   (void)dim;
   (void)x;
@@ -136,8 +138,8 @@ forge_cuda_status forge_cuda_rmsnorm_f32(size_t rows, size_t dim, const float* x
 }
 
 forge_cuda_status forge_cuda_softmax_f32(size_t batch, size_t rows, size_t cols,
-                                        float* scores, int causal,
-                                        size_t causal_q_offset) {
+                                         float* scores, int causal,
+                                         size_t causal_q_offset) {
   (void)batch;
   (void)rows;
   (void)cols;
@@ -155,7 +157,7 @@ forge_cuda_status forge_cuda_silu_f32(size_t n, const float* x, float* y) {
 }
 
 forge_cuda_status forge_cuda_mul_f32(size_t n, const float* a, const float* b,
-                                    float* y) {
+                                     float* y) {
   (void)n;
   (void)a;
   (void)b;
@@ -164,7 +166,7 @@ forge_cuda_status forge_cuda_mul_f32(size_t n, const float* a, const float* b,
 }
 
 forge_cuda_status forge_cuda_add_f32(size_t n, const float* a, const float* b,
-                                    float* y) {
+                                     float* y) {
   (void)n;
   (void)a;
   (void)b;
@@ -173,10 +175,10 @@ forge_cuda_status forge_cuda_add_f32(size_t n, const float* a, const float* b,
 }
 
 forge_cuda_status forge_cuda_linear_f32(size_t m, size_t n, size_t k,
-                                       const float* x, size_t ldx,
-                                       const float* w, size_t ldw,
-                                       const float* bias, float* y,
-                                       size_t ldy) {
+                                        const float* x, size_t ldx,
+                                        const float* w, size_t ldw,
+                                        const float* bias, float* y,
+                                        size_t ldy) {
   (void)m;
   (void)n;
   (void)k;
@@ -191,7 +193,7 @@ forge_cuda_status forge_cuda_linear_f32(size_t m, size_t n, size_t k,
 }
 
 forge_cuda_status forge_cuda_f32_to_bf16(size_t n, const float* src,
-                                        void* dst_bf16) {
+                                         void* dst_bf16) {
   (void)n;
   (void)src;
   (void)dst_bf16;
@@ -199,10 +201,10 @@ forge_cuda_status forge_cuda_f32_to_bf16(size_t n, const float* src,
 }
 
 forge_cuda_status forge_cuda_linear_bf16_w(size_t m, size_t n, size_t k,
-                                          const float* x, size_t ldx,
-                                          const void* w_bf16, size_t ldw,
-                                          const float* bias, float* y,
-                                          size_t ldy) {
+                                           const float* x, size_t ldx,
+                                           const void* w_bf16, size_t ldw,
+                                           const float* bias, float* y,
+                                           size_t ldy) {
   (void)m;
   (void)n;
   (void)k;
@@ -217,8 +219,8 @@ forge_cuda_status forge_cuda_linear_bf16_w(size_t m, size_t n, size_t k,
 }
 
 forge_cuda_status forge_cuda_argmax_rows_f32(size_t rows, size_t cols,
-                                            const float* logits,
-                                            int32_t* out_ids) {
+                                             const float* logits,
+                                             int32_t* out_ids) {
   (void)rows;
   (void)cols;
   (void)logits;
@@ -226,10 +228,10 @@ forge_cuda_status forge_cuda_argmax_rows_f32(size_t rows, size_t cols,
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
-forge_cuda_status forge_cuda_embedding_bf16(const void* embed_bf16, size_t vocab,
-                                           size_t hidden,
-                                           const int32_t* token_ids, size_t t,
-                                           float* out) {
+forge_cuda_status forge_cuda_embedding_bf16(const void* embed_bf16,
+                                            size_t vocab, size_t hidden,
+                                            const int32_t* token_ids, size_t t,
+                                            float* out) {
   (void)embed_bf16;
   (void)vocab;
   (void)hidden;
@@ -240,8 +242,9 @@ forge_cuda_status forge_cuda_embedding_bf16(const void* embed_bf16, size_t vocab
 }
 
 forge_cuda_status forge_cuda_rope_f32(size_t seq_len, size_t n_heads,
-                                     size_t head_dim, float* x,
-                                     size_t position_offset, float rope_theta) {
+                                      size_t head_dim, float* x,
+                                      size_t position_offset,
+                                      float rope_theta) {
   (void)seq_len;
   (void)n_heads;
   (void)head_dim;
@@ -252,9 +255,9 @@ forge_cuda_status forge_cuda_rope_f32(size_t seq_len, size_t n_heads,
 }
 
 forge_cuda_status forge_cuda_embedding_f32(const float* embed, size_t vocab,
-                                          size_t hidden,
-                                          const int32_t* token_ids, size_t t,
-                                          float* out) {
+                                           size_t hidden,
+                                           const int32_t* token_ids, size_t t,
+                                           float* out) {
   (void)embed;
   (void)vocab;
   (void)hidden;
@@ -264,13 +267,10 @@ forge_cuda_status forge_cuda_embedding_f32(const float* embed, size_t vocab,
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
-forge_cuda_status forge_cuda_gqa_attn_f32(size_t t_q, size_t t_k, size_t n_heads,
-                                         size_t n_kv_heads, size_t head_dim,
-                                         float scale, const float* q,
-                                         size_t q_w, const float* k,
-                                         size_t kv_w, const float* v,
-                                         float* ctx, int causal,
-                                         size_t causal_q_offset) {
+forge_cuda_status forge_cuda_gqa_attn_f32(
+    size_t t_q, size_t t_k, size_t n_heads, size_t n_kv_heads, size_t head_dim,
+    float scale, const float* q, size_t q_w, const float* k, size_t kv_w,
+    const float* v, float* ctx, int causal, size_t causal_q_offset) {
   (void)t_q;
   (void)t_k;
   (void)n_heads;
@@ -289,7 +289,7 @@ forge_cuda_status forge_cuda_gqa_attn_f32(size_t t_q, size_t t_k, size_t n_heads
 }
 
 forge_cuda_status forge_cuda_copy_rows_f32(size_t rows, size_t cols,
-                                          const float* src, float* dst) {
+                                           const float* src, float* dst) {
   (void)rows;
   (void)cols;
   (void)src;
@@ -298,8 +298,8 @@ forge_cuda_status forge_cuda_copy_rows_f32(size_t rows, size_t cols,
 }
 
 forge_cuda_status forge_cuda_add_rows_f32(size_t rows, size_t cols,
-                                         const float* a, const float* b,
-                                         float* y) {
+                                          const float* a, const float* b,
+                                          float* y) {
   (void)rows;
   (void)cols;
   (void)a;
@@ -309,10 +309,10 @@ forge_cuda_status forge_cuda_add_rows_f32(size_t rows, size_t cols,
 }
 
 forge_cuda_status forge_cuda_kv_append_f32(size_t width, size_t t,
-                                          size_t dst_row_offset,
-                                          const float* k_src,
-                                          const float* v_src, float* k_dst,
-                                          float* v_dst) {
+                                           size_t dst_row_offset,
+                                           const float* k_src,
+                                           const float* v_src, float* k_dst,
+                                           float* v_dst) {
   (void)width;
   (void)t;
   (void)dst_row_offset;
@@ -385,30 +385,56 @@ forge_cuda_status forge_cuda_paged_kv_append_f32(
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
-
 /** metadata rows: uint64_t table address, RoPE position, existing KV length. */
 forge_cuda_status forge_cuda_batch_paged_prepare_f32(
     size_t batch, size_t heads, size_t kv_heads, size_t dim, float theta,
     const uint64_t* metadata, float* q, const float* k, const float* v,
-    float* k_pool, float* v_pool, size_t block_size, size_t blocks, size_t layer) { return FORGE_CUDA_ERR_NOT_BUILT; }
+    float* k_pool, float* v_pool, size_t block_size, size_t blocks,
+    size_t layer) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
 forge_cuda_status forge_cuda_batch_paged_attn_f32(
     size_t batch, size_t heads, size_t kv_heads, size_t dim, float scale,
     const uint64_t* metadata, const float* q, const float* k_pool,
-    const float* v_pool, float* ctx, size_t block_size, size_t blocks, size_t layer) { return FORGE_CUDA_ERR_NOT_BUILT; }
+    const float* v_pool, float* ctx, size_t block_size, size_t blocks,
+    size_t layer) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
 forge_cuda_status forge_cuda_batch_paged_attn_dispatch_f32(
     size_t batch, size_t heads, size_t kv_heads, size_t dim, float scale,
     const uint64_t* metadata, const float* q, const float* k_pool,
-    const float* v_pool, float* ctx, size_t block_size, size_t blocks, size_t layer, int partitioned) { return FORGE_CUDA_ERR_NOT_BUILT; }
+    const float* v_pool, float* ctx, size_t block_size, size_t blocks,
+    size_t layer, int partitioned) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
 
-forge_cuda_status forge_cuda_linear_bf16_xw(
-    size_t m,size_t n,size_t k,const void* x,size_t ldx,const void* w,
-    size_t ldw,const float* bias,float* y,size_t ldy) { return FORGE_CUDA_ERR_NOT_BUILT; }
+forge_cuda_status forge_cuda_linear_bf16_xw(size_t m, size_t n, size_t k,
+                                            const void* x, size_t ldx,
+                                            const void* w, size_t ldw,
+                                            const float* bias, float* y,
+                                            size_t ldy) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
 
-forge_cuda_status forge_cuda_graph_begin(void) { return FORGE_CUDA_ERR_NOT_BUILT; }
-forge_cuda_status forge_cuda_graph_end(void** executable) { return FORGE_CUDA_ERR_NOT_BUILT; }
-forge_cuda_status forge_cuda_graph_replay(void* executable) { return FORGE_CUDA_ERR_NOT_BUILT; }
-forge_cuda_status forge_cuda_graph_destroy(void* executable) { return FORGE_CUDA_ERR_NOT_BUILT; }
+forge_cuda_status forge_cuda_graph_begin(void) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
+forge_cuda_status forge_cuda_graph_end(void** executable) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
+forge_cuda_status forge_cuda_graph_replay(void* executable) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
+forge_cuda_status forge_cuda_graph_destroy(void* executable) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
 
-forge_cuda_status forge_cuda_timer_start(void** timer) { return FORGE_CUDA_ERR_NOT_BUILT; }
-forge_cuda_status forge_cuda_timer_elapsed(void* timer,float* ms) { return FORGE_CUDA_ERR_NOT_BUILT; }
-forge_cuda_status forge_cuda_timer_destroy(void* timer) { return FORGE_CUDA_ERR_NOT_BUILT; }
+forge_cuda_status forge_cuda_timer_start(void** timer) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
+forge_cuda_status forge_cuda_timer_elapsed(void* timer, float* ms) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}
+forge_cuda_status forge_cuda_timer_destroy(void* timer) {
+  return FORGE_CUDA_ERR_NOT_BUILT;
+}

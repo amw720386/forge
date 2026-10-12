@@ -11,8 +11,8 @@ namespace {
  * Tie-break: lowest index (matches CPU greedy).
  * One CUDA block per row; blockDim.x threads reduce via shared memory.
  */
-__global__ void argmax_rows_kernel(size_t rows, size_t cols, const float* logits,
-                                   int32_t* out_ids) {
+__global__ void argmax_rows_kernel(size_t rows, size_t cols,
+                                   const float* logits, int32_t* out_ids) {
   const size_t row = blockIdx.x;
   if (row >= rows) {
     return;

@@ -63,7 +63,8 @@ void test_cuda_ops() {
     expect(forge_cuda_free(&b) == FORGE_CUDA_OK, "cycle free");
   }
 
-  // Matmul small hand-checked: [[1,2],[3,4]] @ [[5,6],[7,8]] = [[19,22],[43,50]]
+  // Matmul small hand-checked: [[1,2],[3,4]] @ [[5,6],[7,8]] =
+  // [[19,22],[43,50]]
   {
     const size_t m = 2, n = 2, k = 2;
     std::vector<float> ha = {1, 2, 3, 4};
@@ -91,9 +92,9 @@ void test_cuda_ops() {
     Buf da(ha.size() * 4), dx(hx.size() * 4), dy(hy.size() * 4);
     forge_cuda_memcpy_h2d(&da.b, ha.data(), ha.size() * 4);
     forge_cuda_memcpy_h2d(&dx.b, hx.data(), hx.size() * 4);
-    expect(forge_cuda_matvec_f32(2, 3, da.f(), 3, dx.f(), dy.f()) ==
-               FORGE_CUDA_OK,
-           "matvec");
+    expect(
+        forge_cuda_matvec_f32(2, 3, da.f(), 3, dx.f(), dy.f()) == FORGE_CUDA_OK,
+        "matvec");
     forge_cuda_synchronize();
     forge_cuda_memcpy_d2h(hy.data(), &dy.b, hy.size() * 4);
     expect_close(hy[0], 6.f, 1e-5f, 1e-4f, "mv0");
@@ -182,14 +183,13 @@ void test_cuda_ops() {
 
   // Argmax rows (tie → lowest index)
   {
-    std::vector<float> h = {1.f, 5.f, 5.f, 3.f,  // row0 → idx 1
-                            9.f, 2.f, 9.f, 1.f}; // row1 → idx 0
+    std::vector<float> h = {1.f, 5.f, 5.f, 3.f,   // row0 → idx 1
+                            9.f, 2.f, 9.f, 1.f};  // row1 → idx 0
     std::vector<int32_t> ids(2, -1);
     Buf d(h.size() * 4), dout(2 * sizeof(int32_t));
     forge_cuda_memcpy_h2d(&d.b, h.data(), h.size() * 4);
-    expect(forge_cuda_argmax_rows_f32(2, 4, d.f(),
-                                      static_cast<int32_t*>(dout.b.ptr)) ==
-               FORGE_CUDA_OK,
+    expect(forge_cuda_argmax_rows_f32(
+               2, 4, d.f(), static_cast<int32_t*>(dout.b.ptr)) == FORGE_CUDA_OK,
            "argmax");
     forge_cuda_synchronize();
     forge_cuda_memcpy_d2h(ids.data(), &dout.b, 2 * sizeof(int32_t));

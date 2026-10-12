@@ -9,8 +9,8 @@
 namespace {
 
 inline bool worth_parallel(size_t m, size_t n, size_t k) {
-  const double flops =
-      2.0 * static_cast<double>(m) * static_cast<double>(n) * static_cast<double>(k);
+  const double flops = 2.0 * static_cast<double>(m) * static_cast<double>(n) *
+                       static_cast<double>(k);
   return (flops >= 5e6) || (m >= 16 && n >= 512 && flops >= 2e6);
 }
 
@@ -83,8 +83,7 @@ inline float dot_i4_group(const float* x, const uint8_t* w_packed, size_t k0,
     // 16 weights / 8 packed bytes per iteration.
     for (; p + 16 <= len; p += 16) {
       const size_t byte_off = (k0 + p) >> 1;
-      sum +=
-          dot_i4_bytes_fma(x + p, unpack_i4_bytes8(w_packed + byte_off));
+      sum += dot_i4_bytes_fma(x + p, unpack_i4_bytes8(w_packed + byte_off));
     }
     // 8 weights / 4 packed bytes.
     if (p + 8 <= len) {
@@ -106,8 +105,8 @@ inline float dot_i4_group(const float* x, const uint8_t* w_packed, size_t k0,
   // Scalar tail (handles odd k0 / remainders / non-AVX builds).
   for (; p < len; ++p) {
     const size_t col = k0 + p;
-    sum += x[p] * static_cast<float>(
-                      nibble_i4(w_packed[col >> 1], (col & 1u) != 0));
+    sum += x[p] *
+           static_cast<float>(nibble_i4(w_packed[col >> 1], (col & 1u) != 0));
   }
   return sum;
 }
@@ -124,9 +123,8 @@ void linear_i8_range(size_t m, size_t k, const float* x, size_t ldx,
       const float* srow = scales + j * n_groups;
       float sum = 0.0f;
       for (size_t g = 0; g < n_groups; ++g) {
-        sum += srow[g] *
-               dot_i8_group(xrow + g * group_size, wrow + g * group_size,
-                            group_size);
+        sum += srow[g] * dot_i8_group(xrow + g * group_size,
+                                      wrow + g * group_size, group_size);
       }
       if (bias != nullptr) {
         sum += bias[j];
@@ -176,7 +174,8 @@ extern "C" forge_status forge_kernels_linear_i8_f32(
     return FORGE_ERR_INVALID_ARGUMENT;
   }
 
-  if (worth_parallel(m, n, k) && forge::ThreadPool::instance().total_threads() > 1) {
+  if (worth_parallel(m, n, k) &&
+      forge::ThreadPool::instance().total_threads() > 1) {
     forge::ThreadPool::instance().parallel_for(n, [&](size_t j0, size_t j1) {
       linear_i8_range(m, k, x, ldx, w_q, scales, group_size, bias, y, ldy, j0,
                       j1);
@@ -188,9 +187,9 @@ extern "C" forge_status forge_kernels_linear_i8_f32(
 }
 
 extern "C" forge_status forge_kernels_linear_i4_f32(
-    size_t m, size_t n, size_t k, const float* x, size_t ldx, const uint8_t* w_q,
-    const float* scales, size_t group_size, const float* bias, float* y,
-    size_t ldy) {
+    size_t m, size_t n, size_t k, const float* x, size_t ldx,
+    const uint8_t* w_q, const float* scales, size_t group_size,
+    const float* bias, float* y, size_t ldy) {
   if (x == nullptr || w_q == nullptr || scales == nullptr || y == nullptr) {
     return FORGE_ERR_INVALID_ARGUMENT;
   }
@@ -201,7 +200,8 @@ extern "C" forge_status forge_kernels_linear_i4_f32(
     return FORGE_ERR_INVALID_ARGUMENT;
   }
 
-  if (worth_parallel(m, n, k) && forge::ThreadPool::instance().total_threads() > 1) {
+  if (worth_parallel(m, n, k) &&
+      forge::ThreadPool::instance().total_threads() > 1) {
     forge::ThreadPool::instance().parallel_for(n, [&](size_t j0, size_t j1) {
       linear_i4_range(m, k, x, ldx, w_q, scales, group_size, bias, y, ldy, j0,
                       j1);

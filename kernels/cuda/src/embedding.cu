@@ -7,8 +7,8 @@
 
 namespace {
 
-__global__ void embed_kernel(const float* table, size_t hidden, const int32_t* ids,
-                             size_t t, float* out) {
+__global__ void embed_kernel(const float* table, size_t hidden,
+                             const int32_t* ids, size_t t, float* out) {
   size_t row = blockIdx.x;
   if (row >= t) {
     return;
@@ -43,9 +43,11 @@ __global__ void embed_bf16_kernel(const __nv_bfloat16* table, size_t hidden,
 
 }  // namespace
 
-extern "C" forge_cuda_status forge_cuda_embedding_f32(
-    const float* embed, size_t vocab, size_t hidden, const int32_t* token_ids,
-    size_t t, float* out) {
+extern "C" forge_cuda_status forge_cuda_embedding_f32(const float* embed,
+                                                      size_t vocab,
+                                                      size_t hidden,
+                                                      const int32_t* token_ids,
+                                                      size_t t, float* out) {
   if (embed == nullptr || token_ids == nullptr || out == nullptr || t == 0 ||
       vocab == 0 || hidden == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
@@ -55,9 +57,11 @@ extern "C" forge_cuda_status forge_cuda_embedding_f32(
   return forge::cuda_detail::launch_check("embed_kernel");
 }
 
-extern "C" forge_cuda_status forge_cuda_embedding_bf16(
-    const void* embed_bf16, size_t vocab, size_t hidden,
-    const int32_t* token_ids, size_t t, float* out) {
+extern "C" forge_cuda_status forge_cuda_embedding_bf16(const void* embed_bf16,
+                                                       size_t vocab,
+                                                       size_t hidden,
+                                                       const int32_t* token_ids,
+                                                       size_t t, float* out) {
   if (embed_bf16 == nullptr || token_ids == nullptr || out == nullptr ||
       t == 0 || vocab == 0 || hidden == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;

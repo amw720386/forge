@@ -30,8 +30,8 @@ forge_status validate_matvec(size_t m, size_t n, const float* a, size_t lda,
 }
 
 #if FORGE_HAS_AVX2_FMA
-void matvec_avx2(size_t m, size_t n, const float* a, size_t lda,
-                 const float* x, float* y) {
+void matvec_avx2(size_t m, size_t n, const float* a, size_t lda, const float* x,
+                 float* y) {
   constexpr size_t kVec = 8;
   for (size_t i = 0; i < m; ++i) {
     __m256 acc = _mm256_setzero_ps();

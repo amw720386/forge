@@ -22,10 +22,17 @@ struct ProfileRegion {
     if (!std::getenv("FORGE_KERNEL_PROFILE")) return;
     cudaStreamCaptureStatus capture;
     if (cudaStreamIsCapturing(cudaStreamPerThread, &capture) != cudaSuccess ||
-        capture != cudaStreamCaptureStatusNone) return;
-    if (cudaEventCreate(&begin) != cudaSuccess) { begin = nullptr; return; }
+        capture != cudaStreamCaptureStatusNone)
+      return;
+    if (cudaEventCreate(&begin) != cudaSuccess) {
+      begin = nullptr;
+      return;
+    }
     if (cudaEventCreate(&end) != cudaSuccess) {
-      cudaEventDestroy(begin); begin = nullptr; end = nullptr; return;
+      cudaEventDestroy(begin);
+      begin = nullptr;
+      end = nullptr;
+      return;
     }
     cudaEventRecord(begin, cudaStreamPerThread);
   }
@@ -37,7 +44,8 @@ struct ProfileRegion {
       if (cudaEventElapsedTime(&ms, begin, end) == cudaSuccess)
         std::fprintf(stderr, "[runtime device] stage=%s ms=%.6f\n", label, ms);
     }
-    cudaEventDestroy(begin); cudaEventDestroy(end);
+    cudaEventDestroy(begin);
+    cudaEventDestroy(end);
   }
 };
 

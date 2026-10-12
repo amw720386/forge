@@ -3,9 +3,11 @@
 #include <cmath>
 #include <vector>
 
-extern "C" forge_status forge_kernels_rope_f32(
-    size_t seq_len, size_t n_heads, size_t head_dim, float* x,
-    const int32_t* positions, size_t position_offset, float rope_theta) {
+extern "C" forge_status forge_kernels_rope_f32(size_t seq_len, size_t n_heads,
+                                               size_t head_dim, float* x,
+                                               const int32_t* positions,
+                                               size_t position_offset,
+                                               float rope_theta) {
   if (x == nullptr) {
     return FORGE_ERR_INVALID_ARGUMENT;
   }
@@ -19,10 +21,10 @@ extern "C" forge_status forge_kernels_rope_f32(
   const size_t half = head_dim / 2;
   std::vector<float> inv_freq(half);
   for (size_t i = 0; i < half; ++i) {
-    inv_freq[i] = static_cast<float>(
-        1.0 / std::pow(static_cast<double>(rope_theta),
-                       static_cast<double>(2 * i) /
-                           static_cast<double>(head_dim)));
+    inv_freq[i] =
+        static_cast<float>(1.0 / std::pow(static_cast<double>(rope_theta),
+                                          static_cast<double>(2 * i) /
+                                              static_cast<double>(head_dim)));
   }
 
   for (size_t t = 0; t < seq_len; ++t) {

@@ -48,8 +48,8 @@ void test_ops() {
 
   // Linear vs reference: Y = X @ W^T
   {
-    float x[6] = {1, 2, 3, 4, 5, 6};          // 2x3
-    float w[6] = {1, 0, 0, 0, 1, 0};          // 2x3 → out=2
+    float x[6] = {1, 2, 3, 4, 5, 6};  // 2x3
+    float w[6] = {1, 0, 0, 0, 1, 0};  // 2x3 → out=2
     float y[4] = {};
     expect(forge_kernels_linear_f32(2, 2, 3, x, 3, w, 3, nullptr, y, 2) ==
                FORGE_OK,
@@ -83,7 +83,7 @@ void test_ops() {
     };
     const int8_t row0[16] = {1, -2, 3, -4, 5, -6, 7, -7,
                              1, -1, 2, -2, 3, -3, 4, -4};
-    const int8_t row1[16] = {1, 1, 1, 1, 1, 1, 1, 1,
+    const int8_t row1[16] = {1,  1,  1,  1,  1,  1,  1,  1,
                              -1, -1, -1, -1, -1, -1, -1, -1};
     for (size_t c = 0; c < k; c += 2) {
       w_q[c / 2] = pack(row0[c], row0[c + 1]);

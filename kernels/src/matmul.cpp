@@ -7,8 +7,8 @@
 namespace {
 
 forge_status validate_matmul(size_t m, size_t n, size_t k, const float* a,
-                             size_t lda, const float* b, size_t ldb,
-                             float* c, size_t ldc) {
+                             size_t lda, const float* b, size_t ldb, float* c,
+                             size_t ldc) {
   if (a == nullptr || b == nullptr || c == nullptr) {
     return FORGE_ERR_INVALID_ARGUMENT;
   }

@@ -5,9 +5,7 @@
 
 #include <cstring>
 
-extern "C" const char* forge_cuda_version(void) {
-  return "forge-cuda/0.1.0";
-}
+extern "C" const char* forge_cuda_version(void) { return "forge-cuda/0.1.0"; }
 
 extern "C" int forge_cuda_is_available(void) {
   int n = 0;
@@ -30,7 +28,7 @@ extern "C" forge_cuda_status forge_cuda_set_device(int device) {
 }
 
 extern "C" forge_cuda_status forge_cuda_device_name(int device, char* out,
-                                                   size_t out_len) {
+                                                    size_t out_len) {
   if (out == nullptr || out_len == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }

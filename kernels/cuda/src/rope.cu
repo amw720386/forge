@@ -7,7 +7,8 @@
 namespace {
 
 __global__ void rope_kernel(size_t seq_len, size_t n_heads, size_t head_dim,
-                            float* x, size_t position_offset, float rope_theta) {
+                            float* x, size_t position_offset,
+                            float rope_theta) {
   size_t t = blockIdx.x;
   size_t h = blockIdx.y;
   if (t >= seq_len || h >= n_heads) {
@@ -17,8 +18,8 @@ __global__ void rope_kernel(size_t seq_len, size_t n_heads, size_t head_dim,
   float* row = x + (t * n_heads + h) * head_dim;
   const float pos = static_cast<float>(position_offset + t);
   for (size_t i = threadIdx.x; i < half; i += blockDim.x) {
-    float inv_freq =
-        powf(rope_theta, -static_cast<float>(2 * i) / static_cast<float>(head_dim));
+    float inv_freq = powf(
+        rope_theta, -static_cast<float>(2 * i) / static_cast<float>(head_dim));
     float angle = pos * inv_freq;
     float cos_v = cosf(angle);
     float sin_v = sinf(angle);
@@ -31,9 +32,10 @@ __global__ void rope_kernel(size_t seq_len, size_t n_heads, size_t head_dim,
 
 }  // namespace
 
-extern "C" forge_cuda_status forge_cuda_rope_f32(
-    size_t seq_len, size_t n_heads, size_t head_dim, float* x,
-    size_t position_offset, float rope_theta) {
+extern "C" forge_cuda_status forge_cuda_rope_f32(size_t seq_len, size_t n_heads,
+                                                 size_t head_dim, float* x,
+                                                 size_t position_offset,
+                                                 float rope_theta) {
   if (x == nullptr || seq_len == 0 || n_heads == 0 || head_dim == 0 ||
       (head_dim % 2) != 0 || !(rope_theta > 0.0f)) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;

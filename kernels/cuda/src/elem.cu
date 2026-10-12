@@ -40,26 +40,26 @@ __global__ void kv_append_kernel(size_t width, size_t t, size_t dst_offset,
 }  // namespace
 
 extern "C" forge_cuda_status forge_cuda_copy_rows_f32(size_t rows, size_t cols,
-                                                     const float* src,
-                                                     float* dst) {
+                                                      const float* src,
+                                                      float* dst) {
   if (src == nullptr || dst == nullptr || rows == 0 || cols == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }
   size_t n = rows * cols;
   copy_rows_kernel<<<(static_cast<unsigned>(n) + 255) / 256, 256>>>(rows, cols,
-                                                                      src, dst);
+                                                                    src, dst);
   return forge::cuda_detail::launch_check("copy_rows_kernel");
 }
 
 extern "C" forge_cuda_status forge_cuda_add_rows_f32(size_t rows, size_t cols,
-                                                    const float* a,
-                                                    const float* b, float* y) {
+                                                     const float* a,
+                                                     const float* b, float* y) {
   if (a == nullptr || b == nullptr || y == nullptr || rows == 0 || cols == 0) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }
   size_t n = rows * cols;
   add_rows_kernel<<<(static_cast<unsigned>(n) + 255) / 256, 256>>>(rows, cols,
-                                                                    a, b, y);
+                                                                   a, b, y);
   return forge::cuda_detail::launch_check("add_rows_kernel");
 }
 

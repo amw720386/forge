@@ -128,15 +128,15 @@ int main() {
     forge_cuda_memset_zero(&a);
     forge_cuda_memset_zero(&x);
     forge_cuda_matvec_f32(m, n, static_cast<float*>(a.ptr), n,
-                         static_cast<float*>(x.ptr),
-                         static_cast<float*>(y.ptr));
+                          static_cast<float*>(x.ptr),
+                          static_cast<float*>(y.ptr));
     forge_cuda_synchronize();
     const int iters = 50;
     cudaEventRecord(start);
     for (int i = 0; i < iters; ++i) {
       forge_cuda_matvec_f32(m, n, static_cast<float*>(a.ptr), n,
-                           static_cast<float*>(x.ptr),
-                           static_cast<float*>(y.ptr));
+                            static_cast<float*>(x.ptr),
+                            static_cast<float*>(y.ptr));
     }
     cudaEventRecord(stop);
     cudaEventSynchronize(stop);

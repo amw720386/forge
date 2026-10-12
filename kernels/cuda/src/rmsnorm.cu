@@ -25,7 +25,8 @@ __global__ void rmsnorm_kernel(size_t rows, size_t dim, const float* x,
   }
   partial[threadIdx.x] = local;
   __syncthreads();
-  for (int stride = static_cast<int>(blockDim.x) / 2; stride > 0; stride >>= 1) {
+  for (int stride = static_cast<int>(blockDim.x) / 2; stride > 0;
+       stride >>= 1) {
     if (static_cast<int>(threadIdx.x) < stride) {
       partial[threadIdx.x] += partial[threadIdx.x + stride];
     }
