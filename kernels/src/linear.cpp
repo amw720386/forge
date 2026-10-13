@@ -3,8 +3,6 @@
 #include "simd.hpp"
 #include "thread_pool.hpp"
 
-#include <algorithm>
-
 namespace {
 
 inline float dot_row(const float* xrow, const float* wrow, size_t k) {

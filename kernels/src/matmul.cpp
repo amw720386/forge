@@ -2,8 +2,6 @@
 
 #include "simd.hpp"
 
-#include <cstring>
-
 namespace {
 
 forge_status validate_matmul(size_t m, size_t n, size_t k, const float* a,

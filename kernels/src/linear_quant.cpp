@@ -3,7 +3,6 @@
 #include "simd.hpp"
 #include "thread_pool.hpp"
 
-#include <algorithm>
 #include <cstdint>
 
 namespace {

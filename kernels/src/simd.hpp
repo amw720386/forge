@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstddef>
-#include <cstdint>
-
 #if defined(__AVX2__) && (defined(__FMA__) || defined(_MSC_VER))
 #include <immintrin.h>
 #define FORGE_HAS_AVX2_FMA 1
@@ -12,14 +9,6 @@
 
 namespace forge {
 namespace simd {
-
-inline bool avx2_fma_enabled() {
-#if FORGE_HAS_AVX2_FMA
-  return true;
-#else
-  return false;
-#endif
-}
 
 #if FORGE_HAS_AVX2_FMA
 inline float hsum256(__m256 v) {

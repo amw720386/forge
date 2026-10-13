@@ -1,11 +1,13 @@
 #pragma once
 
+#include <algorithm>
 #include <atomic>
 #include <condition_variable>
 #include <cstdlib>
 #include <functional>
 #include <mutex>
 #include <thread>
+#include <utility>
 #include <vector>
 
 namespace forge {
