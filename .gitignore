@@ -43,7 +43,7 @@ models/**
 .env.*
 !**/.env.example
 
-# Retired machine-local deployment cache.
+# Local deployment output and cache
 /.forge-deploy-out/
 /.forge/
 
@@ -56,6 +56,8 @@ models/**
 
 # Python reference environment and generated activations
 .venv/
+.ruff_cache/
+.pytest_cache/
 __pycache__/
 *.pyc
 
