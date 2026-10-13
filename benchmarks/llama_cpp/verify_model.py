@@ -3,8 +3,9 @@
 import hashlib
 import json
 import pathlib
-import sys
 import struct
+import sys
+
 import numpy as np
 from gguf import GGUFReader
 

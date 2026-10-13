@@ -2,8 +2,11 @@
 Usage: python tests/reference/pretrained_reference.py MODEL_DIR OUTPUT_DIR
 """
 
-import json, sys, os
+import json
+import os
+import sys
 from pathlib import Path
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 

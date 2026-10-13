@@ -1,6 +1,8 @@
 """Context sweep with token accounting for the server's plain-text chat wrapper."""
 
-import argparse, json, sys
+import argparse
+import json
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 

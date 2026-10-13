@@ -4,19 +4,19 @@ Run after building: python tests/cli_smoke.py --model models/Qwen2.5-0.5B-Instru
 """
 
 import argparse
-import os
-from pathlib import Path
-import subprocess
-import tempfile
 import concurrent.futures
 import json
+import os
+import queue
 import signal
 import socket
+import subprocess
+import tempfile
+import threading
 import time
 import urllib.error
 import urllib.request
-import queue
-import threading
+from pathlib import Path
 
 
 def main():

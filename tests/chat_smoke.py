@@ -5,7 +5,6 @@ import concurrent.futures
 import ctypes
 import json
 import os
-from pathlib import Path
 import signal
 import socket
 import subprocess
@@ -13,6 +12,7 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 
 def main():
@@ -212,6 +212,7 @@ def main():
         "max_tokens": 8,
         "temperature": 0,
     }
+    first = None
     with tempfile.TemporaryDirectory() as cwd:
         for restart in range(2):
             api_model = model.name if restart == 0 else "smoke-alias"
@@ -423,6 +424,7 @@ def main():
                                 )
                             print("OpenAI SDK nonstream/stream: PASS")
                     else:
+                        assert first is not None
                         assert (
                             expected["choices"] == first["choices"]
                             and expected["usage"] == first["usage"]
