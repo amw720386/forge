@@ -82,7 +82,8 @@ extern "C" forge_cuda_status forge_cuda_memcpy_d2d(forge_cuda_buffer* dst,
       src->ptr == nullptr) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }
-  if (dst_off + bytes > dst->bytes || src_off + bytes > src->bytes) {
+  if (dst_off > dst->bytes || bytes > dst->bytes - dst_off ||
+      src_off > src->bytes || bytes > src->bytes - src_off) {
     return FORGE_CUDA_ERR_INVALID_ARGUMENT;
   }
   auto* d = static_cast<char*>(dst->ptr) + dst_off;

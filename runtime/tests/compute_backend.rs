@@ -60,6 +60,42 @@ fn default_backend_is_cpu_without_cuda_feature() {
 }
 
 #[test]
+fn cpu_copy_rejects_overflowing_ranges_without_modifying_destination() {
+    let backend = CpuBackend;
+    let mut src = backend.alloc(8).unwrap();
+    let mut dst = backend.alloc(8).unwrap();
+    backend
+        .copy_h2d(&mut src, &[1, 2, 3, 4, 5, 6, 7, 8])
+        .unwrap();
+    backend.copy_h2d(&mut dst, &[9; 8]).unwrap();
+
+    for (dst_offset, src_offset, bytes) in [
+        (usize::MAX, 0, 2),
+        (0, usize::MAX, 2),
+        (1, 0, usize::MAX),
+        (0, 1, usize::MAX),
+        (8, 0, 1),
+        (0, 8, 1),
+        (9, 0, 0),
+        (0, 9, 0),
+    ] {
+        assert!(matches!(
+            backend.copy_d2d(&mut dst, dst_offset, &src, src_offset, bytes),
+            Err(forge_runtime::compute::ComputeError::InvalidArgument(_))
+        ));
+        let mut actual = [0; 8];
+        backend.copy_d2h(&mut actual, &dst).unwrap();
+        assert_eq!(actual, [9; 8]);
+    }
+
+    backend.copy_d2d(&mut dst, 2, &src, 3, 3).unwrap();
+    backend.copy_d2d(&mut dst, 8, &src, 8, 0).unwrap();
+    let mut actual = [0; 8];
+    backend.copy_d2h(&mut actual, &dst).unwrap();
+    assert_eq!(actual, [9, 9, 4, 5, 6, 9, 9, 9]);
+}
+
+#[test]
 #[cfg(feature = "cuda")]
 fn cuda_parity_when_available() {
     use forge_runtime::compute::CudaBackend;

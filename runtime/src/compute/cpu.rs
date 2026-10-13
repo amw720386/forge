@@ -111,7 +111,11 @@ impl ComputeBackend for CpuBackend {
         if dst.kind != BackendKind::Cpu || src.kind != BackendKind::Cpu {
             return Err(ComputeError::InvalidArgument("cpu buffers required".into()));
         }
-        if dst_offset + bytes > dst.bytes || src_offset + bytes > src.bytes {
+        if dst_offset > dst.bytes
+            || bytes > dst.bytes - dst_offset
+            || src_offset > src.bytes
+            || bytes > src.bytes - src_offset
+        {
             return Err(ComputeError::InvalidArgument("D2D overflow".into()));
         }
         unsafe {
