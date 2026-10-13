@@ -1,4 +1,4 @@
-//! CUDA compute backend (compiled only with `--features cuda`).
+//! CUDA compute backend; `cuda-stub` links a host-only implementation for checks.
 
 use super::backend::{BackendKind, Buffer, ComputeBackend, ComputeError, DeviceInfo};
 use std::env;

@@ -9,6 +9,7 @@
 
 #![cfg(any(feature = "cuda", feature = "cuda-stub"))]
 
+#[cfg(feature = "cuda")]
 use forge_runtime::compute::CudaBackend;
 use forge_runtime::cuda_model::kv::LayerGpuKvCaches;
 use forge_runtime::cuda_model::{CudaScratch, CudaTransformer};
@@ -30,13 +31,16 @@ fn require_real_gpu() -> Option<()> {
         eprintln!(
             "SKIP: cuda-stub build — GPU parity unverified (needs --features cuda + NVIDIA GPU)"
         );
-        return None;
+        None
     }
-    match CudaBackend::try_new(0) {
-        Ok(_) => Some(()),
-        Err(e) => {
-            eprintln!("SKIP: no CUDA device ({e}) — GPU parity unverified");
-            None
+    #[cfg(feature = "cuda")]
+    {
+        match CudaBackend::try_new(0) {
+            Ok(_) => Some(()),
+            Err(e) => {
+                eprintln!("SKIP: no CUDA device ({e}) — GPU parity unverified");
+                None
+            }
         }
     }
 }

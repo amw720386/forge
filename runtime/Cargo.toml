@@ -50,4 +50,3 @@ required-features = ["diagnostics"]
 
 [build-dependencies]
 cc = "1.2"
-

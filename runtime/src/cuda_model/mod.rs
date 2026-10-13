@@ -1,4 +1,4 @@
-//! Full-model CUDA inference. Compiled with `--features cuda`.
+//! Full-model CUDA inference; `cuda-stub` compiles the same paths without a GPU.
 
 mod batcher;
 mod generate;

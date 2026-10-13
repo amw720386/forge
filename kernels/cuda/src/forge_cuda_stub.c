@@ -7,7 +7,6 @@ uint64_t forge_cuda_bf16_scratch_address(void) { return 0; }
 
 #include <stdint.h>
 #include <stdio.h>
-#include <string.h>
 
 static char g_err[256] = "forge_cuda_stub: no real CUDA backend linked";
 
@@ -391,6 +390,20 @@ forge_cuda_status forge_cuda_batch_paged_prepare_f32(
     const uint64_t* metadata, float* q, const float* k, const float* v,
     float* k_pool, float* v_pool, size_t block_size, size_t blocks,
     size_t layer) {
+  (void)batch;
+  (void)heads;
+  (void)kv_heads;
+  (void)dim;
+  (void)theta;
+  (void)metadata;
+  (void)q;
+  (void)k;
+  (void)v;
+  (void)k_pool;
+  (void)v_pool;
+  (void)block_size;
+  (void)blocks;
+  (void)layer;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_batch_paged_attn_f32(
@@ -398,6 +411,19 @@ forge_cuda_status forge_cuda_batch_paged_attn_f32(
     const uint64_t* metadata, const float* q, const float* k_pool,
     const float* v_pool, float* ctx, size_t block_size, size_t blocks,
     size_t layer) {
+  (void)batch;
+  (void)heads;
+  (void)kv_heads;
+  (void)dim;
+  (void)scale;
+  (void)metadata;
+  (void)q;
+  (void)k_pool;
+  (void)v_pool;
+  (void)ctx;
+  (void)block_size;
+  (void)blocks;
+  (void)layer;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_batch_paged_attn_dispatch_f32(
@@ -405,6 +431,20 @@ forge_cuda_status forge_cuda_batch_paged_attn_dispatch_f32(
     const uint64_t* metadata, const float* q, const float* k_pool,
     const float* v_pool, float* ctx, size_t block_size, size_t blocks,
     size_t layer, int partitioned) {
+  (void)batch;
+  (void)heads;
+  (void)kv_heads;
+  (void)dim;
+  (void)scale;
+  (void)metadata;
+  (void)q;
+  (void)k_pool;
+  (void)v_pool;
+  (void)ctx;
+  (void)block_size;
+  (void)blocks;
+  (void)layer;
+  (void)partitioned;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
@@ -413,6 +453,16 @@ forge_cuda_status forge_cuda_linear_bf16_xw(size_t m, size_t n, size_t k,
                                             const void* w, size_t ldw,
                                             const float* bias, float* y,
                                             size_t ldy) {
+  (void)m;
+  (void)n;
+  (void)k;
+  (void)x;
+  (void)ldx;
+  (void)w;
+  (void)ldw;
+  (void)bias;
+  (void)y;
+  (void)ldy;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
@@ -420,21 +470,28 @@ forge_cuda_status forge_cuda_graph_begin(void) {
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_graph_end(void** executable) {
+  (void)executable;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_graph_replay(void* executable) {
+  (void)executable;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_graph_destroy(void* executable) {
+  (void)executable;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 
 forge_cuda_status forge_cuda_timer_start(void** timer) {
+  (void)timer;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_timer_elapsed(void* timer, float* ms) {
+  (void)timer;
+  (void)ms;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }
 forge_cuda_status forge_cuda_timer_destroy(void* timer) {
+  (void)timer;
   return FORGE_CUDA_ERR_NOT_BUILT;
 }

@@ -118,7 +118,7 @@ fn link_cuda_stub(kernels_dir: &Path) {
     cc::Build::new()
         .file(&stub)
         .include(&cuda_inc)
-        .warnings(false)
+        .warnings(true)
         .compile("forge_cuda_stub");
 }
 
