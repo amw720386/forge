@@ -133,7 +133,7 @@ runtime before CPU validation after a stub build.
 ```sh
 # No toolkit or GPU required
 cargo test --release --manifest-path runtime/Cargo.toml --features cuda-stub
-# With a real CUDA build and local GPU; not executed during this cleanup
+# With a real CUDA build and NVIDIA GPU
 ctest --test-dir kernels/build-cuda --output-on-failure -C Release
 cargo test --release --manifest-path runtime/Cargo.toml --features cuda
 ```
@@ -181,9 +181,6 @@ It needs only Python's standard library; absent weights are explicitly skipped.
 On Windows its interrupt check uses Ctrl+Break, which reaches the console
 interrupt handler. Rebuild the server and runtime together after ABI changes.
 
-Current cleanup validation is on Windows x86-64 CPU. Linux builds and CUDA
-execution were not retested. Historical details are in [history/](history/).
-
 ## Common setup failures
 
 - Script execution blocked: use the process-scoped `powershell -NoProfile
@@ -210,4 +207,4 @@ A clean source build uses only tracked source plus installed compilers and norma
 Cargo/Go package resolution. Model-dependent tests require separately supplied
 weights. Existing package download caches may be reused; compiled outputs from
 another checkout are not required. Windows CPU is the validated installation
-path; Linux and historical CUDA execution have not been retested in this phase.
+path; Linux and CUDA require verification on their respective platforms.

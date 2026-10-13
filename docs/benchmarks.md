@@ -1,5 +1,9 @@
 # Benchmarks
 
+This page describes benchmark procedures. It contains no retained measured
+performance results or claims of speedup. Record new results with their hardware,
+model revision, settings and raw output before making performance comparisons.
+
 ## Run locally
 
 The kernel benchmark is synthetic and reports matrix throughput, not model decode
@@ -39,7 +43,7 @@ dtype, context/slot limits and environment settings alongside new results.
 
 Generated output belongs in the ignored root `benchmark-output/` directory,
 separate from benchmark source. `FORGE_BENCH_OUT` overrides this location for
-the shell harnesses. Historical benchmark runs and numbered reports are removed.
+the shell harnesses.
 
 Use `python benchmarks/analysis/summarize_http.py --root benchmark-output` to
 summarize HTTP files named `*-http.json`. Compare generated text between two runs
