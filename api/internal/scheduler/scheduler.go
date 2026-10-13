@@ -21,10 +21,9 @@ import (
 )
 
 type liveReq struct {
-	req       *queue.Request
-	runtimeID uint64
-	nTokens   uint64
-	genStart  time.Time
+	req      *queue.Request
+	nTokens  uint64
+	genStart time.Time
 }
 
 type Scheduler struct {
@@ -178,9 +177,8 @@ func (s *Scheduler) tryAdmit(req *queue.Request) bool {
 	req.State = queue.StateStreaming
 	s.mu.Lock()
 	s.live[id] = &liveReq{
-		req:       req,
-		runtimeID: id,
-		genStart:  time.Now(),
+		req:      req,
+		genStart: time.Now(),
 	}
 	s.mu.Unlock()
 	s.metrics.SetQueueLen(s.q.Len())

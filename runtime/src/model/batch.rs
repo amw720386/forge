@@ -73,7 +73,6 @@ struct Slot {
     emitted: String,
     params: GenerateParams,
     generated: usize,
-    cancelled: bool,
     rng_state: u64,
     /// Owned copy of last-token logits after prefill / shared decode.
     last_logits: Vec<f32>,
@@ -184,7 +183,6 @@ impl ContinuousBatcher {
                 emitted: String::new(),
                 params: GenerateParams::default(),
                 generated: 0,
-                cancelled: false,
                 rng_state: 0xDEADBEEF,
                 last_logits: Vec::new(),
                 pending_decode: None,
@@ -260,7 +258,6 @@ impl ContinuousBatcher {
         slot.params = params;
         slot.generated = 0;
         slot.emitted.clear();
-        slot.cancelled = false;
         slot.rng_state = 0xDEADBEEF ^ id;
         slot.pending_decode = None;
         slot.id = id;
@@ -306,10 +303,6 @@ impl ContinuousBatcher {
 
         // --- Sample: sample & emit for slots that have fresh logits ---
         for si in 0..self.slots.len() {
-            if self.slots[si].cancelled {
-                self.free_slot(si);
-                continue;
-            }
             if self.slots[si].status != SlotStatus::Ready {
                 continue;
             }
@@ -376,7 +369,6 @@ impl ContinuousBatcher {
     fn free_slot(&mut self, si: usize) {
         let slot = &mut self.slots[si];
         slot.status = SlotStatus::Free;
-        slot.cancelled = false;
         slot.pending_decode = None;
         slot.tokens.clear();
         slot.last_logits.clear();
