@@ -2,7 +2,7 @@
 //!
 //! Estimates are **conservative planning aids**, not hard OS limits. Windows working-set /
 //! commit charge and Linux RSS can diverge from in-process sums; true enforcement needs
-//! OS job objects / cgroups (documented in MEMORY_MANAGEMENT.md).
+//! OS job objects / cgroups.
 
 use crate::model::ModelConfig;
 use crate::tensor::TensorError;

@@ -140,6 +140,8 @@ pub struct ForgeBatchSchedStats {
     pub prefill_stall_ns: u64,
 }
 
+/// # Safety
+/// No caller preconditions. The returned static string must not be freed or modified.
 #[no_mangle]
 pub unsafe extern "C" fn forge_version() -> *const c_char {
     VERSION
@@ -149,6 +151,9 @@ pub unsafe extern "C" fn forge_version() -> *const c_char {
         .as_ptr()
 }
 
+/// # Safety
+/// Non-null inputs must cover the matrices described by dimensions and strides.
+/// `c` must be writable and must not overlap `a` or `b`.
 #[no_mangle]
 pub unsafe extern "C" fn forge_matmul_f32(
     m: usize,
@@ -167,6 +172,9 @@ pub unsafe extern "C" fn forge_matmul_f32(
     kernels::forge_kernels_matmul_f32(m, n, k, a, lda, b, ldb, c, ldc)
 }
 
+/// # Safety
+/// Non-null inputs must cover `m` rows of stride `lda` and `n` vector elements.
+/// `y` must be writable for `m` elements and must not overlap either input.
 #[no_mangle]
 pub unsafe extern "C" fn forge_matvec_f32(
     m: usize,
@@ -209,6 +217,9 @@ fn write_piece(dst: &mut [c_char], piece: &str) {
 }
 
 /// device: 0 = CPU, 1 = CUDA FP32, 2 = CUDA BF16 (when built with `--features cuda`).
+/// # Safety
+/// `model_dir` must point to a readable NUL-terminated string. A non-null
+/// `err_buf` must be writable for `err_len` bytes. Free successful handles once.
 #[no_mangle]
 pub unsafe extern "C" fn forge_runtime_load_ex(
     model_dir: *const c_char,
@@ -334,6 +345,8 @@ pub unsafe extern "C" fn forge_runtime_load_ex(
     }))
 }
 
+/// # Safety
+/// The string and error-buffer requirements are the same as [`forge_runtime_load_ex`].
 #[no_mangle]
 pub unsafe extern "C" fn forge_runtime_load(
     model_dir: *const c_char,
@@ -344,6 +357,9 @@ pub unsafe extern "C" fn forge_runtime_load(
     forge_runtime_load_ex(model_dir, max_seq, 0, err_buf, err_len)
 }
 
+/// # Safety
+/// A non-null `rt` must be a live handle returned by a loader, exclusively owned
+/// by the caller. No access to the handle is allowed after this call.
 #[no_mangle]
 pub unsafe extern "C" fn forge_runtime_free(rt: *mut RuntimeHandle) {
     if !rt.is_null() {
@@ -351,6 +367,8 @@ pub unsafe extern "C" fn forge_runtime_free(rt: *mut RuntimeHandle) {
     }
 }
 
+/// # Safety
+/// A non-null `rt` must be a live handle with no concurrent mutable access.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_capacity(rt: *mut RuntimeHandle) -> usize {
     if rt.is_null() {
@@ -359,6 +377,8 @@ pub unsafe extern "C" fn forge_batch_capacity(rt: *mut RuntimeHandle) -> usize {
     (*rt).inner.max_batch()
 }
 
+/// # Safety
+/// A non-null `rt` must be a live handle with no concurrent mutable access.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_active(rt: *mut RuntimeHandle) -> usize {
     if rt.is_null() {
@@ -367,6 +387,8 @@ pub unsafe extern "C" fn forge_batch_active(rt: *mut RuntimeHandle) -> usize {
     (*rt).inner.active_count()
 }
 
+/// # Safety
+/// A non-null `rt` must be a live handle with no concurrent mutable access.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_free_slots(rt: *mut RuntimeHandle) -> usize {
     if rt.is_null() {
@@ -375,6 +397,9 @@ pub unsafe extern "C" fn forge_batch_free_slots(rt: *mut RuntimeHandle) -> usize
     (*rt).inner.free_slots()
 }
 
+/// # Safety
+/// Non-null `rt` must be live with no concurrent mutation; non-null `out` must
+/// point to writable, aligned storage for one stats value, separate from `rt`.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_sched_stats(
     rt: *mut RuntimeHandle,
@@ -388,6 +413,10 @@ pub unsafe extern "C" fn forge_batch_sched_stats(
 }
 
 /// Admit a request into the continuous batcher. Writes request_id on success.
+/// # Safety
+/// Non-null `rt` must be live and exclusively accessed. `prompt_utf8` must be
+/// NUL-terminated; `out_id` and `err_buf` must cover their writable output sizes
+/// and must not overlap the handle or prompt.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_admit(
     rt: *mut RuntimeHandle,
@@ -432,6 +461,8 @@ pub unsafe extern "C" fn forge_batch_admit(
     }
 }
 
+/// # Safety
+/// A non-null `rt` must be live and exclusively accessed for this call.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_cancel(rt: *mut RuntimeHandle, request_id: u64) -> c_int {
     if rt.is_null() {
@@ -445,6 +476,9 @@ pub unsafe extern "C" fn forge_batch_cancel(rt: *mut RuntimeHandle, request_id: 
 }
 
 /// Run one shared decode step. Writes up to `cap` events; returns count (or negative status).
+/// # Safety
+/// Non-null `rt` must be live and exclusively accessed. `out` must cover `cap`
+/// writable, aligned events and must not overlap the handle.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_step(
     rt: *mut RuntimeHandle,
@@ -483,6 +517,9 @@ pub unsafe extern "C" fn forge_batch_step(
 
 /// Full UTF-8 piece from the last batch step. Return required bytes including NUL.
 /// A short buffer is untouched; retry with the returned size before the next step.
+/// # Safety
+/// Non-null `rt` must be live with no concurrent mutation. A non-null `buf` must
+/// cover `len` writable bytes and must not overlap runtime-owned storage.
 #[no_mangle]
 pub unsafe extern "C" fn forge_batch_piece(
     rt: *mut RuntimeHandle,
@@ -503,52 +540,11 @@ pub unsafe extern "C" fn forge_batch_piece(
     needed
 }
 
-#[cfg(test)]
-mod piece_tests {
-    use super::*;
-
-    #[test]
-    fn inline_piece_keeps_utf8_boundaries() {
-        let mut buf = [0i8; 64];
-        write_piece(&mut buf, &("a".repeat(62) + "é"));
-        let text = unsafe { CStr::from_ptr(buf.as_ptr()) }.to_str().unwrap();
-        assert_eq!(text, "a".repeat(62));
-    }
-
-    #[test]
-    #[ignore = "requires local qualified model"]
-    fn full_piece_is_not_truncated_and_short_event_buffer_does_not_step() {
-        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../models/SmolLM2-135M-Instruct");
-        let mut runtime = RuntimeHandle::load(path.to_str().unwrap(), 64, 0).unwrap();
-        runtime.batch_events.push(BatchEvent {
-            request_id: 42,
-            token_id: 0,
-            piece: "é".repeat(128),
-            done: true,
-        });
-        let ptr = &mut *runtime as *mut RuntimeHandle;
-        let mut short = [7u8; 64];
-        unsafe {
-            assert_eq!(
-                forge_batch_piece(ptr, 42, short.as_mut_ptr().cast(), short.len()),
-                257
-            );
-            assert_eq!(short, [7u8; 64]);
-            let mut full = vec![0u8; 257];
-            assert_eq!(
-                forge_batch_piece(ptr, 42, full.as_mut_ptr().cast(), full.len()),
-                257
-            );
-            assert_eq!(std::str::from_utf8(&full[..256]).unwrap(), "é".repeat(128));
-            let mut event: ForgeBatchEvent = std::mem::zeroed();
-            assert_eq!(forge_batch_step(ptr, &mut event, 1), -1);
-        }
-    }
-}
-
 // ---- Single-flight compatibility (uses the same continuous batcher) --------
 
+/// # Safety
+/// The handle, prompt and error-buffer requirements are the same as
+/// [`forge_batch_admit`], without an output request ID.
 #[no_mangle]
 pub unsafe extern "C" fn forge_generate_begin(
     rt: *mut RuntimeHandle,
@@ -585,6 +581,10 @@ pub unsafe extern "C" fn forge_generate_begin(
     st
 }
 
+/// # Safety
+/// Non-null `rt` must be live and exclusively accessed. `token_id` must be
+/// writable and aligned; a non-null `piece_buf` must cover `piece_len` writable
+/// bytes. Outputs must not overlap each other or the handle.
 #[no_mangle]
 pub unsafe extern "C" fn forge_generate_next(
     rt: *mut RuntimeHandle,
@@ -643,6 +643,8 @@ pub unsafe extern "C" fn forge_generate_next(
     }
 }
 
+/// # Safety
+/// A non-null `rt` must be live and exclusively accessed for this call.
 #[no_mangle]
 pub unsafe extern "C" fn forge_generate_cancel(rt: *mut RuntimeHandle) {
     if rt.is_null() {
@@ -657,6 +659,10 @@ pub unsafe extern "C" fn forge_generate_cancel(rt: *mut RuntimeHandle) {
 
 /// Render with the loaded tokenizer's chat template and return preparation JSON.
 /// Returns required bytes including NUL; short buffers are untouched, zero is error.
+/// # Safety
+/// Non-null `rt` must be live with no concurrent mutation. `messages_json` must
+/// be NUL-terminated. Non-null output buffers must cover `len` and `err_len`
+/// writable bytes respectively and must not overlap inputs or each other.
 #[no_mangle]
 pub unsafe extern "C" fn forge_chat_prepare(
     rt: *mut RuntimeHandle,
@@ -705,6 +711,50 @@ pub unsafe extern "C" fn forge_chat_prepare(
         Err(error) => {
             write_err(err_buf, err_len, &error);
             0
+        }
+    }
+}
+
+#[cfg(test)]
+mod piece_tests {
+    use super::*;
+
+    #[test]
+    fn inline_piece_keeps_utf8_boundaries() {
+        let mut buf = [0i8; 64];
+        write_piece(&mut buf, &("a".repeat(62) + "é"));
+        let text = unsafe { CStr::from_ptr(buf.as_ptr()) }.to_str().unwrap();
+        assert_eq!(text, "a".repeat(62));
+    }
+
+    #[test]
+    #[ignore = "requires local qualified model"]
+    fn full_piece_is_not_truncated_and_short_event_buffer_does_not_step() {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../models/SmolLM2-135M-Instruct");
+        let mut runtime = RuntimeHandle::load(path.to_str().unwrap(), 64, 0).unwrap();
+        runtime.batch_events.push(BatchEvent {
+            request_id: 42,
+            token_id: 0,
+            piece: "é".repeat(128),
+            done: true,
+        });
+        let ptr = &mut *runtime as *mut RuntimeHandle;
+        let mut short = [7u8; 64];
+        unsafe {
+            assert_eq!(
+                forge_batch_piece(ptr, 42, short.as_mut_ptr().cast(), short.len()),
+                257
+            );
+            assert_eq!(short, [7u8; 64]);
+            let mut full = vec![0u8; 257];
+            assert_eq!(
+                forge_batch_piece(ptr, 42, full.as_mut_ptr().cast(), full.len()),
+                257
+            );
+            assert_eq!(std::str::from_utf8(&full[..256]).unwrap(), "é".repeat(128));
+            let mut event: ForgeBatchEvent = std::mem::zeroed();
+            assert_eq!(forge_batch_step(ptr, &mut event, 1), -1);
         }
     }
 }

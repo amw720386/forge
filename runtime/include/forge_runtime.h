@@ -41,7 +41,7 @@ FORGE_RUNTIME_API forge_status forge_matvec_f32(size_t m, size_t n,
  * and writes a message into err_buf (if non-NULL).
  * Ownership: caller must forge_runtime_free.
  *
- * The runtime owns a continuous batcher (FORGE_MAX_BATCH, default 8).
+ * The runtime owns a continuous batcher (FORGE_MAX_BATCH, default 4).
  * Single-flight generate_* APIs remain for compatibility; prefer batch_*.
  */
 FORGE_RUNTIME_API forge_runtime* forge_runtime_load(const char* model_dir,
