@@ -80,25 +80,13 @@ impl Linear {
     }
 
     /// Convert FP32 weights in-place to weight-only quant. Bias stays FP32.
-    /// Moves the FP32 buffer out (no extra full clone when uniquely owned via Arc).
+    /// Keep the original allocation intact until conversion succeeds.
     pub fn quantize(&mut self, bits: QuantBits, group_size: usize) -> Result<(), TensorError> {
-        let prev = std::mem::replace(
-            &mut self.weight,
-            // Temporary placeholder; replaced on all paths below.
-            WeightStorage::Fp32(Tensor::zeros(&[1, 1])?),
-        );
-        match prev {
-            WeightStorage::Quant(q) => {
-                self.weight = WeightStorage::Quant(q);
-                Ok(())
-            }
-            WeightStorage::Fp32(t) => {
-                let q = QuantMatrix::from_fp32(&t, bits, group_size)?;
-                drop(t);
-                self.weight = WeightStorage::Quant(q);
-                Ok(())
-            }
+        if let WeightStorage::Fp32(t) = &self.weight {
+            let q = QuantMatrix::from_fp32(t, bits, group_size)?;
+            self.weight = WeightStorage::Quant(q);
         }
+        Ok(())
     }
 
     pub fn forward(&self, x: &Tensor) -> Result<Tensor, TensorError> {
@@ -118,7 +106,7 @@ impl Linear {
         match &self.weight {
             WeightStorage::Fp32(w) => linear_into(x, w, self.bias.as_ref(), out),
             WeightStorage::Quant(_) => {
-                let m = x.shape().get(0).copied().unwrap_or(1);
+                let m = x.shape().first().copied().unwrap_or(1);
                 let k = self.in_features();
                 let n = self.out_features();
                 let out_cols = out.shape().get(1).copied().unwrap_or(n);
@@ -147,7 +135,10 @@ impl Linear {
                 got: vec![in_dim],
             });
         }
-        if rows == 0 || x.len() < rows * x_cols || out.len() < rows * out_cols || x_cols < k
+        if rows == 0
+            || x.len() < rows * x_cols
+            || out.len() < rows * out_cols
+            || x_cols < k
             || out_cols < n
         {
             return Err(TensorError::ShapeMismatch {
@@ -210,5 +201,65 @@ impl Linear {
             },
         };
         kernels::check(status).map_err(TensorError::Kernel)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn failed_quantization_preserves_weights_and_inference() {
+        for bits in [QuantBits::Int8, QuantBits::Int4] {
+            for group_size in [0, 3, 8] {
+                let weight =
+                    Tensor::from_vec(&[2, 4], vec![1., -2., 3., -4., 5., 6., -7., 8.]).unwrap();
+                let bias = Tensor::from_vec(&[2], vec![0.5, -0.5]).unwrap();
+                let mut layer = Linear::new(weight, Some(bias)).unwrap();
+                let input = Tensor::from_vec(&[1, 4], vec![0.25, -0.5, 0.75, 1.]).unwrap();
+                let expected = layer.forward(&input).unwrap();
+                let original = match &layer.weight {
+                    WeightStorage::Fp32(w) => w.data().as_ptr(),
+                    WeightStorage::Quant(_) => unreachable!(),
+                };
+
+                assert_eq!(
+                    layer.quantize(bits, group_size),
+                    Err(TensorError::InvalidArgument)
+                );
+                match &layer.weight {
+                    WeightStorage::Fp32(w) => {
+                        assert_eq!(w.shape(), &[2, 4]);
+                        assert_eq!(w.data().as_ptr(), original);
+                        assert_eq!(w.data(), &[1., -2., 3., -4., 5., 6., -7., 8.]);
+                    }
+                    WeightStorage::Quant(_) => panic!("failed conversion changed storage"),
+                }
+                assert_eq!(layer.bias.as_ref().unwrap().data(), &[0.5, -0.5]);
+                assert_eq!(layer.forward(&input).unwrap().data(), expected.data());
+                layer.quantize(bits, 4).unwrap();
+                assert!(layer.weight.is_quantized());
+            }
+        }
+    }
+
+    #[test]
+    fn quantization_of_packed_weights_is_a_noop() {
+        let mut layer = Linear::new(Tensor::filled(&[2, 4], 1.).unwrap(), None).unwrap();
+        layer.quantize(QuantBits::Int8, 4).unwrap();
+        let before = match &layer.weight {
+            WeightStorage::Quant(q) => q.clone(),
+            WeightStorage::Fp32(_) => unreachable!(),
+        };
+        layer.quantize(QuantBits::Int4, 0).unwrap();
+        match &layer.weight {
+            WeightStorage::Quant(q) => {
+                assert_eq!(q.bits, before.bits);
+                assert_eq!(q.group_size, before.group_size);
+                assert_eq!(q.qweight, before.qweight);
+                assert_eq!(q.scales, before.scales);
+            }
+            WeightStorage::Fp32(_) => panic!("packed weights were replaced"),
+        }
     }
 }
