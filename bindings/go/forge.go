@@ -224,15 +224,15 @@ func (r *Runtime) BatchStep() ([]BatchEvent, error) {
 
 // BatchSchedStats is scheduler / KV observability (no pointers).
 type BatchSchedStats struct {
-	ActiveDecode           uint64
-	ActivePrefill          uint64
-	LastScheduledDecode    uint64
-	LastScheduledPrefill   uint64
-	KvNumBlocks            uint64
-	KvBlockSize            uint64
-	KvFreeBlocks           uint64
-	KvAllocatedBlocks      uint64
-	PrefillStallNs         uint64
+	ActiveDecode         uint64
+	ActivePrefill        uint64
+	LastScheduledDecode  uint64
+	LastScheduledPrefill uint64
+	KvNumBlocks          uint64
+	KvBlockSize          uint64
+	KvFreeBlocks         uint64
+	KvAllocatedBlocks    uint64
+	PrefillStallNs       uint64
 }
 
 // BatchSchedStats returns the latest scheduler/KV counters (zeros on CPU / unsupported).

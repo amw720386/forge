@@ -15,25 +15,25 @@ var (
 	loadOnce sync.Once
 	loadErr  error
 
-	dll               *syscall.DLL
-	procVersion       *syscall.Proc
-	procChatPrepare *syscall.Proc
-	procMatmul        *syscall.Proc
-	procMatvec        *syscall.Proc
-	procRuntimeLoad   *syscall.Proc
-	procRuntimeLoadEx *syscall.Proc
-	procRuntimeFree   *syscall.Proc
-	procGenBegin         *syscall.Proc
-	procGenNext          *syscall.Proc
-	procGenCancel        *syscall.Proc
-	procBatchCapacity    *syscall.Proc
-	procBatchActive      *syscall.Proc
-	procBatchFreeSlots   *syscall.Proc
-	procBatchAdmit       *syscall.Proc
-	procBatchCancel      *syscall.Proc
-	procBatchStep        *syscall.Proc
+	dll                 *syscall.DLL
+	procVersion         *syscall.Proc
+	procChatPrepare     *syscall.Proc
+	procMatmul          *syscall.Proc
+	procMatvec          *syscall.Proc
+	procRuntimeLoad     *syscall.Proc
+	procRuntimeLoadEx   *syscall.Proc
+	procRuntimeFree     *syscall.Proc
+	procGenBegin        *syscall.Proc
+	procGenNext         *syscall.Proc
+	procGenCancel       *syscall.Proc
+	procBatchCapacity   *syscall.Proc
+	procBatchActive     *syscall.Proc
+	procBatchFreeSlots  *syscall.Proc
+	procBatchAdmit      *syscall.Proc
+	procBatchCancel     *syscall.Proc
+	procBatchStep       *syscall.Proc
 	procBatchPiece      *syscall.Proc
-	procBatchSchedStats  *syscall.Proc
+	procBatchSchedStats *syscall.Proc
 )
 
 func ensureLoaded() error {
