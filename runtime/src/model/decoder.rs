@@ -224,7 +224,7 @@ impl DecoderBlock {
 
 fn ensure_capacity(t: &mut Tensor, rows: usize, cols: usize) -> Result<(), TensorError> {
     if t.shape().len() != 2 || t.shape()[1] != cols || t.shape()[0] < rows {
-        *t = Tensor::zeros(&[rows.max(t.shape().get(0).copied().unwrap_or(1)), cols])?;
+        *t = Tensor::zeros(&[rows.max(t.shape().first().copied().unwrap_or(1)), cols])?;
         if t.shape()[0] < rows {
             *t = Tensor::zeros(&[rows, cols])?;
         }

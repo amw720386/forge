@@ -181,7 +181,7 @@ fn validate_shape(shape: &[usize]) -> Result<(), TensorError> {
     if shape.is_empty() {
         return Err(TensorError::EmptyShape);
     }
-    if shape.iter().any(|&d| d == 0) {
+    if shape.contains(&0) {
         return Err(TensorError::ZeroDimension);
     }
     Ok(())

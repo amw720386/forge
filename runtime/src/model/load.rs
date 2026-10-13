@@ -274,7 +274,7 @@ fn f16_to_f32(bits: u16) -> f32 {
     let sign = ((bits >> 15) & 1) as u32;
     let exp = ((bits >> 10) & 0x1f) as u32;
     let frac = (bits & 0x3ff) as u32;
-    let f = if exp == 0 {
+    if exp == 0 {
         if frac == 0 {
             0.0
         } else {
@@ -291,6 +291,5 @@ fn f16_to_f32(bits: u16) -> f32 {
         f32::from_bits((sign << 31) | 0x7f800000 | (frac << 13))
     } else {
         f32::from_bits((sign << 31) | ((exp + 112) << 23) | (frac << 13))
-    };
-    f
+    }
 }
