@@ -73,13 +73,14 @@ fn roundtrip_int8_matches_inmemory_quant() {
     let loaded = load_forge_path(&path, LoadOptions { memory_map: true }).unwrap();
     assert_eq!(loaded.meta.quant_bits, 8);
     assert_eq!(loaded.meta.quant_group_size, 32);
+    // Owned tensors must remain usable after the mapped source is removed.
+    std::fs::remove_file(&path).unwrap();
     let a = greedy_n(&model, &[5, 6, 7], 5);
     let b = greedy_n(&loaded.model, &[5, 6, 7], 5);
     assert_eq!(
         a, b,
         "checkpoint INT8 must match in-memory quantized greedy"
     );
-    let _ = std::fs::remove_file(&path);
 }
 
 #[test]

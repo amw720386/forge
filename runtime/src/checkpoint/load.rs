@@ -13,7 +13,6 @@ use memmap2::Mmap;
 use std::collections::HashMap;
 use std::fs::File;
 use std::path::Path;
-use std::sync::Arc;
 
 #[derive(Clone, Debug)]
 pub struct LoadOptions {
@@ -36,8 +35,6 @@ impl Default for LoadOptions {
 pub struct LoadedCheckpoint {
     pub model: Transformer,
     pub meta: ModelMetaJson,
-    /// Keeps mmap alive for the process lifetime of this load when used.
-    _mmap: Option<Arc<Mmap>>,
 }
 
 fn f32_from_le(bytes: &[u8]) -> Result<Vec<f32>, CheckpointError> {
@@ -86,8 +83,7 @@ impl<'a> TensorStore<'a> {
         let wname = format!("{prefix}.weight");
         let (e, bytes) = self.get(&wname)?;
         let bias = match self.get(&format!("{prefix}.bias")) {
-            Ok((_, bbytes)) => {
-                let be = &self.map.get(&format!("{prefix}.bias")).unwrap().0;
+            Ok((be, bbytes)) => {
                 let shape = shape_usize(&be.shape)?;
                 Some(Tensor::from_vec(&shape, f32_from_le(bbytes)?)?)
             }
@@ -311,18 +307,12 @@ pub fn load_forge_path(
     let path = path.as_ref();
     if opts.memory_map {
         let file = File::open(path)?;
-        // SAFETY: file is kept via Mmap owner; we only read.
+        // SAFETY: the source must not be modified while mapped; only read here.
         let mmap = unsafe { Mmap::map(&file)? };
-        let mmap = Arc::new(mmap);
         let (meta, store) = parse_store(&mmap)?;
         let model = build_model(&store, &meta)?;
-        // Copies into owned Tensor/QuantMatrix buffers above so dropping mmap is safe
-        // after build — but we retain mmap optionally for future zero-copy.
-        Ok(LoadedCheckpoint {
-            model,
-            meta,
-            _mmap: Some(mmap),
-        })
+        // All tensors own their bytes; release the source mapping before returning.
+        Ok(LoadedCheckpoint { model, meta })
     } else {
         let bytes = std::fs::read(path)?;
         if bytes.len() < HEADER_BYTES {
@@ -330,10 +320,6 @@ pub fn load_forge_path(
         }
         let (meta, store) = parse_store(&bytes)?;
         let model = build_model(&store, &meta)?;
-        Ok(LoadedCheckpoint {
-            model,
-            meta,
-            _mmap: None,
-        })
+        Ok(LoadedCheckpoint { model, meta })
     }
 }
