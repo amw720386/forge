@@ -44,7 +44,7 @@ fn main() {
         .include(&include_dir)
         .include(&src_dir)
         .define("FORGE_KERNELS_STATIC", None)
-        .warnings(false);
+        .warnings(true);
 
     for s in &sources {
         build.file(src_dir.join(s));
