@@ -21,11 +21,20 @@ pub enum TensorError {
     SizeOverflow,
     ContiguityRequired,
     InvalidArgument,
-    ShapeMismatch { expected: Vec<usize>, got: Vec<usize> },
-    MatmulInnerMismatch { a_k: usize, b_k: usize },
+    ShapeMismatch {
+        expected: Vec<usize>,
+        got: Vec<usize>,
+    },
+    MatmulInnerMismatch {
+        a_k: usize,
+        b_k: usize,
+    },
     Kernel(i32),
     AllocFailed(String),
-    BudgetExceeded { need_mib: u64, budget_mib: u64 },
+    BudgetExceeded {
+        need_mib: u64,
+        budget_mib: u64,
+    },
 }
 
 impl fmt::Display for TensorError {
@@ -209,10 +218,7 @@ mod tests {
 
     #[test]
     fn rejects_empty_and_zero_dims() {
-        assert!(matches!(
-            Tensor::zeros(&[]),
-            Err(TensorError::EmptyShape)
-        ));
+        assert!(matches!(Tensor::zeros(&[]), Err(TensorError::EmptyShape)));
         assert!(matches!(
             Tensor::zeros(&[2, 0]),
             Err(TensorError::ZeroDimension)

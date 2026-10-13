@@ -64,7 +64,10 @@ fn int8_synthetic_token_agreement() {
         assert!(mad < 0.05, "mean abs logit diff too large: {mad}");
         assert!(mx < 0.5, "max abs logit diff too large: {mx}");
         if fp_tok[0] != q_tok[0] {
-            println!("NOTE: first-token disagree prompt{i}: {} vs {}", fp_tok[0], q_tok[0]);
+            println!(
+                "NOTE: first-token disagree prompt{i}: {} vs {}",
+                fp_tok[0], q_tok[0]
+            );
         }
     }
     assert!(q.weight_nbytes() < fp.weight_nbytes());

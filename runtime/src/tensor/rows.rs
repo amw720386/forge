@@ -21,8 +21,7 @@ pub fn rmsnorm_rows(
     if rows == 0 || dim == 0 || weight.len() < dim {
         return Err(TensorError::InvalidArgument);
     }
-    if x.len() < rows * x_cols || out.len() < rows * out_cols || x_cols < dim || out_cols < dim
-    {
+    if x.len() < rows * x_cols || out.len() < rows * out_cols || x_cols < dim || out_cols < dim {
         return Err(TensorError::ShapeMismatch {
             expected: vec![rows, dim],
             got: vec![x.len(), out.len()],
@@ -109,13 +108,17 @@ pub fn add_rows(
             got: vec![a.len(), b.len(), out.len()],
         });
     }
-    let status = unsafe {
-        kernels::forge_kernels_add_f32(n, a.as_ptr(), b.as_ptr(), out.as_mut_ptr())
-    };
+    let status =
+        unsafe { kernels::forge_kernels_add_f32(n, a.as_ptr(), b.as_ptr(), out.as_mut_ptr()) };
     check(status)
 }
 
-pub fn copy_rows(src: &[f32], rows: usize, cols: usize, dst: &mut [f32]) -> Result<(), TensorError> {
+pub fn copy_rows(
+    src: &[f32],
+    rows: usize,
+    cols: usize,
+    dst: &mut [f32],
+) -> Result<(), TensorError> {
     let n = rows * cols;
     if src.len() < n || dst.len() < n {
         return Err(TensorError::ShapeMismatch {

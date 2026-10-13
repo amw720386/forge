@@ -91,13 +91,21 @@ fn main() {
     let t0 = Instant::now();
     let cuda_fp32 = CudaTransformer::from_cpu_dtype(&model, 0, GpuWeightDType::Fp32).expect("fp32");
     cuda_fp32.backend().synchronize().ok();
-    eprintln!("  {:.2}s weights={:.1} MiB", t0.elapsed().as_secs_f64(), cuda_fp32.weight_bytes() as f64 / (1024.0 * 1024.0));
+    eprintln!(
+        "  {:.2}s weights={:.1} MiB",
+        t0.elapsed().as_secs_f64(),
+        cuda_fp32.weight_bytes() as f64 / (1024.0 * 1024.0)
+    );
 
     eprintln!("upload BF16…");
     let t1 = Instant::now();
     let cuda_bf16 = CudaTransformer::from_cpu_dtype(&model, 0, GpuWeightDType::Bf16).expect("bf16");
     cuda_bf16.backend().synchronize().ok();
-    eprintln!("  {:.2}s weights={:.1} MiB", t1.elapsed().as_secs_f64(), cuda_bf16.weight_bytes() as f64 / (1024.0 * 1024.0));
+    eprintln!(
+        "  {:.2}s weights={:.1} MiB",
+        t1.elapsed().as_secs_f64(),
+        cuda_bf16.weight_bytes() as f64 / (1024.0 * 1024.0)
+    );
 
     let mut cases = Vec::new();
     let mut seq_agree = 0usize;
@@ -108,7 +116,10 @@ fn main() {
     for (id, prompt) in &owned_prompts {
         let ids = tok.encode(prompt, true).expect("encode");
         let max_seq = (ids.len() + max_new + 64).max(512).min(2048);
-        eprintln!("\n--- prompt={id} prompt_tokens={} max_seq={max_seq} ---", ids.len());
+        eprintln!(
+            "\n--- prompt={id} prompt_tokens={} max_seq={max_seq} ---",
+            ids.len()
+        );
 
         let out_fp = generate_cuda(&cuda_fp32, &tok, prompt, &params, max_seq).expect("fp32 gen");
         let out_bf = generate_cuda(&cuda_bf16, &tok, prompt, &params, max_seq).expect("bf16 gen");
@@ -320,7 +331,8 @@ fn compare_logits_at_prefix(
             max_seq,
         )
         .map_err(|e| e.to_string())?;
-        let mut scratch = CudaScratch::new(backend, &model.cfg, max_seq).map_err(|e| e.to_string())?;
+        let mut scratch =
+            CudaScratch::new(backend, &model.cfg, max_seq).map_err(|e| e.to_string())?;
         model
             .forward_tokens(prefix, 0, &mut caches, &mut scratch)
             .map_err(|e| e.to_string())?;

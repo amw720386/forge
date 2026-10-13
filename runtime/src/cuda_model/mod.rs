@@ -1,9 +1,9 @@
 //! Full-model CUDA inference. Compiled with `--features cuda`.
 
 mod batcher;
+mod generate;
 pub mod kv;
 pub mod paged_kv;
-mod generate;
 mod transformer;
 mod weights;
 

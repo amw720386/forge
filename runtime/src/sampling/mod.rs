@@ -37,12 +37,7 @@ pub fn sample_temperature(logits: &[f32], temperature: f32, mut rng: impl FnMut(
 }
 
 /// Top-k then temperature (k==0 → full vocab).
-pub fn sample_top_k(
-    logits: &[f32],
-    k: usize,
-    temperature: f32,
-    rng: impl FnMut() -> f32,
-) -> u32 {
+pub fn sample_top_k(logits: &[f32], k: usize, temperature: f32, rng: impl FnMut() -> f32) -> u32 {
     if k == 0 || k >= logits.len() {
         return sample_temperature(logits, temperature, rng);
     }

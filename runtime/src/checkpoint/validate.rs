@@ -9,14 +9,13 @@ pub fn validate_checkpoint_bytes(bytes: &[u8]) -> Result<ForgeHeader, Checkpoint
     if bytes.len() < HEADER_BYTES {
         return Err(CheckpointError::Format("file too small".into()));
     }
-    let header = ForgeHeader::read_bytes(&bytes[..HEADER_BYTES])
-        .map_err(CheckpointError::Format)?;
+    let header =
+        ForgeHeader::read_bytes(&bytes[..HEADER_BYTES]).map_err(CheckpointError::Format)?;
     if header.header_size as usize != HEADER_BYTES {
         return Err(CheckpointError::Format("unexpected header_size".into()));
     }
-    ArchId::from_u32(header.arch_id).ok_or_else(|| {
-        CheckpointError::Unsupported(format!("arch_id {}", header.arch_id))
-    })?;
+    ArchId::from_u32(header.arch_id)
+        .ok_or_else(|| CheckpointError::Unsupported(format!("arch_id {}", header.arch_id)))?;
 
     let meta_off = header.meta_offset as usize;
     let meta_len = header.meta_length as usize;
@@ -58,8 +57,7 @@ pub fn validate_checkpoint_bytes(bytes: &[u8]) -> Result<ForgeHeader, Checkpoint
     if json_end + 4 > meta.len() {
         return Err(CheckpointError::Format("json OOB".into()));
     }
-    let table_len =
-        u32::from_le_bytes(meta[json_end..json_end + 4].try_into().unwrap()) as usize;
+    let table_len = u32::from_le_bytes(meta[json_end..json_end + 4].try_into().unwrap()) as usize;
     let table_off = json_end + 4;
     let table_end = table_off
         .checked_add(table_len)

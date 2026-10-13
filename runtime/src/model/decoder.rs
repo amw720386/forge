@@ -1,7 +1,7 @@
 use super::config::ModelConfig;
 use super::linear::Linear;
 use super::mlp::MlpWeights;
-use crate::attention::{attend, AttnScratch, AttentionConfig};
+use crate::attention::{attend, AttentionConfig, AttnScratch};
 use crate::cache::KvCache;
 use crate::tensor::rows::{add_rows, copy_rows, rmsnorm_rows};
 use crate::tensor::{Tensor, TensorError};
@@ -29,7 +29,12 @@ impl DecoderBlock {
         let h = cfg.hidden_size;
         let kv = cfg.n_kv_heads * cfg.head_dim();
         for norm in [&weights.input_layernorm, &weights.post_attention_layernorm] {
-            if norm.shape() != [h] { return Err(TensorError::ShapeMismatch { expected: vec![h], got: norm.shape().to_vec() }); }
+            if norm.shape() != [h] {
+                return Err(TensorError::ShapeMismatch {
+                    expected: vec![h],
+                    got: norm.shape().to_vec(),
+                });
+            }
         }
         for (linear, out, input, bias) in [
             (&weights.q_proj, h, h, cfg.architecture.qkv_bias()),
@@ -41,10 +46,17 @@ impl DecoderBlock {
             (&weights.mlp.down, h, cfg.intermediate_size, false),
         ] {
             if linear.weight.out_features() != out || linear.weight.in_features() != input {
-                return Err(TensorError::ShapeMismatch { expected: vec![out, input], got: vec![linear.weight.out_features(), linear.weight.in_features()] });
+                return Err(TensorError::ShapeMismatch {
+                    expected: vec![out, input],
+                    got: vec![linear.weight.out_features(), linear.weight.in_features()],
+                });
             }
-            if linear.bias.is_some() != bias || linear.bias.as_ref().is_some_and(|b| b.shape() != [out]) {
-                return Err(TensorError::Configuration("projection bias incompatible with architecture".into()));
+            if linear.bias.is_some() != bias
+                || linear.bias.as_ref().is_some_and(|b| b.shape() != [out])
+            {
+                return Err(TensorError::Configuration(
+                    "projection bias incompatible with architecture".into(),
+                ));
             }
         }
         let attn_cfg = cfg.attention();

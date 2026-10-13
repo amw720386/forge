@@ -34,9 +34,8 @@ fn main() {
     let max_new: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(16);
     let max_seq = 512;
 
-    let prompt = env::var("FORGE_PROMPT").unwrap_or_else(|_| {
-        "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into()
-    });
+    let prompt = env::var("FORGE_PROMPT")
+        .unwrap_or_else(|_| "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into());
     let mix = env::var("FORGE_MIXED_PROMPTS").unwrap_or_default() == "1";
     let dtype = match env::var("FORGE_CUDA_DTYPE")
         .unwrap_or_else(|_| "fp32".into())
@@ -93,14 +92,13 @@ fn main() {
     eprintln!("\n=== sequential baseline (configured B=1, N=4 requests) ===");
     {
         let tok_s = ForgeTokenizer::from_dir(&dir, 151643, 151645).unwrap();
-        let mut batcher =
-            CudaBatcher::new(
-                CudaTransformer::from_cpu_dtype(&model, 0, dtype).unwrap(),
-                tok_s,
-                max_seq,
-                1,
-            )
-                .unwrap();
+        let mut batcher = CudaBatcher::new(
+            CudaTransformer::from_cpu_dtype(&model, 0, dtype).unwrap(),
+            tok_s,
+            max_seq,
+            1,
+        )
+        .unwrap();
         let t0 = Instant::now();
         let mut total_tok = 0usize;
         for i in 0..4 {

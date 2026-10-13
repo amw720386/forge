@@ -68,7 +68,16 @@ impl ModelConfig {
         self.hidden_size / self.n_heads
     }
     pub fn execution_shape(&self) -> [usize; 8] {
-        [self.hidden_size,self.intermediate_size,self.n_layers,self.n_heads,self.n_kv_heads,self.head_dim(),self.vocab_size,self.max_position_embeddings]
+        [
+            self.hidden_size,
+            self.intermediate_size,
+            self.n_layers,
+            self.n_heads,
+            self.n_kv_heads,
+            self.head_dim(),
+            self.vocab_size,
+            self.max_position_embeddings,
+        ]
     }
 
     pub fn attention(&self) -> AttentionConfig {
@@ -91,13 +100,19 @@ impl ModelConfig {
         {
             return Err(TensorError::ZeroDimension);
         }
-        if !self.rms_norm_eps.is_finite() || self.rms_norm_eps <= 0.0
-            || !self.rope_theta.is_finite() || self.rope_theta <= 0.0
+        if !self.rms_norm_eps.is_finite()
+            || self.rms_norm_eps <= 0.0
+            || !self.rope_theta.is_finite()
+            || self.rope_theta <= 0.0
             || self.bos_token_id as usize >= self.vocab_size
             || self.eos_token_id as usize >= self.vocab_size
-            || self.pad_token_id.is_some_and(|id| id as usize >= self.vocab_size)
+            || self
+                .pad_token_id
+                .is_some_and(|id| id as usize >= self.vocab_size)
         {
-            return Err(TensorError::Configuration("invalid norm, RoPE or special token configuration".into()));
+            return Err(TensorError::Configuration(
+                "invalid norm, RoPE or special token configuration".into(),
+            ));
         }
         if self.hidden_size % self.n_heads != 0 {
             return Err(TensorError::ShapeMismatch {
@@ -105,8 +120,16 @@ impl ModelConfig {
                 got: vec![self.hidden_size],
             });
         }
-        for (a,b) in [(self.hidden_size,self.vocab_size),(self.hidden_size,self.intermediate_size),(self.max_position_embeddings,self.hidden_size)] {
-            if a.checked_mul(b).and_then(|n|n.checked_mul(4)).is_none() { return Err(TensorError::Configuration("model dimensions overflow address space".into())); }
+        for (a, b) in [
+            (self.hidden_size, self.vocab_size),
+            (self.hidden_size, self.intermediate_size),
+            (self.max_position_embeddings, self.hidden_size),
+        ] {
+            if a.checked_mul(b).and_then(|n| n.checked_mul(4)).is_none() {
+                return Err(TensorError::Configuration(
+                    "model dimensions overflow address space".into(),
+                ));
+            }
         }
         self.attention().validate()
     }

@@ -23,9 +23,8 @@ fn main() {
         .cloned()
         .unwrap_or_else(|| "../models/Qwen2.5-0.5B-Instruct".into());
     let max_tokens: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(32);
-    let prompt = env::var("FORGE_PROMPT").unwrap_or_else(|_| {
-        "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into()
-    });
+    let prompt = env::var("FORGE_PROMPT")
+        .unwrap_or_else(|_| "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into());
     let dtype = match env::var("FORGE_CUDA_DTYPE")
         .unwrap_or_else(|_| "fp32".into())
         .to_ascii_lowercase()

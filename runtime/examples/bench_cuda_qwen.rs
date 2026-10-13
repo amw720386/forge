@@ -29,15 +29,11 @@ fn main() {
         .get(1)
         .cloned()
         .unwrap_or_else(|| "../models/Qwen2.5-0.5B-Instruct".into());
-    let max_new: usize = args
-        .get(2)
-        .and_then(|s| s.parse().ok())
-        .unwrap_or(16);
+    let max_new: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(16);
     let max_seq = 512;
 
-    let prompt = env::var("FORGE_PROMPT").unwrap_or_else(|_| {
-        "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into()
-    });
+    let prompt = env::var("FORGE_PROMPT")
+        .unwrap_or_else(|_| "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into());
 
     eprintln!("=== CPU FP32 baseline load ===");
     let t0 = Instant::now();

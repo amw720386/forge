@@ -109,7 +109,9 @@ impl MemoryBudget {
             .checked_mul(4)
             .ok_or(TensorError::SizeOverflow)?;
 
-        let logits_slots = checked_mul(b, vocab)?.checked_mul(4).ok_or(TensorError::SizeOverflow)?;
+        let logits_slots = checked_mul(b, vocab)?
+            .checked_mul(4)
+            .ok_or(TensorError::SizeOverflow)?;
 
         let total = (weight_bytes as u64)
             .checked_add(fwd as u64)
@@ -121,11 +123,7 @@ impl MemoryBudget {
         Ok(total + total / 7)
     }
 
-    pub fn check_allows(
-        &self,
-        cfg: &ModelConfig,
-        weight_bytes: usize,
-    ) -> Result<u64, TensorError> {
+    pub fn check_allows(&self, cfg: &ModelConfig, weight_bytes: usize) -> Result<u64, TensorError> {
         let need = self.estimate_runtime_bytes(cfg, weight_bytes)?;
         let need_mib = need / (1024 * 1024);
         if need_mib > self.budget_mib {
@@ -422,9 +420,7 @@ mod tests {
             budget_mib: 8192,
             max_ram_fraction: 0.0,
         };
-        let e = b
-            .estimate_runtime_bytes(&cfg, 1020 * 1024 * 1024)
-            .unwrap();
+        let e = b.estimate_runtime_bytes(&cfg, 1020 * 1024 * 1024).unwrap();
         let mib = e / (1024 * 1024);
         assert!(mib > 1000 && mib < 5000, "unexpected estimate {mib} MiB");
     }

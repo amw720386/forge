@@ -30,10 +30,7 @@ fn block_allocator_reuse_and_exhaustion() {
     let b2 = a.alloc_one().unwrap();
     assert_eq!(b2, b0); // LIFO reuse
     a.alloc_one().unwrap();
-    assert!(matches!(
-        a.alloc_one(),
-        Err(PagedKvError::Exhausted { .. })
-    ));
+    assert!(matches!(a.alloc_one(), Err(PagedKvError::Exhausted { .. })));
     a.free_one(b1).unwrap();
     a.free_one(b2).unwrap();
 }
@@ -63,8 +60,10 @@ fn paged_vs_contiguous_attention_cpu() {
     let mut k_pool = cpu.alloc(pool_elems * 4).unwrap();
     let mut v_pool = cpu.alloc(pool_elems * 4).unwrap();
     // zero pools
-    cpu.copy_h2d(&mut k_pool, &vec![0u8; pool_elems * 4]).unwrap();
-    cpu.copy_h2d(&mut v_pool, &vec![0u8; pool_elems * 4]).unwrap();
+    cpu.copy_h2d(&mut k_pool, &vec![0u8; pool_elems * 4])
+        .unwrap();
+    cpu.copy_h2d(&mut v_pool, &vec![0u8; pool_elems * 4])
+        .unwrap();
 
     let need_blocks = (t_k + block_size - 1) / block_size;
     let table_host: Vec<u32> = (0..need_blocks as u32).collect();

@@ -5,9 +5,7 @@
 //! cargo run --release --example generate_qwen -- ../models/Qwen2.5-0.5B-Instruct --bits 8 --group 64
 //! ```
 
-use forge_runtime::model::{
-    generate, load_hf_dir, ForgeTokenizer, GenerateParams, QuantBits,
-};
+use forge_runtime::model::{generate, load_hf_dir, ForgeTokenizer, GenerateParams, QuantBits};
 use std::env;
 use std::time::Instant;
 
@@ -29,17 +27,11 @@ fn main() {
                 i += 2;
             }
             "--group" => {
-                group = args
-                    .get(i + 1)
-                    .and_then(|s| s.parse().ok())
-                    .unwrap_or(64);
+                group = args.get(i + 1).and_then(|s| s.parse().ok()).unwrap_or(64);
                 i += 2;
             }
             "--max-tokens" => {
-                max_tokens = args
-                    .get(i + 1)
-                    .and_then(|s| s.parse().ok())
-                    .unwrap_or(32);
+                max_tokens = args.get(i + 1).and_then(|s| s.parse().ok()).unwrap_or(32);
                 i += 2;
             }
             other if other.parse::<usize>().is_ok() => {
@@ -50,9 +42,8 @@ fn main() {
         }
     }
 
-    let prompt = env::var("FORGE_PROMPT").unwrap_or_else(|_| {
-        "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into()
-    });
+    let prompt = env::var("FORGE_PROMPT")
+        .unwrap_or_else(|_| "<|im_start|>user\nHello!<|im_end|>\n<|im_start|>assistant\n".into());
 
     eprintln!("loading model from {dir} ...");
     let t0 = Instant::now();
@@ -72,7 +63,8 @@ fn main() {
     }
     eprintln!("loaded in {:.2}s", t0.elapsed().as_secs_f32());
 
-    let tok = ForgeTokenizer::from_dir(&dir, model.cfg.bos_token_id, model.cfg.eos_token_id).expect("tokenizer");
+    let tok = ForgeTokenizer::from_dir(&dir, model.cfg.bos_token_id, model.cfg.eos_token_id)
+        .expect("tokenizer");
     let params = GenerateParams {
         max_tokens,
         temperature: 0.0,

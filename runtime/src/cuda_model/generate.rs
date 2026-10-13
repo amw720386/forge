@@ -46,8 +46,7 @@ pub fn generate_cuda(
         .forward_tokens(&tokens, 0, &mut caches, &mut scratch)
         .map_err(map_compute)?;
     let vocab = model.cfg.vocab_size;
-    let use_gpu_greedy =
-        params.temperature <= 0.0 && env::var_os("FORGE_CPU_GREEDY").is_none();
+    let use_gpu_greedy = params.temperature <= 0.0 && env::var_os("FORGE_CPU_GREEDY").is_none();
     let mut last_logits = if use_gpu_greedy {
         Vec::new()
     } else {

@@ -1,6 +1,6 @@
 //! Compare C++/Rust kernels against PyTorch-generated fixtures.
 
-use forge_runtime::attention::{attend, AttnScratch, AttentionConfig};
+use forge_runtime::attention::{attend, AttentionConfig, AttnScratch};
 use forge_runtime::cache::KvCache;
 use forge_runtime::ffi::kernels;
 use forge_runtime::tensor::ops::{rmsnorm, rope_inplace, silu_inplace, softmax_inplace_causal};
@@ -14,9 +14,7 @@ fn fixture_dir() -> PathBuf {
 
 fn read_f32(name: &str) -> Vec<f32> {
     let bytes = fs::read(fixture_dir().join(name)).unwrap_or_else(|e| {
-        panic!(
-            "missing fixture {name}: {e}. Run: python tests/reference/kernel_reference.py"
-        )
+        panic!("missing fixture {name}: {e}. Run: python tests/reference/kernel_reference.py")
     });
     assert_eq!(bytes.len() % 4, 0);
     bytes

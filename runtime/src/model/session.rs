@@ -77,7 +77,9 @@ impl StreamSession {
         let done = self.params.eos_token_id == Some(next)
             || self.tokens.len() >= self.max_seq
             || self.tokens.len() - self.prompt_len >= self.params.max_tokens;
-        let piece = self.tok.stream_piece(&self.tokens[self.prompt_len..], &mut self.emitted, done)?;
+        let piece =
+            self.tok
+                .stream_piece(&self.tokens[self.prompt_len..], &mut self.emitted, done)?;
 
         if done {
             self.finished = true;

@@ -210,13 +210,11 @@ pub(crate) fn parse_tensor_table(
         if off + 1 + 1 + 4 + 8 + 8 > buf.len() {
             return Err(CheckpointError::Format("entry truncated".into()));
         }
-        let dtype = DTypeCode::from_u8(buf[off]).ok_or_else(|| {
-            CheckpointError::Format(format!("bad dtype {}", buf[off]))
-        })?;
+        let dtype = DTypeCode::from_u8(buf[off])
+            .ok_or_else(|| CheckpointError::Format(format!("bad dtype {}", buf[off])))?;
         off += 1;
-        let quant = QuantScheme::from_u8(buf[off]).ok_or_else(|| {
-            CheckpointError::Format(format!("bad quant {}", buf[off]))
-        })?;
+        let quant = QuantScheme::from_u8(buf[off])
+            .ok_or_else(|| CheckpointError::Format(format!("bad quant {}", buf[off])))?;
         off += 1;
         let group_size = u32::from_le_bytes(buf[off..off + 4].try_into().unwrap());
         off += 4;
@@ -286,11 +284,19 @@ pub fn save_forge(
         tie_word_embeddings: cfg.tie_word_embeddings,
         quant_bits: qbits,
         quant_group_size: qgroup,
-        bos_token_id: if opts.bos_token_id == 0 { cfg.bos_token_id } else { opts.bos_token_id },
-        eos_token_id: if opts.eos_token_id == 0 { cfg.eos_token_id } else { opts.eos_token_id },
+        bos_token_id: if opts.bos_token_id == 0 {
+            cfg.bos_token_id
+        } else {
+            opts.bos_token_id
+        },
+        eos_token_id: if opts.eos_token_id == 0 {
+            cfg.eos_token_id
+        } else {
+            opts.eos_token_id
+        },
     };
-    let meta_json = serde_json::to_vec(&meta)
-        .map_err(|e| CheckpointError::Format(e.to_string()))?;
+    let meta_json =
+        serde_json::to_vec(&meta).map_err(|e| CheckpointError::Format(e.to_string()))?;
 
     // Metadata section: u32 json_len | json | u32 table_len | table
     let mut meta_blob = Vec::new();
@@ -312,7 +318,13 @@ pub fn save_forge(
     }
     let data_sha = data_hasher.finalize();
 
-    let mut header = ForgeHeader::new_v1(match cfg.architecture { crate::model::Architecture::Qwen2 => ArchId::Qwen2, crate::model::Architecture::Llama => ArchId::Llama }, entries.len() as u32);
+    let mut header = ForgeHeader::new_v1(
+        match cfg.architecture {
+            crate::model::Architecture::Qwen2 => ArchId::Qwen2,
+            crate::model::Architecture::Llama => ArchId::Llama,
+        },
+        entries.len() as u32,
+    );
     header.meta_offset = meta_offset;
     header.meta_length = meta_length;
     header.data_offset = data_offset;

@@ -100,19 +100,9 @@ extern "C" {
 
     pub fn forge_kernels_silu_f32(n: usize, x: *const f32, y: *mut f32) -> c_int;
 
-    pub fn forge_kernels_mul_f32(
-        n: usize,
-        a: *const f32,
-        b: *const f32,
-        y: *mut f32,
-    ) -> c_int;
+    pub fn forge_kernels_mul_f32(n: usize, a: *const f32, b: *const f32, y: *mut f32) -> c_int;
 
-    pub fn forge_kernels_add_f32(
-        n: usize,
-        a: *const f32,
-        b: *const f32,
-        y: *mut f32,
-    ) -> c_int;
+    pub fn forge_kernels_add_f32(n: usize, a: *const f32, b: *const f32, y: *mut f32) -> c_int;
 
     pub fn forge_kernels_version() -> *const c_char;
 

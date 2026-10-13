@@ -75,7 +75,10 @@ fn roundtrip_int8_matches_inmemory_quant() {
     assert_eq!(loaded.meta.quant_group_size, 32);
     let a = greedy_n(&model, &[5, 6, 7], 5);
     let b = greedy_n(&loaded.model, &[5, 6, 7], 5);
-    assert_eq!(a, b, "checkpoint INT8 must match in-memory quantized greedy");
+    assert_eq!(
+        a, b,
+        "checkpoint INT8 must match in-memory quantized greedy"
+    );
     let _ = std::fs::remove_file(&path);
 }
 

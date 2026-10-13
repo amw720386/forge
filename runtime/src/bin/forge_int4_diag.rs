@@ -11,12 +11,9 @@
 
 use forge_runtime::checkpoint::{load_forge_path, LoadOptions};
 use forge_runtime::ffi::kernels;
-use forge_runtime::mem::{
-    allow_multi_model_bench, require_available_ram_mib, ProcessMemory,
-};
+use forge_runtime::mem::{allow_multi_model_bench, require_available_ram_mib, ProcessMemory};
 use forge_runtime::model::{
-    load_hf_dir, ForgeTokenizer, ForwardScratch, LayerKvCaches, QuantBits, QuantMatrix,
-    Transformer,
+    load_hf_dir, ForgeTokenizer, ForwardScratch, LayerKvCaches, QuantBits, QuantMatrix, Transformer,
 };
 use forge_runtime::sampling::greedy;
 use forge_runtime::tensor::Tensor;
@@ -104,10 +101,7 @@ fn parse_args() -> Args {
                 i += 2;
             }
             "--min-avail-mib" => {
-                a.min_avail_mib = args
-                    .get(i + 1)
-                    .and_then(|s| s.parse().ok())
-                    .unwrap_or(4096);
+                a.min_avail_mib = args.get(i + 1).and_then(|s| s.parse().ok()).unwrap_or(4096);
                 i += 2;
             }
             "--skip-micro" => {
@@ -373,7 +367,10 @@ fn main() -> ExitCode {
     let a = parse_args();
 
     println!("=== forge-int4-diag (single backend, conservative) ===");
-    println!("model={:?} backend={} group={}", a.model, a.backend, a.group);
+    println!(
+        "model={:?} backend={} group={}",
+        a.model, a.backend, a.group
+    );
     println!(
         "prefill={} decode={} reps={} max_seq={} min_avail_mib={}",
         a.prefill, a.decode_n, a.reps, a.max_seq, a.min_avail_mib
@@ -422,7 +419,8 @@ fn main() -> ExitCode {
     let (model, tok_dir): (Transformer, PathBuf) = if is_forge {
         let loaded =
             load_forge_path(&a.model, LoadOptions { memory_map: true }).expect("forge load");
-        let parent = forge_runtime::model::tokenizer_dir(&a.model, &loaded.model.cfg).expect("tokenizer directory");
+        let parent = forge_runtime::model::tokenizer_dir(&a.model, &loaded.model.cfg)
+            .expect("tokenizer directory");
         (loaded.model, parent)
     } else {
         let mut model = load_hf_dir(&a.model).expect("load model");
@@ -482,14 +480,7 @@ fn main() -> ExitCode {
             return ExitCode::from(3);
         }
         decode_tps.push(run_model_rep(
-            &label,
-            &model,
-            &tok,
-            prompt,
-            a.prefill,
-            a.decode_n,
-            a.max_seq,
-            rep,
+            &label, &model, &tok, prompt, a.prefill, a.decode_n, a.max_seq, rep,
         ));
     }
 

@@ -180,16 +180,16 @@ fn main() {
 
     println!("=== Forge CPU quantization benchmark ===");
     println!("kernels: {}", kernels::version());
-    println!(
-        "threads: {} (FORGE_NUM_THREADS)",
-        unsafe { kernels::forge_kernels_num_threads() }
-    );
+    println!("threads: {} (FORGE_NUM_THREADS)", unsafe {
+        kernels::forge_kernels_num_threads()
+    });
     println!("model_dir: {dir}");
     println!("prefill_len={prefill_len} decode_n={decode_n}");
     println!("build: cargo --release");
     println!();
 
-    let prompt = "<|im_start|>user\nSay hello in one short sentence.<|im_end|>\n<|im_start|>assistant\n";
+    let prompt =
+        "<|im_start|>user\nSay hello in one short sentence.<|im_end|>\n<|im_start|>assistant\n";
     let prompts_mixed = [
         prompt,
         "<|im_start|>user\nWhat is 2+2?<|im_end|>\n<|im_start|>assistant\n",
@@ -220,10 +220,7 @@ fn main() {
         let mut model_i8 = load_qwen2_dir(&dir).expect("load");
         let tq = Instant::now();
         model_i8.quantize_weights(QuantBits::Int8, 64).unwrap();
-        println!(
-            "(INT8 group=64 quantize wall: {:.1} ms)",
-            ms(tq.elapsed())
-        );
+        println!("(INT8 group=64 quantize wall: {:.1} ms)", ms(tq.elapsed()));
         measure_single("INT8-g64", &model_i8, &tok, prompt, prefill_len, decode_n);
     }
 

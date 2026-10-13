@@ -7,10 +7,8 @@ mod load;
 mod save;
 mod validate;
 
-pub use format::{
-    ArchId, DTypeCode, ForgeHeader, QuantScheme, TensorEntry, FORMAT_VERSION, MAGIC,
-};
 pub use format::ModelMetaJson;
+pub use format::{ArchId, DTypeCode, ForgeHeader, QuantScheme, TensorEntry, FORMAT_VERSION, MAGIC};
 pub use load::{load_forge_path, LoadOptions, LoadedCheckpoint};
 pub use save::{save_forge, SaveOptions};
 pub use validate::validate_checkpoint_bytes;

@@ -38,10 +38,7 @@ fn main() -> ExitCode {
                 i += 2;
             }
             "--group-size" | "--group" => {
-                group = args
-                    .get(i + 1)
-                    .and_then(|s| s.parse().ok())
-                    .unwrap_or(64);
+                group = args.get(i + 1).and_then(|s| s.parse().ok()).unwrap_or(64);
                 i += 2;
             }
             "--output" | "-o" => {

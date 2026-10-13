@@ -7,10 +7,7 @@ fn approx_eq(a: &[f32], b: &[f32], atol: f32, rtol: f32) {
     for (i, (x, y)) in a.iter().zip(b.iter()).enumerate() {
         let diff = (x - y).abs();
         let tol = atol + rtol * x.abs().max(y.abs());
-        assert!(
-            diff <= tol,
-            "mismatch at {i}: got {x} want {y} (tol {tol})"
-        );
+        assert!(diff <= tol, "mismatch at {i}: got {x} want {y} (tol {tol})");
     }
 }
 
@@ -56,17 +53,13 @@ fn hidden_states_prefill_vs_cached() {
 
     let mut c1 = LayerKvCaches::new(&cfg, max_seq).unwrap();
     let mut s1 = ForwardScratch::new(&cfg, max_seq).unwrap();
-    let h_full = model
-        .forward_hidden(&tokens, 0, &mut c1, &mut s1)
-        .unwrap();
+    let h_full = model.forward_hidden(&tokens, 0, &mut c1, &mut s1).unwrap();
 
     let mut c2 = LayerKvCaches::new(&cfg, max_seq).unwrap();
     let mut s2 = ForwardScratch::new(&cfg, max_seq).unwrap();
     // Prefill all but last, then decode last
     let prefix = &tokens[..tokens.len() - 1];
-    model
-        .forward_tokens(prefix, 0, &mut c2, &mut s2)
-        .unwrap();
+    model.forward_tokens(prefix, 0, &mut c2, &mut s2).unwrap();
     model
         .forward_tokens(&[*tokens.last().unwrap()], prefix.len(), &mut c2, &mut s2)
         .unwrap();

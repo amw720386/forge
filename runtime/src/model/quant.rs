@@ -76,7 +76,11 @@ impl QuantMatrix {
         self.qweight.len() + self.scales.len() * 4
     }
 
-    pub fn from_fp32(weight: &Tensor, bits: QuantBits, group_size: usize) -> Result<Self, TensorError> {
+    pub fn from_fp32(
+        weight: &Tensor,
+        bits: QuantBits,
+        group_size: usize,
+    ) -> Result<Self, TensorError> {
         if weight.ndim() != 2 {
             return Err(TensorError::ShapeMismatch {
                 expected: vec![2],

@@ -42,7 +42,9 @@ pub struct LoadedCheckpoint {
 
 fn f32_from_le(bytes: &[u8]) -> Result<Vec<f32>, CheckpointError> {
     if bytes.len() % 4 != 0 {
-        return Err(CheckpointError::Format("f32 bytes not multiple of 4".into()));
+        return Err(CheckpointError::Format(
+            "f32 bytes not multiple of 4".into(),
+        ));
     }
     let mut out = Vec::with_capacity(bytes.len() / 4);
     for chunk in bytes.chunks_exact(4) {
@@ -110,9 +112,7 @@ impl<'a> TensorStore<'a> {
                 let inn = e.shape[1] as usize;
                 let group = e.group_size as usize;
                 if group == 0 || inn % group != 0 {
-                    return Err(CheckpointError::Format(format!(
-                        "{wname} bad group_size"
-                    )));
+                    return Err(CheckpointError::Format(format!("{wname} bad group_size")));
                 }
                 let bits = if e.dtype == DTypeCode::I8 {
                     QuantBits::Int8
@@ -127,9 +127,7 @@ impl<'a> TensorStore<'a> {
                 let scales = f32_from_le(sbytes)?;
                 let n_groups = inn / group;
                 if scales.len() != out * n_groups {
-                    return Err(CheckpointError::Format(format!(
-                        "{sname} length mismatch"
-                    )));
+                    return Err(CheckpointError::Format(format!("{sname} length mismatch")));
                 }
                 let expected_q = match bits {
                     QuantBits::Int8 => out * inn,
@@ -160,9 +158,13 @@ impl<'a> TensorStore<'a> {
     }
 }
 
-fn build_model(store: &TensorStore<'_>, meta: &ModelMetaJson) -> Result<Transformer, CheckpointError> {
+fn build_model(
+    store: &TensorStore<'_>,
+    meta: &ModelMetaJson,
+) -> Result<Transformer, CheckpointError> {
     let cfg = ModelConfig {
-        architecture: crate::model::Architecture::parse(&meta.architecture).map_err(|e| CheckpointError::Unsupported(e.to_string()))?,
+        architecture: crate::model::Architecture::parse(&meta.architecture)
+            .map_err(|e| CheckpointError::Unsupported(e.to_string()))?,
         bos_token_id: meta.bos_token_id,
         eos_token_id: meta.eos_token_id,
         pad_token_id: meta.pad_token_id,
@@ -216,15 +218,17 @@ fn build_model(store: &TensorStore<'_>, meta: &ModelMetaJson) -> Result<Transfor
                 },
             )?),
         },
-        Err(_) if meta.tie_word_embeddings && !store.map.contains_key("lm_head.weight") => Ok(Transformer::from_weights(
-            cfg,
-            TransformerWeights {
-                embed,
-                layers,
-                final_norm,
-                lm_head: None,
-            },
-        )?),
+        Err(_) if meta.tie_word_embeddings && !store.map.contains_key("lm_head.weight") => {
+            Ok(Transformer::from_weights(
+                cfg,
+                TransformerWeights {
+                    embed,
+                    layers,
+                    final_norm,
+                    lm_head: None,
+                },
+            )?)
+        }
         Err(e) => Err(e),
     }
 }
@@ -236,9 +240,15 @@ fn build_model_with_quant_lm_head(
     layers: Vec<DecoderWeights>,
     lm_head: Linear,
 ) -> Result<Transformer, CheckpointError> {
-    if embed.shape() != [cfg.vocab_size, cfg.hidden_size] || final_norm.shape() != [cfg.hidden_size]
-        || lm_head.weight.out_features() != cfg.vocab_size || lm_head.weight.in_features() != cfg.hidden_size
-    { return Err(CheckpointError::Format("embedding, norm or quantized output shape mismatch".into())); }
+    if embed.shape() != [cfg.vocab_size, cfg.hidden_size]
+        || final_norm.shape() != [cfg.hidden_size]
+        || lm_head.weight.out_features() != cfg.vocab_size
+        || lm_head.weight.in_features() != cfg.hidden_size
+    {
+        return Err(CheckpointError::Format(
+            "embedding, norm or quantized output shape mismatch".into(),
+        ));
+    }
     let mut blocks = Vec::with_capacity(layers.len());
     for lw in layers {
         blocks.push(DecoderBlock::new(cfg.clone(), lw)?);
@@ -262,8 +272,16 @@ fn parse_store<'a>(bytes: &'a [u8]) -> Result<(ModelMetaJson, TensorStore<'a>), 
     let json = &meta[4..4 + json_len];
     let model_meta: ModelMetaJson =
         serde_json::from_slice(json).map_err(|e| CheckpointError::Format(e.to_string()))?;
-    let expected_arch = match model_meta.architecture.as_str() { "qwen2" => 1, "llama" => 2, _ => 0 };
-    if expected_arch != header.arch_id { return Err(CheckpointError::Format("header/metadata architecture mismatch".into())); }
+    let expected_arch = match model_meta.architecture.as_str() {
+        "qwen2" => 1,
+        "llama" => 2,
+        _ => 0,
+    };
+    if expected_arch != header.arch_id {
+        return Err(CheckpointError::Format(
+            "header/metadata architecture mismatch".into(),
+        ));
+    }
     let table_len_off = 4 + json_len;
     let table_len =
         u32::from_le_bytes(meta[table_len_off..table_len_off + 4].try_into().unwrap()) as usize;
@@ -279,10 +297,7 @@ fn parse_store<'a>(bytes: &'a [u8]) -> Result<(ModelMetaJson, TensorStore<'a>), 
             .checked_add(e.data_nbytes as usize)
             .ok_or_else(|| CheckpointError::Format("length overflow".into()))?;
         if end > bytes.len() {
-            return Err(CheckpointError::Format(format!(
-                "tensor {} OOB",
-                e.name
-            )));
+            return Err(CheckpointError::Format(format!("tensor {} OOB", e.name)));
         }
         map.insert(e.name.clone(), (e, &bytes[abs..end]));
     }

@@ -1,12 +1,12 @@
 //! Synthetic / real decoder-only transformer blocks.
 
-mod batch;
 mod architecture;
-mod precision;
+mod batch;
 mod graph;
+mod precision;
+pub use architecture::{parse_hf_config, Architecture, DecoderOp, DecoderPlan};
 pub use graph::{DecodeGraphKey, GraphModelIdentity};
 pub use precision::{ExecutionPrecision, PrecisionContract, ScalarType};
-pub use architecture::{Architecture, DecoderOp, DecoderPlan, parse_hf_config};
 mod config;
 mod decoder;
 mod generate;
@@ -24,7 +24,7 @@ pub use decoder::{DecoderBlock, DecoderWeights};
 pub use generate::{generate, GenError, GenerateOutput, GenerateParams};
 pub use linear::{Linear, WeightStorage};
 // Re-export for checkpoint / tooling.
-pub use load::{load_model_path, load_hf_dir, load_qwen2_dir, LoadError};
+pub use load::{load_hf_dir, load_model_path, load_qwen2_dir, LoadError};
 pub use mlp::{Mlp, MlpWeights};
 pub use quant::{QuantBits, QuantMatrix};
 pub use session::StreamSession;

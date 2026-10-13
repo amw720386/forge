@@ -5,9 +5,7 @@
 //! ```
 
 use forge_runtime::ffi::kernels;
-use forge_runtime::model::{
-    load_qwen2_dir, ForgeTokenizer, ForwardScratch, LayerKvCaches,
-};
+use forge_runtime::model::{load_qwen2_dir, ForgeTokenizer, ForwardScratch, LayerKvCaches};
 use forge_runtime::tensor::ops::linear_into;
 use forge_runtime::tensor::Tensor;
 use std::env;
@@ -52,10 +50,9 @@ fn main() {
 
     println!("=== Forge model profiler ===");
     println!("kernels: {}", kernels::version());
-    println!(
-        "threads: {}",
-        unsafe { kernels::forge_kernels_num_threads() }
-    );
+    println!("threads: {}", unsafe {
+        kernels::forge_kernels_num_threads()
+    });
     println!("model:   {dir}");
     println!("prefill_len={prefill_len}  decode_tokens={decode_tokens}");
     println!();

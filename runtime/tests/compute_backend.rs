@@ -9,7 +9,11 @@ fn upload_f32(backend: &dyn ComputeBackend, data: &[f32]) -> forge_runtime::comp
     buf
 }
 
-fn download_f32(backend: &dyn ComputeBackend, buf: &forge_runtime::compute::Buffer, n: usize) -> Vec<f32> {
+fn download_f32(
+    backend: &dyn ComputeBackend,
+    buf: &forge_runtime::compute::Buffer,
+    n: usize,
+) -> Vec<f32> {
     let mut bytes = vec![0u8; n * 4];
     backend.copy_d2h(&mut bytes, buf).unwrap();
     bytes

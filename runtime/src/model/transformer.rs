@@ -12,7 +12,7 @@ use crate::tensor::{Tensor, TensorError};
 pub struct TransformerWeights {
     pub embed: Tensor, // [vocab, H]
     pub layers: Vec<DecoderWeights>,
-    pub final_norm: Tensor, // [H]
+    pub final_norm: Tensor,      // [H]
     pub lm_head: Option<Tensor>, // [vocab, H] if not tied
 }
 
@@ -87,11 +87,24 @@ pub struct Transformer {
 impl Transformer {
     pub fn from_weights(cfg: ModelConfig, w: TransformerWeights) -> Result<Self, TensorError> {
         cfg.validate()?;
-        for (tensor, expected) in [(&w.embed, vec![cfg.vocab_size, cfg.hidden_size]), (&w.final_norm, vec![cfg.hidden_size])] {
-            if tensor.shape() != expected { return Err(TensorError::ShapeMismatch { expected, got: tensor.shape().to_vec() }); }
+        for (tensor, expected) in [
+            (&w.embed, vec![cfg.vocab_size, cfg.hidden_size]),
+            (&w.final_norm, vec![cfg.hidden_size]),
+        ] {
+            if tensor.shape() != expected {
+                return Err(TensorError::ShapeMismatch {
+                    expected,
+                    got: tensor.shape().to_vec(),
+                });
+            }
         }
         if let Some(head) = &w.lm_head {
-            if head.shape() != [cfg.vocab_size, cfg.hidden_size] { return Err(TensorError::ShapeMismatch { expected: vec![cfg.vocab_size, cfg.hidden_size], got: head.shape().to_vec() }); }
+            if head.shape() != [cfg.vocab_size, cfg.hidden_size] {
+                return Err(TensorError::ShapeMismatch {
+                    expected: vec![cfg.vocab_size, cfg.hidden_size],
+                    got: head.shape().to_vec(),
+                });
+            }
         }
         if w.layers.len() != cfg.n_layers {
             return Err(TensorError::ShapeMismatch {
@@ -143,7 +156,11 @@ impl Transformer {
     }
 
     /// Weight-only quantize all linear projections + lm_head. Norms, biases, embeddings stay FP32.
-    pub fn quantize_weights(&mut self, bits: QuantBits, group_size: usize) -> Result<(), TensorError> {
+    pub fn quantize_weights(
+        &mut self,
+        bits: QuantBits,
+        group_size: usize,
+    ) -> Result<(), TensorError> {
         for layer in &mut self.layers {
             let w = &mut layer.weights;
             w.q_proj.quantize(bits, group_size)?;
@@ -205,11 +222,19 @@ impl Transformer {
                 got: vec![scratch.x.shape()[0]],
             });
         }
-        if position_offset.checked_add(t).is_none_or(|end| end > self.cfg.max_position_embeddings) {
-            return Err(TensorError::Configuration("token positions exceed model context limit".into()));
+        if position_offset
+            .checked_add(t)
+            .is_none_or(|end| end > self.cfg.max_position_embeddings)
+        {
+            return Err(TensorError::Configuration(
+                "token positions exceed model context limit".into(),
+            ));
         }
         if caches.layers.len() != self.plan.layers {
-            return Err(TensorError::ShapeMismatch { expected: vec![self.plan.layers], got: vec![caches.layers.len()] });
+            return Err(TensorError::ShapeMismatch {
+                expected: vec![self.plan.layers],
+                got: vec![caches.layers.len()],
+            });
         }
 
         for (i, &tok) in tokens.iter().enumerate() {
@@ -323,9 +348,18 @@ fn synthetic_layer(cfg: &ModelConfig, rng: &mut SimpleRng) -> Result<DecoderWeig
     Ok(DecoderWeights {
         input_layernorm: Tensor::filled(&[h], 1.0)?,
         post_attention_layernorm: Tensor::filled(&[h], 1.0)?,
-        q_proj: Linear::new(random_tensor(rng, &[q_out, h], 0.02), Some(random_tensor(rng, &[q_out], 0.01)))?,
-        k_proj: Linear::new(random_tensor(rng, &[kv_out, h], 0.02), Some(random_tensor(rng, &[kv_out], 0.01)))?,
-        v_proj: Linear::new(random_tensor(rng, &[kv_out, h], 0.02), Some(random_tensor(rng, &[kv_out], 0.01)))?,
+        q_proj: Linear::new(
+            random_tensor(rng, &[q_out, h], 0.02),
+            Some(random_tensor(rng, &[q_out], 0.01)),
+        )?,
+        k_proj: Linear::new(
+            random_tensor(rng, &[kv_out, h], 0.02),
+            Some(random_tensor(rng, &[kv_out], 0.01)),
+        )?,
+        v_proj: Linear::new(
+            random_tensor(rng, &[kv_out, h], 0.02),
+            Some(random_tensor(rng, &[kv_out], 0.01)),
+        )?,
         o_proj: Linear::new(random_tensor(rng, &[h, q_out], 0.02), None)?,
         mlp: MlpWeights {
             gate: Linear::new(random_tensor(rng, &[i, h], 0.02), None)?,
@@ -337,7 +371,9 @@ fn synthetic_layer(cfg: &ModelConfig, rng: &mut SimpleRng) -> Result<DecoderWeig
 
 fn random_tensor(rng: &mut SimpleRng, shape: &[usize], scale: f32) -> Tensor {
     let n: usize = shape.iter().product();
-    let data: Vec<f32> = (0..n).map(|_| (rng.next_f32() * 2.0 - 1.0) * scale).collect();
+    let data: Vec<f32> = (0..n)
+        .map(|_| (rng.next_f32() * 2.0 - 1.0) * scale)
+        .collect();
     Tensor::from_vec(shape, data).expect("shape")
 }
 

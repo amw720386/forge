@@ -1,8 +1,6 @@
 //! CPU compute backend — wraps existing `forge_kernels_*` FFI.
 
-use super::backend::{
-    BackendKind, Buffer, ComputeBackend, ComputeError, DeviceInfo,
-};
+use super::backend::{BackendKind, Buffer, ComputeBackend, ComputeError, DeviceInfo};
 use crate::ffi::kernels;
 
 pub struct CpuBackend;
@@ -117,11 +115,7 @@ impl ComputeBackend for CpuBackend {
             return Err(ComputeError::InvalidArgument("D2D overflow".into()));
         }
         unsafe {
-            std::ptr::copy_nonoverlapping(
-                src.ptr.add(src_offset),
-                dst.ptr.add(dst_offset),
-                bytes,
-            );
+            std::ptr::copy_nonoverlapping(src.ptr.add(src_offset), dst.ptr.add(dst_offset), bytes);
         }
         Ok(())
     }
@@ -245,9 +239,7 @@ impl ComputeBackend for CpuBackend {
         y: &mut Buffer,
         y_cols: usize,
     ) -> Result<(), ComputeError> {
-        let bias_ptr = bias
-            .map(|b| b.as_f32_ptr())
-            .unwrap_or(std::ptr::null());
+        let bias_ptr = bias.map(|b| b.as_f32_ptr()).unwrap_or(std::ptr::null());
         map_status(unsafe {
             kernels::forge_kernels_linear_f32(
                 m,
@@ -280,12 +272,7 @@ impl ComputeBackend for CpuBackend {
         Err(ComputeError::NotBuilt)
     }
 
-    fn f32_to_bf16(
-        &self,
-        _n: usize,
-        _src: &Buffer,
-        _dst: &mut Buffer,
-    ) -> Result<(), ComputeError> {
+    fn f32_to_bf16(&self, _n: usize, _src: &Buffer, _dst: &mut Buffer) -> Result<(), ComputeError> {
         Err(ComputeError::NotBuilt)
     }
 
@@ -309,10 +296,8 @@ impl ComputeBackend for CpuBackend {
         if logits.bytes < need_logits || out_ids.bytes < need_ids {
             return Err(ComputeError::InvalidArgument("buffer too small".into()));
         }
-        let logits_s =
-            unsafe { std::slice::from_raw_parts(logits.as_f32_ptr(), rows * cols) };
-        let ids =
-            unsafe { std::slice::from_raw_parts_mut(out_ids.ptr as *mut i32, rows) };
+        let logits_s = unsafe { std::slice::from_raw_parts(logits.as_f32_ptr(), rows * cols) };
+        let ids = unsafe { std::slice::from_raw_parts_mut(out_ids.ptr as *mut i32, rows) };
         for r in 0..rows {
             let row = &logits_s[r * cols..(r + 1) * cols];
             let mut best_i = 0usize;
@@ -360,17 +345,15 @@ impl ComputeBackend for CpuBackend {
         t: usize,
         out: &mut Buffer,
     ) -> Result<(), ComputeError> {
-        let ids: &[i32] = unsafe {
-            std::slice::from_raw_parts(token_ids.ptr as *const i32, t)
-        };
-        let embed = unsafe {
-            std::slice::from_raw_parts(table.as_f32_ptr(), vocab * hidden)
-        };
+        let ids: &[i32] = unsafe { std::slice::from_raw_parts(token_ids.ptr as *const i32, t) };
+        let embed = unsafe { std::slice::from_raw_parts(table.as_f32_ptr(), vocab * hidden) };
         let y = unsafe { std::slice::from_raw_parts_mut(out.as_f32_mut_ptr(), t * hidden) };
         for row in 0..t {
             let id = ids[row] as usize;
             if id >= vocab {
-                return Err(ComputeError::InvalidArgument("token id out of range".into()));
+                return Err(ComputeError::InvalidArgument(
+                    "token id out of range".into(),
+                ));
             }
             let src = &embed[id * hidden..(id + 1) * hidden];
             y[row * hidden..(row + 1) * hidden].copy_from_slice(src);
@@ -413,8 +396,7 @@ impl ComputeBackend for CpuBackend {
         let q_s = unsafe { std::slice::from_raw_parts(q.as_f32_ptr(), t_q * q_cols) };
         let k_s = unsafe { std::slice::from_raw_parts(k.as_f32_ptr(), t_k * kv_cols) };
         let v_s = unsafe { std::slice::from_raw_parts(v.as_f32_ptr(), t_k * kv_cols) };
-        let ctx_s =
-            unsafe { std::slice::from_raw_parts_mut(ctx.as_f32_mut_ptr(), t_q * q_cols) };
+        let ctx_s = unsafe { std::slice::from_raw_parts_mut(ctx.as_f32_mut_ptr(), t_q * q_cols) };
         ctx_s[..t_q * q_w].fill(0.0);
         let reps = n_heads / n_kv_heads;
         for h in 0..n_heads {
@@ -506,12 +488,8 @@ impl ComputeBackend for CpuBackend {
         let off = dst_row_offset * width;
         let ks = unsafe { std::slice::from_raw_parts(k_src.as_f32_ptr(), n) };
         let vs = unsafe { std::slice::from_raw_parts(v_src.as_f32_ptr(), n) };
-        let kd = unsafe {
-            std::slice::from_raw_parts_mut(k_dst.as_f32_mut_ptr(), off + n)
-        };
-        let vd = unsafe {
-            std::slice::from_raw_parts_mut(v_dst.as_f32_mut_ptr(), off + n)
-        };
+        let kd = unsafe { std::slice::from_raw_parts_mut(k_dst.as_f32_mut_ptr(), off + n) };
+        let vd = unsafe { std::slice::from_raw_parts_mut(v_dst.as_f32_mut_ptr(), off + n) };
         kd[off..off + n].copy_from_slice(ks);
         vd[off..off + n].copy_from_slice(vs);
         Ok(())
@@ -545,7 +523,9 @@ impl ComputeBackend for CpuBackend {
         }
         let need = (t_k + block_size - 1) / block_size;
         if need > num_logical_blocks {
-            return Err(ComputeError::InvalidArgument("block table too short".into()));
+            return Err(ComputeError::InvalidArgument(
+                "block table too short".into(),
+            ));
         }
         let q_w = n_heads * head_dim;
         let q_s = unsafe { std::slice::from_raw_parts(q.as_f32_ptr(), t_q * q_cols) };
@@ -555,13 +535,11 @@ impl ComputeBackend for CpuBackend {
         let pool_elems = n_layers * num_blocks * block_size * kv_cols;
         let k_s = unsafe { std::slice::from_raw_parts(k_pool.as_f32_ptr(), pool_elems) };
         let v_s = unsafe { std::slice::from_raw_parts(v_pool.as_f32_ptr(), pool_elems) };
-        let ctx_s =
-            unsafe { std::slice::from_raw_parts_mut(ctx.as_f32_mut_ptr(), t_q * q_cols) };
+        let ctx_s = unsafe { std::slice::from_raw_parts_mut(ctx.as_f32_mut_ptr(), t_q * q_cols) };
         ctx_s[..t_q * q_w].fill(0.0);
         let reps = n_heads / n_kv_heads;
         let kv_base = |phys: u32, row: usize, kv_h: usize| {
-            ((layer * num_blocks + phys as usize) * block_size + row) * kv_cols
-                + kv_h * head_dim
+            ((layer * num_blocks + phys as usize) * block_size + row) * kv_cols + kv_h * head_dim
         };
         for h in 0..n_heads {
             let kv_h = h / reps;
@@ -676,7 +654,9 @@ impl ComputeBackend for CpuBackend {
         let end = dst_token_offset + t;
         let need = (end + block_size - 1) / block_size;
         if need > num_logical_blocks {
-            return Err(ComputeError::InvalidArgument("block table too short".into()));
+            return Err(ComputeError::InvalidArgument(
+                "block table too short".into(),
+            ));
         }
         let table = unsafe {
             std::slice::from_raw_parts(block_table.ptr as *const u32, num_logical_blocks)

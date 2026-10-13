@@ -3,11 +3,11 @@
 use super::decoder::DecoderWeights;
 use super::linear::Linear;
 use super::mlp::MlpWeights;
+use super::parse_hf_config;
 use super::transformer::{Transformer, TransformerWeights};
 use crate::tensor::{Tensor, TensorError};
 use safetensors::tensor::{SafeTensors, TensorView};
 use safetensors::Dtype;
-use super::parse_hf_config;
 use std::fs;
 use std::path::Path;
 
@@ -52,11 +52,9 @@ pub fn load_model_path(path: impl AsRef<Path>) -> Result<Transformer, LoadError>
             .map(|e| e.eq_ignore_ascii_case("forge"))
             .unwrap_or(false)
     {
-        let loaded = crate::checkpoint::load_forge_path(
-            path,
-            crate::checkpoint::LoadOptions::default(),
-        )
-        .map_err(|e| LoadError::Unsupported(e.to_string()))?;
+        let loaded =
+            crate::checkpoint::load_forge_path(path, crate::checkpoint::LoadOptions::default())
+                .map_err(|e| LoadError::Unsupported(e.to_string()))?;
         return Ok(loaded.model);
     }
     load_hf_dir(path)
@@ -64,8 +62,12 @@ pub fn load_model_path(path: impl AsRef<Path>) -> Result<Transformer, LoadError>
 
 /// Load a Qwen2 HF directory (`config.json` + `model.safetensors`).
 pub fn load_qwen2_dir(dir: impl AsRef<Path>) -> Result<Transformer, LoadError> {
-    let cfg = parse_hf_config(&fs::read_to_string(dir.as_ref().join("config.json")).map_err(LoadError::Io)?)?;
-    if cfg.architecture != super::Architecture::Qwen2 { return Err(LoadError::Unsupported("expected qwen2".into())); }
+    let cfg = parse_hf_config(
+        &fs::read_to_string(dir.as_ref().join("config.json")).map_err(LoadError::Io)?,
+    )?;
+    if cfg.architecture != super::Architecture::Qwen2 {
+        return Err(LoadError::Unsupported("expected qwen2".into()));
+    }
     load_hf_dir(dir)
 }
 
@@ -76,7 +78,10 @@ pub fn load_hf_dir(dir: impl AsRef<Path>) -> Result<Transformer, LoadError> {
     let mut cfg = parse_hf_config(&cfg_text)?;
     if dir.join("tokenizer.json").is_file() {
         use sha2::{Digest, Sha256};
-        cfg.tokenizer_sha256 = Some(format!("{:x}", Sha256::digest(fs::read(dir.join("tokenizer.json")).map_err(LoadError::Io)?)));
+        cfg.tokenizer_sha256 = Some(format!(
+            "{:x}",
+            Sha256::digest(fs::read(dir.join("tokenizer.json")).map_err(LoadError::Io)?)
+        ));
     }
 
     let st_path = dir.join("model.safetensors");
@@ -86,12 +91,29 @@ pub fn load_hf_dir(dir: impl AsRef<Path>) -> Result<Transformer, LoadError> {
     let tensors =
         SafeTensors::deserialize(&bytes).map_err(|e| LoadError::Safetensors(e.to_string()))?;
     for (name, expected) in cfg.architecture.tensor_shapes(&cfg) {
-        let view=tensors.tensor(&name).map_err(|_| LoadError::Missing(name.clone()))?;
-        if view.shape()!=expected { return Err(LoadError::Unsupported(format!("{name}: expected {expected:?}, got {:?}",view.shape()))); }
-        if !matches!(view.dtype(),Dtype::F32 | Dtype::F16 | Dtype::BF16) { return Err(LoadError::Unsupported(format!("{name}: dtype {:?}",view.dtype()))); }
+        let view = tensors
+            .tensor(&name)
+            .map_err(|_| LoadError::Missing(name.clone()))?;
+        if view.shape() != expected {
+            return Err(LoadError::Unsupported(format!(
+                "{name}: expected {expected:?}, got {:?}",
+                view.shape()
+            )));
+        }
+        if !matches!(view.dtype(), Dtype::F32 | Dtype::F16 | Dtype::BF16) {
+            return Err(LoadError::Unsupported(format!(
+                "{name}: dtype {:?}",
+                view.dtype()
+            )));
+        }
     }
     for name in tensors.names() {
-        if name.ends_with(".bias") && (!cfg.architecture.qkv_bias() || !["q_proj.bias","k_proj.bias","v_proj.bias"].iter().any(|suffix| name.ends_with(suffix))) {
+        if name.ends_with(".bias")
+            && (!cfg.architecture.qkv_bias()
+                || !["q_proj.bias", "k_proj.bias", "v_proj.bias"]
+                    .iter()
+                    .any(|suffix| name.ends_with(suffix)))
+        {
             return Err(LoadError::Unsupported(format!("unexpected bias {name}")));
         }
     }
@@ -104,18 +126,54 @@ pub fn load_hf_dir(dir: impl AsRef<Path>) -> Result<Transformer, LoadError> {
         let p = cfg.architecture.layer_tensor(i, "");
         let p = p.trim_end_matches('.');
         let q_w = load_tensor(&tensors, &format!("{p}.self_attn.q_proj.weight"))?;
-        let q_b = if cfg.architecture.qkv_bias() { Some(load_tensor(&tensors, &format!("{p}.self_attn.q_proj.bias"))?) } else {
-            if tensors.tensor(&format!("{p}.self_attn.q_proj.bias")).is_ok() { return Err(LoadError::Unsupported("unexpected Llama attention bias".into())); }
+        let q_b = if cfg.architecture.qkv_bias() {
+            Some(load_tensor(
+                &tensors,
+                &format!("{p}.self_attn.q_proj.bias"),
+            )?)
+        } else {
+            if tensors
+                .tensor(&format!("{p}.self_attn.q_proj.bias"))
+                .is_ok()
+            {
+                return Err(LoadError::Unsupported(
+                    "unexpected Llama attention bias".into(),
+                ));
+            }
             None
         };
         let k_w = load_tensor(&tensors, &format!("{p}.self_attn.k_proj.weight"))?;
-        let k_b = if cfg.architecture.qkv_bias() { Some(load_tensor(&tensors, &format!("{p}.self_attn.k_proj.bias"))?) } else {
-            if tensors.tensor(&format!("{p}.self_attn.k_proj.bias")).is_ok() { return Err(LoadError::Unsupported("unexpected Llama attention bias".into())); }
+        let k_b = if cfg.architecture.qkv_bias() {
+            Some(load_tensor(
+                &tensors,
+                &format!("{p}.self_attn.k_proj.bias"),
+            )?)
+        } else {
+            if tensors
+                .tensor(&format!("{p}.self_attn.k_proj.bias"))
+                .is_ok()
+            {
+                return Err(LoadError::Unsupported(
+                    "unexpected Llama attention bias".into(),
+                ));
+            }
             None
         };
         let v_w = load_tensor(&tensors, &format!("{p}.self_attn.v_proj.weight"))?;
-        let v_b = if cfg.architecture.qkv_bias() { Some(load_tensor(&tensors, &format!("{p}.self_attn.v_proj.bias"))?) } else {
-            if tensors.tensor(&format!("{p}.self_attn.v_proj.bias")).is_ok() { return Err(LoadError::Unsupported("unexpected Llama attention bias".into())); }
+        let v_b = if cfg.architecture.qkv_bias() {
+            Some(load_tensor(
+                &tensors,
+                &format!("{p}.self_attn.v_proj.bias"),
+            )?)
+        } else {
+            if tensors
+                .tensor(&format!("{p}.self_attn.v_proj.bias"))
+                .is_ok()
+            {
+                return Err(LoadError::Unsupported(
+                    "unexpected Llama attention bias".into(),
+                ));
+            }
             None
         };
         let o_w = load_tensor(&tensors, &format!("{p}.self_attn.o_proj.weight"))?;

@@ -182,7 +182,6 @@ pub struct CudaTransformer {
     pub cfg: ModelConfig,
     pub plan: crate::model::DecoderPlan,
     generation: u64,
-    #[allow(dead_code)]
     pub attn_cfg: AttentionConfig,
     backend: CudaBackend,
     weights: GpuModelWeights,
@@ -220,7 +219,10 @@ impl CudaTransformer {
         Ok(Self {
             cfg: model.cfg.clone(),
             plan,
-            generation: { static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(1); NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed) },
+            generation: {
+                static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(1);
+                NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+            },
             attn_cfg,
             backend,
             weights,
@@ -558,37 +560,35 @@ impl CudaTransformer {
         y: &mut Buffer,
         y_cols: usize,
     ) -> Result<(), ComputeError> {
-        if self.weights.lm_shares_embed {
+        if let Some(head) = &self.weights.lm_head {
+            head.apply(backend, x, rows, x_cols, y, y_cols)
+        } else {
             match self.weight_dtype {
                 GpuWeightDType::Fp32 => backend.linear_f32(
                     rows,
-                    self.weights.lm_head.out,
-                    self.weights.lm_head.in_features,
+                    self.cfg.vocab_size,
+                    self.cfg.hidden_size,
                     x,
                     x_cols,
                     &self.weights.embed,
-                    self.weights.lm_head.in_features,
+                    self.cfg.hidden_size,
                     None,
                     y,
                     y_cols,
                 ),
                 GpuWeightDType::Bf16 => backend.linear_bf16_w(
                     rows,
-                    self.weights.lm_head.out,
-                    self.weights.lm_head.in_features,
+                    self.cfg.vocab_size,
+                    self.cfg.hidden_size,
                     x,
                     x_cols,
                     &self.weights.embed,
-                    self.weights.lm_head.in_features,
+                    self.cfg.hidden_size,
                     None,
                     y,
                     y_cols,
                 ),
             }
-        } else {
-            self.weights
-                .lm_head
-                .apply(backend, x, rows, x_cols, y, y_cols)
         }
     }
 
@@ -870,7 +870,7 @@ impl CudaTransformer {
         }
         backend.copy_h2d(&mut scratch.token_ids, cast_u8(&ids))?;
         self.embed_tokens(backend, &scratch.token_ids, t, &mut scratch.x)?;
-        let reuse = self.weights.lm_head.dtype == GpuWeightDType::Bf16
+        let reuse = self.weight_dtype == GpuWeightDType::Bf16
             && std::env::var("FORGE_REUSE_BF16").as_deref() == Ok("1");
         for (layer, w) in self.weights.layers.iter().enumerate() {
             backend.copy_rows_f32(t, h, &scratch.x, &mut scratch.residual)?;
@@ -1062,7 +1062,9 @@ impl CudaTransformer {
         stats: &mut CudaBatchStats,
     ) -> Result<(), ComputeError> {
         if scratch.dimensions != self.cfg.execution_shape() {
-            return Err(ComputeError::InvalidArgument("batch scratch belongs to an incompatible model configuration".into()));
+            return Err(ComputeError::InvalidArgument(
+                "batch scratch belongs to an incompatible model configuration".into(),
+            ));
         }
         let b = tokens.len();
         if b == 0 || b > scratch.max_batch {
@@ -1131,7 +1133,11 @@ impl CudaTransformer {
             && std::env::var("FORGE_REUSE_BF16").as_deref() == Ok("1");
         // Preserve validated BF16 greedy decisions and avoid launching idle warps
         // for long large batches or short contexts. Re-capture at dispatch changes.
-        let precision = if self.weight_dtype == GpuWeightDType::Bf16 { crate::model::ExecutionPrecision::CudaBf16 } else { crate::model::ExecutionPrecision::CudaFp32 };
+        let precision = if self.weight_dtype == GpuWeightDType::Bf16 {
+            crate::model::ExecutionPrecision::CudaBf16
+        } else {
+            crate::model::ExecutionPrecision::CudaFp32
+        };
         let partitioned = std::env::var("FORGE_DECODE_ATTN_BLOCK").as_deref() != Ok("0")
             && precision.partitioned_attention_lengths(b, sessions.iter().map(|s| s.len + 1));
         let graph_enabled = batched
@@ -1139,14 +1145,41 @@ impl CudaTransformer {
             && !scratch.graph_disabled[b];
         let key = crate::model::DecodeGraphKey {
             model: crate::model::GraphModelIdentity::new(&self.cfg, precision, self.generation),
-            batch: b, kv_block_size: pool.block_size, kv_blocks: pool.num_blocks,
-            allocations: [scratch.x.ptr as usize, scratch.metadata.ptr as usize, pool.k_pool().ptr as usize, pool.v_pool().ptr as usize, self.backend.bf16_scratch_address()],
-            workspace: [scratch.residual.ptr as usize, scratch.normed.ptr as usize, scratch.q.ptr as usize, scratch.k.ptr as usize, scratch.v.ptr as usize,
-                scratch.ctx.ptr as usize, scratch.attn_out.ptr as usize, scratch.mlp_gate.ptr as usize, scratch.mlp_up.ptr as usize, scratch.mlp_act.ptr as usize,
-                scratch.mlp_out.ptr as usize, scratch.logits.ptr as usize, scratch.token_ids.ptr as usize, scratch.q_row.ptr as usize, scratch.k_row.ptr as usize,
-                scratch.v_row.ptr as usize, scratch.ctx_row.ptr as usize, scratch.metadata.ptr as usize, scratch.normed_bf16.ptr as usize],
-            reuse_bf16, gemm_lt: std::env::var("FORGE_GEMM_LT").as_deref() == Ok("1"),
-            partitioned_attention: partitioned, paged_decode_fp32_kv: true,
+            batch: b,
+            kv_block_size: pool.block_size,
+            kv_blocks: pool.num_blocks,
+            allocations: [
+                scratch.x.ptr as usize,
+                scratch.metadata.ptr as usize,
+                pool.k_pool().ptr as usize,
+                pool.v_pool().ptr as usize,
+                self.backend.bf16_scratch_address(),
+            ],
+            workspace: [
+                scratch.residual.ptr as usize,
+                scratch.normed.ptr as usize,
+                scratch.q.ptr as usize,
+                scratch.k.ptr as usize,
+                scratch.v.ptr as usize,
+                scratch.ctx.ptr as usize,
+                scratch.attn_out.ptr as usize,
+                scratch.mlp_gate.ptr as usize,
+                scratch.mlp_up.ptr as usize,
+                scratch.mlp_act.ptr as usize,
+                scratch.mlp_out.ptr as usize,
+                scratch.logits.ptr as usize,
+                scratch.token_ids.ptr as usize,
+                scratch.q_row.ptr as usize,
+                scratch.k_row.ptr as usize,
+                scratch.v_row.ptr as usize,
+                scratch.ctx_row.ptr as usize,
+                scratch.metadata.ptr as usize,
+                scratch.normed_bf16.ptr as usize,
+            ],
+            reuse_bf16,
+            gemm_lt: std::env::var("FORGE_GEMM_LT").as_deref() == Ok("1"),
+            partitioned_attention: partitioned,
+            paged_decode_fp32_kv: true,
         };
         if scratch.graphs[b]
             .as_ref()

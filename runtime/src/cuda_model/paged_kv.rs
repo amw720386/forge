@@ -12,18 +12,9 @@ pub const DEFAULT_BLOCK_SIZE: usize = 16;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PagedKvError {
-    Exhausted {
-        need: usize,
-        free: usize,
-    },
-    Overflow {
-        len: usize,
-        max_seq: usize,
-    },
-    InvalidBlock {
-        logical: usize,
-        table_len: usize,
-    },
+    Exhausted { need: usize, free: usize },
+    Overflow { len: usize, max_seq: usize },
+    InvalidBlock { logical: usize, table_len: usize },
     DoubleFree(u32),
     ArithmeticOverflow(&'static str),
     Backend(ComputeError),
@@ -117,10 +108,10 @@ impl BlockAllocator {
     }
 
     pub fn alloc_one(&mut self) -> Result<u32, PagedKvError> {
-        let id = self.free.pop().ok_or(PagedKvError::Exhausted {
-            need: 1,
-            free: 0,
-        })?;
+        let id = self
+            .free
+            .pop()
+            .ok_or(PagedKvError::Exhausted { need: 1, free: 0 })?;
         let idx = id as usize;
         if idx >= self.owned.len() || self.owned[idx] {
             return Err(PagedKvError::DoubleFree(id));
@@ -182,7 +173,11 @@ pub struct GpuKvBlockPool {
 }
 
 impl GpuKvBlockPool {
-    pub fn bytes_per_block(n_layers: usize, block_size: usize, kv_width: usize) -> Result<usize, PagedKvError> {
+    pub fn bytes_per_block(
+        n_layers: usize,
+        block_size: usize,
+        kv_width: usize,
+    ) -> Result<usize, PagedKvError> {
         n_layers
             .checked_mul(2)
             .and_then(|x| x.checked_mul(block_size))
@@ -206,7 +201,11 @@ impl GpuKvBlockPool {
             .ok_or(PagedKvError::ArithmeticOverflow("pool_bytes"))
     }
 
-    pub fn resolve_num_blocks(max_batch: usize, max_seq: usize, block_size: usize) -> Result<usize, PagedKvError> {
+    pub fn resolve_num_blocks(
+        max_batch: usize,
+        max_seq: usize,
+        block_size: usize,
+    ) -> Result<usize, PagedKvError> {
         if let Ok(s) = env::var("FORGE_KV_NUM_BLOCKS") {
             if let Ok(n) = s.parse::<usize>() {
                 if n >= 1 {
@@ -292,7 +291,12 @@ impl GpuKvBlockPool {
     }
 
     /// Element offset for layer L, physical block P, row r within the block.
-    pub fn row_offset(&self, layer: usize, physical: u32, row: usize) -> Result<usize, PagedKvError> {
+    pub fn row_offset(
+        &self,
+        layer: usize,
+        physical: u32,
+        row: usize,
+    ) -> Result<usize, PagedKvError> {
         if layer >= self.n_layers || row >= self.block_size {
             return Err(PagedKvError::InvalidBlock {
                 logical: layer,
@@ -469,10 +473,7 @@ mod tests {
     fn exhaustion() {
         let mut a = BlockAllocator::new(16, 2).unwrap();
         a.alloc_n(2).unwrap();
-        assert!(matches!(
-            a.alloc_one(),
-            Err(PagedKvError::Exhausted { .. })
-        ));
+        assert!(matches!(a.alloc_one(), Err(PagedKvError::Exhausted { .. })));
     }
 
     #[test]

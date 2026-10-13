@@ -87,7 +87,8 @@ fn main() -> ExitCode {
         "forge" => {
             let loaded =
                 load_forge_path(&model_path, LoadOptions { memory_map: true }).expect("forge");
-            let parent = forge_runtime::model::tokenizer_dir(&model_path, &loaded.model.cfg).expect("tokenizer directory");
+            let parent = forge_runtime::model::tokenizer_dir(&model_path, &loaded.model.cfg)
+                .expect("tokenizer directory");
             (loaded.model, parent)
         }
         other => {

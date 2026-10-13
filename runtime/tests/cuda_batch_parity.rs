@@ -237,8 +237,7 @@ fn cancel_does_not_corrupt_sibling() {
     }
     assert_eq!(got.len(), params.max_tokens);
 
-    let cuda =
-        CudaTransformer::from_cpu(&Transformer::synthetic(cfg, 99).unwrap(), 0).unwrap();
+    let cuda = CudaTransformer::from_cpu(&Transformer::synthetic(cfg, 99).unwrap(), 0).unwrap();
     let expect = sequential_cuda_greedy(&cuda, &[5, 6], params.max_tokens, max_seq);
     assert_eq!(got, expect);
 }
@@ -344,13 +343,12 @@ fn cpu_batch_regression_still_passes() {
         logits = scratch.logits.data()[..cfg.vocab_size].to_vec();
     }
 
-    let mut batcher =
-        forge_runtime::model::ContinuousBatcher::new_untokenized(
-            Transformer::synthetic(cfg, 7).unwrap(),
-            max_seq,
-            2,
-        )
-        .unwrap();
+    let mut batcher = forge_runtime::model::ContinuousBatcher::new_untokenized(
+        Transformer::synthetic(cfg, 7).unwrap(),
+        max_seq,
+        2,
+    )
+    .unwrap();
     let id = batcher.admit_tokens(prompt, params).unwrap();
     let mut got = Vec::new();
     while batcher.active_count() > 0 {

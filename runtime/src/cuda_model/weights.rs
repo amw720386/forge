@@ -17,13 +17,24 @@ pub struct GpuLinear {
 }
 
 impl GpuLinear {
-    pub(crate) fn apply_precast(&self,backend:&crate::compute::CudaBackend,x:&Buffer,rows:usize,y:&mut Buffer,y_cols:usize)->Result<(),ComputeError>{
-        backend.linear_bf16_xw(rows,self.out,self.in_features,x,&self.weight,self.bias.as_ref(),y,y_cols)
-    }
-
-    #[allow(dead_code)]
-    pub fn upload(backend: &dyn ComputeBackend, linear: &Linear) -> Result<Self, ComputeError> {
-        Self::upload_dtype(backend, linear, GpuWeightDType::Fp32)
+    pub(crate) fn apply_precast(
+        &self,
+        backend: &crate::compute::CudaBackend,
+        x: &Buffer,
+        rows: usize,
+        y: &mut Buffer,
+        y_cols: usize,
+    ) -> Result<(), ComputeError> {
+        backend.linear_bf16_xw(
+            rows,
+            self.out,
+            self.in_features,
+            x,
+            &self.weight,
+            self.bias.as_ref(),
+            y,
+            y_cols,
+        )
     }
 
     pub fn upload_dtype(
@@ -31,18 +42,15 @@ impl GpuLinear {
         linear: &Linear,
         dtype: GpuWeightDType,
     ) -> Result<Self, ComputeError> {
-        let (out, k) = match &linear.weight {
-            WeightStorage::Fp32(w) => (w.shape()[0], w.shape()[1]),
+        let w_tensor = match &linear.weight {
+            WeightStorage::Fp32(w) => w,
             WeightStorage::Quant(_) => {
                 return Err(ComputeError::InvalidArgument(
                     "CUDA backend requires FP32 weights (GPU quantization unsupported)".into(),
                 ));
             }
         };
-        let w_tensor = match &linear.weight {
-            WeightStorage::Fp32(t) => t,
-            _ => unreachable!(),
-        };
+        let (out, k) = (w_tensor.shape()[0], w_tensor.shape()[1]);
         let weight = upload_weight_matrix(backend, w_tensor, out, k, dtype)?;
         let bias = if let Some(ref b) = linear.bias {
             let mut buf = backend.alloc(out * 4)?;
@@ -117,8 +125,8 @@ pub struct GpuDecoderWeights {
 pub struct GpuModelWeights {
     pub embed: Buffer,
     pub final_norm: Buffer,
-    pub lm_head: GpuLinear,
-    pub lm_shares_embed: bool,
+    /// None when the output projection uses the embedding allocation.
+    pub lm_head: Option<GpuLinear>,
     pub layers: Vec<GpuDecoderWeights>,
     pub weight_bytes: usize,
 }
@@ -140,7 +148,9 @@ fn upload_weight_matrix(
 ) -> Result<Buffer, ComputeError> {
     let n = rows * cols;
     if t.data().len() < n {
-        return Err(ComputeError::InvalidArgument("weight tensor too small".into()));
+        return Err(ComputeError::InvalidArgument(
+            "weight tensor too small".into(),
+        ));
     }
     match dtype {
         GpuWeightDType::Fp32 => {
@@ -160,9 +170,7 @@ fn upload_weight_matrix(
 }
 
 fn bytemuck_cast(data: &[f32]) -> &[u8] {
-    unsafe {
-        std::slice::from_raw_parts(data.as_ptr() as *const u8, data.len() * 4)
-    }
+    unsafe { std::slice::from_raw_parts(data.as_ptr() as *const u8, data.len() * 4) }
 }
 
 /// FP32 upload path (wrapper around [`upload_model_dtype`]).
@@ -179,7 +187,9 @@ pub fn upload_model_dtype(
     dtype: GpuWeightDType,
 ) -> Result<GpuModelWeights, ComputeError> {
     if backend.kind() != BackendKind::Cuda {
-        return Err(ComputeError::InvalidArgument("CUDA backend required".into()));
+        return Err(ComputeError::InvalidArgument(
+            "CUDA backend required".into(),
+        ));
     }
     let mut weight_bytes = 0usize;
 
@@ -200,17 +210,11 @@ pub fn upload_model_dtype(
         WeightStorage::Quant(_) => false,
     };
     let lm_head = if lm_shares_embed {
-        GpuLinear {
-            out: model.cfg.vocab_size,
-            in_features: model.cfg.hidden_size,
-            dtype,
-            weight: backend.alloc(1)?, // placeholder; forward uses embed
-            bias: None,
-        }
+        None
     } else {
         let g = GpuLinear::upload_dtype(backend, &model.lm_head, dtype)?;
         weight_bytes += g.weight.bytes + g.bias.as_ref().map(|b| b.bytes).unwrap_or(0);
-        g
+        Some(g)
     };
 
     let mut layers = Vec::with_capacity(model.layers.len());
@@ -252,7 +256,6 @@ pub fn upload_model_dtype(
         embed,
         final_norm,
         lm_head,
-        lm_shares_embed,
         layers,
         weight_bytes,
     })

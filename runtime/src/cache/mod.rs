@@ -48,7 +48,12 @@ impl KvCache {
     }
 
     /// Append `t` rows from contiguous `[t, width]` prefixes (may be larger buffers).
-    pub fn append_rows(&mut self, k_src: &[f32], v_src: &[f32], t: usize) -> Result<(), TensorError> {
+    pub fn append_rows(
+        &mut self,
+        k_src: &[f32],
+        v_src: &[f32],
+        t: usize,
+    ) -> Result<(), TensorError> {
         let width = self.width();
         if t == 0 || self.len + t > self.max_seq {
             return Err(TensorError::ShapeMismatch {

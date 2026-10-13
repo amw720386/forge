@@ -84,21 +84,25 @@ impl Buffer {
 }
 
 // A bounds-checked non-owning view whose lifetime keeps its allocation borrowed.
+#[cfg(any(feature = "cuda", feature = "cuda-stub"))]
 pub(crate) struct BufferView<'a> {
     buffer: Buffer,
     _owner: std::marker::PhantomData<&'a mut Buffer>,
 }
+#[cfg(any(feature = "cuda", feature = "cuda-stub"))]
 impl std::ops::Deref for BufferView<'_> {
     type Target = Buffer;
     fn deref(&self) -> &Buffer {
         &self.buffer
     }
 }
+#[cfg(any(feature = "cuda", feature = "cuda-stub"))]
 impl std::ops::DerefMut for BufferView<'_> {
     fn deref_mut(&mut self) -> &mut Buffer {
         &mut self.buffer
     }
 }
+#[cfg(any(feature = "cuda", feature = "cuda-stub"))]
 impl Buffer {
     pub(crate) fn view_mut(
         &mut self,

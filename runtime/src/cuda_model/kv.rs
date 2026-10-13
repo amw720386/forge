@@ -44,7 +44,15 @@ impl GpuKvCache {
         if self.len + t > self.max_seq {
             return Err(ComputeError::InvalidArgument("KV cache overflow".into()));
         }
-        backend.kv_append_f32(self.width, t, self.len, k_src, v_src, &mut self.k, &mut self.v)?;
+        backend.kv_append_f32(
+            self.width,
+            t,
+            self.len,
+            k_src,
+            v_src,
+            &mut self.k,
+            &mut self.v,
+        )?;
         self.len += t;
         Ok(())
     }

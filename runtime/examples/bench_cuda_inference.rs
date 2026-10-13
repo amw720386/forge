@@ -38,7 +38,6 @@ use std::time::Instant;
 
 #[cfg(feature = "cuda")]
 fn main() {
-
     let args: Vec<String> = env::args().collect();
     let cfg = Cli::parse(&args);
 
@@ -112,7 +111,8 @@ fn main() {
 
         let mut trials: Vec<TrialMetrics> = Vec::new();
         for t in 0..cfg.trials {
-            let m = run_trial(&mut batcher, &prompts, &prompt_lens, b, &params, true).expect("trial");
+            let m =
+                run_trial(&mut batcher, &prompts, &prompt_lens, b, &params, true).expect("trial");
             eprintln!(
                 "  trial {t}: tokens={} wall={:.3}s agg={:.2} tok/s ttft_p50={:.4}s e2e_p50={:.4}s occ={:.2}",
                 m.total_tokens,
@@ -129,7 +129,9 @@ fn main() {
         eprintln!(
             "  MEDIAN agg={:.2} tok/s  decodeâ‰ˆ{:.2}  prefillâ‰ˆ{:.2}  ttft_p50={:.4}s  (n={})",
             summary["aggregate_tok_s_median"].as_f64().unwrap_or(0.0),
-            summary["steady_decode_tok_s_median"].as_f64().unwrap_or(0.0),
+            summary["steady_decode_tok_s_median"]
+                .as_f64()
+                .unwrap_or(0.0),
             summary["prefill_tok_s_median"].as_f64().unwrap_or(0.0),
             summary["ttft_p50_median_s"].as_f64().unwrap_or(0.0),
             cfg.trials
@@ -523,17 +525,9 @@ fn run_trial(
         total_tokens: total,
         prompt_tokens,
         e2e_wall_s: wall,
-        aggregate_tok_s: if wall > 0.0 {
-            total as f64 / wall
-        } else {
-            0.0
-        },
+        aggregate_tok_s: if wall > 0.0 { total as f64 / wall } else { 0.0 },
         mean_per_req_tok_s: mean_per_req,
-        request_throughput: if wall > 0.0 {
-            n_req as f64 / wall
-        } else {
-            0.0
-        },
+        request_throughput: if wall > 0.0 { n_req as f64 / wall } else { 0.0 },
         prefill_tok_s,
         steady_decode_tok_s: steady_decode,
         ttft_p50_s: percentile(&ttfts, 0.50),

@@ -225,12 +225,11 @@ impl ContinuousBatcher {
     /// Admit a new request: tokenize + prefill on its private KV/scratch.
     /// Returns `BatchError::Full` when no free slot (backpressure).
     pub fn admit(&mut self, prompt: &str, params: GenerateParams) -> Result<u64, BatchError> {
-        let tok = self
-            .tok
-            .as_ref()
-            .ok_or_else(|| BatchError::Gen(GenError::Tok(super::tokenizer::TokError::Encode(
+        let tok = self.tok.as_ref().ok_or_else(|| {
+            BatchError::Gen(GenError::Tok(super::tokenizer::TokError::Encode(
                 "tokenizer not configured".into(),
-            ))))?;
+            )))
+        })?;
         let tokens = tok.encode(prompt, true)?;
         self.admit_tokens(tokens, params)
     }
@@ -274,8 +273,7 @@ impl ContinuousBatcher {
             &mut self.prefill_scratch,
         )?;
         let vocab = self.model.cfg.vocab_size;
-        self.slots[idx].last_logits =
-            self.prefill_scratch.logits.data()[..vocab].to_vec();
+        self.slots[idx].last_logits = self.prefill_scratch.logits.data()[..vocab].to_vec();
         self.slots[idx].status = SlotStatus::Ready;
         Ok(id)
     }
@@ -328,7 +326,9 @@ impl ContinuousBatcher {
                 || slot.generated >= slot.params.max_tokens
                 || slot.tokens.len() >= self.max_seq;
             let piece = match &self.tok {
-                Some(tok) => tok.stream_piece(&slot.tokens[slot.prompt_len..], &mut slot.emitted, done)?,
+                Some(tok) => {
+                    tok.stream_piece(&slot.tokens[slot.prompt_len..], &mut slot.emitted, done)?
+                }
                 None => String::new(),
             };
 
@@ -410,9 +410,7 @@ impl ContinuousBatcher {
 
         // Embed pending tokens into batch.x[0..b)
         for (row, &si) in idxs.iter().enumerate() {
-            let tok = self.slots[si]
-                .pending_decode
-                .ok_or(BatchError::Empty)? as usize;
+            let tok = self.slots[si].pending_decode.ok_or(BatchError::Empty)? as usize;
             if tok >= self.model.cfg.vocab_size {
                 return Err(BatchError::Tensor(TensorError::ShapeMismatch {
                     expected: vec![self.model.cfg.vocab_size],
@@ -645,9 +643,12 @@ mod tests {
         }
 
         // Continuous batch: admit all, step until done.
-        let mut batcher =
-            ContinuousBatcher::new_untokenized(Transformer::synthetic(cfg.clone(), 7).unwrap(), max_seq, 4)
-                .unwrap();
+        let mut batcher = ContinuousBatcher::new_untokenized(
+            Transformer::synthetic(cfg.clone(), 7).unwrap(),
+            max_seq,
+            4,
+        )
+        .unwrap();
         let mut ids = Vec::new();
         for p in &prompts {
             ids.push(batcher.admit_tokens(p.clone(), params.clone()).unwrap());
@@ -659,7 +660,12 @@ mod tests {
             Err(BatchError::Full)
         ));
         // Free the filler slot so we only track the three prompts.
-        let filler = batcher.slots.iter().find(|s| s.status != SlotStatus::Free && !ids.contains(&s.id)).unwrap().id;
+        let filler = batcher
+            .slots
+            .iter()
+            .find(|s| s.status != SlotStatus::Free && !ids.contains(&s.id))
+            .unwrap()
+            .id;
         batcher.cancel(filler).unwrap();
 
         let mut batched: std::collections::HashMap<u64, Vec<u32>> =
@@ -686,9 +692,12 @@ mod tests {
             eos_token_id: None,
         };
 
-        let mut batcher =
-            ContinuousBatcher::new_untokenized(Transformer::synthetic(cfg.clone(), 99).unwrap(), max_seq, 2)
-                .unwrap();
+        let mut batcher = ContinuousBatcher::new_untokenized(
+            Transformer::synthetic(cfg.clone(), 99).unwrap(),
+            max_seq,
+            2,
+        )
+        .unwrap();
         let keep = batcher.admit_tokens(vec![5, 6], params.clone()).unwrap();
         let drop = batcher.admit_tokens(vec![7, 8, 9], params.clone()).unwrap();
 

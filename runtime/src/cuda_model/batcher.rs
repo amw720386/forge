@@ -315,7 +315,9 @@ impl CudaBatcher {
                 || slot.generated >= slot.params.max_tokens
                 || slot.tokens.len() >= self.max_seq;
             let piece = match &self.tok {
-                Some(tok) => tok.stream_piece(&slot.tokens[slot.prompt_len..], &mut slot.emitted, done)?,
+                Some(tok) => {
+                    tok.stream_piece(&slot.tokens[slot.prompt_len..], &mut slot.emitted, done)?
+                }
                 None => String::new(),
             };
 
